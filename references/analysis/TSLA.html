@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesla (TSLA) — Configuration Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C47B5A;
+    --primary-hover: #B06A4A;
+    --primary-subtle: rgba(196, 123, 90, 0.12);
+    --secondary: #7D8C6E;
+    --secondary-subtle: rgba(125, 140, 110, 0.12);
+    --accent: #8B8FC7;
+    --accent-subtle: rgba(139, 143, 199, 0.12);
+    --bg: #FAF7F4;
+    --bg-alt: #F5F0EB;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EAE2;
+    --text-primary: #2D2824;
+    --text-secondary: #6B5F54;
+    --text-tertiary: #9A8E82;
+    --border: #E8E0D5;
+    --border-strong: #D1C7B8;
+    --border-subtle: #F0EAE2;
+    --success: #6B8C5A;
+    --success-subtle: rgba(107, 140, 90, 0.12);
+    --warning: #C49A5A;
+    --warning-subtle: rgba(196, 154, 90, 0.12);
+    --error: #C45A5A;
+    --error-subtle: rgba(196, 90, 90, 0.12);
+    --amber: #B8927A;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(45,40,36,0.05);
+    --shadow-md: 0 2px 8px rgba(45,40,36,0.06), 0 1px 2px rgba(45,40,36,0.04);
+    --shadow-lg: 0 4px 16px rgba(45,40,36,0.08), 0 2px 4px rgba(45,40,36,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 30;
+    padding: 32px 0 48px 0;
+    transition: transform 0.3s ease;
+  }
+  .sidebar-logo {
+    padding: 0 24px 24px 24px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h2 {
+    font-family: var(--font-serif);
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: -0.02em;
+  }
+  .sidebar-logo .ticker {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 0.04em; margin-top: 4px;
+  }
+  .nav-group { padding: 8px 16px; }
+  .nav-group-label {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 8px 4px;
+  }
+  .nav-link {
+    display: block; padding: 6px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .nav-link:hover { background: var(--primary-subtle); color: var(--text-primary); }
+  .nav-link .snum {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px; max-width: 960px;
+    padding: 48px 56px 120px 56px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    color: var(--primary); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 400;
+    color: var(--text-primary); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 32px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono); font-size: 22px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .stat-delta {
+    font-family: var(--font-mono); font-size: 12px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--error); }
+  .delta-neutral { color: var(--text-tertiary); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; color: var(--primary);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-size: 24px;
+    font-weight: 500; color: var(--text-primary);
+    letter-spacing: -0.02em; line-height: 1.3;
+  }
+  .section-cadence {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: var(--text-tertiary);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 15px; color: var(--text-primary); line-height: 1.6;
+  }
+  .field-value.mono {
+    font-family: var(--font-mono); font-size: 14px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-serif); font-size: 18px;
+    font-weight: 500; color: var(--text-primary);
+    margin-bottom: 12px; line-height: 1.3;
+  }
+  .card-subtitle {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--text-secondary); margin-bottom: 16px;
+  }
+
+  /* Product architecture cards */
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .product-card.core { border-left-color: var(--primary); }
+  .product-card.supporting { border-left-color: var(--secondary); }
+  .product-card.legacy { border-left-color: var(--text-tertiary); }
+  .product-card.emerging { border-left-color: var(--accent); }
+
+  .product-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: var(--font-serif); font-size: 17px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .product-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .badge-primary { background: var(--primary-subtle); color: #9C5D3F; }
+  .badge-secondary { background: var(--secondary-subtle); color: #4A5A3E; }
+  .badge-accent { background: var(--accent-subtle); color: #6B6FA9; }
+  .badge-success { background: var(--success-subtle); color: #4A6B3A; }
+  .badge-warning { background: var(--warning-subtle); color: #8B6B3A; }
+  .badge-error { background: var(--error-subtle); color: #9C3A3A; }
+  .badge-neutral { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  /* Risk severity dots */
+  .severity-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .dot-red { background: var(--error); }
+  .dot-yellow { background: var(--warning); }
+  .dot-green { background: var(--success); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 20px; font-size: 14px;
+  }
+  .data-table thead th {
+    font-family: var(--font-sans); font-size: 11px;
+    font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding: 10px 12px; text-align: left;
+  }
+  .data-table thead th.num { text-align: right; }
+  .data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .data-table tbody td.num {
+    font-family: var(--font-mono); font-size: 13px;
+    text-align: right; white-space: nowrap;
+  }
+  .data-table tbody td.label-cell {
+    font-weight: 500; color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(196, 123, 90, 0.04);
+  }
+  .data-table tbody tr:last-child td { border-bottom: 1px solid var(--border-strong); }
+
+  /* ── RISK CARDS ── */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+  }
+  .risk-card.red { border-left: 4px solid var(--error); }
+  .risk-card.yellow { border-left: 4px solid var(--warning); }
+  .risk-card.green { border-left: 4px solid var(--success); }
+  .risk-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+  }
+  .risk-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .risk-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .risk-body {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .risk-watch {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ── CALLOUT / FLAG ── */
+  .callout {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0; padding: 14px 18px;
+    margin: 16px 0; font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: var(--warning-subtle);
+  }
+  .callout.danger {
+    border-left-color: var(--error);
+    background: var(--error-subtle);
+  }
+  .callout.success {
+    border-left-color: var(--success);
+    background: var(--success-subtle);
+  }
+  .callout strong { color: var(--text-primary); }
+
+  /* ── SCENARIO BARS ── */
+  .scenario-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    margin-bottom: 10px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .scenario-bar.bull { border-left: 4px solid var(--success); }
+  .scenario-bar.base { border-left: 4px solid var(--primary); }
+  .scenario-bar.bear { border-left: 4px solid var(--error); }
+  .scenario-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; min-width: 50px;
+  }
+  .scenario-value {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 500; min-width: 110px;
+  }
+  .scenario-prob {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .scenario-desc {
+    font-size: 13px; color: var(--text-secondary); flex: 1;
+  }
+
+  /* ── SCORECARD ── */
+  .score-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-metric {
+    flex: 1; font-size: 14px; color: var(--text-primary);
+  }
+  .score-weight {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); min-width: 40px; text-align: center;
+  }
+  .score-badge {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; min-width: 40px; text-align: center;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .score-plus { background: var(--success-subtle); color: #4A6B3A; }
+  .score-minus { background: var(--error-subtle); color: #9C3A3A; }
+  .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+  /* ── KILL CRITERION ── */
+  .kill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .kill-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .kill-num {
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; color: var(--primary);
+  }
+  .kill-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary); flex: 1;
+    margin-left: 10px;
+  }
+  .kill-action {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 4px;
+  }
+  .kill-reduce { background: var(--warning-subtle); color: #8B6B3A; }
+  .kill-exit { background: var(--error-subtle); color: #9C3A3A; }
+  .kill-reassess { background: var(--accent-subtle); color: #6B6FA9; }
+
+  .kill-trigger {
+    font-size: 14px; color: var(--text-primary); margin-bottom: 8px;
+    padding: 10px 14px; background: var(--bg-alt); border-radius: 6px;
+    line-height: 1.5;
+  }
+  .kill-gap {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); margin-top: 8px;
+  }
+
+  /* ── ANALYST CARDS ── */
+  .analyst-card {
+    display: flex; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+  .analyst-rating {
+    writing-mode: vertical-lr; text-orientation: mixed;
+    font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 0;
+    display: flex; align-items: center;
+  }
+  .analyst-body { flex: 1; }
+  .analyst-name {
+    font-family: var(--font-serif); font-size: 15px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .analyst-firm {
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+  }
+  .analyst-pt {
+    font-family: var(--font-mono); font-size: 16px;
+    font-weight: 600; color: var(--primary); margin-bottom: 6px;
+  }
+  .analyst-thesis {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: var(--primary);
+    transition: width 0.6s ease;
+  }
+
+  /* ── GRID HELPERS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .divider.accent { border-top: 2px solid var(--primary); }
+
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 20px 0;
+  }
+  .verdict-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .verdict-value {
+    font-family: var(--font-serif); font-size: 20px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .verdict-score {
+    font-family: var(--font-mono); font-size: 28px;
+    font-weight: 600; color: var(--primary);
+    margin-left: auto;
+  }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+  }
+  .check-icon { font-size: 16px; line-height: 1.4; }
+  .check-pass .check-icon { color: var(--success); }
+  .check-fail .check-icon { color: var(--error); }
+  .check-open .check-icon { color: var(--text-tertiary); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none; position: fixed; top: 16px; left: 16px;
+    z-index: 40; width: 44px; height: 44px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px;
+    color: var(--text-primary);
+  }
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 48px 24px 120px; }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .hero h1 { font-size: 30px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; max-width: 100%; }
+  }
+</style>
+</head><body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h2>Tesla, Inc.</h2>
+    <div class="ticker">NASDAQ: TSLA &nbsp;·&nbsp; Configuration Card</div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Foundation (Phase 1)</div>
+    <a class="nav-link" href="#s1"><span class="snum">S1</span> Identity & Classification</a>
+    <a class="nav-link" href="#s2"><span class="snum">S2</span> Thesis & Key Metric</a>
+    <a class="nav-link" href="#s3"><span class="snum">S3</span> Product Architecture</a>
+    <a class="nav-link" href="#s4"><span class="snum">S4</span> Revenue Stream Map</a>
+    <a class="nav-link" href="#s5"><span class="snum">S5</span> Competitive Context & Moat</a>
+    <a class="nav-link" href="#s6"><span class="snum">S6</span> Management Team</a>
+    <a class="nav-link" href="#s7"><span class="snum">S7</span> Acceleration Table</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Financials (Phase 2)</div>
+    <a class="nav-link" href="#s8"><span class="snum">S8</span> Income Statement</a>
+    <a class="nav-link" href="#s9"><span class="snum">S9</span> Balance Sheet</a>
+    <a class="nav-link" href="#s10"><span class="snum">S10</span> Cash Flow & Quality</a>
+    <a class="nav-link" href="#s11"><span class="snum">S11</span> Scorecard</a>
+    <a class="nav-link" href="#s12"><span class="snum">S12</span> Tier 2 Metrics</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Catalysts & Sell-Side (Phase 3)</div>
+    <a class="nav-link" href="#s13"><span class="snum">S13</span> Catalyst Pipeline</a>
+    <a class="nav-link" href="#s14"><span class="snum">S14</span> Sell-Side Landscape</a>
+    <a class="nav-link" href="#s15"><span class="snum">S15</span> Guidance & Credibility</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Risk & Valuation (Phase 4)</div>
+    <a class="nav-link" href="#s16"><span class="snum">S16</span> Kill Criteria</a>
+    <a class="nav-link" href="#s17"><span class="snum">S17</span> Valuation Framework</a>
+    <a class="nav-link" href="#s18"><span class="snum">S18</span> Pre-Earnings Baseline</a>
+    <a class="nav-link" href="#s19"><span class="snum">S19</span> Risk Inventory</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audit</div>
+    <a class="nav-link" href="#checkA">Checklist A — Documents</a>
+    <a class="nav-link" href="#checkB">Checklist B — Consistency</a>
+  </div>
+</nav>
+
+<main class="main">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Delta Framework · Configuration Card</div>
+    <h1>Tesla, Inc.</h1>
+    <div class="hero-meta">NASDAQ: TSLA &nbsp;·&nbsp; Automotive / Clean Energy / AI & Robotics<br>Built: March 3, 2026 &nbsp;·&nbsp; Most recent quarter: Q4 2025 (ended Dec 31, 2025)<br>19 sections + 2 procedural checklists</div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-label">FY2025 Revenue</div><div class="stat-value">$94.8B</div><div class="stat-delta delta-down">-2.9% YoY</div></div>
+      <div class="stat-card"><div class="stat-label">Auto GM ex-Credits</div><div class="stat-value">17.9%</div><div class="stat-delta delta-up">+540 bps from Q1 trough</div></div>
+      <div class="stat-card"><div class="stat-label">Scorecard</div><div class="stat-value">22%</div><div class="stat-delta delta-neutral">Mixed / stable</div></div>
+      <div class="stat-card"><div class="stat-label">Expected Value</div><div class="stat-value">$377</div><div class="stat-delta delta-down">-9% from ~$415</div></div>
+    </div>
+  </div>
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header"><span class="section-num">S1</span><h2 class="section-title">Identity & Model Classification</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div>
+        <div class="field-group"><div class="field-label">Ticker</div><div class="field-value mono">TSLA</div></div>
+        <div class="field-group"><div class="field-label">Company</div><div class="field-value">Tesla, Inc.</div></div>
+        <div class="field-group"><div class="field-label">Sector</div><div class="field-value">Automotive / Clean Energy / AI & Robotics</div></div>
+      </div>
+      <div>
+        <div class="field-group"><div class="field-label">Position Established</div><div class="field-value mono">[To be confirmed]</div></div>
+        <div class="field-group"><div class="field-label">Model Type</div><div class="field-value">Vertically integrated manufacturer — multi-segment (automotive + energy + services) with emerging autonomy/robotics platform economics</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Normal Operating Profile</h3>
+      <p>Tesla operates as a vertically integrated automotive and energy manufacturer with direct-to-consumer sales (no dealer network), in-house battery cell and powertrain production, and proprietary software (FSD, Autobidder, Powerhub). Two reportable segments: Automotive and Energy Generation & Storage. FY2025 revenue mix: Automotive ~73%, Energy ~13.5%, Services & Other ~13.2%.</p>
+      <p>Normalized gross margins are 16-20% consolidated. Auto GM ex-credits range 12-18%. Energy segment margins are higher and expanding. FCF conversion is low for current investment phase — FY2024 was $3.6B, FY2025 recovered to $6.2B. With FY2026 CapEx guided >$20B, FCF will likely turn negative.</p>
+      <hr class="divider">
+      <table class="data-table">
+        <thead><tr><th>Parameter</th><th>Setting</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">FCF conversion</td><td>Asset-heavy, 30-50% of NI when not in heavy CapEx mode. FY2026 expected FCF-negative.</td></tr>
+          <tr><td class="label-cell">Tier 2 metrics</td><td>Deliveries, auto GM ex-credits, energy storage (GWh), reg credit dependency, SBC % of revenue</td></tr>
+          <tr><td class="label-cell">DSO interpretation</td><td>Direct-to-consumer with upfront payment; DSO naturally low (14-19 days)</td></tr>
+          <tr><td class="label-cell">Catalyst calendar</td><td>Cybercab production, Optimus, FSD regulatory approvals, Robotaxi expansion, 6 factory ramps, tariff policy</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header"><span class="section-num">S2</span><h2 class="section-title">Thesis & Key Metric</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card">
+      <h3 class="card-title">Falsifiable Thesis Statement</h3>
+      <p>Tesla's transition from a volume automotive manufacturer to an AI/autonomy platform will be validated by <strong>(1)</strong> Robotaxi scaling beyond Austin to 10+ US markets by end of 2026, generating measurable ride-hailing revenue, <strong>(2)</strong> automotive gross margins ex-credits sustaining above 15% despite Model S/X discontinuation, and <strong>(3)</strong> the $20B+ CapEx cycle funded without dilutive equity raises, with energy storage growing to >15% of total revenue by Q4 2026.</p>
+      <div class="callout warn" style="margin-top: 16px;"><strong>Falsification triggers:</strong> Auto GM ex-credits <13% for 2 consecutive quarters | Robotaxi <5 US markets by Dec 2026 | Liquidity <$20B or dilutive raise >$5B</div>
+      <div class="hero-meta" style="margin-top: 12px;">Date written: March 3, 2026 &nbsp;·&nbsp; Last reviewed: March 3, 2026</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">3-Sentence Bear Case</h3>
+      <p style="color: var(--error);">The $20B+ CapEx program overwhelms Tesla's $44B cash position without generating near-term returns, forcing dilutive capital raises or project cancellations. Core automotive margins compress as Chinese competitors (BYD, NIO, Xpeng) accelerate global expansion, US EV incentives phase out, and Musk's political activities damage brand perception in key markets. Robotaxi scaling stalls on regulatory fragmentation while Waymo extends its operational lead, and Optimus remains pre-revenue through 2027, making Tesla's trillion-dollar+ valuation increasingly dependent on optionality that never converts to cash flow.</p>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--primary);">
+      <h3 class="card-title">Key Metric: Auto Gross Margin Excluding Regulatory Credits</h3>
+      <div class="grid-2" style="margin-bottom: 12px;">
+        <div>
+          <div class="field-label">Current Value (Q4-25)</div>
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--success);">17.9%</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary);">5-quarter: 13.6% → 12.5% → 15.0% → 15.4% → 17.9%</div>
+        </div>
+        <div>
+          <div class="field-label">Why This Tests the Thesis</div>
+          <p style="font-size: 14px;">Isolates core vehicle profitability from volatile regulatory credit stream ($1.99B FY2025). Directly measures whether Tesla can maintain pricing power and cost efficiency while scaling volume and absorbing tariffs ($500M+/quarter).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header"><span class="section-num">S3</span><h2 class="section-title">Business Model & Product Architecture</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="product-card core">
+      <div class="product-header"><span class="product-name">1. Model Y / Model 3 (mass-market EVs)</span><div class="product-badges"><span class="badge badge-primary">Core</span><span class="badge badge-secondary">Scale</span><span class="badge badge-neutral">~70% of Rev</span></div></div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Model Y is bestselling car of any kind globally (~1.1M unit/yr run rate). Refreshed across all 4 factories in Q1 2025. ASP range $35-55K. Auto GM ex-credits 12.5-17.9% over trailing 5Q.</p>
+    </div>
+    <div class="product-card supporting">
+      <div class="product-header"><span class="product-name">2. Cybertruck (electric pickup)</span><div class="product-badges"><span class="badge badge-secondary">Growth / Emerging</span></div></div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Full-size electric pickup. Premium ASP ~$80-100K. Ramping at Gigafactory Texas. Likely margin-dilutive in 2025. Included in "Other Models" count (50,850 units FY2025 across S/X/Cybertruck/Semi).</p>
+    </div>
+    <div class="product-card core">
+      <div class="product-header"><span class="product-name">3. Energy Generation & Storage</span><div class="product-badges"><span class="badge badge-primary">Core / Growth</span><span class="badge badge-neutral">~13.5% of Rev</span></div></div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Megapack (grid-scale) and Powerwall (residential). FY2025: $12.8B (+27% YoY), 46.7 GWh deployed (record). Higher margins than automotive. Autobidder and Powerhub software create recurring revenue. Tariff headwinds ~$200M/quarter.</p>
+    </div>
+    <div class="product-card supporting">
+      <div class="product-header"><span class="product-name">4. Services & Other</span><div class="product-badges"><span class="badge badge-neutral">Cash Flow Stabilizer</span><span class="badge badge-neutral">~13.2% of Rev</span></div></div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Supercharging (open to non-Tesla, NACS standard), insurance (13 states), parts, used vehicles. FY2025: $12.5B (+19% YoY). Services margin declined to 8.8% in Q4 from service center hiring ahead of fleet growth.</p>
+    </div>
+    <div class="product-card emerging">
+      <div class="product-header"><span class="product-name">5. Robotaxi / Autonomous Ride-Hailing</span><div class="product-badges"><span class="badge badge-accent">Pre-revenue (launched Jun 2025)</span></div></div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Operating Model Y fleet in Austin and Bay Area. Cybercab purpose-built for 50-60 hrs/week duty cycle. Per-mile cost structure not yet disclosed. Currently in 2 US markets.</p>
+    </div>
+    <div class="product-card emerging">
+      <div class="product-header"><span class="product-name">6. Optimus (humanoid robot)</span><div class="product-badges"><span class="badge badge-accent">Pre-revenue</span></div></div>
+      <p style="font-size: 14px; color: var(--text-secondary);">General-purpose autonomous humanoid robot. Gen 3 unveil planned for Q1 2026 (per Q4/FY25 update). First production line being installed; SOP targeted before end of 2026 with eventual planned capacity of 1M units/year. Leverages FSD neural network and in-house AI chip design.</p>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header"><span class="section-num">S4</span><h2 class="section-title">Revenue Stream Map</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card">
+      <h3 class="card-title">FY2025 Full Year Revenue: $94,827M <span style="color: var(--error); font-family: var(--font-mono); font-size: 14px;">(-2.9% YoY)</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Stream</th><th class="num">FY25 ($M)</th><th class="num">% Rev</th><th class="num">FY24 ($M)</th><th class="num">YoY</th><th>Thesis Role</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Auto Sales (ex-credits)</td><td class="num">65,821</td><td class="num">69.4%</td><td class="num">72,480</td><td class="num" style="color:var(--error)">-9.2%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+          <tr><td class="label-cell">Energy Gen & Storage</td><td class="num">12,771</td><td class="num">13.5%</td><td class="num">10,086</td><td class="num" style="color:var(--success)">+26.6%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+          <tr><td class="label-cell">Services & Other</td><td class="num">12,530</td><td class="num">13.2%</td><td class="num">10,534</td><td class="num" style="color:var(--success)">+18.9%</td><td><span class="badge badge-neutral">Cash Flow Stabilizer</span></td></tr>
+          <tr><td class="label-cell">Regulatory Credits</td><td class="num">1,993</td><td class="num">2.1%</td><td class="num">2,763</td><td class="num" style="color:var(--error)">-27.9%</td><td><span class="badge badge-neutral">Immaterial (declining)</span></td></tr>
+          <tr><td class="label-cell">Leasing</td><td class="num">1,712</td><td class="num">1.8%</td><td class="num">1,827</td><td class="num" style="color:var(--error)">-6.3%</td><td><span class="badge badge-neutral">Immaterial</span></td></tr>
+          <tr style="font-weight:600"><td>Total</td><td class="num">94,827</td><td class="num">100%</td><td class="num">97,690</td><td class="num" style="color:var(--error)">-2.9%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Quarterly Revenue Progression ($M)</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th class="num">Total</th><th class="num">Auto Sales</th><th class="num">Reg Cred</th><th class="num">Leasing</th><th class="num">Energy</th><th class="num">Services</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q4-24</td><td class="num">25,707</td><td class="num">18,659</td><td class="num">692</td><td class="num">447</td><td class="num">3,061</td><td class="num">2,848</td></tr>
+          <tr><td class="label-cell">Q1-25</td><td class="num">19,335</td><td class="num">12,925</td><td class="num">595</td><td class="num">447</td><td class="num">2,730</td><td class="num">2,638</td></tr>
+          <tr><td class="label-cell">Q2-25</td><td class="num">22,496</td><td class="num">15,787</td><td class="num">439</td><td class="num">435</td><td class="num">2,789</td><td class="num">3,046</td></tr>
+          <tr><td class="label-cell">Q3-25</td><td class="num">28,095</td><td class="num">20,359</td><td class="num">417</td><td class="num">429</td><td class="num">3,415</td><td class="num">3,475</td></tr>
+          <tr><td class="label-cell">Q4-25</td><td class="num">24,901</td><td class="num">16,750</td><td class="num">542</td><td class="num">401</td><td class="num">3,837</td><td class="num">3,371</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header"><span class="section-num">S5</span><h2 class="section-title">Competitive Context & Moat Evidence</h2><span class="section-cadence">landscape: material change / moat: quarterly</span></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">BYD (Build Your Dreams)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">World's largest EV manufacturer by volume. Vertically integrated. Aggressive global expansion. Price competition at 30-50% discount. Surpassed Tesla in total EV+PHEV sales in 2024.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Waymo (Alphabet)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Operational autonomous ride-hailing in 5+ US cities. Established safety record and regulatory relationships. More expensive sensor suite but more proven for unsupervised autonomy. Direct competitor to Robotaxi thesis.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">Legacy OEMs (GM/Ford/VW/Hyundai/Toyota)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Massive production scale, established dealer networks. Accelerating EV transition. Constrained by dealer model, slower software iteration, and ICE transition costs.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">Chinese EV Startups (NIO, Xpeng, Li Auto)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Technology-forward EVs, competitive pricing. Expanding into Europe and Middle East. Primarily China-domestic threat. Collectively eroding Tesla's China share but individually subscale.</p></div>
+    <hr class="divider accent">
+    <div class="card">
+      <h3 class="card-title">Moat Evidence Grid</h3>
+      <p style="font-size: 14px; margin-bottom: 12px;"><strong>Moat type:</strong> Vertical integration (battery to software) + Brand/ecosystem (Supercharger NACS standard, OTA, FSD) + Manufacturing scale (6 factories, 2M+ capacity) + Data advantage (6B+ FSD miles)</p>
+      <div class="field-label" style="margin-bottom: 8px">Evidence Now</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">Supercharger NACS adopted as industry standard · FSD: 6B+ cumulative miles · Model Y: bestselling car globally · Energy: 46.7 GWh deployed (record) · In-house lithium refinery, cathode refinery, AI inference chip design · Direct sales model with OTA updates</div>
+      <div class="field-label" style="margin-bottom: 8px">Moat Limitations</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">Vehicle hardware increasingly commoditized · FSD still requires supervision outside limited geofences · Brand damage from CEO political activity · Regulatory credits not a durable moat · Energy faces "increase in competition and tariffs"</div>
+      <div class="verdict-box"><div><div class="verdict-label">Quarterly Moat Pulse</div><div class="verdict-value">Stable</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Improving from Q1 low, but structural questions remain on autonomy timeline and brand</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">March 3, 2026</div></div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header"><span class="section-num">S6</span><h2 class="section-title">Management Team Assessment</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="card-title">Elon Musk — CEO & Co-founder</h3>
+        <div class="card-subtitle">~22 year tenure · Also CEO SpaceX, CTO xAI</div>
+        <p style="font-size: 14px; color: var(--text-secondary);">Serial entrepreneur. Largest individual shareholder. Subject of 2025 CEO Performance Award (Operation Maestro: 423.7M shares, $2T-$8.5T milestones). Product timelines historically aggressive — FSD "next year" since 2016.</p>
+        <div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> HIGH on timelines (apply 2-3× to stated dates). MODERATE on product capability claims. LOW on manufacturing/engineering claims.</div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Vaibhav Taneja — CFO</h3>
+        <div class="card-subtitle">CFO since August 2023 (~2.5 years) · Previously Tesla CAO</div>
+        <p style="font-size: 14px; color: var(--text-secondary);">Precise, data-oriented. Transparent about tariff impacts ($500M+), CapEx funding strategy, and investment phase rationale. FY2025 CapEx revisions suggest conservative tendencies.</p>
+        <div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> LOW on near-term financials. MODERATE on forward CapEx guidance (pattern of over-guiding).</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 4px;">
+      <h3 class="card-title">Guidance Pattern: Erratic (Musk) / Moderate (Taneja)</h3>
+      <div class="card-subtitle">Tesla does not provide formal quarterly revenue or EPS guidance</div>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th>Pattern</th><th class="num">Factor</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">CapEx guidance</td><td>Over-promise, under-execute</td><td class="num" style="color:var(--error)">×0.755 (25% over-guide)</td></tr>
+          <tr><td class="label-cell">Revenue vs consensus</td><td>Beat only 45% of time (20Q)</td><td class="num">~0% (neutral)</td></tr>
+          <tr><td class="label-cell">EPS vs consensus</td><td>Beat 75% of time (20Q)</td><td class="num" style="color:var(--success)">Modest upside</td></tr>
+          <tr><td class="label-cell">Musk timeline commitments</td><td>60% delivery rate</td><td class="num" style="color:var(--error)">Apply 2-3× to date claims</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>FY2025 CapEx:</strong> Guided $11.3B → Actual $8,527M (25% underspend). Pattern: over-promise ambitions, then under-execute.</div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header"><span class="section-num">S7</span><h2 class="section-title">Cross-Quarter Acceleration Table</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4-24</th><th class="num">Q1-25</th><th class="num">Q2-25</th><th class="num">Q3-25</th><th class="num">Q4-25</th><th>Trend</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue ($M)</td><td class="num">25,707</td><td class="num">19,335</td><td class="num">22,496</td><td class="num">28,095</td><td class="num">24,901</td><td>Volatile</td></tr>
+          <tr><td class="label-cell">Gross margin</td><td class="num">16.3%</td><td class="num">16.3%</td><td class="num">17.2%</td><td class="num">18.0%</td><td class="num">20.1%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Auto GM ex-credits</td><td class="num">13.6%</td><td class="num">12.5%⚑</td><td class="num">15.0%</td><td class="num">15.4%</td><td class="num">17.9%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Operating margin</td><td class="num">6.2%</td><td class="num">2.1%⚑</td><td class="num">4.1%</td><td class="num">5.8%</td><td class="num">5.7%</td><td><span class="badge badge-secondary">Stable</span></td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$0.60</td><td class="num">$0.27</td><td class="num">$0.40</td><td class="num">$0.50</td><td class="num">$0.50</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">FCF ($M)</td><td class="num">2,034</td><td class="num">664</td><td class="num">146⚑</td><td class="num">3,990</td><td class="num">1,420</td><td>Volatile</td></tr>
+          <tr><td class="label-cell">Deliveries</td><td class="num">495,570</td><td class="num">336,681⚑</td><td class="num">384,122</td><td class="num">497,099</td><td class="num">418,227</td><td>Volatile</td></tr>
+          <tr><td class="label-cell">Energy (GWh)</td><td class="num">11.0</td><td class="num">10.4</td><td class="num">9.6</td><td class="num">12.5</td><td class="num">14.2</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">SBC ($M)</td><td class="num">579</td><td class="num">573</td><td class="num">635</td><td class="num">663</td><td class="num">954⚑</td><td><span class="badge badge-warning">Accel. ⚠</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header"><span class="section-num">S8</span><h2 class="section-title">Quarterly Income Statement Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4-24</th><th class="num">Q1-25</th><th class="num">Q2-25</th><th class="num">Q3-25</th><th class="num">Q4-25</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Total Revenue ($M)</td><td class="num">25,707</td><td class="num">19,335</td><td class="num">22,496</td><td class="num">28,095</td><td class="num">24,901</td></tr>
+          <tr><td class="label-cell">&nbsp;&nbsp;QoQ Growth</td><td class="num">—</td><td class="num">-24.8%</td><td class="num">+16.4%</td><td class="num">+24.9%</td><td class="num">-11.4%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Gross Margin</td><td class="num">16.3%</td><td class="num">16.3%</td><td class="num">17.2%</td><td class="num">18.0%</td><td class="num">20.1%</td></tr>
+          <tr><td class="label-cell">Auto GM ex-Credits</td><td class="num">13.6%</td><td class="num">12.5%</td><td class="num">15.0%</td><td class="num">15.4%</td><td class="num">17.9%</td></tr>
+          <tr><td class="label-cell">Operating Margin (GAAP)</td><td class="num">6.2%</td><td class="num">2.1%</td><td class="num">4.1%</td><td class="num">5.8%</td><td class="num">5.7%</td></tr>
+          <tr><td class="label-cell">Net Margin (GAAP)</td><td class="num">8.3%</td><td class="num">2.1%</td><td class="num">5.2%</td><td class="num">4.9%</td><td class="num">3.4%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">GAAP EPS</td><td class="num">$0.60</td><td class="num">$0.12</td><td class="num">$0.33</td><td class="num">$0.39</td><td class="num">$0.24</td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$0.60</td><td class="num">$0.27</td><td class="num">$0.40</td><td class="num">$0.50</td><td class="num">$0.50</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>FY2025 Annual:</strong> Revenue $94,827M (-2.9% YoY vs $97,690M). GAAP EPS $1.08. Non-GAAP EPS ~$1.67. GAAP NI $3,794M. Q4-25 GAAP NI depressed by BTC mark-to-market losses and elevated SBC ($954M, partly driven by CEO Performance Award).</div>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header"><span class="section-num">S9</span><h2 class="section-title">Balance Sheet Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4-24</th><th class="num">Q1-25</th><th class="num">Q2-25</th><th class="num">Q3-25</th><th class="num">Q4-25</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Total liquidity ($M)</td><td class="num">36,563</td><td class="num">36,996</td><td class="num">36,782</td><td class="num">41,647</td><td class="num">44,059</td></tr>
+          <tr><td class="label-cell">Total debt</td><td class="num">8,213</td><td class="num">7,529</td><td class="num">7,220</td><td class="num">7,702</td><td class="num">8,376</td></tr>
+          <tr><td class="label-cell">Net cash</td><td class="num">28,350</td><td class="num">29,467</td><td class="num">29,562</td><td class="num">33,945</td><td class="num">35,683</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Accounts receivable</td><td class="num">4,418</td><td class="num">3,784</td><td class="num">3,838</td><td class="num">4,703</td><td class="num">4,642</td></tr>
+          <tr><td class="label-cell">Inventory</td><td class="num">12,017</td><td class="num">13,706</td><td class="num">14,570</td><td class="num">12,276</td><td class="num">13,138</td></tr>
+          <tr><td class="label-cell">Deferred revenue (total)</td><td class="num">6,198</td><td class="num">6,302</td><td class="num">6,623</td><td class="num">6,901</td><td class="num">7,055</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Shareholders' equity</td><td class="num">72,913</td><td class="num">74,653</td><td class="num">77,314</td><td class="num">79,970</td><td class="num">82,137</td></tr>
+          <tr><td class="label-cell">Diluted shares (M)</td><td class="num">3,517</td><td class="num">3,521</td><td class="num">3,519</td><td class="num">3,526</td><td class="num">3,539</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>Liquidity +$7.5B YoY</strong> ($36.6B→$44.1B). Deferred revenue +$857M YoY (+14%) — growing FSD and energy prepayments. Share creep: 3,517→3,539 (+0.6% YoY) before potential 423.7M CEO award dilution.</div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header"><span class="section-num">S10</span><h2 class="section-title">Earnings Quality & Cash Flow Forensics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="card-title">Q4 2025 Cash Flow</h3>
+        <div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$3,813M</div></div>
+        <div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$1,420M</div></div>
+        <div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">5.7%</div></div>
+        <div class="field-group"><div class="field-label">CapEx</div><div class="field-value mono">$2,393M</div></div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">FY2025 Cash Flow</h3>
+        <div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$14,747M</div></div>
+        <div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$6,220M</div></div>
+        <div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">6.6%</div></div>
+        <div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">9.0% ($8,527M)</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">SBC & Dilution</h3>
+      <p style="font-size: 14px; color: var(--text-secondary);">FY2025 SBC: $2,825M (3.0% of revenue) vs FY2024: $1,999M (2.0%) — +41% increase. Q4-25 SBC rose to $954M; the 2025 CEO Performance Award contributed to the increase, with $162M of recognized expense explicitly attributed to the award in the 2025 10-K. Diluted shares: 3,539M (+0.6% YoY). 423.7M share overhang from CEO award ($2T-$8.5T market cap milestones). No buyback program.</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">DSO & Per-Share Economics</h3>
+      <div class="grid-2">
+        <div><div class="field-label">DSO (Q4-25)</div><div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600;">17 days</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">Normal range: 14-19 days</div></div>
+        <div><div class="field-label">ROIC (FY2025 est.)</div><div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600;">~4.8%</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">FY2024: ~2.8%. Investment-cycle ROIC.</div></div>
+      </div>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Earnings Quality Verdict</div><div class="verdict-value">Minor concerns</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">SBC rising to 3.0%, BTC mark-to-market volatility, FY2026 FCF likely negative on $20B+ CapEx. Core OCF ($14.7B) is healthy. Concerns are non-operational and dilution-related.</div></div>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header"><span class="section-num">S11</span><h2 class="section-title">Thesis-Weighted Scorecard</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <div class="score-row" style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 4px;"><span class="score-metric" style="font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Metric</span><span class="score-weight" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">WT</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Score</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Wtd</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Auto GM ex-credits</strong> — 12.5%→17.9% over 5Q, +540 bps improvement</span><span class="score-weight">2.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+2.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Revenue growth rate</strong> — FY2025 -2.9% YoY, Q4-25 -3.1% YoY</span><span class="score-weight">1.5×</span><span class="score-badge score-minus">-1</span><span class="score-badge score-minus">-1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Energy storage growth</strong> — 46.7 GWh FY2025 (+49% YoY), record Q4 14.2 GWh</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Gross margin trajectory</strong> — 16.3%→20.1% over 5Q, best in 2+ years</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>FCF conversion</strong> — FY2025 ~93% non-GAAP. FY2026 CapEx will pressure</span><span class="score-weight">1.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>DSO trend</strong> — 14→17 days (+3 YoY), within normal range</span><span class="score-weight">1.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Deliveries</strong> — FY2025 1.64M vs 1.79M FY2024 (-8.6%)</span><span class="score-weight">1.0×</span><span class="score-badge score-minus">-1</span><span class="score-badge score-minus">-1.0</span></div>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Scorecard Result</div><div class="verdict-value">Mixed / stable (lower end)</div></div><div class="verdict-score">22%</div></div>
+    <p style="font-size: 13px; color: var(--text-tertiary); text-align: center;">&gt;60% = Clearly improving &nbsp;·&nbsp; 20-60% = Mixed/stable &nbsp;·&nbsp; &lt;20% = Deterioration</p>
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Historical Score Trajectory</h3>
+      <div style="display: flex; gap: 8px; align-items: flex-end; height: 100px; margin: 16px 0 8px;">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--error);margin-bottom:4px;">-11%</div><div style="width:100%;height:5px;background:var(--error-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--error);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-24</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--error);margin-bottom:4px;">-67%</div><div style="width:100%;height:5px;background:var(--error-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--error);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q1-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">44%</div><div style="width:100%;height:44px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">89%</div><div style="width:100%;height:89px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q3-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">22%</div><div style="width:100%;height:22px;background:var(--warning-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--warning);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-25</div></div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Highly volatile — V-shaped recovery from Q1-25 trough (-67%) to Q3-25 near-max (89%), then pullback to 22% as revenue and deliveries declined. Scores driven by production cycle timing, not sustained momentum.</p>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header"><span class="section-num">S12</span><h2 class="section-title">Tier 2 Sector-Specific Metrics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4-25</th><th class="num">Q3-25</th><th class="num">YoY Δ</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Vehicle Deliveries</td><td class="num">418,227</td><td class="num">497,099</td><td class="num" style="color:var(--error)">-15.6% vs Q4-24</td><td><span class="badge badge-warning">YELLOW</span></td></tr>
+          <tr><td class="label-cell">Energy Storage (GWh)</td><td class="num">14.2</td><td class="num">12.5</td><td class="num" style="color:var(--success)">+29.1% vs Q4-24</td><td><span class="badge badge-success">GREEN</span></td></tr>
+          <tr><td class="label-cell">Regulatory Credits ($M)</td><td class="num">$542</td><td class="num">$417</td><td class="num" style="color:var(--error)">-21.7% vs Q4-24</td><td><span class="badge badge-warning">YELLOW</span></td></tr>
+          <tr><td class="label-cell">SBC % of Revenue</td><td class="num">3.8%</td><td class="num">2.4%</td><td class="num" style="color:var(--error)">+150 bps vs Q4-24</td><td><span class="badge badge-warning">YELLOW</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header"><span class="section-num">S13</span><h2 class="section-title">Forward Catalyst Pipeline & Product Roadmap</h2><span class="section-cadence">material change</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Window</th><th>Event</th><th>Type</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q1 2026</td><td>Optimus Gen 3 unveil; first production lines being installed (per Q4/FY25 update)</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">Q1-Q2 2026</td><td>Robotaxi expansion beyond Austin/Bay Area</td><td>Regulatory</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">H1 2026</td><td>Cybercab and Tesla Semi production ramps commencing (per Q4/FY25 update)</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">2026</td><td>Ramp of six new production lines across vehicle, robots, energy storage and battery manufacturing (per Q4/FY25 update)</td><td>CapEx</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">2026</td><td>FSD rollout to China and EMEA (pending regulatory)</td><td>Regulatory</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">Mid-2026</td><td>Samsung AI chip fab partnership</td><td>Supply</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header"><span class="section-num">S14</span><h2 class="section-title">Sell-Side Landscape</h2><span class="section-cadence">material change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Total Analysts</div><div class="stat-value">~50</div></div>
+      <div class="stat-card"><div class="stat-label">Consensus PT</div><div class="stat-value">~$400</div><div class="stat-delta delta-down">~4% below $415</div></div>
+      <div class="stat-card"><div class="stat-label">Ratings</div><div class="stat-value" style="font-size: 16px;">44% Buy · 38% Hold · 18% Sell</div></div>
+    </div>
+    <div style="font-size: 11px; color: var(--text-tertiary); text-align: right; margin-top: -12px; margin-bottom: 12px;">Source: Reuters/LSEG consensus; as of 2026-03-04. Values are time-sensitive.</div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">OW</div><div class="analyst-body"><div class="analyst-name">Alexander Potter — Piper Sandler</div><div class="analyst-pt">PT: $500</div><p class="analyst-thesis">AI + robotics optionality model. Sum-of-parts: core auto + energy + FSD/Robotaxi option + Optimus option. Most accurate among bulls on both stock direction and PT.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--error);">UW</div><div class="analyst-body"><div class="analyst-name">Colin Langan — Wells Fargo</div><div class="analyst-pt">PT: $125</div><p class="analyst-thesis">Core auto fundamentals only. TSLA trades at ~100×+ P/E on core auto. Autonomy systematically overpromised. Chinese competition structural. Most rigorous bear-case stress test.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">Buy</div><div class="analyst-body"><div class="analyst-name">Mark Delaney — Goldman Sachs</div><div class="analyst-pt">PT: $405</div><p class="analyst-thesis">Balanced DCF + peer multiples. Closest to consensus. Most accurate overall PT. Best proxy for consensus thinking — when Delaney shifts, it signals consensus inflection.</p></div></div>
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card" style="border-left: 3px solid var(--success);"><h3 class="card-title">Notable Bull Case (Ives, $600)</h3><p style="font-size: 14px;">FSD monetization: $100B+ recurring revenue if >50% fleet pays $99-199/month. Optimus = multi-trillion TAM not priced in. Robotaxi at scale by 2027, energy at $25B+.</p></div>
+      <div class="card" style="border-left: 3px solid var(--error);"><h3 class="card-title">Notable Bear Case (Langan, $125)</h3><p style="font-size: 14px;">Core auto is a low-margin commodity at a tech multiple. FY2025 revenue -2.9%, deliveries -8.6%. Reg credits mask ~200 bps of core margin weakness. Revenue beat rate only 45% over 20Q. $20B+ CapEx will destroy FCF.</p></div>
+    </div>
+  </div>
+
+  <!-- S15 -->
+  <div class="section" id="s15">
+    <div class="section-header"><span class="section-num">S15</span><h2 class="section-title">Management Guidance & Credibility</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <h3 class="card-title">FY2026 Forward Expectations</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Raw</th><th class="num">Adjusted</th><th class="num">Street</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">CapEx</td><td class="num">>$20B</td><td class="num" style="color:var(--primary);font-weight:600">~$15B (×0.755)</td><td class="num">—</td></tr>
+          <tr><td class="label-cell">Revenue</td><td class="num">No guidance</td><td class="num">~$105-109B</td><td class="num">$105-109B</td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">No guidance</td><td class="num">Modest upside</td><td class="num">$2.09-2.25</td></tr>
+          <tr><td class="label-cell">Deliveries</td><td class="num">No guidance</td><td class="num">~1.75M</td><td class="num">1.75M</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Commitment Tracker — Delivery Rate: 60%</h3>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Robotaxi launch in Austin — DELIVERED (June 2025)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Model Y refresh across all 4 factories in Q1 — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> FSD expansion to Bay Area — DELIVERED (Q3 2025)</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> "Cheaper models to market soon, SOP June" — STATUS UNCLEAR</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> "Autonomous vehicles in quarter to half of US by end of 2026" — OPEN (high discount)</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Capital Allocation Score</h3>
+      <div class="progress-track"><div class="progress-fill" style="width: 55%;"></div></div>
+      <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--primary);">11 / 20</div>
+      <table class="data-table" style="margin-top: 12px;">
+        <thead><tr><th>Category</th><th class="num">Score</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">High-return investing</td><td class="num">4/5</td><td>6 factories + AI compute; but pattern of under-deploying</td></tr>
+          <tr><td class="label-cell">Acquisitions</td><td class="num" style="color:var(--error)">1/5</td><td>xAI investment = related-party with governance concerns</td></tr>
+          <tr><td class="label-cell">Equity management</td><td class="num" style="color:var(--error)">2/5</td><td>SBC +41%, no buybacks, 423.7M share CEO award overhang</td></tr>
+          <tr><td class="label-cell">Balance sheet</td><td class="num">4/5</td><td>$44B liquidity, minimal debt. $20B+ CapEx drawdown ahead</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Management Credibility</div><div class="verdict-value">Moderate</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Taneja credible on near-term financials. Musk timelines require 2-3× discount. CapEx 25% over-promise pattern. Revenue beats only 45%. Trust cost discipline, discount timelines and CapEx ambitions.</div></div>
+  </div>
+
+  <!-- S16 -->
+  <div class="section" id="s16">
+    <div class="section-header"><span class="section-num">S16</span><h2 class="section-title">Kill Criteria</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="callout danger" style="margin-bottom: 24px;"><strong>RULE:</strong> If ANY criterion fires, execute the pre-committed action. Do not rationalize. Do not wait for "one more quarter of data."</div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#1</span><span class="kill-title">Auto GM ex-Credits Deterioration</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Auto GM ex-credits &lt;13% for 2 consecutive quarters, excluding planned factory transitions or one-time tariff events &gt;$1B.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Auto GM ex-credits &lt;10% in ANY quarter → execute immediately</div><div class="kill-gap">Gap: Current 17.9% → trigger 13% (4.9pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#2</span><span class="kill-title">Capital Depletion / Forced Dilution</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Total liquidity &lt;$20B, OR Tesla announces dilutive equity offering &gt;$5B.</div><div class="kill-gap">Gap: Current $44.1B → trigger $20B ($24.1B margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#3</span><span class="kill-title">Delivery Volume Collapse</span><span class="kill-action kill-reduce">REDUCE 25% + CAP 10%</span></div><div class="kill-trigger"><strong>Trigger:</strong> FY deliveries decline YoY for 2 consecutive fiscal years, AND decline not &gt;80% from single model transition.</div><div class="kill-gap">Gap: FY2025 1.636M was -8.6% vs FY2024 — first year triggered. FY2026 &lt;1.636M fires criterion. Consensus: 1.75M (+7%).</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#4</span><span class="kill-title">Robotaxi Scaling Failure</span><span class="kill-action kill-reassess">REASSESS + REDUCE 25%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Robotaxi operating in &lt;5 US markets by Dec 31, 2026, AND no Cybercab production deliveries.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Tesla publicly withdraws Robotaxi program → EXIT immediately</div><div class="kill-gap">Gap: Current 2 markets → trigger 5 (need 3 additional)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#5</span><span class="kill-title">Management Credibility Collapse</span><span class="kill-action kill-reassess">REDUCE 25% + REASSESS</span></div><div class="kill-trigger"><strong>Trigger:</strong> S15 credibility verdict at "Low" for 2 consecutive quarterly reviews, OR CFO departure.</div><div class="kill-gap">Gap: Current "Moderate" → trigger "Low" (1 grade margin)</div></div>
+  </div>
+
+  <!-- S17 -->
+  <div class="section" id="s17">
+    <div class="section-header"><span class="section-num">S17</span><h2 class="section-title">Valuation Framework</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Market Cap</div><div class="stat-value">~$1.56T</div></div>
+      <div class="stat-card"><div class="stat-label">Enterprise Value</div><div class="stat-value">~$1.52T</div></div>
+      <div class="stat-card"><div class="stat-label">Fwd P/E (FY26)</div><div class="stat-value">~191×</div><div class="stat-delta delta-down">Auto peers: 6-10×</div></div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Scenario Analysis (3-Year Horizon → FY2028)</h3>
+      <div class="scenario-bar bull"><div class="scenario-label" style="color: var(--success);">Bull</div><div class="scenario-value" style="color: var(--success);">$700-$900</div><div class="scenario-prob">15%</div><div class="scenario-desc">Revenue ~$200B. Robotaxi 20+ markets, Cybercab mass production, FSD >25% fleet, energy $25B+.</div></div>
+      <div class="scenario-bar base"><div class="scenario-label" style="color: var(--primary);">Base</div><div class="scenario-value" style="color: var(--primary);">$350-$450</div><div class="scenario-prob">50%</div><div class="scenario-desc">Revenue ~$140-150B. Deliveries ~2M, auto GM ex-credits >15%, Robotaxi limited, CapEx self-funded.</div></div>
+      <div class="scenario-bar bear"><div class="scenario-label" style="color: var(--error);">Bear</div><div class="scenario-value" style="color: var(--error);">$125-$200</div><div class="scenario-prob">35%</div><div class="scenario-desc">Revenue ~$100-110B. Margins <13%, deliveries stall, Robotaxi fails to scale, Optimus pre-revenue, cash erodes.</div></div>
+      <div class="verdict-box" style="margin-top: 16px;"><div><div class="verdict-label">Expected Value</div><div class="verdict-value" style="font-family: var(--font-mono);">$377</div></div><div style="font-size: 14px; color: var(--error); font-weight: 500;">~-9% downside from ~$415 &nbsp;·&nbsp; Annualized (3-yr): ~-3%</div></div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Valuation Gap: <span style="color: var(--primary);">Fair</span></h3>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border);">
+        1. Robotaxi scales beyond pilot markets into measurable revenue<br>
+        2. Auto GM ex-credits sustains >15% through CapEx investment cycle<br>
+        3. $20B+ CapEx program generates returns within 3-5 years<br>
+        4. No dilutive equity raise required to fund investment cycle<br>
+        5. Energy storage grows to >20% of revenue, sustaining margin mix
+      </div>
+      <div class="callout" style="margin-top: 16px;"><strong>Position sizing:</strong> Conservative — expected value near current price, bear case (~$163) represents ~60% downside.</div>
+    </div>
+  </div>
+
+  <!-- S18 -->
+  <div class="section" id="s18">
+    <div class="section-header"><span class="section-num">S18</span><h2 class="section-title">Rolling Quarterly Baseline & Pre-Earnings Checklist</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <h3 class="card-title">Q4 2025 Snapshot</h3>
+      <div class="grid-3">
+        <div><div class="field-label">Revenue</div><div class="field-value mono">$24,901M (-3.1% YoY)</div></div>
+        <div><div class="field-label">Gross Margin</div><div class="field-value mono">20.1%</div></div>
+        <div><div class="field-label">FCF</div><div class="field-value mono">$1,420M (5.7% margin)</div></div>
+        <div><div class="field-label">DSO</div><div class="field-value mono">17 days</div></div>
+        <div><div class="field-label">Diluted Shares</div><div class="field-value mono">3,539M</div></div>
+        <div><div class="field-label">Liquidity</div><div class="field-value mono">$44,059M</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Pre-Earnings Checklist for Q1 2026</h3>
+      <div class="card-subtitle">Earnings date: ~Late April 2026</div>
+      <div class="field-label" style="margin-top: 16px;">What the Market Needs to Hear</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">
+        1. Deliveries >420K (Q1-25 was 337K Model Y refresh trough)<br>
+        2. Auto GM ex-credits >16% (sustaining despite S/X exit + tariffs >$500M)<br>
+        3. CapEx accelerating to ~$4-5B/quarter (credible start to $20B+ program)
+      </div>
+      <div class="field-label">Thresholds</div>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Expectation</th><th class="num">Concern</th><th class="num">Kill Threshold</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue (Q1)</td><td class="num">~$24-26B</td><td class="num" style="color:var(--warning)">&lt;$22B</td><td class="num" style="color:var(--error)">N/A (no formal guide)</td></tr>
+          <tr><td class="label-cell">Auto GM ex-Credits</td><td class="num">&gt;16%</td><td class="num" style="color:var(--warning)">&lt;15%</td><td class="num" style="color:var(--error)">&lt;13% for 2Q / &lt;10% any Q</td></tr>
+          <tr><td class="label-cell">Liquidity</td><td class="num">&gt;$40B</td><td class="num" style="color:var(--warning)">Drawdown rate</td><td class="num" style="color:var(--error)">&lt;$20B (KC #2)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Last Quarter Verdict</div><div class="verdict-value">Hold</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Conviction: Medium. Margin-over-volume trade-off working, but expected value near current price with 60% downside in bear scenario.</div></div>
+  </div>
+
+  <!-- S19 -->
+  <div class="section" id="s19">
+    <div class="section-header"><span class="section-num">S19</span><h2 class="section-title">Risk Inventory</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-3" style="margin-bottom: 20px; text-align: center;">
+      <div class="stat-card" style="border-left: 3px solid var(--error);"><div class="stat-label">RED Risks</div><div class="stat-value" style="color: var(--error);">0</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--warning);"><div class="stat-label">YELLOW Risks</div><div class="stat-value" style="color: var(--warning);">8</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--success);"><div class="stat-label">GREEN Risks</div><div class="stat-value" style="color: var(--success);">2</div></div>
+    </div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#1 — Auto Margin Compression</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competitive · Severity: High · Probability: Medium</div><p class="risk-body">BYD surpassed Tesla in EV+PHEV sales. Chinese competitors expanding globally at 30-50% discount. Auto GM ex-credits recovered to 17.9% but still below FY2022-23 levels.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#2 — CapEx Cycle Cash Burn / Forced Dilution</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Financial · Severity: High · Probability: Medium-High</div><p class="risk-body">FY2026 CapEx guided >$20B (6 factories + AI compute). $44B liquidity provides ~2yr buffer. FY2025 pattern: guided $11.3B, actual $8.5B (25% underspend).</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#3 — Robotaxi Regulatory Fragmentation</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Regulatory · Severity: High · Probability: Medium</div><p class="risk-body">State-by-state US approval. EU layers of regulation. Currently 2 US markets only. Musk targets "quarter to half of the US by end of year" — significant discount required.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#4 — Brand Damage from CEO Political Activity</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Reputational · Severity: Medium-High · Probability: High</div><p class="risk-body">"Vandalism and unwanted hostility toward our brand." European boycotts. DOGE/government roles create partisan polarization. FY2025 deliveries -8.6% (partially brand-driven).</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#5 — SBC Dilution & CEO Compensation Overhang</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Financial/Governance · Severity: Medium · Probability: High</div><p class="risk-body">SBC +41% YoY to $2,825M (3.0% of revenue). Q4-25 SBC elevated at $954M, partly driven by CEO Performance Award ($162M recognized in FY2025 per 10-K). 423.7M share overhang from CEO Performance Award ($2T-$8.5T milestones). No buyback program.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#6 — Tariff / Trade Policy Headwinds</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Macro · Severity: Medium · Probability: High</div><p class="risk-body">>$500M tariff impact Q4-25. US import tariffs on Chinese components. Retaliatory tariffs on US exports. Energy storage also affected.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#7 — EV Incentive Phase-Out (OBBBA)</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Regulatory · Severity: Medium · Probability: High (enacted)</div><p class="risk-body">OBBBA repealed individual consumer EV tax credits. Residential energy credits expired Dec 31, 2025. Reg credit revenue declining (-27.9% YoY). ~100% margin stream structurally declining.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#8 — Waymo Competitive Lead in Autonomy</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Competitive · Severity: Medium-High · Probability: Low-Medium</div><p class="risk-body">Operational in 5+ US cities with established safety record. More expensive hardware but more proven. Tesla's vision-only approach is cheaper at scale but less proven for unsupervised autonomy.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#9 — CEO Attention Allocation / Key Person Risk</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Operational · Severity: Medium · Probability: Medium</div><p class="risk-body">Musk simultaneously CEO of Tesla + SpaceX, CTO of xAI, government advisory roles. xAI investment from Tesla balance sheet raises related-party concerns. Tom Zhu reduced stake 82% and departed.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#10 — BTC / Digital Asset Mark-to-Market</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Financial · Severity: Low · Probability: High (ongoing)</div><p class="risk-body">Post-ASU 2023-08, BTC mark-to-market flows through GAAP NI. Q4-25 impacted by -23% BTC decline. Creates GAAP EPS volatility obscuring core trends.</p></div>
+    <hr class="divider accent">
+    <div class="card">
+      <h3 class="card-title">Insider Activity — Verdict: <span style="color: var(--error);">Concerning</span></h3>
+      <p style="font-size: 14px; color: var(--text-secondary);">Non-Musk insiders sold ~$988M in 12 months, holdings down 53%. Musk $1B open-market purchase (Sep 2025) — timing aligned with shareholder vote record date. CFO Taneja selling outside 10b5-1 plans. Tom Zhu reduced 82%. Five-year drought of non-Musk insider purchases. Board Chair Denholm liquidated >$530M since 2018.</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Correlated Risk Cluster</h3>
+      <p style="font-size: 14px; color: var(--text-secondary);">Risks #1 (margin compression), #4 (brand damage), and #7 (OBBBA incentive phase-out) are interconnected — brand damage reduces demand in markets where EV incentive removal simultaneously reduces price competitiveness, compounding margin pressure from Chinese competition. This cluster maps to kill criteria #1 (margins) and #3 (deliveries).</p>
+    </div>
+  </div>
+
+  <!-- CHECKLIST A -->
+  <div class="section" id="checkA">
+    <div class="section-header"><span class="section-num">A</span><h2 class="section-title">Procedural Checklist A — Document Inventory</h2></div>
+    <div class="card">
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-K annual filing (FY2025)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Press releases: Q1-Q4 2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Earnings call transcripts: Q4-24, Q1-Q4 2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Investor presentations: Q1-Q4 2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Proxy statement / DEF 14A (FY2025)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Sell-side analyst report</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Insider activity report</div>
+      <hr class="divider">
+      <div class="field-label">Gaps</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Q4 2024 press release (delivery figures from JSON correction)</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Detailed Robotaxi operational metrics (CFO: "not meaningful")</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Cybercab production timeline specifics</div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST B -->
+  <div class="section" id="checkB">
+    <div class="section-header"><span class="section-num">B</span><h2 class="section-title">Procedural Checklist B — Consistency Audit</h2></div>
+    <div class="verdict-box" style="background: var(--success-subtle); border-color: var(--success);"><div><div class="verdict-label">Audit Result</div><div class="verdict-value" style="color: var(--success);">PASS (re-verified)</div></div><div class="verdict-score" style="color: var(--success);">14/14</div></div>
+    <div class="card">
+      <div class="field-label">Numerical (4/4)</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Revenue segments sum ✓ (re-verified: FY2024 base values corrected 2026-03-11) · Share count matches ✓ · FCF figures match ✓ (re-verified: FY2024 FCF corrected from $188M to $3.6B, 2026-03-11) · Guidance consistent ✓</p>
+      <div class="field-label">Narrative (6/6)</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Thesis↔scorecard ✓ · Key metric 2× weight ✓ · Threats↔risk inventory ✓ · Moat decay↔risk ✓ · Mgmt↔credibility ✓ · Model↔FCF/Tier2 ✓</p>
+      <div class="field-label">Logical (4/4)</div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Kill triggers > scorecard thresholds ✓ · Implied growth achievable ✓ · Catalyst timing↔revenue ✓ · Bear case → kill criteria + risks ✓</p>
+    </div>
+  </div>
+
+  <hr class="divider accent">
+  <p style="font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 24px;">
+    Delta Framework · Tesla (TSLA) Configuration Card · Built March 3, 2026 · Corrected March 11, 2026<br>
+    Anthropic Warm Humanist Design System · 19 Sections + 2 Procedural Checklists
+  </p>
+
+</main>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.style.background = '');
+        const id = entry.target.id;
+        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (activeLink) activeLink.style.background = 'rgba(196, 123, 90, 0.12)';
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

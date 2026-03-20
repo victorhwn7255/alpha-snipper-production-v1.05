@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robinhood (HOOD) — Configuration Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C47B5A;
+    --primary-hover: #B06A4A;
+    --primary-subtle: rgba(196, 123, 90, 0.12);
+    --secondary: #7D8C6E;
+    --secondary-subtle: rgba(125, 140, 110, 0.12);
+    --accent: #8B8FC7;
+    --accent-subtle: rgba(139, 143, 199, 0.12);
+    --bg: #FAF7F4;
+    --bg-alt: #F5F0EB;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EAE2;
+    --text-primary: #2D2824;
+    --text-secondary: #6B5F54;
+    --text-tertiary: #9A8E82;
+    --border: #E8E0D5;
+    --border-strong: #D1C7B8;
+    --border-subtle: #F0EAE2;
+    --success: #6B8C5A;
+    --success-subtle: rgba(107, 140, 90, 0.12);
+    --warning: #C49A5A;
+    --warning-subtle: rgba(196, 154, 90, 0.12);
+    --error: #C45A5A;
+    --error-subtle: rgba(196, 90, 90, 0.12);
+    --amber: #B8927A;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(45,40,36,0.05);
+    --shadow-md: 0 2px 8px rgba(45,40,36,0.06), 0 1px 2px rgba(45,40,36,0.04);
+    --shadow-lg: 0 4px 16px rgba(45,40,36,0.08), 0 2px 4px rgba(45,40,36,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 30;
+    padding: 32px 0 48px 0;
+    transition: transform 0.3s ease;
+  }
+  .sidebar-logo {
+    padding: 0 24px 24px 24px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h2 {
+    font-family: var(--font-serif);
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: -0.02em;
+  }
+  .sidebar-logo .ticker {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 0.04em; margin-top: 4px;
+  }
+  .nav-group { padding: 8px 16px; }
+  .nav-group-label {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 8px 4px;
+  }
+  .nav-link {
+    display: block; padding: 6px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .nav-link:hover { background: var(--primary-subtle); color: var(--text-primary); }
+  .nav-link .snum {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px; max-width: 960px;
+    padding: 48px 56px 120px 56px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    color: var(--primary); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 400;
+    color: var(--text-primary); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 32px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono); font-size: 22px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .stat-delta {
+    font-family: var(--font-mono); font-size: 12px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--error); }
+  .delta-neutral { color: var(--text-tertiary); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; color: var(--primary);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-size: 24px;
+    font-weight: 500; color: var(--text-primary);
+    letter-spacing: -0.02em; line-height: 1.3;
+  }
+  .section-cadence {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: var(--text-tertiary);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 15px; color: var(--text-primary); line-height: 1.6;
+  }
+  .field-value.mono {
+    font-family: var(--font-mono); font-size: 14px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-serif); font-size: 18px;
+    font-weight: 500; color: var(--text-primary);
+    margin-bottom: 12px; line-height: 1.3;
+  }
+  .card-subtitle {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--text-secondary); margin-bottom: 16px;
+  }
+
+  /* Product architecture cards */
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .product-card.core { border-left-color: var(--primary); }
+  .product-card.supporting { border-left-color: var(--secondary); }
+  .product-card.legacy { border-left-color: var(--text-tertiary); }
+  .product-card.emerging { border-left-color: var(--accent); }
+
+  .product-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: var(--font-serif); font-size: 17px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .product-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .badge-primary { background: var(--primary-subtle); color: #9C5D3F; }
+  .badge-secondary { background: var(--secondary-subtle); color: #4A5A3E; }
+  .badge-accent { background: var(--accent-subtle); color: #6B6FA9; }
+  .badge-success { background: var(--success-subtle); color: #4A6B3A; }
+  .badge-warning { background: var(--warning-subtle); color: #8B6B3A; }
+  .badge-error { background: var(--error-subtle); color: #9C3A3A; }
+  .badge-neutral { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  /* Risk severity dots */
+  .severity-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .dot-red { background: var(--error); }
+  .dot-yellow { background: var(--warning); }
+  .dot-green { background: var(--success); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 20px; font-size: 14px;
+  }
+  .data-table thead th {
+    font-family: var(--font-sans); font-size: 11px;
+    font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding: 10px 12px; text-align: left;
+  }
+  .data-table thead th.num { text-align: right; }
+  .data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .data-table tbody td.num {
+    font-family: var(--font-mono); font-size: 13px;
+    text-align: right; white-space: nowrap;
+  }
+  .data-table tbody td.label-cell {
+    font-weight: 500; color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(196, 123, 90, 0.04);
+  }
+  .data-table tbody tr:last-child td { border-bottom: 1px solid var(--border-strong); }
+
+  /* ── RISK CARDS ── */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+  }
+  .risk-card.red { border-left: 4px solid var(--error); }
+  .risk-card.yellow { border-left: 4px solid var(--warning); }
+  .risk-card.green { border-left: 4px solid var(--success); }
+  .risk-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+  }
+  .risk-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .risk-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .risk-body {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .risk-watch {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ── CALLOUT / FLAG ── */
+  .callout {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0; padding: 14px 18px;
+    margin: 16px 0; font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: var(--warning-subtle);
+  }
+  .callout.danger {
+    border-left-color: var(--error);
+    background: var(--error-subtle);
+  }
+  .callout.success {
+    border-left-color: var(--success);
+    background: var(--success-subtle);
+  }
+  .callout strong { color: var(--text-primary); }
+
+  /* ── SCENARIO BARS ── */
+  .scenario-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    margin-bottom: 10px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .scenario-bar.bull { border-left: 4px solid var(--success); }
+  .scenario-bar.base { border-left: 4px solid var(--primary); }
+  .scenario-bar.bear { border-left: 4px solid var(--error); }
+  .scenario-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; min-width: 50px;
+  }
+  .scenario-value {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 500; min-width: 110px;
+  }
+  .scenario-prob {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .scenario-desc {
+    font-size: 13px; color: var(--text-secondary); flex: 1;
+  }
+
+  /* ── SCORECARD ── */
+  .score-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-metric {
+    flex: 1; font-size: 14px; color: var(--text-primary);
+  }
+  .score-weight {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); min-width: 40px; text-align: center;
+  }
+  .score-badge {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; min-width: 40px; text-align: center;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .score-plus { background: var(--success-subtle); color: #4A6B3A; }
+  .score-minus { background: var(--error-subtle); color: #9C3A3A; }
+  .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+  /* ── KILL CRITERION ── */
+  .kill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .kill-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .kill-num {
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; color: var(--primary);
+  }
+  .kill-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary); flex: 1;
+    margin-left: 10px;
+  }
+  .kill-action {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 4px;
+  }
+  .kill-reduce { background: var(--warning-subtle); color: #8B6B3A; }
+  .kill-exit { background: var(--error-subtle); color: #9C3A3A; }
+  .kill-reassess { background: var(--accent-subtle); color: #6B6FA9; }
+
+  .kill-trigger {
+    font-size: 14px; color: var(--text-primary); margin-bottom: 8px;
+    padding: 10px 14px; background: var(--bg-alt); border-radius: 6px;
+    line-height: 1.5;
+  }
+  .kill-gap {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); margin-top: 8px;
+  }
+
+  /* ── ANALYST CARDS ── */
+  .analyst-card {
+    display: flex; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+  .analyst-rating {
+    writing-mode: vertical-lr; text-orientation: mixed;
+    font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 0;
+    display: flex; align-items: center;
+  }
+  .analyst-body { flex: 1; }
+  .analyst-name {
+    font-family: var(--font-serif); font-size: 15px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .analyst-firm {
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+  }
+  .analyst-pt {
+    font-family: var(--font-mono); font-size: 16px;
+    font-weight: 600; color: var(--primary); margin-bottom: 6px;
+  }
+  .analyst-thesis {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: var(--primary);
+    transition: width 0.6s ease;
+  }
+
+  /* ── GRID HELPERS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .divider.accent { border-top: 2px solid var(--primary); }
+
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 20px 0;
+  }
+  .verdict-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .verdict-value {
+    font-family: var(--font-serif); font-size: 20px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .verdict-score {
+    font-family: var(--font-mono); font-size: 28px;
+    font-weight: 600; color: var(--primary);
+    margin-left: auto;
+  }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+  }
+  .check-icon { font-size: 16px; line-height: 1.4; }
+  .check-pass .check-icon { color: var(--success); }
+  .check-fail .check-icon { color: var(--error); }
+  .check-open .check-icon { color: var(--text-tertiary); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none; position: fixed; top: 16px; left: 16px;
+    z-index: 40; width: 44px; height: 44px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px;
+    color: var(--text-primary);
+  }
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 48px 24px 120px; }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .hero h1 { font-size: 30px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; max-width: 100%; }
+  }
+</style>
+</head><body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<nav class="sidebar">
+  <div class="sidebar-logo"><h2>Robinhood Markets</h2><div class="ticker">NASDAQ: HOOD &nbsp;·&nbsp; Configuration Card</div></div>
+  <div class="nav-group"><div class="nav-group-label">Foundation (Phase 1)</div>
+    <a class="nav-link" href="#s1"><span class="snum">S1</span> Identity & Classification</a><a class="nav-link" href="#s2"><span class="snum">S2</span> Thesis & Key Metric</a><a class="nav-link" href="#s3"><span class="snum">S3</span> Product Architecture</a><a class="nav-link" href="#s4"><span class="snum">S4</span> Revenue Stream Map</a><a class="nav-link" href="#s5"><span class="snum">S5</span> Competitive Context & Moat</a><a class="nav-link" href="#s6"><span class="snum">S6</span> Management Team</a><a class="nav-link" href="#s7"><span class="snum">S7</span> Acceleration Table</a></div>
+  <div class="nav-group"><div class="nav-group-label">Financials (Phase 2)</div>
+    <a class="nav-link" href="#s8"><span class="snum">S8</span> Income Statement</a><a class="nav-link" href="#s9"><span class="snum">S9</span> Balance Sheet</a><a class="nav-link" href="#s10"><span class="snum">S10</span> Cash Flow & Quality</a><a class="nav-link" href="#s11"><span class="snum">S11</span> Scorecard</a><a class="nav-link" href="#s12"><span class="snum">S12</span> Tier 2 Metrics</a></div>
+  <div class="nav-group"><div class="nav-group-label">Catalysts & Sell-Side (Phase 3)</div>
+    <a class="nav-link" href="#s13"><span class="snum">S13</span> Catalyst Pipeline</a><a class="nav-link" href="#s14"><span class="snum">S14</span> Sell-Side Landscape</a><a class="nav-link" href="#s15"><span class="snum">S15</span> Guidance & Credibility</a></div>
+  <div class="nav-group"><div class="nav-group-label">Risk & Valuation (Phase 4)</div>
+    <a class="nav-link" href="#s16"><span class="snum">S16</span> Kill Criteria</a><a class="nav-link" href="#s17"><span class="snum">S17</span> Valuation Framework</a><a class="nav-link" href="#s18"><span class="snum">S18</span> Pre-Earnings Baseline</a><a class="nav-link" href="#s19"><span class="snum">S19</span> Risk Inventory</a></div>
+  <div class="nav-group"><div class="nav-group-label">Audit</div>
+    <a class="nav-link" href="#checkA">Checklist A — Documents</a><a class="nav-link" href="#checkB">Checklist B — Consistency</a></div>
+</nav>
+<main class="main">
+  <div class="hero">
+    <div class="hero-eyebrow">Delta Framework · Configuration Card</div>
+    <h1>Robinhood Markets, Inc.</h1>
+    <div class="hero-meta">NASDAQ: HOOD &nbsp;·&nbsp; Financial Services / Fintech<br>Built: March 15, 2026 &nbsp;·&nbsp; Most recent quarter: Q4 FY2025 (ended Dec 31, 2025)<br>19 sections + 2 procedural checklists</div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-label">FY2025 Revenue</div><div class="stat-value">$4.47B</div><div class="stat-delta delta-up">+52% YoY</div></div>
+      <div class="stat-card"><div class="stat-label">Net Deposits (FY)</div><div class="stat-value">$68.1B</div><div class="stat-delta delta-up">35% of prior AUM (7× industry)</div></div>
+      <div class="stat-card"><div class="stat-label">Scorecard</div><div class="stat-value">50%</div><div class="stat-delta delta-neutral">Mixed / stable</div></div>
+      <div class="stat-card"><div class="stat-label">Expected Value</div><div class="stat-value">$91</div><div class="stat-delta delta-up">+25% from $73</div></div>
+    </div>
+  </div>
+
+  <!-- S1 --><div class="section" id="s1"><div class="section-header"><span class="section-num">S1</span><h2 class="section-title">Identity & Model Classification</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2"><div><div class="field-group"><div class="field-label">Ticker</div><div class="field-value mono">HOOD</div></div><div class="field-group"><div class="field-label">Company</div><div class="field-value">Robinhood Markets, Inc.</div></div><div class="field-group"><div class="field-label">Sector</div><div class="field-value">Financial Services / Fintech</div></div></div><div><div class="field-group"><div class="field-label">Position Established</div><div class="field-value mono">[To be confirmed]</div></div><div class="field-group"><div class="field-label">Model Type</div><div class="field-value">Transaction-based fintech / Retail financial services platform. No traditional COGS — all expenses are OpEx. 90%+ fixed-cost structure with >70% incremental margins.</div></div></div></div>
+    <div class="card" style="margin-top: 16px;"><h3 class="card-title">Normal Operating Profile</h3>
+      <p>Revenue from transaction-based fees (PFOF, crypto rebates, event contracts — 59%), net interest income (margin lending, cash sweep, securities lending — 34%), and subscription/other (Gold, proxy — 7%). Operating margins 40-50%. Revenue sensitive to: (a) trading volumes/crypto cycles, (b) interest rates (100bp = ~$304M), (c) market sentiment.</p>
+      <p>FCF conversion NOT meaningful quarterly — brokerage working capital causes swings of -$1.6B to +$3.5B. Evaluate FCF annually only. FY2025: FCF $1,584M / NI $1,883M = 84% conversion.</p>
+      <hr class="divider">
+      <table class="data-table"><thead><tr><th>Parameter</th><th>Setting</th></tr></thead><tbody>
+        <tr><td class="label-cell">FCF conversion</td><td>Annual only. Healthy: 70%+ of NI. Quarterly swings are normal brokerage operations.</td></tr>
+        <tr><td class="label-cell">Tier 2 metrics</td><td>ARPU, net deposits, Gold subscribers, platform assets, funded customer growth</td></tr>
+        <tr><td class="label-cell">DSO</td><td>NOT APPLICABLE. $18.0B receivables are margin loans + credit card balances, not trade AR.</td></tr>
+        <tr><td class="label-cell">Catalyst calendar</td><td>Product launches (Gold Card, banking, prediction markets, Cortex AI), Reg NMS phased rollout (BOLO May 2026, Rule 605 Aug 2026, tick size/access fees Nov 2026), Fed rate decisions, crypto cycles, Rothera JV launch (mid-2026)</td></tr>
+      </tbody></table></div></div>
+
+  <!-- S2 --><div class="section" id="s2"><div class="section-header"><span class="section-num">S2</span><h2 class="section-title">Thesis & Key Metric</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card"><h3 class="card-title">Falsifiable Thesis Statement</h3>
+      <p>Robinhood's product velocity and vertical integration are enabling it to capture disproportionate share of the millennial/Gen-Z wealth accumulation cycle, sustaining <strong>25%+ revenue CAGR</strong> through FY2028. Three pillars: <strong>(1)</strong> expanding ARPU from $171 toward $250+ through Gold, credit card, banking, retirement; <strong>(2)</strong> new revenue verticals — prediction markets, futures, international — adding $500M+ incremental by FY2027; <strong>(3)</strong> maintaining 45%+ operating margins as fixed-cost leverage offsets investment.</p>
+      <div class="callout warn" style="margin-top: 16px;"><strong>Falsification trigger:</strong> Net deposit growth below 15% YoY combined with funded customer churn exceeding 2M would challenge this thesis.</div>
+      <div class="hero-meta" style="margin-top: 12px;">Date written: March 15, 2026 &nbsp;·&nbsp; Last reviewed: March 15, 2026</div></div>
+    <div class="card"><h3 class="card-title">3-Sentence Bear Case</h3>
+      <p style="color: var(--error);">PFOF regulatory risk (Reg NMS: tick size + access fee reduction Nov 2026, Rule 605 disclosure Aug 2026) could compress margin below 40% — 59% of revenue has outsized PFOF exposure; a 20% decline cuts total revenue ~12%. Competition from Schwab (38.5M accounts), Fidelity (45M), and SoFi erodes differentiation as rate cuts ($304M/100bp) compress NII (34% of revenue) and crypto cyclicality drives volatility. Heavy executive selling ($1.4B+, zero purchases, co-founder Bhatt near-complete economic exit) signals potential misalignment with the public growth narrative.</p></div>
+    <div class="card" style="border-left: 3px solid var(--primary);"><h3 class="card-title">Key Metric: Net Deposits ($ amount and YoY growth rate)</h3>
+      <div class="grid-2" style="margin-bottom: 12px;"><div>
+          <div class="field-label">FY2025 Value</div>
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--success);">$68.1B</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary);">35% of prior-year AUM · ~7× industry norm (5-8%)</div></div>
+        <div><div class="field-label">5-Quarter Trajectory ($B)</div>
+          <div style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary); line-height: 1.8;">$16.1 → $18.0 → $13.8 → $20.4 → $15.9<br>$193B → $322B platform assets<br>FY2026 target: 20%+ growth. Q1 QTD: $7B+</div></div></div></div></div>
+
+  <!-- S3 --><div class="section" id="s3"><div class="section-header"><span class="section-num">S3</span><h2 class="section-title">Business Model & Product Architecture</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">1. Options & Equities Trading</span><div class="product-badges"><span class="badge badge-primary">Core</span><span class="badge badge-neutral">32% of Rev</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Commission-free, mobile-first. Self-clearing via RHS. Options $1,123M (25%), Equities $302M (7%). PFOF-based revenue. 24-hour trading. Citadel Securities = 13% of total revenue.</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">2. Cryptocurrency Trading</span><div class="product-badges"><span class="badge badge-primary">Core</span><span class="badge badge-neutral">20% of Rev</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">58 cryptos (US) / 74 (EU). Staking, perpetual futures (Bitstamp), self-custody wallet. FY2025: $901M. Highly cyclical — ranged $160M (Q2) to $358M (Q4'24). Bitstamp adds institutional capability.</p></div>
+    <div class="product-card emerging"><div class="product-header"><span class="product-name">3. Prediction Markets & Futures</span><div class="product-badges"><span class="badge badge-accent">Growth / Emerging</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">"Fastest-growing business in our history" — $300M+ annualized run rate in first year. Rothera JV (HOOD 45%/Susquehanna 45%/MIAX 10%) captures full $0.02/contract economics (vs current $0.01). Active state litigation from gaming regulators.</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">4. Margin Lending & Securities Lending</span><div class="product-badges"><span class="badge badge-neutral">Core</span><span class="badge badge-neutral">17% of Rev</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Margin interest $573M (13%) + securities lending $190M (4%). Margin book: $16.8B (+113% YoY). Near-zero incremental cost. Credit losses: $114M provision FY2025.</p></div>
+    <div class="product-card supporting"><div class="product-header"><span class="product-name">5. Cash Sweep & Interest Income</span><div class="product-badges"><span class="badge badge-neutral">Core / Mature</span><span class="badge badge-neutral">16% of Rev</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">FDIC-insured sweep ($2.25M coverage), segregated cash, corporate cash. Combined $715M. Rate-sensitive: 100bp = ~$304M impact (6.8% of rev).</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">6. Robinhood Gold (Subscription)</span><div class="product-badges"><span class="badge badge-primary">Core</span><span class="badge badge-secondary">Monetization Flywheel</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Premium tier: higher APY, 3% IRA match, lower margin rates, Gold Card access. $179M FY2025 (4%). 4.18M subscribers (+58% YoY). ~$43/year per sub. Near-100% gross margin. Key flywheel — Gold subs generate higher ARPU.</p></div>
+    <div class="product-card emerging"><div class="product-header"><span class="product-name">7. Gold Card, Banking & Wealth Management</span><div class="product-badges"><span class="badge badge-accent">Growth / Emerging</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">No-fee credit card (600K holders, targeting >1M by YE 2026). Banking via BaaS (Coastal Bank). IRA with match. Strategies (0.25% fee). Robinhood Ventures Fund I (private markets). All gated behind Gold subscription.</p></div>
+    <div class="product-card supporting"><div class="product-header"><span class="product-name">8. TradePMR (RIA Custodial)</span><div class="product-badges"><span class="badge badge-secondary">Growth / B2B</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">First B2B channel. $42.5B in RIA assets under administration. Complements retail with higher-AUM, lower-churn RIA clients. Not yet material to consolidated revenue.</p></div></div>
+
+  <!-- S4 --><div class="section" id="s4"><div class="section-header"><span class="section-num">S4</span><h2 class="section-title">Revenue Stream Map</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card"><h3 class="card-title">FY2025 Full Year Revenue: $4,473M <span style="color: var(--success); font-family: var(--font-mono); font-size: 14px;">(+52% YoY)</span></h3>
+      <table class="data-table"><thead><tr><th>Stream</th><th class="num">FY25 ($M)</th><th class="num">% Rev</th><th class="num">FY24 ($M)</th><th class="num">YoY</th><th>Thesis Role</th></tr></thead><tbody>
+        <tr><td class="label-cell">Transaction-Based</td><td class="num">2,628</td><td class="num">58.7%</td><td class="num">1,647</td><td class="num" style="color:var(--success)">+60%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+        <tr><td class="label-cell">&nbsp;&nbsp;Options</td><td class="num">1,123</td><td class="num">25.1%</td><td class="num">—</td><td class="num">—</td><td></td></tr>
+        <tr><td class="label-cell">&nbsp;&nbsp;Crypto</td><td class="num">901</td><td class="num">20.1%</td><td class="num">—</td><td class="num">—</td><td></td></tr>
+        <tr><td class="label-cell">&nbsp;&nbsp;Equities</td><td class="num">302</td><td class="num">6.8%</td><td class="num">—</td><td class="num">—</td><td></td></tr>
+        <tr><td class="label-cell">&nbsp;&nbsp;Other (events/futures)</td><td class="num">302</td><td class="num">6.8%</td><td class="num">—</td><td class="num">—</td><td></td></tr>
+        <tr><td class="label-cell">Net Interest Revenues</td><td class="num">1,514</td><td class="num">33.8%</td><td class="num">1,109</td><td class="num" style="color:var(--success)">+37%</td><td><span class="badge badge-neutral">Cash Flow Stabilizer</span></td></tr>
+        <tr><td class="label-cell">Other Revenues</td><td class="num">331</td><td class="num">7.4%</td><td class="num">195</td><td class="num" style="color:var(--success)">+70%</td><td><span class="badge badge-primary">Thesis-Critical (Gold)</span></td></tr>
+        <tr style="font-weight:600"><td>Total</td><td class="num">4,473</td><td class="num">100%</td><td class="num">2,951</td><td class="num" style="color:var(--success)">+52%</td><td></td></tr>
+      </tbody></table></div>
+    <div class="card"><h3 class="card-title">Quarterly Revenue Progression ($M)</h3>
+      <table class="data-table"><thead><tr><th></th><th class="num">Total</th><th class="num">Txn-Based</th><th class="num">Net Int</th><th class="num">Other</th><th class="num">Txn%</th><th class="num">YoY</th></tr></thead><tbody>
+        <tr><td class="label-cell">Q4 2024</td><td class="num">1,014</td><td class="num">672</td><td class="num">296</td><td class="num">46</td><td class="num">66.3%</td><td class="num">+115%</td></tr>
+        <tr><td class="label-cell">Q1 2025</td><td class="num">927</td><td class="num">583</td><td class="num">290</td><td class="num">54</td><td class="num">62.9%</td><td class="num">+50%</td></tr>
+        <tr><td class="label-cell">Q2 2025</td><td class="num">989</td><td class="num">539</td><td class="num">357</td><td class="num">93</td><td class="num">54.5%</td><td class="num">+45%</td></tr>
+        <tr><td class="label-cell">Q3 2025</td><td class="num">1,274</td><td class="num">730</td><td class="num">456</td><td class="num">88</td><td class="num">57.3%</td><td class="num">+100%</td></tr>
+        <tr><td class="label-cell">Q4 2025</td><td class="num">1,283</td><td class="num">776</td><td class="num">411</td><td class="num">96</td><td class="num">60.5%</td><td class="num">+27%</td></tr>
+      </tbody></table></div></div>
+
+  <!-- S5 --><div class="section" id="s5"><div class="section-header"><span class="section-num">S5</span><h2 class="section-title">Competitive Context & Moat Evidence</h2><span class="section-cadence">landscape: material change / moat: quarterly</span></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Charles Schwab (38.5M active brokerage accounts, $11.9T client assets)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Full-service incumbent. Commission-free with fractional shares and IRA match — feature gap narrowing. No PFOF dependence. Competes for same wealth transfer opportunity with vastly greater resources. 46.5M total accounts.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Fidelity Investments (~45M accounts)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Largest retail brokerage by accounts. Workplace 401k franchise captures young professionals. "Graduating investor" pipeline may cap HOOD's ARPU upside.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">SoFi Technologies (~$37B deposits, ~13.7M members)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Closest "financial super app" peer targeting same demographic. Has bank charter (HOOD does not). Smaller scale, lower brand awareness. Not visibly winning share from HOOD.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">Coinbase ($273B quarterly volume, ~11M MAU)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Dominant crypto-native exchange. Direct competition on crypto (20% of HOOD rev). HOOD's multi-asset embedding vs Coinbase crypto-only. Bitstamp acquisition strengthens HOOD's institutional position.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">Interactive Brokers (~4.4M accounts)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Superior execution, global access, advanced tools. HOOD attacking with Legend desktop, index options, futures. IBKR's execution quality and global access remain superior.</p></div>
+    <hr class="divider accent">
+    <div class="card"><h3 class="card-title">Moat Evidence Grid</h3>
+      <p style="font-size: 14px; margin-bottom: 12px;"><strong>Moat type:</strong> Product velocity + Vertical integration (self-clearing) + Brand/network effects</p>
+      <div class="field-label" style="margin-bottom: 8px">Evidence Now</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">8 consecutive quarters positive net inflows from ALL major competitors · 11 revenue lines >$100M ARR · Self-clearing since 2018 (structural cost advantage) · Net deposits $68.1B (7× industry norm) · 4.18M Gold subs (+58% YoY) · Prediction markets $300M+ run rate in year 1 · 75%+ customer service cases solved by AI ($100M+ savings)</div>
+      <div class="field-label" style="margin-bottom: 8px">Moat Limitations</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">PFOF regulatory framework externally controlled · 50%+ first-time investors (less sticky) · No bank charter (relies on BaaS) · Crypto revenue purely cyclical · Churn doubled to 1.7M in FY2025 · Dual-class with Bhatt 35.9% voting despite near-complete economic exit (as of Apr 2025 proxy; Class B at ~12.3% of total, 5% auto-conversion trigger + Aug 2036 hardstop)</div>
+      <div class="verdict-box"><div><div class="verdict-label">Quarterly Moat Pulse</div><div class="verdict-value">Strengthening</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">8Q consecutive net inflows from all major competitors, 11 revenue lines >$100M, prediction markets first-mover, Gold subscriber acceleration</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">Q4 2025</div></div></div></div>
+
+  <!-- S6 --><div class="section" id="s6"><div class="section-header"><span class="section-num">S6</span><h2 class="section-title">Management Team Assessment</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div class="card"><h3 class="card-title">Vladimir Tenev — CEO & Co-founder</h3><div class="card-subtitle">13 year tenure · Stanford/UCLA Math · 24.2% voting power (46.6M Class B) (as of Apr 2025 proxy)</div><p style="font-size: 14px; color: var(--text-secondary);">Credible on product milestones — 5/5 delivery rate from Q4 2024 call. Cites specific data. Apply 50-70% haircut to long-term market sizing claims ("$100T wealth transfer," "prediction markets supercycle driving trillions"). $34K salary + $2.1M perks; real wealth is equity.</p><div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Low on near-term execution. High on long-term TAM sizing.</div></div>
+      <div class="card"><h3 class="card-title">Shiv Verma — CFO (New)</h3><div class="card-subtitle">First earnings call Q4 2025 · Replaced Jason Warnick (7 years, ex-Amazon)</div><p style="font-size: 14px; color: var(--text-secondary);">Crisp, numbers-forward. References "The Outsiders" capital allocation framework. Financial North Star: "maximize EPS and free cash flow per share." Insufficient data — one earnings call. Default to Moderate until 2+ quarters of track record.</p><div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Insufficient data. Default Moderate until pattern established.</div></div></div>
+    <div class="card" style="margin-top: 4px;"><h3 class="card-title">Guidance Pattern: Non-Guiding (Rev/EPS) / Qualitative Sandbagger</h3>
+      <div class="card-subtitle">Only guides Adjusted OpEx + SBC annually. 1 formal guidance cycle available.</div>
+      <table class="data-table"><thead><tr><th>Period</th><th class="num">Guided Range</th><th class="num">Actual</th><th class="num">Result</th></tr></thead><tbody>
+        <tr><td class="label-cell">FY2025 OpEx+SBC</td><td class="num">$2,000-2,100M</td><td class="num">$2,265M</td><td class="num" style="color:var(--warning)">ABOVE +8% (M&A-driven)</td></tr>
+        <tr><td class="label-cell">FY2025 Rev (qual.)</td><td class="num">"Double-digit growth"</td><td class="num">+52%</td><td class="num" style="color:var(--success)">Massive beat</td></tr>
+        <tr><td class="label-cell">FY2026 OpEx+SBC</td><td class="num">$2,600-2,725M</td><td class="num">PENDING</td><td class="num">—</td></tr>
+      </tbody></table>
+      <div class="callout" style="margin-top: 12px;"><strong>Commitment delivery:</strong> 5/5 from Q4 2024 call — Gold Card 600K ✓, Gold subs 4.18M ✓, SBC <10% ✓, shares ~flat ✓, 3 product events ✓. 100% delivery rate.</div></div></div>
+
+  <!-- S7 --><div class="section" id="s7"><div class="section-header"><span class="section-num">S7</span><h2 class="section-title">Cross-Quarter Acceleration Table</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric</th><th class="num">Q4'24</th><th class="num">Q1'25</th><th class="num">Q2'25</th><th class="num">Q3'25</th><th class="num">Q4'25</th><th>Trend</th></tr></thead><tbody>
+      <tr><td class="label-cell">Revenue ($M)</td><td class="num">1,014</td><td class="num">927</td><td class="num">989</td><td class="num">1,274</td><td class="num">1,283</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Rev YoY</td><td class="num">+115%</td><td class="num">+50%</td><td class="num">+45%</td><td class="num">+100%</td><td class="num">+27%</td><td><span class="badge badge-warning">Decel.</span></td></tr>
+      <tr><td class="label-cell">Operating Margin</td><td class="num">54.8%</td><td class="num">39.9%⚑</td><td class="num">44.4%</td><td class="num">49.8%</td><td class="num">50.7%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Adj EBITDA Margin</td><td class="num">60.5%</td><td class="num">50.7%</td><td class="num">55.5%</td><td class="num">58.2%</td><td class="num">59.3%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">EPS (diluted)</td><td class="num">$1.01*</td><td class="num">$0.37</td><td class="num">$0.42</td><td class="num">$0.61</td><td class="num">$0.66</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Net Deposits ($B)</td><td class="num">16.1</td><td class="num">18.0</td><td class="num">13.8⚑</td><td class="num">20.4</td><td class="num">15.9</td><td>Volatile</td></tr>
+      <tr><td class="label-cell">ARPU ($)</td><td class="num">164</td><td class="num">145⚑</td><td class="num">151</td><td class="num">191</td><td class="num">191</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Gold Subs (M)</td><td class="num">2.6</td><td class="num">3.2</td><td class="num">3.5</td><td class="num">3.9</td><td class="num">4.2</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Funded Customers (M)</td><td class="num">25.2</td><td class="num">25.8</td><td class="num">26.5</td><td class="num">26.8</td><td class="num">27.0</td><td><span class="badge badge-warning">Decel.</span></td></tr>
+      <tr><td class="label-cell">SBC % Rev</td><td class="num">7.6%</td><td class="num">7.9%</td><td class="num">7.9%</td><td class="num">6.1%</td><td class="num">5.9%</td><td><span class="badge badge-success">Improving</span></td></tr>
+    </tbody></table>
+    <div class="callout" style="margin-top: 12px;">*Q4'24 NI/EPS includes $369M DTA release + $55M accrual reversal. Clean NI ~$492M, clean EPS ~$0.54. ⚑Q1'25 OpM 39.9% below 40% floor. ⚑Q2'25 net deposits $13.8B lowest quarter. ⚑Q1'25 ARPU $145 trough.</div></div></div>
+
+  <!-- S8 --><div class="section" id="s8"><div class="section-header"><span class="section-num">S8</span><h2 class="section-title">Quarterly Income Statement Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric</th><th class="num">Q4'24</th><th class="num">Q1'25</th><th class="num">Q2'25</th><th class="num">Q3'25</th><th class="num">Q4'25</th></tr></thead><tbody>
+      <tr><td class="label-cell">Total Revenue ($M)</td><td class="num">1,014</td><td class="num">927</td><td class="num">989</td><td class="num">1,274</td><td class="num">1,283</td></tr>
+      <tr><td class="label-cell">&nbsp;&nbsp;YoY Growth</td><td class="num">+115%</td><td class="num">+50%</td><td class="num">+45%</td><td class="num">+100%</td><td class="num">+27%</td></tr>
+      <tr style="height:8px"><td colspan="6"></td></tr>
+      <tr><td class="label-cell">Operating Margin (GAAP)</td><td class="num">54.8%</td><td class="num">39.9%</td><td class="num">44.4%</td><td class="num">49.8%</td><td class="num">50.7%</td></tr>
+      <tr><td class="label-cell">Adj EBITDA Margin</td><td class="num">60.5%</td><td class="num">50.7%</td><td class="num">55.5%</td><td class="num">58.2%</td><td class="num">59.3%</td></tr>
+      <tr><td class="label-cell">Net Margin (GAAP)</td><td class="num">90.3%⚑</td><td class="num">36.2%</td><td class="num">39.0%</td><td class="num">43.6%</td><td class="num">47.2%</td></tr>
+      <tr style="height:8px"><td colspan="6"></td></tr>
+      <tr><td class="label-cell">Net Income ($M)</td><td class="num">916⚑</td><td class="num">336</td><td class="num">386</td><td class="num">556</td><td class="num">605</td></tr>
+      <tr><td class="label-cell">EPS (diluted)</td><td class="num">$1.01⚑</td><td class="num">$0.37</td><td class="num">$0.42</td><td class="num">$0.61</td><td class="num">$0.66</td></tr>
+    </tbody></table>
+    <div class="callout" style="margin-top: 12px;"><strong>FY2025:</strong> Revenue $4,473M (+52%). OI $2,094M (46.8%). NI $1,883M. EPS $2.05. Adj EBITDA $2,522M (56.4%). Rule of 40: 52% + 35.4% = 87.4% ✓. ⚑Q4'24 NI includes $369M DTA release + $55M accrual reversal.</div></div></div>
+
+  <!-- S9 --><div class="section" id="s9"><div class="section-header"><span class="section-num">S9</span><h2 class="section-title">Balance Sheet Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric ($M)</th><th class="num">Q4'24</th><th class="num">Q1'25</th><th class="num">Q2'25</th><th class="num">Q3'25</th><th class="num">Q4'25</th></tr></thead><tbody>
+      <tr><td class="label-cell">Cash & equiv.</td><td class="num">4,332</td><td class="num">4,416</td><td class="num">4,162</td><td class="num">4,331</td><td class="num">4,261</td></tr>
+      <tr><td class="label-cell">Total assets</td><td class="num">26,187</td><td class="num">27,517</td><td class="num">35,324</td><td class="num">41,452</td><td class="num">38,137</td></tr>
+      <tr><td class="label-cell">Total debt</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">602</td></tr>
+      <tr><td class="label-cell">Net cash (Q4'25)</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">3,659</td></tr>
+      <tr><td class="label-cell">Stockholders' equity</td><td class="num">7,972</td><td class="num">7,953</td><td class="num">8,072</td><td class="num">8,567</td><td class="num">9,151</td></tr>
+      <tr><td class="label-cell">WA diluted shares (M)</td><td class="num">908</td><td class="num">909</td><td class="num">909</td><td class="num">918</td><td class="num">918</td></tr>
+    </tbody></table>
+    <div class="callout" style="margin-top: 12px;"><strong>User receivables:</strong> $18.0B (Q4'25) — margin loans + credit card, NOT trade AR. Margin book +113% YoY ($7.9B → $16.8B). Equity +15% YoY. End-period outstanding: 901M (790M Class A + 111M Class B). WA diluted for EPS: 919M. Buyback absorbing SBC dilution but not yet accretive.</div></div></div>
+
+  <!-- S10 --><div class="section" id="s10"><div class="section-header"><span class="section-num">S10</span><h2 class="section-title">Earnings Quality & Cash Flow Forensics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-2">
+      <div class="card"><h3 class="card-title">FY2025 Cash Flow (Annual Only)</h3><div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$1,638M</div></div><div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$1,584M</div></div><div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">35.4%</div></div><div class="field-group"><div class="field-label">FCF Conversion (FCF/NI)</div><div class="field-value mono">84.1%</div></div><div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">1.2% ($54M)</div></div></div>
+      <div class="card"><h3 class="card-title">ROIC & Per-Share Economics</h3><div class="field-group"><div class="field-label">ROIC (FY2025)</div><div class="field-value mono">40.4% (actual tax) / 35.7% (normalized)</div></div><div class="field-group"><div class="field-label">Revenue/Share</div><div class="field-value mono">$4.87 (+49% YoY)</div></div><div class="field-group"><div class="field-label">FCF/Share</div><div class="field-value mono">$1.72 (FY2024: -$0.23)</div></div><div class="field-group"><div class="field-label">Dilution Cost</div><div class="field-value mono">~110 bps (negligible vs 49% rev growth)</div></div></div></div>
+    <div class="card"><h3 class="card-title">SBC & Dilution</h3><p style="font-size: 14px; color: var(--text-secondary);">FY2025 SBC: $305M (6.8% of revenue), down from 10.3% in FY2023. 5Q SBC: $77M (7.6%) → $73M (7.9%) → $78M (7.9%) → $78M (6.1%) → $76M (5.9%). Shares (Dec 31, 2025): 901M basic outstanding (790M Class A + 111M Class B) · 919M diluted (EPS denominator). $1.5B buyback authorized (Apr 2025), $910M executed, ~$590M remaining.</p></div>
+    <div class="callout warn" style="margin-top: 4px;">Quarterly FCF is meaningless for brokerage — swings from -$1,588M to +$3,491M in FY2025 from margin loan origination, securities borrowed/loaned, user deposits. Annual FCF ($1,584M) is the authoritative measure.</div>
+    <div class="verdict-box"><div><div class="verdict-label">Earnings Quality Verdict</div><div class="verdict-value">Minor concerns</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Credit loss provisioning ($114M) growing as Gold Card scales. SBC dilution vs buyback currently neutral. Quarterly FCF volatility is structural, not quality signal.</div></div></div>
+
+  <!-- S11 --><div class="section" id="s11"><div class="section-header"><span class="section-num">S11</span><h2 class="section-title">Thesis-Weighted Scorecard</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <div class="score-row" style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 4px;"><span class="score-metric" style="font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Metric</span><span class="score-weight" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">WT</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Score</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Wtd</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Net Deposit Growth</strong> — Q4 $15.9B (~19% annualized, near 20% target). FY total $68.1B (35%).</span><span class="score-weight">2.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Revenue YoY Growth</strong> — +27% Q4 vs +100% Q3. Above 25% threshold but decelerating fast.</span><span class="score-weight">1.5×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Operating Margin</strong> — 50.7% Q4, up from 49.8% QoQ. Above 45% target. Expanding.</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>ARPU</strong> — $191, flat QoQ. +16% YoY from $164. Plateau at scale.</span><span class="score-weight">1.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Gold Subscriber Growth</strong> — 4.2M (+58% YoY, +8% QoQ). Fastest-growing operating metric.</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>FCF Conversion (Annual)</strong> — FY2025: 84% (FCF/NI). Inflection from FY2024 negative.</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>SBC % of Revenue</strong> — 5.9% Q4, down from 7.6% YoY. Below 10% target.</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div></div>
+    <div class="verdict-box"><div><div class="verdict-label">Scorecard Result</div><div class="verdict-value">Mixed / Stable</div></div><div class="verdict-score">50%</div></div>
+    <p style="font-size: 13px; color: var(--text-tertiary); text-align: center;">&gt;60% = Clearly improving &nbsp;·&nbsp; 20-60% = Mixed/stable &nbsp;·&nbsp; &lt;20% = Deterioration</p>
+    <div class="card" style="margin-top: 16px;"><h3 class="card-title">Historical Score Trajectory</h3>
+      <div style="display: flex; gap: 8px; align-items: flex-end; height: 100px; margin: 16px 0 8px;">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">56%</div><div style="width:100%;height:56px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4'24</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--error);margin-bottom:4px;">6%</div><div style="width:100%;height:6px;background:var(--error-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--error);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q1'25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">61%</div><div style="width:100%;height:61px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2'25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">89%</div><div style="width:100%;height:89px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q3'25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">50%</div><div style="width:100%;height:50px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4'25</div></div></div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Volatile — driven by brokerage seasonality and crypto cycles. Trough Q1'25 (margin below floor, ARPU down). Peak Q3'25 (crypto surge, record ARPU). Normalizing to 50% as revenue growth decelerates off tough comps.</p></div></div>
+
+  <!-- S12 --><div class="section" id="s12"><div class="section-header"><span class="section-num">S12</span><h2 class="section-title">Tier 2 Sector-Specific Metrics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric</th><th class="num">Q4'25</th><th class="num">Q3'25</th><th class="num">YoY Δ</th><th>Signal</th></tr></thead><tbody>
+      <tr><td class="label-cell">ARPU (annualized)</td><td class="num">$191</td><td class="num">$191</td><td class="num" style="color:var(--success)">+16% YoY</td><td><span class="badge badge-success">GREEN</span></td></tr>
+      <tr><td class="label-cell">Gold Penetration Rate</td><td class="num">15.6%</td><td class="num">14.6%</td><td class="num" style="color:var(--success)">+5.2pp YoY</td><td><span class="badge badge-success">GREEN</span></td></tr>
+      <tr><td class="label-cell">Net Interest % of Rev</td><td class="num">32.0%</td><td class="num">35.8%</td><td class="num">Flat YoY</td><td><span class="badge badge-warning">YELLOW (watch)</span></td></tr>
+      <tr><td class="label-cell">Crypto Rev (quarterly)</td><td class="num">$221M</td><td class="num">$268M</td><td class="num" style="color:var(--error)">-38% YoY</td><td><span class="badge badge-warning">YELLOW (watch)</span></td></tr>
+    </tbody></table></div></div>
+
+  <!-- S13 --><div class="section" id="s13"><div class="section-header"><span class="section-num">S13</span><h2 class="section-title">Forward Catalyst Pipeline & Product Roadmap</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Window</th><th>Event</th><th>Type</th><th>Impact</th></tr></thead><tbody>
+      <tr><td class="label-cell">May 2026</td><td>BOLO + best odd-lot bid/offer dissemination begins (full odd-lot quotations deferred to May 2028 per Jan 2026 exemptive relief)</td><td>Regulatory</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+      <tr><td class="label-cell">Aug 2026</td><td>Rule 605 amendments: expanded order execution disclosure (brokers + market centers). Increases PFOF transparency.</td><td>Regulatory</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">Nov 2026</td><td>Rule 612 tick size ($0.005 for tick-constrained) + Rule 610(c) access fee cap reduction (30→10 mils). Core PFOF economics catalyst.</td><td>Regulatory</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">Mid-2026</td><td>Rothera JV operational launch (owned exchange)</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">Throughout</td><td>Fed rate decisions (NII sensitivity: 100bp = $304M)</td><td>Macro</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">Q1 2026</td><td>Cortex AI Assistant + Robinhood Social launch</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+      <tr><td class="label-cell">YE 2026</td><td>Gold Card >1M cardholders (from 600K)</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+      <tr><td class="label-cell">H2 2026</td><td>International market launches (several new)</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+    </tbody></table></div></div>
+
+  <!-- S14 --><div class="section" id="s14"><div class="section-header"><span class="section-num">S14</span><h2 class="section-title">Sell-Side Landscape</h2><span class="section-cadence">material change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Total Analysts</div><div class="stat-value">24</div></div>
+      <div class="stat-card"><div class="stat-label">Consensus PT</div><div class="stat-value">~$120</div><div class="stat-delta delta-up">+64% from $73</div></div>
+      <div class="stat-card"><div class="stat-label">Ratings</div><div class="stat-value" style="font-size: 16px;">71% Buy · 25% Hold · 4% Sell</div></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">OP</div><div class="analyst-body"><div class="analyst-name">Dan Dolev — Mizuho</div><div class="analyst-pt">PT: $110 (lowered from $135, Mar 2026)</div><p class="analyst-thesis">Proprietary user surveys: prediction market users fund with FRESH deposits, not cannibalizing crypto. Granular take-rate analysis. Most useful for testing diversification thesis.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">OW</div><div class="analyst-body"><div class="analyst-name">Patrick Moley — Piper Sandler</div><div class="analyst-pt">PT: $135</div><p class="analyst-thesis">Platform economics — tracks 11 business lines individually. Estimates Rothera JV ~45% prediction market economics bump. Most detailed bottom-up revenue model.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--text-secondary);">EW</div><div class="analyst-body"><div class="analyst-name">Michael Cyprys — Morgan Stanley</div><div class="analyst-pt">PT: $147 (reiterated Mar 2026)</div><p class="analyst-thesis">Previously the street's most articulated bear (~$90 through mid-2025). Raised to $146 Oct '25, $147 Dec '25 on improving transaction volumes. Maintains Equal Weight — sees fair value already reflected. Useful for tracking where consensus skepticism has been absorbed.</p></div></div>
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card" style="border-left: 3px solid var(--success);"><h3 class="card-title">Notable Bull (Ryan, JMP $180)</h3><p style="font-size: 14px;">Financial super app: 11 revenue streams >$100M de-risks cyclicality. Prediction markets supercycle + Rothera JV. $100T wealth transfer tailwind. Gold Card scaling to 1M+. Net deposits 7× industry. AI $100M+ savings.</p></div>
+      <div class="card" style="border-left: 3px solid var(--error);"><h3 class="card-title">Structural Bear Case (no active sell-side bear advocate)</h3><p style="font-size: 14px;">Former bear Cyprys (MS) raised PT from ~$90 to $147 in Oct-Dec 2025. No major firm currently holds a sub-$80 PT. Structural risks remain: crypto cyclicality (-38% YoY Q4), PFOF regulatory compression (Nov 2026), 28× P/E assumes sustained 20%+ growth but trajectory decelerates to mid-teens, $1.4B+ insider selling with zero purchases, +18% expense growth creates margin headwind if revenue decelerates.</p></div></div></div>
+
+  <!-- S15 --><div class="section" id="s15"><div class="section-header"><span class="section-num">S15</span><h2 class="section-title">Management Guidance & Credibility</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><h3 class="card-title">FY2026 Forward Expectations</h3>
+      <table class="data-table"><thead><tr><th>Metric</th><th class="num">Guidance</th><th class="num">Adjusted</th><th class="num">Street Consensus</th></tr></thead><tbody>
+        <tr><td class="label-cell">Adj OpEx + SBC</td><td class="num">$2,600-2,725M</td><td class="num" style="color:var(--primary);font-weight:600">~$2,796M (+5% M&A buffer)</td><td class="num">—</td></tr>
+        <tr><td class="label-cell">Revenue (qual.)</td><td class="num">"Grow faster than expenses"</td><td class="num">Upward bias (conservative)</td><td class="num">~$5.5B (+23%)</td></tr>
+        <tr><td class="label-cell">EPS</td><td class="num">No guidance</td><td class="num">—</td><td class="num">~$2.57 (+25%)</td></tr>
+        <tr><td class="label-cell">Adj EBITDA</td><td class="num">No guidance</td><td class="num">—</td><td class="num">~$3.2B (58.9%)</td></tr>
+      </tbody></table></div>
+    <div class="card"><h3 class="card-title">Commitment Tracker — Delivery Rate: 100%</h3>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Gold Card "multiples of 100K" — 600K achieved</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Gold subs "approaching 3M" — 4.18M actual (exceeded)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> SBC below 10% of revenue — 6.8% actual</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Diluted shares "roughly flat" — +1.4% YoY (borderline)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Three product events in 2025 — All 3 held</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> Gold Card >1M by YE 2026 — OPEN</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> Rothera JV operational by mid-2026 — OPEN</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> OpEx+SBC $2.6-2.725B (FY2026) — OPEN</div></div>
+    <div class="card"><h3 class="card-title">Capital Allocation Score</h3><div class="progress-track"><div class="progress-fill" style="width: 80%;"></div></div><div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--primary);">16 / 20</div>
+      <table class="data-table" style="margin-top: 12px;"><thead><tr><th>Category</th><th class="num">Score</th><th>Notes</th></tr></thead><tbody>
+        <tr><td class="label-cell">High-return investing</td><td class="num">4/5</td><td>Heavy R&D — prediction markets $300M+ run rate validates deployment</td></tr>
+        <tr><td class="label-cell">Acquisitions</td><td class="num">4/5</td><td>Bitstamp (institutional crypto + EU) + TradePMR (RIA B2B). Strategic.</td></tr>
+        <tr><td class="label-cell">Equity management</td><td class="num">3/5</td><td>$1.5B buyback (Apr 2025), $910M executed, SBC 6.8% declining. +1.1% YoY dilution — absorbing, not yet accretive</td></tr>
+        <tr><td class="label-cell">Balance sheet</td><td class="num">5/5</td><td>Net cash $3.7B. $602M Credit Card Funding Trust. $3.775B revolver. Fortress.</td></tr>
+      </tbody></table></div>
+    <div class="verdict-box"><div><div class="verdict-label">Management Credibility</div><div class="verdict-value">Moderate</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">100% delivery + heavy revenue sandbagging = high reliability, but only 1 formal guidance cycle + new CFO (1 call). Upgrade to High after 2+ quarters of Verma-led guidance accuracy.</div></div></div>
+
+  <!-- S16 --><div class="section" id="s16"><div class="section-header"><span class="section-num">S16</span><h2 class="section-title">Kill Criteria</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="callout danger" style="margin-bottom: 24px;"><strong>RULE:</strong> If ANY criterion fires, execute the pre-committed action. Do not rationalize. Do not wait for "one more quarter of data."</div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#1</span><span class="kill-title">Net Deposit Deceleration</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Net deposit growth &lt;10% of prior-year-end assets (annualized) for 2 consecutive quarters.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Net deposits NEGATIVE in ANY single quarter → execute immediately</div><div class="kill-gap">Gap: Current 35% (FY2025) → trigger 10% (25pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#2</span><span class="kill-title">Revenue Growth Stall</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Total revenue YoY growth &lt;10% for 2 consecutive quarters, excluding one-time regulatory charges.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Revenue YoY &lt;0% in ANY quarter → execute immediately</div><div class="kill-gap">Gap: Current +27% (Q4) → trigger 10% (17pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#3</span><span class="kill-title">PFOF Structural Compression</span><span class="kill-action kill-reduce">EXIT entirely</span></div><div class="kill-trigger"><strong>Trigger:</strong> Transaction-based revenue declines &gt;25% YoY for 2 consecutive quarters AND PFOF-specific regulatory changes implemented.</div><div class="kill-gap">Gap: Current +15% Q4 YoY txn-based → trigger -25% (40pp margin). Compound prevents false fire from crypto cycle alone.</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#4</span><span class="kill-title">Operating Margin Collapse</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> GAAP operating margin &lt;30% for 2 consecutive quarters, excluding one-time acquisition charges &gt;$50M.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Operating margin &lt;20% in ANY quarter → execute immediately</div><div class="kill-gap">Gap: Current 50.7% → trigger 30% (20.7pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#5</span><span class="kill-title">Management Credibility Failure</span><span class="kill-action kill-reassess">REASSESS + ≤5% position</span></div><div class="kill-trigger"><strong>Trigger:</strong> Commitment delivery rate &lt;50% over trailing 4Q OR guided OpEx+SBC exceeded &gt;20% on organic basis for 2 consecutive years.</div><div class="kill-gap">Gap: Current 100% delivery (5/5) → trigger 50%. FY2025 OpEx +8% (M&A-driven, organic in-range).</div></div></div>
+
+  <!-- S17 --><div class="section" id="s17"><div class="section-header"><span class="section-num">S17</span><h2 class="section-title">Valuation Framework</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Market Cap (at $73)</div><div class="stat-value">~$65.8B</div><div class="stat-delta delta-neutral">901M basic outstanding</div></div>
+      <div class="stat-card"><div class="stat-label">Enterprise Value</div><div class="stat-value">~$62.0B</div><div class="stat-delta delta-neutral">Mkt cap – $3.8B net cash</div></div>
+      <div class="stat-card"><div class="stat-label">Fwd P/E (FY26)</div><div class="stat-value">~28.4×</div><div class="stat-delta delta-neutral">SoFi ~25×, COIN ~20×</div></div></div>
+    <div class="card"><h3 class="card-title">Scenario Analysis (2-Year Horizon → FY2027)</h3>
+      <div class="scenario-bar bull"><div class="scenario-label" style="color: var(--success);">Bull</div><div class="scenario-value" style="color: var(--success);">$120-$150</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$7.5B. Prediction markets + Rothera $500M+, Gold Card >1M, international $200M+, crypto recovery. EPS ~$4.0-4.5.</div></div>
+      <div class="scenario-bar base"><div class="scenario-label" style="color: var(--primary);">Base</div><div class="scenario-value" style="color: var(--primary);">$85-$105</div><div class="scenario-prob">45%</div><div class="scenario-desc">Revenue ~$6.0-6.5B. Consensus 20-22% growth, 45-50% op margin, PFOF intact, net deposits >20%. EPS ~$3.0-3.5.</div></div>
+      <div class="scenario-bar bear"><div class="scenario-label" style="color: var(--error);">Bear</div><div class="scenario-value" style="color: var(--error);">$40-$55</div><div class="scenario-prob">30%</div><div class="scenario-desc">Revenue ~$4.5-5.0B. PFOF compression, 200bp rate cuts (-$600M NII), crypto bear market, customer growth stalls. EPS ~$1.5-2.0.</div></div>
+      <div class="verdict-box" style="margin-top: 16px;"><div><div class="verdict-label">Expected Value</div><div class="verdict-value" style="font-family: var(--font-mono);">$91</div></div><div style="font-size: 14px; color: var(--success); font-weight: 500;">+24.7% upside from $73 &nbsp;·&nbsp; Annualized (2-yr): ~11.6%</div></div></div>
+    <div class="card"><h3 class="card-title">Valuation Gap: <span style="color: var(--success);">Modestly Attractive</span></h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">52% drawdown from highs de-risked from stretched to attractive. EV $91 = 25% upside, bear $47.5 = 35% downside. Risk/reward modestly positive at current levels.</p>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border);">1. Revenue growth sustains 20%+ through FY2027 via new products<br>2. PFOF regulatory changes manageable (not structurally destructive)<br>3. Operating margins maintain 45%+ as fixed-cost leverage continues<br>4. Net deposits sustain 20%+ growth, validating super app thesis<br>5. Insider selling is diversification, not fundamental concern</div>
+      <div class="callout" style="margin-top: 16px;"><strong>Position sizing:</strong> 3-5% appropriate. Enough for base case benefit, not so concentrated bear case is portfolio-destructive. Insider selling + PFOF uncertainty warrant smaller sizing.</div></div></div>
+
+  <!-- S18 --><div class="section" id="s18"><div class="section-header"><span class="section-num">S18</span><h2 class="section-title">Rolling Quarterly Baseline & Pre-Earnings Checklist</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><h3 class="card-title">Q4 FY2025 Snapshot</h3><div class="grid-3">
+      <div><div class="field-label">Revenue</div><div class="field-value mono">$1,283M (+27% YoY)</div></div>
+      <div><div class="field-label">Op Margin</div><div class="field-value mono">50.7% (GAAP)</div></div>
+      <div><div class="field-label">FCF (FY)</div><div class="field-value mono">$1,584M (84% conv.)</div></div>
+      <div><div class="field-label">Net Deposits</div><div class="field-value mono">$15.9B (Q4)</div></div>
+      <div><div class="field-label">Net Cash</div><div class="field-value mono">$3,659M</div></div>
+      <div><div class="field-label">ROIC</div><div class="field-value mono">40.4%</div></div>
+    </div></div>
+    <div class="card"><h3 class="card-title">Pre-Earnings Checklist for Q1 FY2026</h3><div class="card-subtitle">Earnings date: ~May 2026</div>
+      <div class="field-label" style="margin-top: 16px;">What the Market Needs to Hear</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">1. Revenue >$1.15B (+24% YoY) — confirms 20%+ thesis persists despite App crypto -52% YoY headwind (partially offset by Bitstamp $14.2B)<br>2. Net deposits >$15B — sustains 20%+ deposit rate (Q1 QTD $7B+ as of Feb 10)<br>3. Reg NMS update — Rule 605 disclosure (Aug 2026) readiness + Nov 2026 tick size/access fee impact modeling</div>
+      <div class="field-label">Thresholds</div>
+      <table class="data-table"><thead><tr><th>Metric</th><th class="num">Expectation</th><th class="num">Concern</th><th class="num">Kill Threshold</th></tr></thead><tbody>
+        <tr><td class="label-cell">Revenue</td><td class="num">$1.15-1.35B</td><td class="num" style="color:var(--warning)">&lt;$1,020M (&lt;10% YoY)</td><td class="num" style="color:var(--error)">&lt;$927M (&lt;0% = C2 emerg.)</td></tr>
+        <tr><td class="label-cell">Op Margin</td><td class="num">40-50%</td><td class="num" style="color:var(--warning)">&lt;35%</td><td class="num" style="color:var(--error)">&lt;30% for 2Q / &lt;20% any Q</td></tr>
+        <tr><td class="label-cell">Net Deposits</td><td class="num">$15-18B</td><td class="num" style="color:var(--warning)">&lt;$8B (annualizes &lt;10%)</td><td class="num" style="color:var(--error)">Negative (C1 emerg.)</td></tr>
+      </tbody></table></div>
+    <div class="verdict-box"><div><div class="verdict-label">Conviction Level</div><div class="verdict-value">Medium</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Hold. Strong business quality, uncertain macro/regulatory backdrop. Balanced risk/reward at fair valuation. 3-5% position sizing appropriate.</div></div></div>
+
+  <!-- S19 --><div class="section" id="s19"><div class="section-header"><span class="section-num">S19</span><h2 class="section-title">Risk Inventory</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-3" style="margin-bottom: 20px; text-align: center;">
+      <div class="stat-card" style="border-left: 3px solid var(--error);"><div class="stat-label">RED Risks</div><div class="stat-value" style="color: var(--error);">0</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--warning);"><div class="stat-label">YELLOW Risks</div><div class="stat-value" style="color: var(--warning);">7</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--success);"><div class="stat-label">GREEN Risks</div><div class="stat-value" style="color: var(--success);">3</div></div></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#1 — PFOF Regulatory Compression</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Regulatory · Severity: High · Probability: Medium</div><p class="risk-body">Three-phase SEC Reg NMS rollout: Rule 605 execution disclosure (Aug 2026), BOLO transparency (May 2026, full odd-lot deferred to May 2028), tick size + access fee reduction (Nov 2026). Nov 2026 tick/fee changes are the primary PFOF threat — narrower spreads compress wholesaler economics. 25%+ of revenue from PFOF. 20% PFOF decline = ~12% total revenue cut. Current SEC chair PFOF-friendly but rules already adopted and in pipeline.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#2 — Interest Rate Sensitivity</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Macro · Severity: Medium-High · Probability: Medium</div><p class="risk-body">NII is 34% of revenue ($1,514M). 100bp = ~$304M impact (6.8% of rev). 200bp cut cycle = ~$600M headwind. Creates asymmetric downside if Fed pivots to aggressive cutting.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#3 — Crypto Revenue Cyclicality</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Operational · Severity: Medium-High · Probability: High</div><p class="risk-body">Crypto = 20% of revenue ($901M). Q4'25 $221M was -38% YoY vs Q4'24 $358M. Jan 2026: Robinhood App crypto volumes $8.7B (-52% YoY); total crypto including Bitstamp $22.9B. App-only decline overstates company-level impact. Single largest earnings volatility driver.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#4 — Market Maker Concentration</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Concentration · Severity: Medium · Probability: Medium</div><p class="risk-body">Citadel Securities = 13% of total revenue. Wintermute = 6% (down from 10%). Combined 19% from two market makers. Loss of or repricing by either would directly impact PFOF revenue.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#5 — Competitive Feature Parity</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competitive · Severity: Medium-High · Probability: Medium</div><p class="risk-body">Schwab (38.5M accounts) and Fidelity (45M) replicating key features. "Graduating investor" pipeline may cap ARPU upside as wealthier customers transfer to full-service incumbents.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#6 — Customer Churn Acceleration</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Operational · Severity: Medium · Probability: Medium</div><p class="risk-body">Churn doubled from 0.9M (FY2024) to 1.7M (FY2025). Net adds 1.8M on 25.2M base = 7% growth (slowing). 50%+ first-time investors potentially less sticky.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#7 — Credit Loss Provisioning</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Operational · Severity: Medium · Probability: Low-Medium</div><p class="risk-body">$114M FY2025 provision across Gold Card, margin, credit products. Margin book +113% to $16.8B. If loss rates exceed income, Gold Card becomes a drag before it scales.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#8 — Event Contract / Prediction Market Litigation</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Regulatory · Severity: Medium · Probability: Medium-High</div><p class="risk-body">Active state litigation from gaming regulators (NV, NJ, MA, OH, CT). Sports contracts face legal uncertainty. Rothera JV ($300M+ run rate) depends on continued regulatory framework.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#9 — Dual-Class Governance</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Structural · Severity: Low-Medium · Probability: Low</div><p class="risk-body">Bhatt retains 60.2% of Class B / 35.9% voting power despite near-complete economic exit (887 indirect shares) (as of Apr 2025 proxy — likely shifted since). Tenev 24.2% voting. Combined ~60.1% founder control. Class B has 10 votes per share. Sunset provisions: (1) all Class B auto-converts when Class B falls below 5% of aggregate Class A + Class B outstanding (currently ~12.3% — not imminent); (2) hardstop Final Conversion Date of August 2, 2036 (15 years post-IPO); (3) transfer-based conversion on each non-permitted Class B sale.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#10 — CFO Transition</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Operational · Severity: Low-Medium · Probability: Low</div><p class="risk-body">Warnick (7 years, Amazon veteran) → Verma (1 earnings call). Track record and credibility unproven. Only 1 formal guidance cycle completed.</p></div>
+    <hr class="divider accent">
+    <div class="card"><h3 class="card-title">Insider Activity — Verdict: <span style="color: var(--warning);">Noteworthy</span></h3><p style="font-size: 14px; color: var(--text-secondary);">$1.4B+ total insider selling over 6 months, 87+ transactions — 100% sells, zero purchases across 8 insiders. Co-founder Bhatt near-complete economic exit (887 indirect shares). Major sales predominantly via Rule 10b5-1 plans; some transactions may include ESPP elections or tax-withholding sales per 10-K disclosure. Stock 400%+ before selling. No buying at $75-80 during 33% drawdown.</p></div>
+    <div class="card"><h3 class="card-title">Correlated Risk Cluster</h3><p style="font-size: 14px; color: var(--text-secondary);">Risks #1 (PFOF regulatory), #2 (rate sensitivity), and #3 (crypto cyclicality) are correlated — all external macro/regulatory forces. Fed cuts rates aggressively (compressing NII) + crypto extended bear market + SEC PFOF tightening would simultaneously impair all three revenue pillars. This cluster underpins the 30% bear case probability.</p></div></div>
+
+  <!-- CHECKLIST A --><div class="section" id="checkA"><div class="section-header"><span class="section-num">A</span><h2 class="section-title">Procedural Checklist A — Document Inventory</h2></div>
+    <div class="card">
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-K annual filings: FY2025, FY2024</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-Q quarterly filings: Q1-Q3 2025, Q3 2024</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Press releases: Q4 2024 through Q4 2025 (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Earnings call transcripts: Q4 2024, Q4 2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Proxy statement / DEF 14A</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Sell-side analyst report</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Insider activity report</div>
+      <hr class="divider"><div class="field-label">Gaps</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> No Q1-Q3 2024/2025 earnings transcripts (only Q4 each year)</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> No investor presentation / slide deck</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> No FY2023 financials extracted</div></div></div>
+
+  <!-- CHECKLIST B --><div class="section" id="checkB"><div class="section-header"><span class="section-num">B</span><h2 class="section-title">Procedural Checklist B — Consistency Audit</h2></div>
+    <div class="verdict-box" style="background: var(--success-subtle); border-color: var(--success);"><div><div class="verdict-label">Audit Result</div><div class="verdict-value" style="color: var(--success);">PASS</div></div><div class="verdict-score" style="color: var(--success);">14/14</div></div>
+    <div class="card">
+      <div class="field-label">Numerical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Revenue segments sum ($2,628+$1,514+$331=$4,473) ✓ · Share count 918M ✓ · FCF $1,584M ✓ · Guidance $2.6-2.725B consistent ✓</p>
+      <div class="field-label">Narrative (6/6)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Thesis ↔ scorecard (net deposits 2×, 50% mixed) ✓ · Key metric 2× weight ✓ · Schwab/Fidelity L2 → R5 ✓ · Moat decay ↔ risk (churn/PFOF) ✓ · Mgmt Moderate ✓ · Model drives FCF/Tier2 ✓</p>
+      <div class="field-label">Logical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary);">Kill triggers beyond current scores ✓ · Implied growth achievable ✓ · Catalyst timing aligns ✓ · Bear case → kill criteria + risks ✓</p></div></div>
+
+  <hr class="divider accent">
+  <p style="font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 24px;">Delta Framework · Robinhood (HOOD) Configuration Card v2 · Built March 15, 2026 · Price anchor: $73 (close)<br>Anthropic Warm Humanist Design System · 19 Sections + 2 Procedural Checklists</p>
+</main>
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { navLinks.forEach(link => link.style.background = ''); const id = entry.target.id; const al = document.querySelector(`.nav-link[href="#${id}"]`); if (al) al.style.background = 'rgba(196, 123, 90, 0.12)'; } });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => { link.addEventListener('click', () => { document.querySelector('.sidebar').classList.remove('open'); }); });
+</script>
+</body>
+</html>

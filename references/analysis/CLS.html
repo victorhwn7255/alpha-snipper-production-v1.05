@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celestica (CLS) — Configuration Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C47B5A;
+    --primary-hover: #B06A4A;
+    --primary-subtle: rgba(196, 123, 90, 0.12);
+    --secondary: #7D8C6E;
+    --secondary-subtle: rgba(125, 140, 110, 0.12);
+    --accent: #8B8FC7;
+    --accent-subtle: rgba(139, 143, 199, 0.12);
+    --bg: #FAF7F4;
+    --bg-alt: #F5F0EB;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EAE2;
+    --text-primary: #2D2824;
+    --text-secondary: #6B5F54;
+    --text-tertiary: #9A8E82;
+    --border: #E8E0D5;
+    --border-strong: #D1C7B8;
+    --border-subtle: #F0EAE2;
+    --success: #6B8C5A;
+    --success-subtle: rgba(107, 140, 90, 0.12);
+    --warning: #C49A5A;
+    --warning-subtle: rgba(196, 154, 90, 0.12);
+    --error: #C45A5A;
+    --error-subtle: rgba(196, 90, 90, 0.12);
+    --amber: #B8927A;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(45,40,36,0.05);
+    --shadow-md: 0 2px 8px rgba(45,40,36,0.06), 0 1px 2px rgba(45,40,36,0.04);
+    --shadow-lg: 0 4px 16px rgba(45,40,36,0.08), 0 2px 4px rgba(45,40,36,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 30;
+    padding: 32px 0 48px 0;
+    transition: transform 0.3s ease;
+  }
+  .sidebar-logo {
+    padding: 0 24px 24px 24px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h2 {
+    font-family: var(--font-serif);
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: -0.02em;
+  }
+  .sidebar-logo .ticker {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 0.04em; margin-top: 4px;
+  }
+  .nav-group { padding: 8px 16px; }
+  .nav-group-label {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 8px 4px;
+  }
+  .nav-link {
+    display: block; padding: 6px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .nav-link:hover { background: var(--primary-subtle); color: var(--text-primary); }
+  .nav-link .snum {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px; max-width: 960px;
+    padding: 48px 56px 120px 56px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    color: var(--primary); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 400;
+    color: var(--text-primary); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 32px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono); font-size: 22px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .stat-delta {
+    font-family: var(--font-mono); font-size: 12px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--error); }
+  .delta-neutral { color: var(--text-tertiary); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; color: var(--primary);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-size: 24px;
+    font-weight: 500; color: var(--text-primary);
+    letter-spacing: -0.02em; line-height: 1.3;
+  }
+  .section-cadence {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: var(--text-tertiary);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 15px; color: var(--text-primary); line-height: 1.6;
+  }
+  .field-value.mono {
+    font-family: var(--font-mono); font-size: 14px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-serif); font-size: 18px;
+    font-weight: 500; color: var(--text-primary);
+    margin-bottom: 12px; line-height: 1.3;
+  }
+  .card-subtitle {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--text-secondary); margin-bottom: 16px;
+  }
+
+  /* Product architecture cards */
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .product-card.core { border-left-color: var(--primary); }
+  .product-card.supporting { border-left-color: var(--secondary); }
+  .product-card.legacy { border-left-color: var(--text-tertiary); }
+  .product-card.emerging { border-left-color: var(--accent); }
+
+  .product-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: var(--font-serif); font-size: 17px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .product-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .badge-primary { background: var(--primary-subtle); color: #9C5D3F; }
+  .badge-secondary { background: var(--secondary-subtle); color: #4A5A3E; }
+  .badge-accent { background: var(--accent-subtle); color: #6B6FA9; }
+  .badge-success { background: var(--success-subtle); color: #4A6B3A; }
+  .badge-warning { background: var(--warning-subtle); color: #8B6B3A; }
+  .badge-error { background: var(--error-subtle); color: #9C3A3A; }
+  .badge-neutral { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  /* Risk severity dots */
+  .severity-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .dot-red { background: var(--error); }
+  .dot-yellow { background: var(--warning); }
+  .dot-green { background: var(--success); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 20px; font-size: 14px;
+  }
+  .data-table thead th {
+    font-family: var(--font-sans); font-size: 11px;
+    font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding: 10px 12px; text-align: left;
+  }
+  .data-table thead th.num { text-align: right; }
+  .data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .data-table tbody td.num {
+    font-family: var(--font-mono); font-size: 13px;
+    text-align: right; white-space: nowrap;
+  }
+  .data-table tbody td.label-cell {
+    font-weight: 500; color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(196, 123, 90, 0.04);
+  }
+  .data-table tbody tr:last-child td { border-bottom: 1px solid var(--border-strong); }
+
+  /* ── RISK CARDS ── */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+  }
+  .risk-card.red { border-left: 4px solid var(--error); }
+  .risk-card.yellow { border-left: 4px solid var(--warning); }
+  .risk-card.green { border-left: 4px solid var(--success); }
+  .risk-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+  }
+  .risk-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .risk-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .risk-body {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .risk-watch {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ── CALLOUT / FLAG ── */
+  .callout {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0; padding: 14px 18px;
+    margin: 16px 0; font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: var(--warning-subtle);
+  }
+  .callout.danger {
+    border-left-color: var(--error);
+    background: var(--error-subtle);
+  }
+  .callout.success {
+    border-left-color: var(--success);
+    background: var(--success-subtle);
+  }
+  .callout strong { color: var(--text-primary); }
+
+  /* ── SCENARIO BARS ── */
+  .scenario-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    margin-bottom: 10px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .scenario-bar.bull { border-left: 4px solid var(--success); }
+  .scenario-bar.base { border-left: 4px solid var(--primary); }
+  .scenario-bar.bear { border-left: 4px solid var(--error); }
+  .scenario-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; min-width: 50px;
+  }
+  .scenario-value {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 500; min-width: 110px;
+  }
+  .scenario-prob {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .scenario-desc {
+    font-size: 13px; color: var(--text-secondary); flex: 1;
+  }
+
+  /* ── SCORECARD ── */
+  .score-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-metric {
+    flex: 1; font-size: 14px; color: var(--text-primary);
+  }
+  .score-weight {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); min-width: 40px; text-align: center;
+  }
+  .score-badge {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; min-width: 40px; text-align: center;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .score-plus { background: var(--success-subtle); color: #4A6B3A; }
+  .score-minus { background: var(--error-subtle); color: #9C3A3A; }
+  .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+  /* ── KILL CRITERION ── */
+  .kill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .kill-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .kill-num {
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; color: var(--primary);
+  }
+  .kill-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary); flex: 1;
+    margin-left: 10px;
+  }
+  .kill-action {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 4px;
+  }
+  .kill-reduce { background: var(--warning-subtle); color: #8B6B3A; }
+  .kill-exit { background: var(--error-subtle); color: #9C3A3A; }
+  .kill-reassess { background: var(--accent-subtle); color: #6B6FA9; }
+
+  .kill-trigger {
+    font-size: 14px; color: var(--text-primary); margin-bottom: 8px;
+    padding: 10px 14px; background: var(--bg-alt); border-radius: 6px;
+    line-height: 1.5;
+  }
+  .kill-gap {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); margin-top: 8px;
+  }
+
+  /* ── ANALYST CARDS ── */
+  .analyst-card {
+    display: flex; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+  .analyst-rating {
+    writing-mode: vertical-lr; text-orientation: mixed;
+    font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 0;
+    display: flex; align-items: center;
+  }
+  .analyst-body { flex: 1; }
+  .analyst-name {
+    font-family: var(--font-serif); font-size: 15px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .analyst-firm {
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+  }
+  .analyst-pt {
+    font-family: var(--font-mono); font-size: 16px;
+    font-weight: 600; color: var(--primary); margin-bottom: 6px;
+  }
+  .analyst-thesis {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: var(--primary);
+    transition: width 0.6s ease;
+  }
+
+  /* ── GRID HELPERS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .divider.accent { border-top: 2px solid var(--primary); }
+
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 20px 0;
+  }
+  .verdict-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .verdict-value {
+    font-family: var(--font-serif); font-size: 20px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .verdict-score {
+    font-family: var(--font-mono); font-size: 28px;
+    font-weight: 600; color: var(--primary);
+    margin-left: auto;
+  }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+  }
+  .check-icon { font-size: 16px; line-height: 1.4; }
+  .check-pass .check-icon { color: var(--success); }
+  .check-fail .check-icon { color: var(--error); }
+  .check-open .check-icon { color: var(--text-tertiary); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none; position: fixed; top: 16px; left: 16px;
+    z-index: 40; width: 44px; height: 44px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px;
+    color: var(--text-primary);
+  }
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 48px 24px 120px; }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .hero h1 { font-size: 30px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; max-width: 100%; }
+  }
+</style>
+</head><body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<nav class="sidebar">
+  <div class="sidebar-logo"><h2>Celestica Inc.</h2><div class="ticker">NYSE: CLS &nbsp;·&nbsp; Configuration Card</div></div>
+  <div class="nav-group"><div class="nav-group-label">Foundation (Phase 1)</div>
+    <a class="nav-link" href="#s1"><span class="snum">S1</span> Identity & Classification</a><a class="nav-link" href="#s2"><span class="snum">S2</span> Thesis & Key Metric</a><a class="nav-link" href="#s3"><span class="snum">S3</span> Product Architecture</a><a class="nav-link" href="#s4"><span class="snum">S4</span> Revenue Stream Map</a><a class="nav-link" href="#s5"><span class="snum">S5</span> Competitive Context & Moat</a><a class="nav-link" href="#s6"><span class="snum">S6</span> Management Team</a><a class="nav-link" href="#s7"><span class="snum">S7</span> Acceleration Table</a></div>
+  <div class="nav-group"><div class="nav-group-label">Financials (Phase 2)</div>
+    <a class="nav-link" href="#s8"><span class="snum">S8</span> Income Statement</a><a class="nav-link" href="#s9"><span class="snum">S9</span> Balance Sheet</a><a class="nav-link" href="#s10"><span class="snum">S10</span> Cash Flow & Quality</a><a class="nav-link" href="#s11"><span class="snum">S11</span> Scorecard</a><a class="nav-link" href="#s12"><span class="snum">S12</span> Tier 2 Metrics</a></div>
+  <div class="nav-group"><div class="nav-group-label">Catalysts & Sell-Side (Phase 3)</div>
+    <a class="nav-link" href="#s13"><span class="snum">S13</span> Catalyst Pipeline</a><a class="nav-link" href="#s14"><span class="snum">S14</span> Sell-Side Landscape</a><a class="nav-link" href="#s15"><span class="snum">S15</span> Guidance & Credibility</a></div>
+  <div class="nav-group"><div class="nav-group-label">Risk & Valuation (Phase 4)</div>
+    <a class="nav-link" href="#s16"><span class="snum">S16</span> Kill Criteria</a><a class="nav-link" href="#s17"><span class="snum">S17</span> Valuation Framework</a><a class="nav-link" href="#s18"><span class="snum">S18</span> Pre-Earnings Baseline</a><a class="nav-link" href="#s19"><span class="snum">S19</span> Risk Inventory</a></div>
+  <div class="nav-group"><div class="nav-group-label">Audit</div>
+    <a class="nav-link" href="#checkA">Checklist A — Documents</a><a class="nav-link" href="#checkB">Checklist B — Consistency</a></div>
+</nav>
+<main class="main">
+  <div class="hero">
+    <div class="hero-eyebrow">Delta Framework · Configuration Card</div>
+    <h1>Celestica Inc.</h1>
+    <div class="hero-meta">NYSE: CLS &nbsp;·&nbsp; Electronics Manufacturing Services / AI Infrastructure<br>Built: March 12, 2026 &nbsp;·&nbsp; Most recent quarter: Q4 2025 (ended Dec 31, 2025)<br>19 sections + 2 procedural checklists</div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-label">FY2025 Revenue</div><div class="stat-value">$12.4B</div><div class="stat-delta delta-up">+28% YoY</div></div>
+      <div class="stat-card"><div class="stat-label">CCS Comms Growth</div><div class="stat-value">+79% YoY</div><div class="stat-delta delta-up">Q4 2025 · $2,115M</div></div>
+      <div class="stat-card"><div class="stat-label">Scorecard</div><div class="stat-value">67%</div><div class="stat-delta delta-up">Clearly improving</div></div>
+      <div class="stat-card"><div class="stat-label">Expected Value</div><div class="stat-value">$338</div><div class="stat-delta delta-up">+26% from $269</div></div>
+    </div>
+  </div>
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header"><span class="section-num">S1</span><h2 class="section-title">Identity & Model Classification</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div><div class="field-group"><div class="field-label">Ticker</div><div class="field-value mono">CLS</div></div><div class="field-group"><div class="field-label">Company</div><div class="field-value">Celestica Inc.</div></div><div class="field-group"><div class="field-label">Sector</div><div class="field-value">Electronics Manufacturing Services / AI Infrastructure</div></div></div>
+      <div><div class="field-group"><div class="field-label">Position Established</div><div class="field-value mono">[To be confirmed]</div></div><div class="field-group"><div class="field-label">Model Type</div><div class="field-value">Contract design and manufacturing (EMS/ODM hybrid) transitioning to AI infrastructure design partner</div></div></div>
+    </div>
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Normal Operating Profile</h3>
+      <p>Two segments: CCS (Connectivity & Cloud Solutions, 74% of FY2025 revenue) and ATS (Advanced Technology Solutions, 26%). Within CCS, the HPS business — ODM-designed networking switches and rack-scale systems — is the growth engine (41% of FY2025 revenue, +81% YoY). Non-GAAP adjusted operating margins are 6.5-8.0%, expanding ~100bps/year.</p>
+      <p>GAAP margins are unreliable for QoQ comparison due to TRS fair value adjustments causing SGA swings of $70-110M/quarter — use non-GAAP adjusted EBIAT. FCF conversion 55-75% of NI annually. CapEx historically 1.5-2% but rising to ~6% in FY2026 ($1B) for customer-backed capacity expansion.</p>
+      <hr class="divider">
+      <table class="data-table">
+        <thead><tr><th>Parameter</th><th>Setting</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">FCF conversion</td><td>50-75% of NI (asset-moderate manufacturing with working capital requirements)</td></tr>
+          <tr><td class="label-cell">Tier 2 metrics</td><td>HPS revenue mix (% of total), customer concentration, CCS segment margin, ROIC, design win pipeline (1.6T/3.2T)</td></tr>
+          <tr><td class="label-cell">DSO interpretation</td><td>B2B with hyperscalers; DSO trending DOWN despite revenue acceleration = positive signal</td></tr>
+          <tr><td class="label-cell">Catalyst calendar</td><td>Networking transitions (800G → 1.6T → 3.2T), digital native ramp (2027), Google TPU upgrades</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header"><span class="section-num">S2</span><h2 class="section-title">Thesis & Key Metric</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card">
+      <h3 class="card-title">Falsifiable Thesis Statement</h3>
+      <p>Celestica's transformation from traditional EMS contract manufacturer to AI infrastructure design partner — via its HPS networking switch portfolio (41% cumulative market share in 200G+ custom Ethernet, 55% in custom solutions) and custom ASIC compute partnerships (Google TPU, digital native customer) — creates a structurally higher-margin business with design-driven switching costs that will sustain <strong>30%+ CCS revenue growth</strong> and <strong>50-100bps annual non-GAAP operating margin expansion</strong> through FY2027.</p>
+      <div class="callout warn" style="margin-top: 16px;"><strong>Falsification trigger:</strong> CCS Communications YoY growth &lt;30% for 2 consecutive quarters with simultaneous margin decline, OR loss of "preferred partner" status with any top-3 hyperscaler.</div>
+      <div class="hero-meta" style="margin-top: 12px;">Date written: March 12, 2026 &nbsp;·&nbsp; Last reviewed: March 12, 2026</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">3-Sentence Bear Case</h3>
+      <p style="color: var(--error);">Google (~32% of FY2025 revenue) diversifies TPU manufacturing to competitors like Inventec or Foxconn, as previewed by the January 2026 Digitimes report that caused a ~6% stock decline. The $1B capex plan proves ill-timed if hyperscaler AI capex decelerates post-2027, stranding capacity and compressing ROIC from 43% toward the mid-20s. Simultaneously, 1.6T switch margins erode as Wiwynn, Accton, or Taiwanese ODMs close the manufacturing complexity gap, reducing pricing power and collapsing the 30× forward P/E premium.</p>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--primary);">
+      <h3 class="card-title">Key Metric: CCS Communications Revenue YoY Growth</h3>
+      <div class="grid-2" style="margin-bottom: 12px;">
+        <div>
+          <div class="field-label">Current Value (Q4 2025)</div>
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--success);">+79% YoY</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary);">$2,114.6M · 57.5% of FY2025 revenue</div>
+        </div>
+        <div>
+          <div class="field-label">5-Quarter Trajectory ($M)</div>
+          <div style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary); line-height: 1.8;">$1,180 → $1,428 → $1,641 → $1,943 → $2,115<br>FY2025: $7,126.4M (+81% YoY)<br>Q1 2026 outlook: +low 60s% YoY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header"><span class="section-num">S3</span><h2 class="section-title">Business Model & Product Architecture</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">1. HPS Networking Switches (400G/800G/1.6T/3.2T)</span><div class="product-badges"><span class="badge badge-primary">Core / Growth</span><span class="badge badge-secondary">~41% of Rev</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Custom Ethernet switches for AI data centers. 41% cumulative market share in 200G+ custom Ethernet, 55% in custom solutions. First operational 1.6T switch prototype (Tomahawk 6). 10 active 1.6T programs, design wins with 3 hyperscalers. 1,100+ design engineers. Liquid cooling integration (DS6001).</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">2. AI/ML Custom Compute (Google TPU)</span><div class="product-badges"><span class="badge badge-primary">Growth</span><span class="badge badge-secondary">Scale / Emerging</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Custom ASIC-based compute systems — Google TPU is anchor program. Rack-scale integration, advanced liquid cooling, testing, orchestration. Q4 2025 Enterprise +33% YoY with acceleration expected FY2026 (100+teens% Q1 growth guided). "Preferred" but not sole source.</p></div>
+    <div class="product-card emerging"><div class="product-header"><span class="product-name">3. Digital Native Rack-Scale AI System</span><div class="product-badges"><span class="badge badge-accent">Emerging</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Full rack-scale custom AI system for unnamed digital native customer (analyst/media speculation links to OpenAI; unconfirmed by CLS). "At least a few billion dollars in the first year" (2027). Samples H2 2026. CLS's highest-complexity engagement — proof point for full platform solutions capability.</p></div>
+    <div class="product-card supporting"><div class="product-header"><span class="product-name">4. Traditional CCS EMS</span><div class="product-badges"><span class="badge badge-neutral">Core / Mature</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Standard EMS for IT infrastructure — optical (Ciena), storage, data center racks. Lower margin than HPS. Being de-emphasized as HPS mix grows.</p></div>
+    <div class="product-card legacy"><div class="product-header"><span class="product-name">5. ATS Segment (A&D, Capital Equipment, Industrial, HealthTech)</span><div class="product-badges"><span class="badge badge-neutral">Cash Flow Stabilizer</span><span class="badge badge-neutral">26% of Rev</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Diversified industrial markets. $3.2B FY2025. Segment margin 5.3% (improved from 4.6%). Exiting low-margin A&D programs, adding engineering-led HealthTech (>$100M growth expected 2026) and data center power infrastructure.</p></div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header"><span class="section-num">S4</span><h2 class="section-title">Revenue Stream Map</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card">
+      <h3 class="card-title">FY2025 Full Year Revenue: $12,390.9M <span style="color: var(--success); font-family: var(--font-mono); font-size: 14px;">(+28% YoY)</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Stream</th><th class="num">FY25 ($M)</th><th class="num">% Rev</th><th class="num">FY24 ($M)</th><th class="num">YoY</th><th>Thesis Role</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">CCS — Communications</td><td class="num">7,126.4</td><td class="num">57.5%</td><td class="num">3,946.7</td><td class="num" style="color:var(--success)">+81%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+          <tr><td class="label-cell">CCS — Enterprise</td><td class="num">2,062.1</td><td class="num">16.6%</td><td class="num">2,543.8</td><td class="num" style="color:var(--error)">-19%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+          <tr><td class="label-cell">ATS</td><td class="num">3,202.4</td><td class="num">25.8%</td><td class="num">3,155.5</td><td class="num" style="color:var(--text-secondary)">+1%</td><td><span class="badge badge-neutral">Cash Flow Stabilizer</span></td></tr>
+          <tr style="font-weight:600"><td>Total</td><td class="num">12,390.9</td><td class="num">100%</td><td class="num">9,646.0</td><td class="num" style="color:var(--success)">+28%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Quarterly Revenue Progression ($M)</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th class="num">Total</th><th class="num">CCS</th><th class="num">Comms</th><th class="num">Enterprise</th><th class="num">ATS</th><th class="num">CCS%</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q4 2024</td><td class="num">2,545.7</td><td class="num">1,739.9</td><td class="num">1,180.0</td><td class="num">559.9</td><td class="num">805.8</td><td class="num">68%</td></tr>
+          <tr><td class="label-cell">Q1 2025</td><td class="num">2,648.6</td><td class="num">1,841.4</td><td class="num">1,427.7</td><td class="num">413.7</td><td class="num">807.2</td><td class="num">70%</td></tr>
+          <tr><td class="label-cell">Q2 2025</td><td class="num">2,893.4</td><td class="num">2,074.3</td><td class="num">1,641.2</td><td class="num">433.1</td><td class="num">819.1</td><td class="num">72%</td></tr>
+          <tr><td class="label-cell">Q3 2025</td><td class="num">3,194.0</td><td class="num">2,413.0</td><td class="num">1,942.9</td><td class="num">470.1</td><td class="num">781.0</td><td class="num">76%</td></tr>
+          <tr><td class="label-cell">Q4 2025</td><td class="num">3,654.9</td><td class="num">2,859.8</td><td class="num">2,114.6</td><td class="num">745.2</td><td class="num">795.1</td><td class="num">78%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>Customer concentration:</strong> Top customer (Google) grew from 24% to 36% of quarterly revenue over 5 quarters. FY2025: Top 3 = 32%, 14%, 12% (58%). Top 10 = 79%. Direction: Worsening.</div>
+    </div>
+    <div class="card"><h3 class="card-title">HPS Revenue (from earnings calls)</h3><p style="font-size: 14px; color: var(--text-secondary);">FY2024: ~$2.8B (29% of rev) → FY2025: ~$5.0B (41% of rev, +81% YoY). Q3 2025: $1.4B (44% of Q). Q4 2025: $1.4B (38% of Q — % compressed by Enterprise surge, not HPS weakness).</p></div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header"><span class="section-num">S5</span><h2 class="section-title">Competitive Context & Moat Evidence</h2><span class="section-cadence">landscape: material change / moat: quarterly</span></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Wiwynn Corporation (ODM)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Data center ODM competitor with hyperscaler relationships. Growing in custom server/compute. CLS's 800G/1.6T design leadership and 41% market share provide significant lead. Wiwynn lacks rack-scale integration capability.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Inventec / Foxconn (Hon Hai)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Google TPU dual-sourcing candidate. Jan 2026 Digitimes report caused ~6% stock decline. Manufacturing capacity is replicable. CLS: "partnership has never been stronger or more integrated." Foxconn = world's largest EMS.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">Accton Technology (ODM)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">White-box switching ODM. Competes at lower complexity tiers. "Fewer and fewer competitors can do it effectively" at 1.6T+. CLS holds 55% custom switch market vs single-digits for competitors.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">Arista Networks / Cisco Systems (OEM)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">OEM networking alternative. Hyperscalers moving toward custom/ODM solutions — structural tailwind for CLS. Arista dominant in enterprise Ethernet, not custom hyperscaler builds.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">Quanta Computer (ODM)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Largest ODM globally. CLS differentiates on 1.6T design complexity (first prototype "first anywhere"), zero critical excursions, and SONiC software integration. Competition primarily on lower-complexity EMS.</p></div>
+    <hr class="divider accent">
+    <div class="card">
+      <h3 class="card-title">Moat Evidence Grid</h3>
+      <p style="font-size: 14px; margin-bottom: 12px;"><strong>Moat type:</strong> Switching costs (design integration) + Complexity barrier (manufacturing at scale) + Ecosystem relationships (Broadcom preferred partner, Google preferred manufacturing partner)</p>
+      <div class="field-label" style="margin-bottom: 8px">Evidence Now</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">41% cumulative market share in 200G+ custom Ethernet (>2× next competitor) · 55% of custom DC switch spend · First operational 1.6T switch prototype · Business competitors won on price "came back in 2026 because others could not execute" · Broadcom CEO: "preferred provider for the most technically demanding solutions" · 10 active 1.6T programs · Zero critical excursions · 1,100+ design engineers</div>
+      <div class="field-label" style="margin-bottom: 8px">Moat Limitations</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">No proprietary silicon — depends on Broadcom/Marvell · "Preferred" ≠ sole source; all hyperscalers maintain second sources · Reverse switching cost: CLS more dependent on Google (32%) than Google on CLS · Traditional EMS programs are commodity-like</div>
+      <div class="verdict-box"><div><div class="verdict-label">Quarterly Moat Pulse</div><div class="verdict-value">Strengthening</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Q4 +44% rev, third hyperscaler 1.6T win, FY2026 outlook raised to $17B, 10 active 1.6T programs, competitors unable to execute</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">March 12, 2026</div></div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header"><span class="section-num">S6</span><h2 class="section-title">Management Team Assessment</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div class="card"><h3 class="card-title">Robert A. Mionis — CEO</h3><div class="card-subtitle">11 year tenure · BS Electrical Engineering · Age 62 · 120.4× guideline</div><p style="font-size: 14px; color: var(--text-secondary);">Former operating partner Pamplona Capital, CEO StandardAero, senior roles at GE/Honeywell. ~1,010,091 shares ($270M+). Largest insider holder. Did NOT sell in 2026 (tax withholding only) — strongest mitigating factor against broader insider selling.</p><div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Low on execution and customer relationships. Moderate on long-term TAM sizing.</div></div>
+      <div class="card"><h3 class="card-title">Mandeep Chawla — CFO</h3><div class="card-subtitle">CFO since 2017 (9 years) · Master of Finance, CPA/CMA · Age 48</div><p style="font-size: 14px; color: var(--text-secondary);">Data-driven, financially precise. Provides granular segment guidance and proactively manages expectations ("high confidence view"). Guidance deliberately conservative — sandbagging pattern is institutional, not accidental. Sold to zero direct holdings Jan-Feb 2025 (historical). Post-Feb 2026 vesting: ~99,444 direct shares (per most recent Form 4). No open-market sales in 2026.</p><div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Low. Most reliable source for financial expectations. Apply sandbagging factors with confidence.</div></div>
+    </div>
+    <div class="card" style="margin-top: 4px;">
+      <h3 class="card-title">Guidance Pattern: Extreme Sandbagger (4/4 beats, 4 consecutive FY raises)</h3>
+      <table class="data-table">
+        <thead><tr><th>Quarter</th><th class="num">Rev Guided (mid)</th><th class="num">Rev Actual</th><th class="num">Beat vs Mid</th><th class="num">EPS Guided</th><th class="num">EPS Actual</th><th class="num">EPS Beat</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q1 2025</td><td class="num">$2,550M</td><td class="num">$2,648.6M</td><td class="num" style="color:var(--success)">+3.9%</td><td class="num">$1.11</td><td class="num">$1.20</td><td class="num" style="color:var(--success)">+8.1%</td></tr>
+          <tr><td class="label-cell">Q2 2025</td><td class="num">$2,650M</td><td class="num">$2,893.4M</td><td class="num" style="color:var(--success)">+9.2%</td><td class="num">$1.22</td><td class="num">$1.39</td><td class="num" style="color:var(--success)">+13.9%</td></tr>
+          <tr><td class="label-cell">Q3 2025</td><td class="num">$3,000M</td><td class="num">$3,194.0M</td><td class="num" style="color:var(--success)">+6.5%</td><td class="num">$1.45</td><td class="num">$1.58</td><td class="num" style="color:var(--success)">+9.0%</td></tr>
+          <tr><td class="label-cell">Q4 2025</td><td class="num">$3,450M</td><td class="num">$3,654.9M</td><td class="num" style="color:var(--success)">+5.9%</td><td class="num">$1.73</td><td class="num">$1.89</td><td class="num" style="color:var(--success)">+9.2%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">Revenue: 4/4 exceeded high end, avg beat +6.4% vs mid. EPS: 4/4 exceeded high end, avg beat +10.1%. Non-GAAP op margin: record every quarter (6.8% → 7.1% → 7.4% → 7.6% → 7.7%). FY2025 initial guide $10,400M → actual $12,390.9M (+19.1%).</div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header"><span class="section-num">S7</span><h2 class="section-title">Cross-Quarter Acceleration Table</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4 2024</th><th class="num">Q1 2025</th><th class="num">Q2 2025</th><th class="num">Q3 2025</th><th class="num">Q4 2025</th><th>Trend</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue Growth (YoY)</td><td class="num">+19%</td><td class="num">+20%</td><td class="num">+21%</td><td class="num">+28%</td><td class="num">+44%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Non-GAAP Adj Op Margin</td><td class="num">6.8%</td><td class="num">7.1%</td><td class="num">7.4%</td><td class="num">7.6%</td><td class="num">7.7%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">CCS Comms Rev ($M)</td><td class="num">1,180</td><td class="num">1,428</td><td class="num">1,641</td><td class="num">1,943</td><td class="num">2,115</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">CCS Segment Margin</td><td class="num">7.9%</td><td class="num">8.0%</td><td class="num">8.3%</td><td class="num">8.3%</td><td class="num">8.4%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Adjusted ROIC</td><td class="num">29.1%</td><td class="num">31.5%</td><td class="num">35.5%</td><td class="num">37.5%</td><td class="num">43.1%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">GAAP Gross Margin</td><td class="num">11.7%</td><td class="num">10.3%</td><td class="num">12.8%</td><td class="num">13.0%</td><td class="num">11.8%</td><td>Volatile⚑</td></tr>
+          <tr><td class="label-cell">FCF Conversion</td><td class="num">63.2%</td><td class="num">108.6%</td><td class="num">56.8%</td><td class="num">33.2%</td><td class="num">58.3%</td><td>Volatile⚑</td></tr>
+          <tr><td class="label-cell">Diluted Shares (M)</td><td class="num">117.3</td><td class="num">116.9</td><td class="num">115.9</td><td class="num">115.9</td><td class="num">115.9</td><td><span class="badge badge-secondary">Stable</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">⚑ GAAP GM volatile from TRS FVA (SGA $38-$113M swings). ⚑ FCF conversion volatile from working capital timing in high-growth manufacturing. CCS now 78% of revenue (was 68% Q4 2024) — mix shift accelerating.</div>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header"><span class="section-num">S8</span><h2 class="section-title">Quarterly Income Statement Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4 2024</th><th class="num">Q1 2025</th><th class="num">Q2 2025</th><th class="num">Q3 2025</th><th class="num">Q4 2025</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Total Revenue ($M)</td><td class="num">2,545.7</td><td class="num">2,648.6</td><td class="num">2,893.4</td><td class="num">3,194.0</td><td class="num">3,654.9</td></tr>
+          <tr><td class="label-cell">&nbsp;&nbsp;YoY Growth</td><td class="num">+19%</td><td class="num">+20%</td><td class="num">+21%</td><td class="num">+28%</td><td class="num">+44%</td></tr>
+          <tr><td class="label-cell">&nbsp;&nbsp;QoQ Growth</td><td class="num">—</td><td class="num">+4.0%</td><td class="num">+9.2%</td><td class="num">+10.4%</td><td class="num">+14.4%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Gross Margin (GAAP)</td><td class="num">11.7%</td><td class="num">10.3%</td><td class="num">12.8%</td><td class="num">13.0%</td><td class="num">11.8%</td></tr>
+          <tr><td class="label-cell">Adj Operating Margin</td><td class="num">6.8%</td><td class="num">7.1%</td><td class="num">7.4%</td><td class="num">7.6%</td><td class="num">7.7%</td></tr>
+          <tr><td class="label-cell">GAAP Net Margin</td><td class="num">6.0%</td><td class="num">3.3%</td><td class="num">7.3%</td><td class="num">8.4%</td><td class="num">7.3%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">GAAP EPS (diluted)</td><td class="num">$1.29</td><td class="num">$0.74</td><td class="num">$1.82</td><td class="num">$2.31</td><td class="num">$2.31</td></tr>
+          <tr><td class="label-cell">Adjusted EPS</td><td class="num">$1.11</td><td class="num">$1.20</td><td class="num">$1.39</td><td class="num">$1.58</td><td class="num">$1.89</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>FY2025 Annual:</strong> Revenue $12,390.9M (+28%). Adj EBIAT $927.0M (7.5%). Adj EPS $6.05. FY2024: $9,646.0M, Adj EBIAT $622.6M (6.5%), Adj EPS $3.88. ⚑ GAAP EPS ($7.16) > Adj EPS ($6.05): TRS gains inflated GAAP. Non-GAAP is more conservative.</div>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header"><span class="section-num">S9</span><h2 class="section-title">Balance Sheet Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric ($M)</th><th class="num">Q4 2024</th><th class="num">Q1 2025</th><th class="num">Q2 2025</th><th class="num">Q3 2025</th><th class="num">Q4 2025</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Cash & equiv.</td><td class="num">423.3</td><td class="num">303.0</td><td class="num">313.8</td><td class="num">305.9</td><td class="num">595.6</td></tr>
+          <tr><td class="label-cell">Total debt</td><td class="num">796.7</td><td class="num">941.7</td><td class="num">875.2</td><td class="num">784.1</td><td class="num">776.5</td></tr>
+          <tr><td class="label-cell">Net debt</td><td class="num">373.4</td><td class="num">638.7</td><td class="num">561.4</td><td class="num">478.2</td><td class="num">180.9</td></tr>
+          <tr><td class="label-cell">Debt/EBITDA</td><td class="num">1.1×</td><td class="num">~1.1×</td><td class="num">~0.9×</td><td class="num">0.7×</td><td class="num">0.6×</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Accounts receivable</td><td class="num">2,069.0</td><td class="num">2,135.9</td><td class="num">2,287.8</td><td class="num">2,439.3</td><td class="num">2,638.1</td></tr>
+          <tr><td class="label-cell">Inventories</td><td class="num">1,760.6</td><td class="num">1,788.3</td><td class="num">1,918.1</td><td class="num">2,046.7</td><td class="num">2,188.0</td></tr>
+          <tr><td class="label-cell">Shareholders' equity</td><td class="num">1,896.0</td><td class="num">1,556.8</td><td class="num">1,757.9</td><td class="num">2,028.6</td><td class="num">2,216.3</td></tr>
+          <tr><td class="label-cell">Diluted shares (M)</td><td class="num">117.3</td><td class="num">116.9</td><td class="num">115.9</td><td class="num">115.9</td><td class="num">115.9</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top: 12px;"><strong>Net debt declining:</strong> $373.4M → $180.9M over 5 quarters despite +44% revenue growth. AR +27.5% and inventory +24.3% — both grow slower than revenue (+28%). Undrawn $750M revolver available. Q1 2025 debt spike ($941.7M) was temporary revolver draw, fully repaid by Q3.</div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header"><span class="section-num">S10</span><h2 class="section-title">Earnings Quality & Cash Flow Forensics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-2">
+      <div class="card"><h3 class="card-title">Q4 2025 Cash Flow</h3><div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$250.6M</div></div><div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$155.9M</div></div><div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">4.3%</div></div><div class="field-group"><div class="field-label">FCF Conversion</div><div class="field-value mono">58.3%</div></div></div>
+      <div class="card"><h3 class="card-title">FY2025 Cash Flow</h3><div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$659.5M</div></div><div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$458.3M</div></div><div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">3.7%</div></div><div class="field-group"><div class="field-label">FCF Conversion</div><div class="field-value mono">55.0%</div></div><div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">1.6% ($201.2M)</div></div></div>
+    </div>
+    <div class="card"><h3 class="card-title">SBC & Dilution</h3><p style="font-size: 14px; color: var(--text-secondary);">FY2025 SBC: $69.8M (0.56% of revenue). FY2024: $57.4M (0.60%). Diluted shares: 115.9M (-1.2% YoY). Buyback: $150.7M (1.3M shares @ ~$116 avg). Shares declining despite SBC — buyback more than offsets dilution. Net accretive: dilution cost only 56 bps.</p></div>
+    <div class="card"><h3 class="card-title">DSO & Per-Share Economics</h3><div class="grid-2">
+      <div><div class="field-label">DSO (Q4 2025)</div><div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600; color: var(--success);">66.4 days</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">Down 8.4 days YoY (was 74.8). 5Q: 74.8 → 72.5 → 71.9 → 70.2 → 66.4</div></div>
+      <div><div class="field-label">ROIC (Q4 2025)</div><div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600; color: var(--success);">43.1%</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">FY2025: 37.1% · FY2024: 27.2% · Reinvestment rate: 30.5%</div></div>
+    </div><p style="font-size: 13px; color: var(--text-tertiary); margin-top: 12px;">Rev/share: $106.64 (+31.3% YoY) · FCF/share: $3.94 (+52.7% YoY)</p></div>
+    <div class="verdict-box"><div><div class="verdict-label">Earnings Quality Verdict</div><div class="verdict-value">Clean</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">FY2026 capex step-up to $1B (6% of rev) will compress FCF margin to ~2.9% and conversion to ~40-45%. Planned investment phase, not deterioration. Verify returns by Q3 2026.</div></div>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header"><span class="section-num">S11</span><h2 class="section-title">Thesis-Weighted Scorecard</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <div class="score-row" style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 4px;"><span class="score-metric" style="font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Metric</span><span class="score-weight" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">WT</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Score</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Wtd</span></div>
+      <div class="score-row"><span class="score-metric"><strong>CCS Comms revenue growth (YoY)</strong> — +79% Q4, well above 30% thesis threshold</span><span class="score-weight">2.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+2.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Non-GAAP adj operating margin</strong> — 7.7% = 5th consecutive company record</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>ROIC</strong> — 43.1% vs 37.5% QoQ, 29.1% YoY. Near-doubling validates capital efficiency</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Revenue growth (total)</strong> — +44% YoY, accelerating from +28% Q3</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>FCF conversion</strong> — 58.3% Q4, 55.0% FY2025. Within 50-75% healthy range</span><span class="score-weight">1.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Customer concentration</strong> — Top customer 36% Q4 (was 24% Q4 2024). +12pp worsening</span><span class="score-weight">1.0×</span><span class="score-badge score-minus">-1</span><span class="score-badge score-minus">-1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>DSO trend</strong> — 66.4 days, down 8.4 days YoY. Significant improvement</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Scorecard Result</div><div class="verdict-value">Clearly Improving</div></div><div class="verdict-score">67%</div></div>
+    <p style="font-size: 13px; color: var(--text-tertiary); text-align: center;">&gt;60% = Clearly improving &nbsp;·&nbsp; 20-60% = Mixed/stable &nbsp;·&nbsp; &lt;20% = Deterioration</p>
+    <div class="card" style="margin-top: 16px;"><h3 class="card-title">Historical Score Trajectory</h3>
+      <div style="display: flex; gap: 8px; align-items: flex-end; height: 100px; margin: 16px 0 8px;">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">44%</div><div style="width:100%;height:44px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-24</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">67%</div><div style="width:100%;height:67px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q1-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">56%</div><div style="width:100%;height:56px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">56%</div><div style="width:100%;height:56px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q3-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">67%</div><div style="width:100%;height:67px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-25</div></div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Thesis-core metrics (Comms growth, margin, ROIC) scored +1 every quarter. Score oscillates driven by customer concentration drag (-1 most quarters) and FCF conversion volatility.</p>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header"><span class="section-num">S12</span><h2 class="section-title">Tier 2 Sector-Specific Metrics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table">
+      <thead><tr><th>Metric</th><th class="num">Q4 2025</th><th class="num">Prior Q</th><th class="num">YoY Δ</th><th>Signal</th></tr></thead>
+      <tbody>
+        <tr><td class="label-cell">HPS Revenue Mix (% of total)</td><td class="num">38% ($1.4B)</td><td class="num">44% ($1.4B)</td><td class="num" style="color:var(--success)">+9pp YoY</td><td><span class="badge badge-success">GREEN</span></td></tr>
+        <tr><td class="label-cell">Customer Concentration (top %)</td><td class="num">36%</td><td class="num">30%</td><td class="num" style="color:var(--error)">+12pp YoY</td><td><span class="badge badge-error">RED</span></td></tr>
+        <tr><td class="label-cell">CCS Segment Margin</td><td class="num">8.4%</td><td class="num">8.3%</td><td class="num" style="color:var(--success)">+50 bps YoY</td><td><span class="badge badge-success">GREEN</span></td></tr>
+        <tr><td class="label-cell">Enterprise Revenue</td><td class="num">$745.2M</td><td class="num">$470.1M</td><td class="num" style="color:var(--success)">+33% YoY</td><td><span class="badge badge-warning">YELLOW → GREEN</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header"><span class="section-num">S13</span><h2 class="section-title">Forward Catalyst Pipeline & Product Roadmap</h2><span class="section-cadence">material change</span></div>
+    <div class="card"><table class="data-table">
+      <thead><tr><th>Window</th><th>Event</th><th>Type</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td class="label-cell">H1 2026</td><td>Enterprise compute ramp acceleration (Google next-gen TPU)</td><td>Revenue</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">H2 2026</td><td>1.6T switch production ramp begins (10 active programs)</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">H2 2026</td><td>Digital native customer sample deliveries</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">2027</td><td>Digital native production ramp ("$multi-billion first year")</td><td>Revenue</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">Late Apr 2026</td><td>Q1 2026 earnings (beat/raise cycle test)</td><td>Earnings</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+        <tr><td class="label-cell">Late 2026</td><td>3.2T switch samples</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+        <tr><td class="label-cell">FY2026</td><td>$1B capacity expansion across 5 sites</td><td>Operational</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header"><span class="section-num">S14</span><h2 class="section-title">Sell-Side Landscape</h2><span class="section-cadence">material change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Total Analysts</div><div class="stat-value">~17</div></div>
+      <div class="stat-card"><div class="stat-label">Consensus PT</div><div class="stat-value">~$385</div><div class="stat-delta delta-up">+43% from $269</div></div>
+      <div class="stat-card"><div class="stat-label">Ratings</div><div class="stat-value" style="font-size: 16px;">15 Buy · 2 Hold · 0 Sell</div></div>
+    </div>
+    <div style="font-size: 11px; color: var(--text-tertiary); text-align: center; margin-top: -12px; margin-bottom: 16px;">Source: Delta Framework compiled research (TipRanks, StockAnalysis, Benzinga cross-referenced), as of March 2026</div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">CL</div><div class="analyst-body"><div class="analyst-name">Michael Ng — Goldman Sachs</div><div class="analyst-pt">PT: $440 <span style="font-size: 12px; color: var(--text-tertiary);">(Conviction List)</span></div><p class="analyst-thesis">AI infrastructure capex supercycle beneficiary. Raised from $340 → $440 in 13 days. Multi-year secular demand thesis. Sets the institutional bull ceiling; Goldman CL drives fundamental long-only flows.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">Buy</div><div class="analyst-body"><div class="analyst-name">BofA Analyst — Bank of America</div><div class="analyst-pt">PT: $400 <span style="font-size: 12px; color: var(--text-tertiary);">(Initiation)</span></div><p class="analyst-thesis">32× CY2027E EPS of $12.36. PEG 0.7× against 47% EPS CAGR. Three-pillar: (1) dominant switching share, (2) custom ASIC server growth, (3) rack-scale AI assembly. Most detailed public bull framework.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--text-secondary);">Hold</div><div class="analyst-body"><div class="analyst-name">Daniel Chan — TD Securities</div><div class="analyst-pt">PT: $330</div><p class="analyst-thesis">"Good company, full valuation." Finds "little to fault" but 30× P/E fully reflects the growth story. Downgraded Oct 2025 from Buy while raising PT from $130 → $238. Best bear-case discipline. If TD upgrades → genuine entry point signal.</p></div></div>
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card" style="border-left: 3px solid var(--success);"><h3 class="card-title">Notable Bull Case</h3><p style="font-size: 14px;">41% switch market share + 55% custom solutions. ROIC 43% approaching software-like returns. PEG 0.5-0.8× on 40%+ EPS CAGR. Three hyperscaler 1.6T wins + digital native ($multi-B 2027). Barclays: "$17B FY2026 guidance conservative and likely raised throughout the year."</p></div>
+      <div class="card" style="border-left: 3px solid var(--error);"><h3 class="card-title">Notable Bear Case</h3><p style="font-size: 14px;">~30× forward P/E exceeding NVIDIA — hard to justify for EMS/ODM. Three customers = 63% of Q4 revenue. Single Digitimes report caused ~6% decline. $1B capex transforms asset-light model. Limited visibility beyond 4-quarter window. Automated DCF models (Alpha Spread, Simply Wall St) flag 40-90% overvaluation — these models historically struggle with hypergrowth transformations.</p></div>
+    </div>
+  </div>
+
+  <!-- S15 -->
+  <div class="section" id="s15">
+    <div class="section-header"><span class="section-num">S15</span><h2 class="section-title">Management Guidance & Credibility</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <h3 class="card-title">FY2026 Forward Expectations — Raw vs. Credibility-Adjusted</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Raw Guidance</th><th class="num">Adjusted</th><th class="num">Street</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q1 2026 Revenue</td><td class="num">$4,000M</td><td class="num" style="color:var(--primary);font-weight:600">$4,256M (×1.064)</td><td class="num">~$4,100-4,200M</td></tr>
+          <tr><td class="label-cell">Q1 2026 EPS</td><td class="num">$2.05</td><td class="num" style="color:var(--primary);font-weight:600">$2.26 (×1.101)</td><td class="num">~$2.15-2.20</td></tr>
+          <tr><td class="label-cell">FY2026 Revenue</td><td class="num">$17,000M</td><td class="num" style="color:var(--primary);font-weight:600">$18,105M (×1.065)</td><td class="num">~$17,600M</td></tr>
+          <tr><td class="label-cell">FY2026 EPS</td><td class="num">$8.75</td><td class="num" style="color:var(--primary);font-weight:600">$9.19 (×1.05)</td><td class="num">~$8.75-9.00</td></tr>
+          <tr><td class="label-cell">FY2026 FCF</td><td class="num">$500M</td><td class="num" style="color:var(--primary);font-weight:600">$539M (×1.078)</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><h3 class="card-title">Commitment Tracker — Delivery Rate: 100%</h3>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> FY2025 revenue beat: $12,390.9M vs $12,200M final outlook — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> FY2025 record margins: 7.5% adj op margin, beat every quarter — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> FY2025 FCF: $458.3M vs $425M guide — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 1.6T switch prototype operational — DELIVERED (confirmed Q4)</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> FY2026 revenue $17B / EPS $8.75 — OPEN (raised from $16B/$8.20)</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> $1B capex across 5 sites — OPEN</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> Digital native customer sample delivery H2 2026 — OPEN</div>
+    </div>
+    <div class="card"><h3 class="card-title">Capital Allocation Score</h3><div class="progress-track"><div class="progress-fill" style="width: 75%;"></div></div><div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--primary);">15 / 20</div>
+      <table class="data-table" style="margin-top: 12px;">
+        <thead><tr><th>Category</th><th class="num">Score</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">High-return investing</td><td class="num">4/5</td><td>ROIC 43.1%; $1B customer-backed capex; R&D +50% YoY</td></tr>
+          <tr><td class="label-cell">Acquisitions</td><td class="num">3/5</td><td>NCS Global $65.3M tuck-in; strategic, not a driver</td></tr>
+          <tr><td class="label-cell">Equity management</td><td class="num">4/5</td><td>$150.7M buyback; shares -1.2% YoY; SBC only 0.56% of rev</td></tr>
+          <tr><td class="label-cell">Balance sheet</td><td class="num">4/5</td><td>Net debt $180.9M; Debt/EBITDA 0.6×; $750M undrawn revolver</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Management Credibility</div><div class="verdict-value">High</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Extreme sandbagger: Revenue +6.4%, EPS +10.1%. 100% delivery rate. 4 consecutive FY raises. Apply credibility adjustment to ALL forward expectations. Monitor: $1B capex returns by Q3 2026.</div></div>
+  </div>
+
+  <!-- S16 -->
+  <div class="section" id="s16">
+    <div class="section-header"><span class="section-num">S16</span><h2 class="section-title">Kill Criteria</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="callout danger" style="margin-bottom: 24px;"><strong>RULE:</strong> If ANY criterion fires, execute the pre-committed action. Do not rationalize. Do not wait for "one more quarter of data."</div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#1</span><span class="kill-title">CCS Communications Growth Collapse</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> CCS Comms YoY growth &lt;30% for 2 consecutive quarters AND non-GAAP adj op margin declining YoY for same 2 quarters.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Communications YoY growth &lt;15% in ANY single quarter → execute immediately</div><div class="kill-gap">Gap: Current +79% → trigger &lt;30% (49pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#2</span><span class="kill-title">Customer Concentration Breach</span><span class="kill-action kill-reduce">REDUCE 50% / REASSESS</span></div><div class="kill-trigger"><strong>Trigger:</strong> Top customer &gt;40% for 2 consecutive quarters, OR loss of "preferred partner" status with Google.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Top customer &gt;50% in ANY single quarter</div><div class="kill-gap">Gap: Current 36% → trigger 40% (4pp margin — closest criterion)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#3</span><span class="kill-title">ROIC Compression (CapEx Returns)</span><span class="kill-action kill-reassess">REASSESS + REDUCE 25%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Adjusted ROIC &lt;25% for 2 consecutive quarters, excluding quarters with restructuring charges &gt;$25M.</div><div class="kill-gap">Gap: Current 43.1% → trigger &lt;25% (18pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#4</span><span class="kill-title">FCF Structural Deterioration</span><span class="kill-action kill-reduce">REDUCE 25%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Annual FCF conversion &lt;35% for any full FY AND Debt/EBITDA &gt;2.0× at year-end.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Net debt &gt;$500M at any quarter-end → REDUCE immediately</div><div class="kill-gap">Gap: FCF conversion 55.0% → 35% (20pp); Debt/EBITDA 0.6× → 2.0× (1.4×)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#5</span><span class="kill-title">Management Credibility Failure</span><span class="kill-action kill-reassess">REASSESS</span></div><div class="kill-trigger"><strong>Trigger:</strong> Revenue misses guidance midpoint in 2 of any 4 consecutive quarters, OR annual outlook lowered at any call.</div><div class="kill-gap">Gap: Current 4/4 beats (+6.4% avg) → trigger 2/4 misses. An outlook lowering would be unprecedented.</div></div>
+  </div>
+
+  <!-- S17 -->
+  <div class="section" id="s17">
+    <div class="section-header"><span class="section-num">S17</span><h2 class="section-title">Valuation Framework</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Market Cap</div><div class="stat-value">~$30.9B</div></div>
+      <div class="stat-card"><div class="stat-label">Enterprise Value</div><div class="stat-value">~$31.1B</div></div>
+      <div class="stat-card"><div class="stat-label">Fwd P/E (FY2026)</div><div class="stat-value">~30.7×</div><div class="stat-delta delta-neutral">Exceeds NVDA (~28×)</div></div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Scenario Analysis (3-Year Horizon → FY2028)</h3>
+      <div class="scenario-bar bull"><div class="scenario-label" style="color: var(--success);">Bull</div><div class="scenario-value" style="color: var(--success);">$420-$490</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$29B. 1.6T ramp exceeds expectations, digital native $3B+, Google deepens, margin 8.5%+, EPS ~$17.</div></div>
+      <div class="scenario-bar base"><div class="scenario-label" style="color: var(--primary);">Base</div><div class="scenario-value" style="color: var(--primary);">$320-$390</div><div class="scenario-prob">50%</div><div class="scenario-desc">Revenue ~$24B. 1.6T on schedule, digital native ramps 2027, beat/raise continues, margin 8.0%, EPS ~$13.5.</div></div>
+      <div class="scenario-bar bear"><div class="scenario-label" style="color: var(--error);">Bear</div><div class="scenario-value" style="color: var(--error);">$160-$220</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$19B. Google shifts to competitors, AI capex decelerates, 1.6T margins compressed, EPS ~$10.</div></div>
+      <div class="verdict-box" style="margin-top: 16px;"><div><div class="verdict-label">Expected Value</div><div class="verdict-value" style="font-family: var(--font-mono);">$338</div></div><div style="font-size: 14px; color: var(--success); font-weight: 500;">+26% upside from $269 &nbsp;·&nbsp; Annualized (3-yr): ~8%</div></div>
+    </div>
+    <div class="card"><h3 class="card-title">Valuation Gap: <span style="color: var(--success);">Attractive</span></h3>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border);">1. CCS Comms growth sustains >30% YoY through FY2027 (1.6T replaces 800G)<br>2. $1B capex produces returns ≥ current 43% ROIC<br>3. Google relationship holds — no material TPU second-sourcing<br>4. Digital native customer ramps 2027 with $2B+ (reduces concentration)<br>5. Non-GAAP margin expands to 8.0-8.5% (HPS mix drives premium pricing)</div>
+      <div class="callout" style="margin-top: 16px;"><strong>Position sizing:</strong> Size to customer concentration risk. At 36% top-customer dependency, a Google-related headline can cause 8-10% single-day moves.</div>
+    </div>
+  </div>
+
+  <!-- S18 -->
+  <div class="section" id="s18">
+    <div class="section-header"><span class="section-num">S18</span><h2 class="section-title">Rolling Quarterly Baseline & Pre-Earnings Checklist</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><h3 class="card-title">Q4 2025 Snapshot</h3><div class="grid-3">
+      <div><div class="field-label">Revenue</div><div class="field-value mono">$3,654.9M (+44% YoY)</div></div>
+      <div><div class="field-label">Adj Op Margin</div><div class="field-value mono">7.7% (record)</div></div>
+      <div><div class="field-label">FCF</div><div class="field-value mono">$155.9M (58.3% conv.)</div></div>
+      <div><div class="field-label">DSO</div><div class="field-value mono">66.4 days (-8.4 YoY)</div></div>
+      <div><div class="field-label">ROIC</div><div class="field-value mono">43.1%</div></div>
+      <div><div class="field-label">Net Debt</div><div class="field-value mono">$180.9M (0.6× Debt/EBITDA)</div></div>
+    </div></div>
+    <div class="card"><h3 class="card-title">Pre-Earnings Checklist for Q1 2026</h3><div class="card-subtitle">Earnings date: ~Late April 2026</div>
+      <div class="field-label" style="margin-top: 16px;">What the Market Needs to Hear</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">1. Revenue exceeds $4,150M guide high end — continues beat pattern. Adj: $4,256M<br>2. FY2026 outlook raised from $17B — continues raise-every-quarter pattern<br>3. Digital native program on track for H2 2026 sample delivery</div>
+      <div class="field-label">Thresholds</div>
+      <table class="data-table"><thead><tr><th>Metric</th><th class="num">Expectation</th><th class="num">Concern</th><th class="num">Kill Threshold</th></tr></thead><tbody>
+        <tr><td class="label-cell">Revenue</td><td class="num">$4,256M (adj)</td><td class="num" style="color:var(--warning)">&lt;$4,000M (guide mid)</td><td class="num" style="color:var(--error)">2/4 misses (KC #5)</td></tr>
+        <tr><td class="label-cell">Adj Op Margin</td><td class="num">≥7.8%</td><td class="num" style="color:var(--warning)">&lt;7.4%</td><td class="num" style="color:var(--error)">YoY decline for 2Q (KC #1)</td></tr>
+        <tr><td class="label-cell">CCS Comms Growth</td><td class="num">+low 60s% YoY</td><td class="num" style="color:var(--warning)">Deceleration</td><td class="num" style="color:var(--error)">&lt;30% for 2Q / &lt;15% any Q</td></tr>
+        <tr><td class="label-cell">Concentration</td><td class="num">≤36%</td><td class="num" style="color:var(--warning)">&gt;38%</td><td class="num" style="color:var(--error)">&gt;40% for 2Q / &gt;50% any Q</td></tr>
+      </tbody></table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Scorecard / Conviction</div><div class="verdict-value">67% — Clearly Improving</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Strong thesis / Attractive valuation (2×2 placement). Management credibility: High. Earnings quality: Clean. Size to concentration risk.</div></div>
+  </div>
+
+  <!-- S19 -->
+  <div class="section" id="s19">
+    <div class="section-header"><span class="section-num">S19</span><h2 class="section-title">Risk Inventory</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-3" style="margin-bottom: 20px; text-align: center;">
+      <div class="stat-card" style="border-left: 3px solid var(--error);"><div class="stat-label">RED Risks</div><div class="stat-value" style="color: var(--error);">2</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--warning);"><div class="stat-label">YELLOW Risks</div><div class="stat-value" style="color: var(--warning);">6</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--success);"><div class="stat-label">GREEN Risks</div><div class="stat-value" style="color: var(--success);">2</div></div>
+    </div>
+    <div class="risk-card red"><div class="risk-header"><span class="risk-title">#1 — Customer Concentration — Google Dependency</span><span class="badge badge-error">RED</span></div><div class="risk-meta">Financial · Severity: High · Probability: High</div><p class="risk-body">Google = ~32% of FY2025, 36% of Q4. Top 3 = 63% of Q4. Top 10 = 79%. January 2026 Digitimes report caused ~6% single-day decline. "Preferred" ≠ sole source — Google maintains second sources for all programs.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#2 — Hyperscaler AI Capex Deceleration</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Macro · Severity: High · Probability: Medium</div><p class="risk-body">77% of CCS revenue from hyperscalers (up from 51% in 2022). If Google, Meta, or others cut AI capex, CLS revenue growth decelerates sharply. $1B capex bet compounds exposure.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#3 — 1.6T Switch Competition — Margin Erosion</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competitive · Severity: Medium-High · Probability: Medium</div><p class="risk-body">Wiwynn and Accton compete as manufacturing complexity gap may narrow at 1.6T. CLS holds 55% custom switch market and 41% of 200G+ Ethernet. "Fewer and fewer competitors can do it" — but scale production differs from prototyping.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#4 — $1B Capex Execution Risk</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Financial · Severity: Medium-High · Probability: Medium</div><p class="risk-body">5× capex increase ($201M → $1B) across 5 sites. If customer programs delay, returns compress. FCF constrained at $500M despite 37% revenue growth. Transforms asset-light EMS to capital-intensive.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#5 — Google TPU Second-Sourcing — Inventec</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competitive · Severity: High · Probability: Medium</div><p class="risk-body">January 2026 Digitimes: Inventec gaining Google L10-L11 TPU assembly. Management: "partnership has never been stronger or more integrated." But BCP dual-sourcing is standard hyperscaler practice.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#6 — Digital Native Customer Delay Risk</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Operational · Severity: Medium · Probability: Medium</div><p class="risk-body">Unnamed customer (analyst speculation: OpenAI; unconfirmed). "$multi-billion first year" (2027). Samples H2 2026. If XPU silicon delayed or customer changes timeline, 2027 expectations fall short.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#7 — Pomerantz Securities Investigation</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Legal/Governance · Severity: Medium · Probability: Low</div><p class="risk-body">Pomerantz LLP press releases Jan-Feb 2026 regarding potential securities fraud investigation. No formal complaint filed. Common following volatile price action — may not materialize.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#8 — Tariff & Trade Policy Exposure</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Regulatory · Severity: Medium · Probability: Low</div><p class="risk-body">70% production in Asia. "Substantially all tariffs expected to be recovered from customers" via contractual pass-through. Texas/Mexico expansions provide geographic hedging.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#9 — Working Capital Intensity</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Financial · Severity: Low · Probability: Medium</div><p class="risk-body">AR $2.6B and inventory $2.2B. Both growing slower than revenue (+27.5% AR vs +44% rev). DSO improving (74.8 → 66.4 days). But absolute levels require significant working capital as revenue scales toward $17B+.</p></div>
+    <div class="risk-card red"><div class="risk-header"><span class="risk-title">#10 — Insider Selling Pattern — Discretionary, No 10b5-1</span><span class="badge badge-error">RED</span></div><div class="risk-meta">Governance · Severity: Medium · Probability: High (already occurred)</div><p class="risk-body">$230M+ total insider dispositions (open-market sales + tax-withholding on vesting), NO 10b5-1 plans filed. Phillips (89% liquidation), Etienvre (repeated zero-out) were open-market Code S sales. Unusual for $30B+ market cap. CEO NOT selling in 2026 is strongest mitigating factor.</p></div>
+    <hr class="divider accent">
+    <div class="card"><h3 class="card-title">Insider Activity — Verdict: <span style="color: var(--warning);">Noteworthy, trending Concerning</span></h3><p style="font-size: 14px; color: var(--text-secondary);">~$230M+ total insider dispositions over 14 months (includes ~$100M+ Code F tax withholding + ~$130M+ Code S open-market sales). No 10b5-1 plans filed per Form 4 XML. Two post-earnings clusters (Feb 2025: ~$134M; Feb 2026: ~$97.7M). CEO Mionis: ~$71.3M in 2025, did NOT sell in 2026. CCS President Phillips: $49.0M, liquidated 89% of position. CFO Chawla: sold to zero in Feb 2025; ~99K shares post-2026 vesting (no open-market sales in 2026). Only open-market purchase: Director Koellner 6,000 shares ($2.05M).</p></div>
+    <div class="card"><h3 class="card-title">Correlated Risk Cluster</h3><p style="font-size: 14px; color: var(--text-secondary);">Risks #1 (customer concentration), #2 (AI capex deceleration), and #5 (TPU second-sourcing) are correlated — a hyperscaler capex cut would reduce CLS revenue while giving Google leverage to pursue second sources, compounding concentration impact. Risks #4 (capex execution) and #2 are also correlated — capex returns depend on sustained customer demand. A correlated event would likely fire Kill Criteria #1 and #2 simultaneously.</p></div>
+  </div>
+
+  <!-- CHECKLIST A -->
+  <div class="section" id="checkA">
+    <div class="section-header"><span class="section-num">A</span><h2 class="section-title">Procedural Checklist A — Document Inventory</h2></div>
+    <div class="card">
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-K annual filings: FY2025, FY2024</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-Q quarterly filings: Q1-Q3 2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Press releases: Q4 2024 through Q4 2025 (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Earnings call transcripts: Q4 2024 through Q4 2025 (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Investor presentations: Q4 2024 through Q4 2025 (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Proxy statement / DEF 14A (June 2025)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Sell-side analyst report</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Insider activity report</div>
+      <hr class="divider"><div class="field-label">Gaps</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Q3 2024 earnings transcript (needed for Q4 2024 guidance baseline)</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Historical 10-Q filings prior to Q4 2024</div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST B -->
+  <div class="section" id="checkB">
+    <div class="section-header"><span class="section-num">B</span><h2 class="section-title">Procedural Checklist B — Consistency Audit</h2></div>
+    <div class="verdict-box" style="background: var(--success-subtle); border-color: var(--success);"><div><div class="verdict-label">Audit Result</div><div class="verdict-value" style="color: var(--success);">PASS</div></div><div class="verdict-score" style="color: var(--success);">14/14</div></div>
+    <div class="card">
+      <div class="field-label">Numerical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Revenue segments sum (CCS+ATS=$12,390.9M) ✓ · Share count 115.9M ✓ · FCF matches S10/S11 ✓ · Guidance consistent S15↔S6 ✓</p>
+      <div class="field-label">Narrative (6/6)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Thesis ↔ scorecard 67% ✓ · Key metric 2× weight ✓ · S5 L2 threats in S19 ✓ · Moat decay ↔ risk ✓ · S6 High ↔ S15 High ✓ · S1 model drives S10/S12 ✓</p>
+      <div class="field-label">Logical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary);">Kill triggers beyond current scores ✓ · Growth rates achievable per S8 ✓ · Catalyst timing aligns ✓ · Bear case → S16+S19 ✓</p>
+    </div>
+  </div>
+
+  <hr class="divider accent">
+  <p style="font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 24px;">Delta Framework · Celestica (CLS) Configuration Card v2 · Built March 12, 2026 · 9 fixes applied March 13, 2026<br>Anthropic Warm Humanist Design System · 19 Sections + 2 Procedural Checklists</p>
+</main>
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { navLinks.forEach(link => link.style.background = ''); const id = entry.target.id; const al = document.querySelector(`.nav-link[href="#${id}"]`); if (al) al.style.background = 'rgba(196, 123, 90, 0.12)'; } });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => { link.addEventListener('click', () => { document.querySelector('.sidebar').classList.remove('open'); }); });
+</script>
+</body>
+</html>

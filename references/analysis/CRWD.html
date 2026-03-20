@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrowdStrike (CRWD) — Configuration Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C47B5A;
+    --primary-hover: #B06A4A;
+    --primary-subtle: rgba(196, 123, 90, 0.12);
+    --secondary: #7D8C6E;
+    --secondary-subtle: rgba(125, 140, 110, 0.12);
+    --accent: #8B8FC7;
+    --accent-subtle: rgba(139, 143, 199, 0.12);
+    --bg: #FAF7F4;
+    --bg-alt: #F5F0EB;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EAE2;
+    --text-primary: #2D2824;
+    --text-secondary: #6B5F54;
+    --text-tertiary: #9A8E82;
+    --border: #E8E0D5;
+    --border-strong: #D1C7B8;
+    --border-subtle: #F0EAE2;
+    --success: #6B8C5A;
+    --success-subtle: rgba(107, 140, 90, 0.12);
+    --warning: #C49A5A;
+    --warning-subtle: rgba(196, 154, 90, 0.12);
+    --error: #C45A5A;
+    --error-subtle: rgba(196, 90, 90, 0.12);
+    --amber: #B8927A;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(45,40,36,0.05);
+    --shadow-md: 0 2px 8px rgba(45,40,36,0.06), 0 1px 2px rgba(45,40,36,0.04);
+    --shadow-lg: 0 4px 16px rgba(45,40,36,0.08), 0 2px 4px rgba(45,40,36,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 30;
+    padding: 32px 0 48px 0;
+    transition: transform 0.3s ease;
+  }
+  .sidebar-logo {
+    padding: 0 24px 24px 24px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h2 {
+    font-family: var(--font-serif);
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: -0.02em;
+  }
+  .sidebar-logo .ticker {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 0.04em; margin-top: 4px;
+  }
+  .nav-group { padding: 8px 16px; }
+  .nav-group-label {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 8px 4px;
+  }
+  .nav-link {
+    display: block; padding: 6px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .nav-link:hover { background: var(--primary-subtle); color: var(--text-primary); }
+  .nav-link .snum {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px; max-width: 960px;
+    padding: 48px 56px 120px 56px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    color: var(--primary); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 400;
+    color: var(--text-primary); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 32px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono); font-size: 22px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .stat-delta {
+    font-family: var(--font-mono); font-size: 12px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--error); }
+  .delta-neutral { color: var(--text-tertiary); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; color: var(--primary);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-size: 24px;
+    font-weight: 500; color: var(--text-primary);
+    letter-spacing: -0.02em; line-height: 1.3;
+  }
+  .section-cadence {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: var(--text-tertiary);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 15px; color: var(--text-primary); line-height: 1.6;
+  }
+  .field-value.mono {
+    font-family: var(--font-mono); font-size: 14px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-serif); font-size: 18px;
+    font-weight: 500; color: var(--text-primary);
+    margin-bottom: 12px; line-height: 1.3;
+  }
+  .card-subtitle {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--text-secondary); margin-bottom: 16px;
+  }
+
+  /* Product architecture cards */
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .product-card.core { border-left-color: var(--primary); }
+  .product-card.supporting { border-left-color: var(--secondary); }
+  .product-card.legacy { border-left-color: var(--text-tertiary); }
+  .product-card.emerging { border-left-color: var(--accent); }
+
+  .product-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: var(--font-serif); font-size: 17px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .product-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .badge-primary { background: var(--primary-subtle); color: #9C5D3F; }
+  .badge-secondary { background: var(--secondary-subtle); color: #4A5A3E; }
+  .badge-accent { background: var(--accent-subtle); color: #6B6FA9; }
+  .badge-success { background: var(--success-subtle); color: #4A6B3A; }
+  .badge-warning { background: var(--warning-subtle); color: #8B6B3A; }
+  .badge-error { background: var(--error-subtle); color: #9C3A3A; }
+  .badge-neutral { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  /* Risk severity dots */
+  .severity-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .dot-red { background: var(--error); }
+  .dot-yellow { background: var(--warning); }
+  .dot-green { background: var(--success); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 20px; font-size: 14px;
+  }
+  .data-table thead th {
+    font-family: var(--font-sans); font-size: 11px;
+    font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding: 10px 12px; text-align: left;
+  }
+  .data-table thead th.num { text-align: right; }
+  .data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .data-table tbody td.num {
+    font-family: var(--font-mono); font-size: 13px;
+    text-align: right; white-space: nowrap;
+  }
+  .data-table tbody td.label-cell {
+    font-weight: 500; color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(196, 123, 90, 0.04);
+  }
+  .data-table tbody tr:last-child td { border-bottom: 1px solid var(--border-strong); }
+
+  /* ── RISK CARDS ── */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+  }
+  .risk-card.red { border-left: 4px solid var(--error); }
+  .risk-card.yellow { border-left: 4px solid var(--warning); }
+  .risk-card.green { border-left: 4px solid var(--success); }
+  .risk-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+  }
+  .risk-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .risk-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .risk-body {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .risk-watch {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ── CALLOUT / FLAG ── */
+  .callout {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0; padding: 14px 18px;
+    margin: 16px 0; font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: var(--warning-subtle);
+  }
+  .callout.danger {
+    border-left-color: var(--error);
+    background: var(--error-subtle);
+  }
+  .callout.success {
+    border-left-color: var(--success);
+    background: var(--success-subtle);
+  }
+  .callout strong { color: var(--text-primary); }
+
+  /* ── SCENARIO BARS ── */
+  .scenario-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    margin-bottom: 10px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .scenario-bar.bull { border-left: 4px solid var(--success); }
+  .scenario-bar.base { border-left: 4px solid var(--primary); }
+  .scenario-bar.bear { border-left: 4px solid var(--error); }
+  .scenario-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; min-width: 50px;
+  }
+  .scenario-value {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 500; min-width: 110px;
+  }
+  .scenario-prob {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .scenario-desc {
+    font-size: 13px; color: var(--text-secondary); flex: 1;
+  }
+
+  /* ── SCORECARD ── */
+  .score-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-metric {
+    flex: 1; font-size: 14px; color: var(--text-primary);
+  }
+  .score-weight {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); min-width: 40px; text-align: center;
+  }
+  .score-badge {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; min-width: 40px; text-align: center;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .score-plus { background: var(--success-subtle); color: #4A6B3A; }
+  .score-minus { background: var(--error-subtle); color: #9C3A3A; }
+  .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+  /* ── KILL CRITERION ── */
+  .kill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .kill-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .kill-num {
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; color: var(--primary);
+  }
+  .kill-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary); flex: 1;
+    margin-left: 10px;
+  }
+  .kill-action {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 4px;
+  }
+  .kill-reduce { background: var(--warning-subtle); color: #8B6B3A; }
+  .kill-exit { background: var(--error-subtle); color: #9C3A3A; }
+  .kill-reassess { background: var(--accent-subtle); color: #6B6FA9; }
+
+  .kill-trigger {
+    font-size: 14px; color: var(--text-primary); margin-bottom: 8px;
+    padding: 10px 14px; background: var(--bg-alt); border-radius: 6px;
+    line-height: 1.5;
+  }
+  .kill-gap {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); margin-top: 8px;
+  }
+
+  /* ── ANALYST CARDS ── */
+  .analyst-card {
+    display: flex; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+  .analyst-rating {
+    writing-mode: vertical-lr; text-orientation: mixed;
+    font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 0;
+    display: flex; align-items: center;
+  }
+  .analyst-body { flex: 1; }
+  .analyst-name {
+    font-family: var(--font-serif); font-size: 15px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .analyst-firm {
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+  }
+  .analyst-pt {
+    font-family: var(--font-mono); font-size: 16px;
+    font-weight: 600; color: var(--primary); margin-bottom: 6px;
+  }
+  .analyst-thesis {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: var(--primary);
+    transition: width 0.6s ease;
+  }
+
+  /* ── GRID HELPERS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .divider.accent { border-top: 2px solid var(--primary); }
+
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 20px 0;
+  }
+  .verdict-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .verdict-value {
+    font-family: var(--font-serif); font-size: 20px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .verdict-score {
+    font-family: var(--font-mono); font-size: 28px;
+    font-weight: 600; color: var(--primary);
+    margin-left: auto;
+  }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+  }
+  .check-icon { font-size: 16px; line-height: 1.4; }
+  .check-pass .check-icon { color: var(--success); }
+  .check-fail .check-icon { color: var(--error); }
+  .check-open .check-icon { color: var(--text-tertiary); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none; position: fixed; top: 16px; left: 16px;
+    z-index: 40; width: 44px; height: 44px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px;
+    color: var(--text-primary);
+  }
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 48px 24px 120px; }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .hero h1 { font-size: 30px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; max-width: 100%; }
+  }
+</style>
+</head><body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<nav class="sidebar">
+  <div class="sidebar-logo"><h2>CrowdStrike Holdings</h2><div class="ticker">NASDAQ: CRWD &nbsp;·&nbsp; Configuration Card</div></div>
+  <div class="nav-group"><div class="nav-group-label">Foundation (Phase 1)</div>
+    <a class="nav-link" href="#s1"><span class="snum">S1</span> Identity & Classification</a><a class="nav-link" href="#s2"><span class="snum">S2</span> Thesis & Key Metric</a><a class="nav-link" href="#s3"><span class="snum">S3</span> Product Architecture</a><a class="nav-link" href="#s4"><span class="snum">S4</span> Revenue Stream Map</a><a class="nav-link" href="#s5"><span class="snum">S5</span> Competitive Context & Moat</a><a class="nav-link" href="#s6"><span class="snum">S6</span> Management Team</a><a class="nav-link" href="#s7"><span class="snum">S7</span> Acceleration Table</a></div>
+  <div class="nav-group"><div class="nav-group-label">Financials (Phase 2)</div>
+    <a class="nav-link" href="#s8"><span class="snum">S8</span> Income Statement</a><a class="nav-link" href="#s9"><span class="snum">S9</span> Balance Sheet</a><a class="nav-link" href="#s10"><span class="snum">S10</span> Cash Flow & Quality</a><a class="nav-link" href="#s11"><span class="snum">S11</span> Scorecard</a><a class="nav-link" href="#s12"><span class="snum">S12</span> Tier 2 Metrics</a></div>
+  <div class="nav-group"><div class="nav-group-label">Catalysts & Sell-Side (Phase 3)</div>
+    <a class="nav-link" href="#s13"><span class="snum">S13</span> Catalyst Pipeline</a><a class="nav-link" href="#s14"><span class="snum">S14</span> Sell-Side Landscape</a><a class="nav-link" href="#s15"><span class="snum">S15</span> Guidance & Credibility</a></div>
+  <div class="nav-group"><div class="nav-group-label">Risk & Valuation (Phase 4)</div>
+    <a class="nav-link" href="#s16"><span class="snum">S16</span> Kill Criteria</a><a class="nav-link" href="#s17"><span class="snum">S17</span> Valuation Framework</a><a class="nav-link" href="#s18"><span class="snum">S18</span> Pre-Earnings Baseline</a><a class="nav-link" href="#s19"><span class="snum">S19</span> Risk Inventory</a></div>
+  <div class="nav-group"><div class="nav-group-label">Audit</div>
+    <a class="nav-link" href="#checkA">Checklist A — Documents</a><a class="nav-link" href="#checkB">Checklist B — Consistency</a></div>
+</nav>
+<main class="main">
+  <div class="hero">
+    <div class="hero-eyebrow">Delta Framework · Configuration Card</div>
+    <h1>CrowdStrike Holdings, Inc.</h1>
+    <div class="hero-meta">NASDAQ: CRWD &nbsp;·&nbsp; Cybersecurity / SaaS<br>Built: March 11, 2026 &nbsp;·&nbsp; Most recent quarter: Q4 FY2026 (ended Jan 31, 2026)<br>19 sections + 2 procedural checklists</div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-label">FY2026 Revenue</div><div class="stat-value">$4.81B</div><div class="stat-delta delta-up">+21.7% YoY</div></div>
+      <div class="stat-card"><div class="stat-label">Net New ARR (Q4)</div><div class="stat-value">$331M</div><div class="stat-delta delta-up">Record quarter</div></div>
+      <div class="stat-card"><div class="stat-label">Scorecard</div><div class="stat-value">89%</div><div class="stat-delta delta-up">Clearly improving</div></div>
+      <div class="stat-card"><div class="stat-label">Expected Value</div><div class="stat-value">$480</div><div class="stat-delta delta-up">+9.8% from $437</div></div>
+    </div>
+  </div>
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header"><span class="section-num">S1</span><h2 class="section-title">Identity & Model Classification</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div><div class="field-group"><div class="field-label">Ticker</div><div class="field-value mono">CRWD</div></div><div class="field-group"><div class="field-label">Company</div><div class="field-value">CrowdStrike Holdings, Inc.</div></div><div class="field-group"><div class="field-label">Sector</div><div class="field-value">Cybersecurity / SaaS</div></div></div>
+      <div><div class="field-group"><div class="field-label">Position Established</div><div class="field-value mono">[To be confirmed]</div></div><div class="field-group"><div class="field-label">Model Type</div><div class="field-value">Capital-light SaaS platform — AI-native cybersecurity, subscription-based, single lightweight sensor architecture delivering 33 cloud modules</div></div></div>
+    </div>
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Normal Operating Profile</h3>
+      <p>CrowdStrike operates as a capital-light SaaS cybersecurity platform delivering 33 cloud modules through a single sensor architecture. Subscription revenue comprises ~95% of total. Normal subscription gross margins are 78-81% (non-GAAP) — each additional module has near-zero marginal cost. GAAP operating margins remain negative (-6% FY26) due to heavy SBC (~22-23% of revenue, ~$1.1B annually).</p>
+      <p>Non-GAAP operating margins are 18-25% and expanding. FCF margin is 22-29% quarterly, 26-27% annual, with Q4 seasonally strongest. SBC is the dominant earnings quality concern — annual SBC exceeds GAAP net income by >$1B.</p>
+      <hr class="divider">
+      <table class="data-table">
+        <thead><tr><th>Parameter</th><th>Setting</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">FCF conversion</td><td>FCF margin 25%+ annual (capital-light SaaS); 30%+ is FY27+ target. FCF/NI inapplicable while GAAP unprofitable</td></tr>
+          <tr><td class="label-cell">Tier 2 metrics</td><td>Net new ARR, module adoption (6+/7+/8+), dollar-based net retention rate, Falcon Flex adoption/re-Flex rate</td></tr>
+          <tr><td class="label-cell">DSO interpretation</td><td>Subscription SaaS with annual/multi-year contracts; Q4 DSO spikes from January renewals</td></tr>
+          <tr><td class="label-cell">Catalyst calendar</td><td>Fal.Con conference (Sep), quarterly ARR inflection, FedRAMP awards, M&A integration milestones</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header"><span class="section-num">S2</span><h2 class="section-title">Thesis & Key Metric</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card">
+      <h3 class="card-title">Falsifiable Thesis Statement</h3>
+      <p>CrowdStrike's Falcon platform consolidation — driven by Falcon Flex adoption ($1.69B ending ARR, 26% average ARR lift on re-Flex), expanding module adoption (50% at 6+ modules), and 115% net retention — will sustain 20%+ ARR growth and expand non-GAAP operating margin from 25% toward management's 32% target by FY2029.</p>
+      <p>At $5.25B ARR scale, CrowdStrike must generate <strong>$300M+ quarterly net new ARR</strong> to maintain this growth rate, requiring successful monetization of Charlotte AI and continued displacement of legacy point products.</p>
+      <div class="callout warn" style="margin-top: 16px;"><strong>Falsification trigger:</strong> A single quarter of net new ARR below $250M — absent a documented incident-related delay — would challenge the growth durability thesis.</div>
+      <div class="hero-meta" style="margin-top: 12px;">Date written: March 11, 2026 &nbsp;·&nbsp; Last reviewed: March 11, 2026</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">3-Sentence Bear Case</h3>
+      <p style="color: var(--error);">AI commoditization of threat analytics creates margin compression and pricing pressure on CrowdStrike's highest-growth products. Microsoft Defender's 28.6% endpoint share (IDC 2024) and zero-cost bundling erodes demand, while Palo Alto's CyberArk ($25B) and Chronosphere ($3.35B) acquisitions create a formidable identity+observability competitor. The 2× cybersecurity peer valuation premium (18-23× EV/Revenue vs ~10× peers) provides no buffer for execution missteps.</p>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--primary);">
+      <h3 class="card-title">Key Metric: Net New ARR (quarterly, $M)</h3>
+      <div class="grid-2" style="margin-bottom: 12px;">
+        <div>
+          <div class="field-label">Current Value (Q4 FY26)</div>
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--success);">$331M</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary);">Record quarter · +24% ARR YoY to $5,253M</div>
+        </div>
+        <div>
+          <div class="field-label">5-Quarter Trajectory</div>
+          <div style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary); line-height: 1.8;">$224 → $194⚑ → $221 → $265 → $331<br>FY27 Q1 guided: $249-$251M (+29-30% YoY)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header"><span class="section-num">S3</span><h2 class="section-title">Business Model & Product Architecture</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">1. Falcon Endpoint Security (EDR, XDR, NGAV)</span><div class="product-badges"><span class="badge badge-primary">Core</span><span class="badge badge-secondary">Mature / Scale</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Real-time endpoint protection via single lightweight sensor. Processes 1T+ security events/day through Threat Graph. ~18% endpoint market share vs Microsoft 28.6% (IDC 2024, published May 2025). Beachhead for entire platform.</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">2. Cloud Security (CWP, CSPM, ASPM)</span><div class="product-badges"><span class="badge badge-primary">Growth</span><span class="badge badge-secondary">Scale</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Runtime protection for cloud workloads and containers. Part of combined cloud + identity + SIEM segment exceeding $1.9B ARR (+>45% YoY). Same sensor as endpoint.</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">3. Identity Protection</span><div class="product-badges"><span class="badge badge-primary">Growth</span><span class="badge badge-secondary">Scale</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Extends sensor to detect identity-based attacks (80% of modern breaches). >$520M ARR (+>34% YoY). Acquired SGNL.AI ($637M total consideration, Feb 2026). Competes with Microsoft Entra, Okta, SailPoint.</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">4. Next-Gen SIEM & Log Management</span><div class="product-badges"><span class="badge badge-primary">Growth</span><span class="badge badge-accent">Fastest-growing</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Replaces legacy SIEM (Splunk, IBM QRadar). >$585M ARR (+>75% YoY). 7 modules now >$300M ARR. Most vulnerable to AI commoditization — LLM-based analytics could compress pricing.</p></div>
+    <div class="product-card supporting"><div class="product-header"><span class="product-name">5. Managed Detection & Response (Falcon Complete)</span><div class="product-badges"><span class="badge badge-neutral">Core</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">24/7 managed security by CrowdStrike analysts. Premium subscription tier. Higher ARPU, lower GM due to human headcount. Charlotte AI must automate Tier 1 triage for scale economics.</p></div>
+    <div class="product-card emerging"><div class="product-header"><span class="product-name">6. Charlotte AI & AI Security</span><div class="product-badges"><span class="badge badge-accent">Emerging</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Agentic AI: 11 agents deployed, ARR tripled in Q4 FY26, 6× usage growth YoY. AI Detection & Response (Pangea) saw 5× QoQ adoption. Bull case: >$500M ARR within 2-3 years. Near-100% gross margin.</p></div>
+    <div class="product-card legacy"><div class="product-header"><span class="product-name">7. Professional Services</span><div class="product-badges"><span class="badge badge-neutral">Supporting</span><span class="badge badge-neutral">~5% of Rev</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Incident response and proactive assessments. $247M FY26. 18% gross margin. Strategic entry point for Falcon platform sales.</p></div>
+  </div>
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header"><span class="section-num">S4</span><h2 class="section-title">Revenue Stream Map</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card">
+      <h3 class="card-title">FY2026 Full Year Revenue: $4,812.0M <span style="color: var(--success); font-family: var(--font-mono); font-size: 14px;">(+21.7% YoY)</span></h3>
+      <table class="data-table">
+        <thead><tr><th>Stream</th><th class="num">FY26 ($M)</th><th class="num">% Rev</th><th class="num">FY25 ($M)</th><th class="num">YoY</th><th>Thesis Role</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Subscription Revenue</td><td class="num">4,564.7</td><td class="num">94.9%</td><td class="num">3,761.5</td><td class="num" style="color:var(--success)">+21.4%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+          <tr><td class="label-cell">Professional Services</td><td class="num">247.3</td><td class="num">5.1%</td><td class="num">192.1</td><td class="num" style="color:var(--success)">+28.7%</td><td><span class="badge badge-neutral">Immaterial</span></td></tr>
+          <tr style="font-weight:600"><td>Total</td><td class="num">4,812.0</td><td class="num">100%</td><td class="num">3,953.6</td><td class="num" style="color:var(--success)">+21.7%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Quarterly Revenue Progression ($K)</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th class="num">Total</th><th class="num">Subscription</th><th class="num">Pro Svcs</th><th class="num">Sub %</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q4 FY25</td><td class="num">1,058,538</td><td class="num">1,008,316</td><td class="num">50,222</td><td class="num">95.3%</td></tr>
+          <tr><td class="label-cell">Q1 FY26</td><td class="num">1,103,434</td><td class="num">1,050,768</td><td class="num">52,666</td><td class="num">95.2%</td></tr>
+          <tr><td class="label-cell">Q2 FY26</td><td class="num">1,168,952</td><td class="num">1,102,945</td><td class="num">66,007</td><td class="num">94.4%</td></tr>
+          <tr><td class="label-cell">Q3 FY26</td><td class="num">1,234,244</td><td class="num">1,168,705</td><td class="num">65,539</td><td class="num">94.7%</td></tr>
+          <tr><td class="label-cell">Q4 FY26</td><td class="num">1,305,375</td><td class="num">1,242,265</td><td class="num">63,110</td><td class="num">95.2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card"><h3 class="card-title">ARR-to-Revenue Bridge</h3><p style="font-size: 14px; color: var(--text-secondary);">Ending ARR FY26: $5,253M → Subscription revenue FY26: $4,565M. ARR exceeds revenue by ~15% ($688M gap) reflecting annualized run rate vs ratable recognition, Falcon Flex phased deployment, and CCP program deferrals. Total deferred revenue: $4,753M.</p><p style="font-size: 13px; color: var(--text-tertiary); margin-top: 8px;">No individual customer >10%. 88,000+ organizations. International: 33% of FY26 revenue ($1,595M, +26% YoY).</p></div>
+  </div>
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header"><span class="section-num">S5</span><h2 class="section-title">Competitive Context & Moat Evidence</h2><span class="section-cadence">landscape: material change / moat: quarterly</span></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Microsoft (Defender / Security) — 28.6% endpoint share (IDC 2024)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Bundling endpoint security at zero incremental cost with E5/A5. Copilot for Security competes with Charlotte AI. Most persistent competitive threat — doesn't need best-in-class detection to win cost-conscious buyers.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Palo Alto Networks (PANW / Cortex XSIAM)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Platform consolidation directly competing with Falcon. XSIAM competes with Next-Gen SIEM. Completed CyberArk acquisition ($25B, Feb 2026) — now has identity security at scale. Chronosphere ($3.35B, Jan 2026) adds AI-era observability. PANW is building a broad platform rivaling Falcon's multi-module approach.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">SentinelOne</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Lower-cost endpoint alternative targeting mid-market. Purple AI as competing agentic security. ~$819M FY25 revenue vs CRWD $4.8B. Standalone competitor; PANW acquisition speculation has not materialized.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">AI-native / LLM-based Security Startups</span><span class="badge badge-success">L1 → L2 if demonstrated</span></div><p class="risk-body">AI commoditization of threat analytics. If LLMs replicate SIEM correlation at lower cost, next-gen SIEM pricing power erodes. CrowdStrike counter: "In cybersecurity, you simply cannot have a hallucination" — proprietary data advantage over generic LLMs.</p></div>
+    <hr class="divider accent">
+    <div class="card">
+      <h3 class="card-title">Moat Evidence Grid</h3>
+      <p style="font-size: 14px; margin-bottom: 12px;"><strong>Moat type:</strong> Platform switching costs + Proprietary data network effects (Threat Graph: 1T+ events/day)</p>
+      <div class="field-label" style="margin-bottom: 8px">Evidence Now</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">97% gross retention (among highest in enterprise SaaS) · 115% net retention (expanding from 112%) · 50% at 6+ modules · Falcon Flex: 23% re-Flex within 7 months, 26% avg ARR lift · 88,000+ organizations · 33 modules on single sensor</div>
+      <div class="field-label" style="margin-bottom: 8px">Moat Limitations</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">Endpoint share (18%) trails Microsoft (28.6%, IDC 2024) · SBC at 22.8% of revenue · July 19 incident risk inherent in single-sensor model · Cloud security market fragmented · Moat strongest at endpoint, weaker in adjacent markets (SIEM, identity)</div>
+      <div class="verdict-box"><div><div class="verdict-label">Quarterly Moat Pulse</div><div class="verdict-value">Strengthening</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Record Q4 net new ARR, net retention expanding, Falcon Flex flywheel accelerating, July 19 operationally recovered (legal/cost exposure ongoing per 10-K)</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">March 11, 2026</div></div>
+    </div>
+  </div>
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header"><span class="section-num">S6</span><h2 class="section-title">Management Team Assessment</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div class="card"><h3 class="card-title">George Kurtz — CEO & Co-founder</h3><div class="card-subtitle">13+ years tenure · Former EVP & CTO McAfee · B.S. Accounting, CPA · Age 55</div><p style="font-size: 14px; color: var(--text-secondary);">Visionary platform evangelist with deep cybersecurity domain credibility. Demonstrated crisis management post-July 19 (record Q4 net new ARR, 97% gross retention). $10B ARR target by ~FY2031 requires 14%+ CAGR — ambitious but plausible. Ownership: ~6.3M shares (2.53%).</p><div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Low on product/platform. Moderate on TAM sizing and long-term targets. Low on competitive positioning.</div></div>
+      <div class="card"><h3 class="card-title">Burt Podbere — CFO</h3><p style="font-size: 14px; color: var(--text-secondary);">Precise, methodical. Detailed forward guidance with specific ranges and M&A integration cost assumptions ($74-80M FY27). Proactively discloses headwinds (CCP impact, commission amortization change). Direct numerical answers to analysts.</p><div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Low. Reliable guidance baseline — apply sandbagging factor for credibility-adjusted expectations.</div></div>
+    </div>
+    <div class="card" style="margin-top: 4px;">
+      <h3 class="card-title">Guidance Pattern: Consistent Sandbagger (beat-and-raise every quarter FY26)</h3>
+      <table class="data-table">
+        <thead><tr><th>Quarter</th><th class="num">Rev Guided (mid)</th><th class="num">Rev Actual</th><th class="num">Beat</th><th class="num">EPS Guided</th><th class="num">EPS Actual</th><th class="num">EPS Beat</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q1 FY26</td><td class="num">$1,103.5M</td><td class="num">$1,103.4M</td><td class="num">In-line</td><td class="num">$0.65</td><td class="num">$0.73</td><td class="num" style="color:var(--success)">+$0.08</td></tr>
+          <tr><td class="label-cell">Q2 FY26</td><td class="num">$1,148.2M</td><td class="num">$1,169.0M</td><td class="num" style="color:var(--success)">+$20.8M</td><td class="num">$0.83</td><td class="num">$0.93</td><td class="num" style="color:var(--success)">+$0.10</td></tr>
+          <tr><td class="label-cell">Q3 FY26</td><td class="num">$1,213.0M</td><td class="num">$1,234.2M</td><td class="num" style="color:var(--success)">+$21.2M</td><td class="num">$0.94</td><td class="num">$0.96</td><td class="num" style="color:var(--success)">+$0.02</td></tr>
+          <tr><td class="label-cell">Q4 FY26</td><td class="num">$1,295.0M</td><td class="num">$1,305.4M</td><td class="num" style="color:var(--success)">+$10.4M</td><td class="num">$1.10</td><td class="num">$1.12</td><td class="num" style="color:var(--success)">+$0.02</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">Revenue: 3/4 beats, avg +$13.1M (+1.1%). EPS: 4/4 beats, avg +$0.055 (+6.4%). Full-year FY26 guide raised every quarter. Initial guide: $4,774.5M / $3.39 EPS → Actual: $4,812.0M / $3.73 EPS.</div>
+    </div>
+  </div>
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header"><span class="section-num">S7</span><h2 class="section-title">Cross-Quarter Acceleration Table</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th><th class="num">Q3 FY26</th><th class="num">Q4 FY26</th><th>Trend</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue ($M)</td><td class="num">$1,059</td><td class="num">$1,103</td><td class="num">$1,169</td><td class="num">$1,234</td><td class="num">$1,305</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">GAAP Gross Margin</td><td class="num">74.1%</td><td class="num">73.8%</td><td class="num">73.5%</td><td class="num">75.1%</td><td class="num">75.8%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Non-GAAP Op Margin</td><td class="num">20.5%</td><td class="num">18.2%⚑</td><td class="num">21.8%</td><td class="num">21.4%</td><td class="num">25.0%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">GAAP Op Margin</td><td class="num">-8.1%</td><td class="num">-11.3%⚑</td><td class="num">-9.7%</td><td class="num">-5.6%</td><td class="num">-0.5%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">FCF Margin</td><td class="num">22.7%</td><td class="num">25.5%</td><td class="num">24.4%</td><td class="num">24.1%</td><td class="num">28.8%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Net New ARR ($M)</td><td class="num">$224</td><td class="num">$194⚑</td><td class="num">$221</td><td class="num">$265</td><td class="num">$331</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">ARR YoY</td><td class="num">+23%</td><td class="num">+22%</td><td class="num">+20%⚑</td><td class="num">+23%</td><td class="num">+24%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">SBC % of Rev</td><td class="num">25.7%⚑</td><td class="num">23.0%</td><td class="num">24.6%⚑</td><td class="num">22.8%</td><td class="num">21.0%</td><td><span class="badge badge-success">Decel. ↓</span></td></tr>
+          <tr><td class="label-cell">Module 6+</td><td class="num">48%</td><td class="num">48%</td><td class="num">48%</td><td class="num">49%</td><td class="num">50%</td><td><span class="badge badge-secondary">Stable</span></td></tr>
+          <tr><td class="label-cell">Falcon Flex ARR ($B)</td><td class="num">—</td><td class="num">—</td><td class="num">$1.00</td><td class="num">$1.35</td><td class="num">$1.69</td><td><span class="badge badge-success">Accel.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header"><span class="section-num">S8</span><h2 class="section-title">Quarterly Income Statement Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th><th class="num">Q3 FY26</th><th class="num">Q4 FY26</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Total Revenue ($K)</td><td class="num">1,058,538</td><td class="num">1,103,434</td><td class="num">1,168,952</td><td class="num">1,234,244</td><td class="num">1,305,375</td></tr>
+          <tr><td class="label-cell">&nbsp;&nbsp;QoQ Growth</td><td class="num">—</td><td class="num">+4.2%</td><td class="num">+5.9%</td><td class="num">+5.6%</td><td class="num">+5.8%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Gross Margin (GAAP)</td><td class="num">74.1%</td><td class="num">73.8%</td><td class="num">73.5%</td><td class="num">75.1%</td><td class="num">75.8%</td></tr>
+          <tr><td class="label-cell">Op Margin (GAAP)</td><td class="num">-8.1%</td><td class="num">-11.3%</td><td class="num">-9.7%</td><td class="num">-5.6%</td><td class="num">-0.5%</td></tr>
+          <tr><td class="label-cell">Op Margin (Non-GAAP)</td><td class="num">20.5%</td><td class="num">18.2%</td><td class="num">21.8%</td><td class="num">21.4%</td><td class="num">25.0%</td></tr>
+          <tr><td class="label-cell">Net Margin (GAAP)</td><td class="num">-8.7%</td><td class="num">-10.0%</td><td class="num">-6.6%</td><td class="num">-2.8%</td><td class="num">+3.0%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">GAAP EPS (diluted)</td><td class="num">-$0.37</td><td class="num">-$0.44</td><td class="num">-$0.31</td><td class="num">-$0.14</td><td class="num">$0.15</td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$1.03</td><td class="num">$0.73</td><td class="num">$0.93</td><td class="num">$0.96</td><td class="num">$1.12</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>FY26 Annual:</strong> Revenue $4,812.0M (+21.7% YoY). GAAP NI -$162.5M (EPS -$0.65). Non-GAAP OI $1,046.5M (21.7% margin). Non-GAAP EPS $3.73. <strong>Rule of 40:</strong> 21.7% + 25.7% = 47.4 ✓</div>
+    </div>
+  </div>
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header"><span class="section-num">S9</span><h2 class="section-title">Balance Sheet Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric ($K)</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th><th class="num">Q3 FY26</th><th class="num">Q4 FY26</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Cash & equiv.</td><td class="num">4,323,295</td><td class="num">4,614,153</td><td class="num">4,972,436</td><td class="num">4,801,083</td><td class="num">5,230,125</td></tr>
+          <tr><td class="label-cell">Net cash</td><td class="num">3,579,312</td><td class="num">3,870,170</td><td class="num">4,227,965</td><td class="num">4,055,612</td><td class="num">4,484,654</td></tr>
+          <tr><td class="label-cell">Accounts receivable</td><td class="num">1,128,564</td><td class="num">808,694</td><td class="num">886,557</td><td class="num">1,013,116</td><td class="num">1,361,844</td></tr>
+          <tr><td class="label-cell">Total deferred revenue</td><td class="num">3,728,677</td><td class="num">3,771,395</td><td class="num">3,834,857</td><td class="num">4,063,250</td><td class="num">4,753,438</td></tr>
+          <tr><td class="label-cell">Total debt</td><td class="num">743,983</td><td class="num">~744,000</td><td class="num">~745,000</td><td class="num">~745,000</td><td class="num">745,471</td></tr>
+          <tr><td class="label-cell">Shareholders' equity</td><td class="num">3,318,917</td><td class="num">3,491,014</td><td class="num">3,794,691</td><td class="num">4,059,017</td><td class="num">4,472,605</td></tr>
+          <tr><td class="label-cell">Wtd-avg diluted shares (EPS, K)</td><td class="num">249,408</td><td class="num">248,432</td><td class="num">249,909</td><td class="num">251,326</td><td class="num">258,133</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top: 12px;"><strong>Deferred revenue +27.5% YoY</strong> vs revenue +21.7% — bullish: forward demand growing faster than recognized revenue. $4.75B = ~12 months visibility. Net cash expanding ($3.6B → $4.5B). Goodwill +$450M from Pangea/Onum acquisitions ($1,363M, 12% of assets). SGNL/Seraphic closed post-FYE (Feb 2026) — goodwill impact in FY27.</div>
+    </div>
+  </div>
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header"><span class="section-num">S10</span><h2 class="section-title">Earnings Quality & Cash Flow Forensics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-2">
+      <div class="card"><h3 class="card-title">Q4 FY2026 Cash Flow</h3><div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$497,869K</div></div><div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$376,363K</div></div><div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">28.8%</div></div></div>
+      <div class="card"><h3 class="card-title">FY2026 Cash Flow</h3><div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$1,612,349K</div></div><div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$1,235,274K</div></div><div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">25.7%</div></div><div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">7.7% ($370,859K)</div></div></div>
+    </div>
+    <div class="card"><h3 class="card-title">SBC & Dilution</h3><p style="font-size: 14px; color: var(--text-secondary);">FY26 SBC: $1,096,679K (22.8% of revenue). FY25: $861,391K (21.8%). Quarterly %: 25.7% → 23.0% → 24.6% → 22.8% → 21.0% — declining. Q4 wtd-avg diluted shares (EPS): 258,133K (+3.5% YoY). Shares outstanding: 253,614K (Feb 28, 2026). Buyback: $50.6M (143,801 shares @ $352 avg). $949M authorization remaining. Buyback offsets <3% of SBC issuance.</p>
+      <div class="callout warn" style="margin-top: 12px;"><strong>Per-share dilution cost: ~290 bps.</strong> Revenue grew 21.7%, revenue/share grew 18.8%. Revenue/share: $19.20 (+18.8% YoY). FCF/share: $4.93 (+13.1% YoY).</div>
+    </div>
+    <div class="card"><h3 class="card-title">DSO</h3><div style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary);">Q4 FY25: 98 → Q1: 67 → Q2: 70 → Q3: 76 → Q4 FY26: 96 days. Normal range: 67-98 (Q4 highest from year-end renewals). Q4/Q4 YoY: -2 days. Status: Stable.</div></div>
+    <div class="verdict-box"><div><div class="verdict-label">Earnings Quality Verdict</div><div class="verdict-value">Minor concerns</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">SBC at 22.8% is persistent quality concern (entire GAAP/non-GAAP gap). FCF amply covers SBC cost. GAAP/non-GAAP gap is narrowing. Not "Investigate" but not "Clean" while diluted shares grow +3.5% YoY.</div></div>
+  </div>
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header"><span class="section-num">S11</span><h2 class="section-title">Thesis-Weighted Scorecard</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <div class="score-row" style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 4px;"><span class="score-metric" style="font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Metric</span><span class="score-weight" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">WT</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Score</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Wtd</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Net New ARR</strong> — $331M record, +25% QoQ from $265M</span><span class="score-weight">2.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+2.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>ARR YoY growth</strong> — 24% Q4 vs 23% Q3, reaccelerating from 20% trough</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Non-GAAP op margin</strong> — 25.0% Q4 vs 21.4% Q3 (+360 bps)</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Revenue QoQ growth</strong> — +5.8% Q4 vs +5.6% Q3 (stable, not accelerating)</span><span class="score-weight">1.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>FCF margin</strong> — 28.8% Q4 vs 24.1% Q3 (seasonal + expanding)</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Gross margin (GAAP)</strong> — 75.8% Q4 vs 75.1% Q3 (expanding)</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Module adoption 6+</strong> — 50% Q4 vs 49% Q3 (steady improvement)</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Scorecard Result</div><div class="verdict-value">Clearly Improving</div></div><div class="verdict-score">89%</div></div>
+    <p style="font-size: 13px; color: var(--text-tertiary); text-align: center;">&gt;60% = Clearly improving &nbsp;·&nbsp; 20-60% = Mixed/stable &nbsp;·&nbsp; &lt;20% = Deterioration</p>
+    <div class="card" style="margin-top: 16px;"><h3 class="card-title">Historical Score Trajectory</h3>
+      <div style="display: flex; gap: 8px; align-items: flex-end; height: 100px; margin: 16px 0 8px;">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">0%</div><div style="width:100%;height:5px;background:var(--warning-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--warning);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--error);margin-bottom:4px;">-28%</div><div style="width:100%;height:5px;background:var(--error-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--error);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q1-26</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">33%</div><div style="width:100%;height:33px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-26</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">61%</div><div style="width:100%;height:61px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q3-26</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">89%</div><div style="width:100%;height:89px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-26</div></div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">V-shaped recovery from -28% post-outage trough (Q1 FY26) to 89% record. Three consecutive quarters of improvement. Customer retention stabilized (97% gross); 10-K notes ongoing adverse effects and expected future costs.</p>
+    </div>
+  </div>
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header"><span class="section-num">S12</span><h2 class="section-title">Tier 2 Sector-Specific Metrics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table">
+      <thead><tr><th>Metric</th><th class="num">Q4 FY26</th><th class="num">Prior</th><th class="num">YoY Δ</th><th>Signal</th></tr></thead>
+      <tbody>
+        <tr><td class="label-cell">Dollar-Based Net Retention</td><td class="num">115%</td><td class="num">112% (Q4 FY25)</td><td class="num" style="color:var(--success)">+300 bps</td><td><span class="badge badge-success">GREEN</span></td></tr>
+        <tr><td class="label-cell">Falcon Flex Ending ARR</td><td class="num">$1.69B</td><td class="num">$1.35B (Q3)</td><td class="num" style="color:var(--success)">New metric</td><td><span class="badge badge-success">GREEN</span></td></tr>
+        <tr><td class="label-cell">Module Adoption 8+</td><td class="num">24%</td><td class="num">24% (Q3)</td><td class="num" style="color:var(--success)">+300 bps YoY</td><td><span class="badge badge-neutral">MONITORING</span></td></tr>
+        <tr><td class="label-cell">Rule of 40</td><td class="num">47.4</td><td class="num">—</td><td class="num" style="color:var(--success)">Above threshold</td><td><span class="badge badge-success">GREEN</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header"><span class="section-num">S13</span><h2 class="section-title">Forward Catalyst Pipeline & Product Roadmap</h2><span class="section-cadence">material change</span></div>
+    <div class="card"><table class="data-table">
+      <thead><tr><th>Window</th><th>Event</th><th>Type</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td class="label-cell">Jun 2026</td><td>Q1 FY27 earnings — net new ARR test ($249-251M guided)</td><td>Earnings</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">Sep 2026</td><td>Fal.Con conference — Charlotte AI monetization update</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">H2 FY27</td><td>59% of FY27 net new ARR guided in second half</td><td>Earnings</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">Jan 2027</td><td>Q4 FY27 — $10B ARR path visibility test</td><td>Milestone</td><td><span class="badge badge-error">HIGH</span></td></tr>
+        <tr><td class="label-cell">Q2 FY27</td><td>SGNL.AI + Seraphic integration milestones</td><td>M&A</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+        <tr><td class="label-cell">Ongoing</td><td>DOJ/SEC inquiry resolution</td><td>Regulatory</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+        <tr><td class="label-cell">Ongoing</td><td>Share repurchase program ($949M remaining)</td><td>Cap Alloc</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header"><span class="section-num">S14</span><h2 class="section-title">Sell-Side Landscape</h2><span class="section-cadence">material change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Total Analysts</div><div class="stat-value">43</div></div>
+      <div class="stat-card"><div class="stat-label">Consensus PT</div><div class="stat-value">~$505</div><div class="stat-delta delta-up">+16% from $437</div></div>
+      <div class="stat-card"><div class="stat-label">Ratings</div><div class="stat-value" style="font-size: 16px;">67% Buy · 33% Hold · 0% Sell</div></div>
+    </div>
+    <div style="font-size: 11px; color: var(--text-tertiary); margin: -12px 0 16px 0; font-family: var(--font-mono);">Source: Internal sell-side landscape report (CRWD_Sellside_Analyst_Report.md), as of March 11, 2026. Covers 43 analysts with post-Q4 FY26 ratings. Public aggregators vary: MarketBeat (~49 analysts, ~$506 avg PT), MarketWatch (~57 ratings, ~$492 avg PT). Differences reflect inclusion criteria, timing of stale ratings, and coverage of non-fundamental quant services.</div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--text-secondary);">MP</div><div class="analyst-body"><div class="analyst-name">Peter Weed — Bernstein</div><div class="analyst-pt">PT: $368 <span style="font-size: 12px; color: var(--text-tertiary);">(lowest on Street)</span></div><p class="analyst-thesis">Valuation discipline — CRWD at 2× peer multiples (18-23× EV/Rev vs ~10×) with no buffer. AI commoditization risk compresses pricing on SIEM/Charlotte AI. Strongest bear framework.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">Buy</div><div class="analyst-body"><div class="analyst-name">Fatima Boolani — Citi</div><div class="analyst-pt">PT: $525</div><p class="analyst-thesis">Falcon Flex adoption flywheel. Models re-Flex rate acceleration, 26% avg ARR lift, 7-month re-Flex cycle. Best quantification of Flex unit economics ($86M flagship deal). Most useful for validating GTM model.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--text-secondary);">Hold</div><div class="analyst-body"><div class="analyst-name">Brad Zelnick — Deutsche Bank</div><div class="analyst-pt">PT: $440</div><p class="analyst-thesis">Balanced risk-reward. Good company, expensive stock. Flags Microsoft bundling (28.6% share, IDC 2024), DOGE budget scrutiny, cybersecurity spending deceleration. Best framework for position sizing.</p></div></div>
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card" style="border-left: 3px solid var(--success);"><h3 class="card-title">Notable Bull Case</h3><p style="font-size: 14px;">Falcon Flex creates self-reinforcing flywheel: deploy → use 5-10+ modules → re-Flex with 26% ARR lift → expand to 15-25+ modules. 115% net retention, Charlotte AI as >$500M incremental ARR. Margin path to 32% by FY2029. Fastest pure-play cybersecurity platform at scale.</p></div>
+      <div class="card" style="border-left: 3px solid var(--error);"><h3 class="card-title">Notable Bear Case</h3><p style="font-size: 14px;">AI commoditization (Claude Code Security triggered ~10% selloff). Microsoft Defender 28.6% endpoint share (IDC 2024) with zero-cost bundling. PANW+CyberArk identity platform. 2× peer premium with zero buffer. KeyBanc: cyber budgets growing slower than IT in 2026. 164 insider sales in 6 months, zero purchases for 3+ years.</p></div>
+    </div>
+  </div>
+  <!-- S15 -->
+  <div class="section" id="s15">
+    <div class="section-header"><span class="section-num">S15</span><h2 class="section-title">Management Guidance & Credibility</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <h3 class="card-title">FY2027 Forward Expectations — Raw vs. Credibility-Adjusted</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Guide Midpoint</th><th class="num">Adjusted</th><th class="num">Street</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q1 FY27 Revenue</td><td class="num">$1,362.0M<br><span style="font-size:11px;color:var(--text-tertiary)">($1,360–$1,364)</span></td><td class="num" style="color:var(--primary);font-weight:600">$1,377.0M</td><td class="num">~$1,370-1,380M</td></tr>
+          <tr><td class="label-cell">FY27 Revenue</td><td class="num">$5,898.0M<br><span style="font-size:11px;color:var(--text-tertiary)">($5,868–$5,928)</span></td><td class="num" style="color:var(--primary);font-weight:600">$5,963.0M</td><td class="num">~$5,920-5,960M</td></tr>
+          <tr><td class="label-cell">FY27 Non-GAAP EPS</td><td class="num">$4.84<br><span style="font-size:11px;color:var(--text-tertiary)">($4.78–$4.90)</span></td><td class="num" style="color:var(--primary);font-weight:600">$5.15</td><td class="num">~$4.78-4.90</td></tr>
+          <tr><td class="label-cell">FY27 Ending ARR</td><td class="num">$6,491M<br><span style="font-size:11px;color:var(--text-tertiary)">($6,466–$6,516)</span></td><td class="num" style="color:var(--primary);font-weight:600">$6,556M</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">Sandbagging factors: Revenue ×1.011, EPS ×1.064, ARR ×1.01 (conservative). Revenue sandbagging is modest; EPS sandbagging is significant (+6.4%). CrowdStrike guides revenue tightly but builds margin cushion.</div>
+    </div>
+    <div class="card"><h3 class="card-title">Commitment Tracker — Delivery Rate: 100%</h3>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> FY26 revenue/EPS beats — DELIVERED (beat-and-raise every quarter)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Outage recovery — DELIVERED (97% gross retention, record Q4 net new ARR)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Op margin expansion — DELIVERED (18.2% → 25.0%)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Falcon Flex >1,600 customers — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Net new ARR reacceleration — DELIVERED ($194M → $331M record)</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> FY27 FCF margin ≥30% — OPEN (Podbere, Q4 FY26)</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> $10B ARR by ~FY2031 — OPEN (requires ~14% CAGR from $5.25B)</div>
+    </div>
+    <div class="card"><h3 class="card-title">Capital Allocation Score</h3><div class="progress-track"><div class="progress-fill" style="width: 65%;"></div></div><div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--primary);">13 / 20</div>
+      <table class="data-table" style="margin-top: 12px;">
+        <thead><tr><th>Category</th><th class="num">Score</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">High-return investing</td><td class="num">3/5</td><td>R&D 29% driving 33-module platform; not yet GAAP-profitable</td></tr>
+          <tr><td class="label-cell">Acquisitions</td><td class="num">3/5</td><td>SGNL ($637M total) + Seraphic ($341M total) — strategic; integration unproven</td></tr>
+          <tr><td class="label-cell">Equity management</td><td class="num" style="color:var(--error)">2/5</td><td>SBC 22.8%; $1B buyback but only $51M deployed (5%)</td></tr>
+          <tr><td class="label-cell">Balance sheet</td><td class="num">5/5</td><td>$4.5B net cash, $745M fixed-rate debt, ample liquidity</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Management Credibility</div><div class="verdict-value">High</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">100% delivery rate on FY26 commitments. Beat-and-raise every quarter. Apply +1.1% revenue / +6.4% EPS sandbagging factors. Key risk: DOJ/SEC inquiry with no updates since Q1 FY26.</div></div>
+  </div>
+  <!-- S16 -->
+  <div class="section" id="s16">
+    <div class="section-header"><span class="section-num">S16</span><h2 class="section-title">Kill Criteria</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="callout danger" style="margin-bottom: 24px;"><strong>RULE:</strong> If ANY criterion fires, execute the pre-committed action. Do not rationalize. Do not wait for "one more quarter of data."</div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#1</span><span class="kill-title">Net New ARR Deceleration</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Net new ARR &lt;$250M for 2 consecutive quarters, excluding documented CCP or acquisition timing shifts.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Net new ARR &lt;$200M in ANY single quarter → execute immediately</div><div class="kill-gap">Gap: Current $331M → trigger $250M (24% decline from current)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#2</span><span class="kill-title">Net Retention Collapse</span><span class="kill-action kill-reduce">REDUCE 75%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Dollar-based net retention &lt;110% for 2 consecutive annual disclosures.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Net retention &lt;105% in ANY disclosure → execute immediately</div><div class="kill-gap">Gap: Current 115% → trigger 110% (500 bps margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#3</span><span class="kill-title">Margin Reversal</span><span class="kill-action kill-reassess">REASSESS</span></div><div class="kill-trigger"><strong>Trigger:</strong> Non-GAAP op margin &lt;18% for 2 consecutive quarters AND GAAP op margin deteriorating &gt;500 bps QoQ for 2 consecutive quarters.</div><div class="kill-gap">Gap: Non-GAAP 25.0% → 18.0% (700 bps); GAAP -0.5% (improving)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#4</span><span class="kill-title">Management Credibility Failure</span><span class="kill-action kill-reduce">REDUCE 50% / EXIT</span></div><div class="kill-trigger"><strong>Trigger:</strong> Revenue miss &gt;5% below guided midpoint OR two consecutive guidance misses OR DOJ/SEC enforcement action/restatement.</div><div class="kill-gap">Gap: Current 100% delivery rate, avg beat +$13.1M. 5% miss on Q1 FY27 = $68M shortfall.</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#5</span><span class="kill-title">Competitive Displacement</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Gross retention &lt;93% for 2 consecutive annual disclosures OR endpoint share decline &gt;3pp in any 12-month period.</div><div class="kill-gap">Gap: Gross retention 97% → 93% (4pp); endpoint share ~18% (stable)</div></div>
+  </div>
+  <!-- S17 -->
+  <div class="section" id="s17">
+    <div class="section-header"><span class="section-num">S17</span><h2 class="section-title">Valuation Framework</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Market Cap</div><div class="stat-value">~$110.7B</div></div>
+      <div class="stat-card"><div class="stat-label">Enterprise Value</div><div class="stat-value">~$106.2B</div></div>
+      <div class="stat-card"><div class="stat-label">EV/Rev (Trailing)</div><div class="stat-value">22.1×</div><div class="stat-delta delta-neutral">Peers ~10×</div></div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Scenario Analysis (3-Year Horizon → FY2029)</h3>
+      <div class="scenario-bar bull"><div class="scenario-label" style="color: var(--success);">Bull</div><div class="scenario-value" style="color: var(--success);">$550-$600</div><div class="scenario-prob">20%</div><div class="scenario-desc">Revenue ~$9.4B, 25%+ CAGR, Charlotte AI >$500M ARR, op margin ≥30%, net retention expanding above 115%.</div></div>
+      <div class="scenario-bar base"><div class="scenario-label" style="color: var(--primary);">Base</div><div class="scenario-value" style="color: var(--primary);">$470-$520</div><div class="scenario-prob">55%</div><div class="scenario-desc">Revenue ~$8.5B, 20-22% CAGR, op margin 28-30%, net retention ≥112%, net new ARR >$1.2B annually.</div></div>
+      <div class="scenario-bar bear"><div class="scenario-label" style="color: var(--error);">Bear</div><div class="scenario-value" style="color: var(--error);">$350-$390</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$7.5B, growth 16-18%, AI compresses SIEM pricing, Microsoft bundling wins cost-conscious enterprises.</div></div>
+      <div class="verdict-box" style="margin-top: 16px;"><div><div class="verdict-label">Expected Value</div><div class="verdict-value" style="font-family: var(--font-mono);">$480</div></div><div style="font-size: 14px; color: var(--success); font-weight: 500;">+9.8% upside from $437 &nbsp;·&nbsp; Annualized (3-yr): +3.2%</div></div>
+    </div>
+    <div class="card"><h3 class="card-title">Premium Decomposition</h3><p style="font-size: 14px; color: var(--text-secondary);">At $437 ($106.2B EV): ~$65B for current business ($4.81B × ~13.5× peer EV/Rev), ~$41B premium for growth (24% ARR), platform quality (97% retention), and optionality (Charlotte AI, international, cloud/identity/SIEM expansion). Premium as % of EV: ~39%.</p></div>
+    <div class="card"><h3 class="card-title">Valuation Gap: <span style="color: var(--primary);">Fair</span></h3>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border);">1. Net new ARR ≥$250M/quarter through FY27<br>2. Falcon Flex re-Flex rate ≥15% with ≥20% ARR lift<br>3. Non-GAAP op margin ≥28% by FY28<br>4. Net retention ≥112%<br>5. Charlotte AI disclosed as tracked ARR metric</div>
+      <div class="callout" style="margin-top: 16px;"><strong>Position sizing:</strong> Fair value at moderate conviction — core holding weight. Increase to overweight on pullback to $380-$400 (bear scenario floor). Thin expected value (+3.2% annualized).</div>
+    </div>
+  </div>
+  <!-- S18 -->
+  <div class="section" id="s18">
+    <div class="section-header"><span class="section-num">S18</span><h2 class="section-title">Rolling Quarterly Baseline & Pre-Earnings Checklist</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card"><h3 class="card-title">Q4 FY2026 Snapshot</h3><div class="grid-3">
+      <div><div class="field-label">Revenue</div><div class="field-value mono">$1,305.4M (+23.3% YoY)</div></div>
+      <div><div class="field-label">NG Op Margin</div><div class="field-value mono">25.0%</div></div>
+      <div><div class="field-label">FCF</div><div class="field-value mono">$376.4M (28.8% margin)</div></div>
+      <div><div class="field-label">DSO</div><div class="field-value mono">96 days (seasonal)</div></div>
+      <div><div class="field-label">Net Cash</div><div class="field-value mono">$4,485M</div></div>
+      <div><div class="field-label">Wtd-Avg Diluted (EPS)</div><div class="field-value mono">258.1M</div></div>
+    </div></div>
+    <div class="card"><h3 class="card-title">Pre-Earnings Checklist for Q1 FY2027</h3><div class="card-subtitle">Earnings date: June 2026 (estimated)</div>
+      <div class="field-label" style="margin-top: 16px;">What the Market Needs to Hear</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">1. Net new ARR ≥$249M (+29% YoY) — proves growth sustainability at $5.25B base<br>2. Falcon Flex re-Flex rate ≥20% with ending ARR approaching $2B<br>3. GAAP operating income positive — confirms Q4 FY26 was profitability inflection</div>
+      <div class="field-label">Thresholds</div>
+      <table class="data-table"><thead><tr><th>Metric</th><th class="num">Expectation</th><th class="num">Concern</th><th class="num">Kill Threshold</th></tr></thead><tbody>
+        <tr><td class="label-cell">Revenue</td><td class="num">$1,377M (adj)</td><td class="num" style="color:var(--warning)">&lt;$1,340M</td><td class="num" style="color:var(--error)">&gt;5% miss or 2Q misses (KC #4)</td></tr>
+        <tr><td class="label-cell">NG Op Margin</td><td class="num">18-25%</td><td class="num" style="color:var(--warning)">&lt;18%</td><td class="num" style="color:var(--error)">&lt;18% for 2Q (KC #3)</td></tr>
+        <tr><td class="label-cell">Net New ARR</td><td class="num">$249-251M</td><td class="num" style="color:var(--warning)">Deceleration</td><td class="num" style="color:var(--error)">&lt;$250M 2Q / &lt;$200M any Q</td></tr>
+      </tbody></table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Conviction Level</div><div class="verdict-value">Medium-High</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Hold. Core holding weight — not concentrated given thin expected value (+3.2% annualized). Increase on pullback to $380-$400.</div></div>
+  </div>
+  <!-- S19 -->
+  <div class="section" id="s19">
+    <div class="section-header"><span class="section-num">S19</span><h2 class="section-title">Risk Inventory</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-3" style="margin-bottom: 20px; text-align: center;">
+      <div class="stat-card" style="border-left: 3px solid var(--error);"><div class="stat-label">RED Risks</div><div class="stat-value" style="color: var(--error);">0</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--warning);"><div class="stat-label">YELLOW Risks</div><div class="stat-value" style="color: var(--warning);">7</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--success);"><div class="stat-label">GREEN Risks</div><div class="stat-value" style="color: var(--success);">5</div></div>
+    </div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#1 — AI Commoditization of Threat Analytics</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competition/Structural · Severity: High · Probability: Medium</div><p class="risk-body">LLMs may commoditize SOC analytics, compressing pricing on next-gen SIEM (>75% YoY) and Charlotte AI. Anthropic's Claude Code Security announcement triggered ~10% selloff. Counter: proprietary Threat Graph data cannot be replicated by general-purpose models.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#2 — Microsoft Defender Bundling</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competition · Severity: Medium-High · Probability: High</div><p class="risk-body">28.6% endpoint share (IDC 2024, up from 25.8% in 2023) vs CRWD ~18%, bundling at zero incremental cost for E5/A5. Copilot for Security competes with Charlotte AI. July 19 provided narrative advantage to "good enough" positioning.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#3 — Valuation Multiple Compression</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Market/Valuation · Severity: Medium-High · Probability: Medium</div><p class="risk-body">~2× peer multiples (18-23× EV/Rev vs ~10×). Stock fell ~30% from Nov 2025 high ($567) to Mar 2026 ($437) despite strong fundamentals. Expected value shows only +3.2% annualized — thin margin of safety.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#4 — SBC & Dilution Drag</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Financial Quality · Severity: Medium · Probability: High</div><p class="risk-body">SBC $1,097M (22.8% of revenue) — entire GAAP loss vs non-GAAP profit gap. Diluted shares +3.5% YoY. Dilution cost: ~290 bps. $1B buyback authorized but only $51M deployed (~5%).</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#5 — July 19 Incident Recurrence</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Operational · Severity: High · Probability: Low</div><p class="risk-body">July 19 crashed 8.5M Windows devices. New staged deployment framework implemented. Recovery successful: 97% gross retention, record Q4 net new ARR. Probability reduced but non-zero given single-sensor architecture.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#6 — DOJ/SEC Inquiry</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Regulatory/Legal · Severity: High · Probability: Low</div><p class="risk-body">DOJ and SEC requested information on revenue recognition, ARR reporting, July 19 outage. No updates since Q1 FY26. Securities class action dismissed Jan 2026. No Wells notice disclosed.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#7 — PANW Platform Expansion (CyberArk + Chronosphere)</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Competition · Severity: Medium · Probability: Low</div><p class="risk-body">PANW completed CyberArk ($25B, identity) Feb 2026 and Chronosphere ($3.35B, observability) Jan 2026. Combined platform now competes on identity (vs Falcon Identity) and AI observability. Prior PANW-SentinelOne acquisition speculation has been superseded — PANW's M&A focus is clearly elsewhere. Downgraded from YELLOW: competitive threat is real but less acute than a direct endpoint consolidation would have been.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#8 — Regulatory / Single-Vendor Concentration</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Regulatory · Severity: Medium · Probability: Low</div><p class="risk-body">Post-July 19, regulators may limit single-vendor penetration of critical infrastructure. EU DORA targets security providers. Could structurally cap TAM.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#9 — Key Person Risk (George Kurtz)</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Operational/Governance · Severity: Medium-High · Probability: Low</div><p class="risk-body">"Highly dependent on the services of George Kurtz" (10-K). Co-founder, public brand, platform architect. Voting power collapsed from ~31% (2022) to ~2.5% (2025) after dual-class sunset.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#10 — Delta Air Lines Litigation</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Legal · Severity: Medium · Probability: Low</div><p class="risk-body">$500M+ lawsuit related to July 19. CrowdStrike: contractual liability capped in "single-digit millions." Securities class action dismissed Jan 2026. Consumer class actions active.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#11 — Cybersecurity Budget Deceleration</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Macro/Demand · Severity: Medium · Probability: Medium</div><p class="risk-body">KeyBanc CIO survey: cybersecurity budgets growing slower than overall IT in 2026 — departure from "security-at-all-costs" era. Federal budgets face DOGE scrutiny. Charlotte AI FedRAMP provides partial offset.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#12 — M&A Integration Risk (SGNL/Seraphic)</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Operational · Severity: Medium · Probability: Low</div><p class="risk-body">$978M total consideration (cash + replacement equity): SGNL ($637M, identity) + Seraphic ($341M, browser), Feb 2026. CFO guided $74-80M FY27 integration costs and "minimal organic ARR contribution." Goodwill now $1,363M (12% of assets).</p></div>
+    <hr class="divider accent">
+    <div class="card"><h3 class="card-title">Insider Activity — Verdict: Neutral-Negative</h3><p style="font-size: 14px; color: var(--text-secondary);">$310-320M total insider sales over 12 months, zero open-market purchases. Last buy: Dec 2022. 60-70% of sales are RSU vesting tax-withholding. Discretionary flags: Kurtz $24.9M sale 2 days before layoff; Sentonas $22.7M Oct 2025 blocks; Kurtz Feb 2026 Form 144 for up to $105M. Sector-wide pattern (PANW, ZS similar); no conviction buying in 3+ years is directionally negative.</p></div>
+    <div class="card"><h3 class="card-title">Correlated Risk Cluster</h3><p style="font-size: 14px; color: var(--text-secondary);">Risks #1 (AI commoditization), #3 (valuation compression), and #7 (PANW platform expansion) are correlated — AI commoditization would compress multiples sector-wide, and PANW's identity+observability platform build-out combined with AI feature parity creates simultaneous competitive, pricing, and valuation pressure. Kill criterion #1 (net new ARR deceleration) is the leading indicator for all three risks firing together.</p></div>
+  </div>
+  <!-- CHECKLIST A -->
+  <div class="section" id="checkA">
+    <div class="section-header"><span class="section-num">A</span><h2 class="section-title">Procedural Checklist A — Document Inventory</h2></div>
+    <div class="card">
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-K annual filings: FY2026, FY2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-Q quarterly filings: Q3 FY25, Q1-Q3 FY26</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Earnings call transcripts: Q4 FY25 through Q4 FY26 (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Investor presentations: Q4 FY25 through Q4 FY26 (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Proxy statement / DEF 14A</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Sell-side analyst report</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Insider activity report</div>
+      <hr class="divider"><div class="field-label">Gaps</div>
+      <div class="check-item" style="color: var(--text-tertiary);"><span class="check-icon">—</span> Q4 10-Qs: not filed (covered by annual 10-K per SEC rules)</div>
+      <div class="check-item" style="color: var(--text-tertiary);"><span class="check-icon">—</span> Q1/Q2 FY25 10-Qs: not sourced (exist on EDGAR, outside 5-quarter build window)</div>
+    </div>
+  </div>
+  <!-- CHECKLIST B -->
+  <div class="section" id="checkB">
+    <div class="section-header"><span class="section-num">B</span><h2 class="section-title">Procedural Checklist B — Consistency Audit</h2></div>
+    <div class="verdict-box" style="background: var(--success-subtle); border-color: var(--success);"><div><div class="verdict-label">Audit Result</div><div class="verdict-value" style="color: var(--success);">PASS</div></div><div class="verdict-score" style="color: var(--success);">14/14</div></div>
+    <div style="font-size: 12px; color: var(--text-tertiary); margin: -8px 0 12px 0;">Re-verified March 12, 2026 after corrections: FCF (company-reported definition), FY26 EPS ($3.73), goodwill attribution (Pangea/Onum), Kurtz age, document inventory wording, diluted shares label (wtd-avg EPS basis), endpoint share (IDC 2024: MSFT 28.6%), PANW risk reframed (CyberArk/Chronosphere, not S1), sell-side sourced, July 19 language softened, guidance ranges added.</div>
+    <div class="card">
+      <div class="field-label">Numerical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Revenue segments sum ($1,242,265 + $63,110 = $1,305,375) ✓ · Wtd-avg diluted shares 258,133K ✓ · FCF $376,363K ✓ · Guidance internally consistent ✓</p>
+      <div class="field-label">Narrative (6/6)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Thesis ↔ scorecard (89%) ✓ · Key metric 2× weight ✓ · S5 threats in S19 ✓ · Moat decay ↔ risk ✓ · S6 ↔ S15 consistent ✓ · Capital-light model drives S10/S12 ✓</p>
+      <div class="field-label">Logical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary);">Kill thresholds beyond current scores ✓ · ~22% CAGR achievable given FY26 21% ✓ · Catalyst timing aligns ✓ · Bear case mapped to S16+S19 ✓</p>
+    </div>
+  </div>
+  <hr class="divider accent">
+  <p style="font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 24px;">Delta Framework · CrowdStrike (CRWD) Configuration Card · Built March 11, 2026<br>Anthropic Warm Humanist Design System · 19 Sections + 2 Procedural Checklists</p>
+</main>
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { navLinks.forEach(link => link.style.background = ''); const id = entry.target.id; const al = document.querySelector(`.nav-link[href="#${id}"]`); if (al) al.style.background = 'rgba(196, 123, 90, 0.12)'; } });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => { link.addEventListener('click', () => { document.querySelector('.sidebar').classList.remove('open'); }); });
+</script>
+</body>
+</html>

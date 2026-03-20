@@ -1,0 +1,609 @@
+/* ═══════════════════════════════════════════════════
+   Alpha by TheVixGuy — Dark Theme
+   Colors from /references/styles/dark_theme.json
+   ═══════════════════════════════════════════════════ */
+
+/* ── CSS Custom Properties (Dark Theme) ── */
+:root {
+  --primary: #D4956F;
+  --primary-hover: #DFA882;
+  --primary-active: #C88660;
+  --primary-subtle: rgba(212, 149, 111, 0.10);
+  --secondary: #92A87E;
+  --secondary-subtle: rgba(146, 168, 126, 0.10);
+  --accent: #A3A4D4;
+  --accent-subtle: rgba(163, 164, 212, 0.10);
+  --bg: #1A1714;
+  --bg-alt: #211E1A;
+  --surface: #2B2621;
+  --surface-alt: #342E28;
+  --surface-raised: #3D362F;
+  --text-primary: #EDE8E3;
+  --text-secondary: #B5A99D;
+  --text-tertiary: #988C82;
+  --text-inverse: #1A1714;
+  --border: rgba(237, 232, 227, 0.08);
+  --border-strong: rgba(237, 232, 227, 0.15);
+  --border-subtle: rgba(237, 232, 227, 0.05);
+  --success: #82B86E;
+  --success-subtle: rgba(130, 184, 110, 0.12);
+  --warning: #D4AE6E;
+  --warning-subtle: rgba(212, 174, 110, 0.12);
+  --error: #D47272;
+  --error-subtle: rgba(212, 114, 114, 0.12);
+  --amber: #B8A898;
+
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+  --shadow-sm: 0 1px 3px rgba(10, 8, 6, 0.25);
+  --shadow-md: 0 2px 8px rgba(10, 8, 6, 0.30), 0 1px 2px rgba(10, 8, 6, 0.20);
+  --shadow-lg: 0 4px 16px rgba(10, 8, 6, 0.35), 0 2px 4px rgba(10, 8, 6, 0.20);
+}
+
+/* ── Base Resets ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* ═══════════════════════════════════════════════════
+   Site Header
+   ═══════════════════════════════════════════════════ */
+
+.site-header {
+  border-bottom: 1px solid var(--border-strong);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.site-header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.site-logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.site-logo-brand {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.site-nav a {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.site-nav a:hover {
+  color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════════════════
+   Landing Page
+   ═══════════════════════════════════════════════════ */
+
+.landing {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+}
+
+.landing h1 {
+  font-family: var(--font-serif);
+  font-size: 42px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.landing-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 720px;
+  margin-bottom: 48px;
+}
+
+.ticker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.ticker-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+  display: block;
+}
+.ticker-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.ticker-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ticker-symbol {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.ticker-quarter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  background: var(--surface-alt);
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.ticker-company {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.ticker-sector {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.ticker-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════
+   Ticker Nav Bar (Analysis Pages)
+   ═══════════════════════════════════════════════════ */
+
+.ticker-nav {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ticker-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 4px;
+}
+
+.ticker-nav-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  padding: 8px 14px;
+  margin: 4px 0;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.ticker-nav-btn:hover {
+  color: var(--text-primary);
+  background: var(--surface);
+}
+.ticker-nav-btn.active {
+  color: var(--primary);
+  background: var(--primary-subtle);
+}
+
+/* ═══════════════════════════════════════════════════
+   Breadcrumb
+   ═══════════════════════════════════════════════════ */
+
+.breadcrumb {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px 0;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+.breadcrumb a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--text-primary);
+}
+.breadcrumb-sep {
+  margin: 0 8px;
+  color: var(--text-tertiary);
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════════════
+   Section Navigation (Horizontal Sticky Tabs)
+   ═══════════════════════════════════════════════════ */
+
+.section-nav {
+  position: sticky;
+  top: 64px;
+  z-index: 20;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row 1: Phase tabs */
+.section-nav-phases {
+  display: flex;
+  gap: 4px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-nav-phase-btn {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  padding: 6px 12px;
+  margin: 4px 0;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+}
+.section-nav-phase-btn:hover {
+  color: var(--text-primary);
+  background: var(--surface);
+}
+.section-nav-phase-btn.active {
+  color: var(--primary);
+  background: var(--primary-subtle);
+}
+
+/* Row 2: Section tabs for active phase */
+.section-nav-sections {
+  display: flex;
+  padding: 3px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.section-nav-sections::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  padding: 6px 12px;
+  margin: 4px 0;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.section-nav-num {
+  margin-right: 4px;
+  opacity: 0.5;
+}
+.section-nav-btn:hover {
+  color: var(--text-primary);
+  background: var(--surface);
+}
+.section-nav-btn.active {
+  color: var(--primary);
+  background: var(--primary-subtle);
+}
+.section-nav-btn.active .section-nav-num {
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════
+   Freshness Indicator
+   ═══════════════════════════════════════════════════ */
+
+.freshness {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 0 0 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.01em;
+}
+
+/* ═══════════════════════════════════════════════════
+   Analysis Content Wrapper
+   ═══════════════════════════════════════════════════ */
+
+.analysis-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.analysis-content > div {
+  max-width: 960px;
+}
+
+.analysis-content p {
+  margin-bottom: 12px;
+}
+
+/* Offset scroll targets so sticky header + section nav don't cover them */
+.analysis-content [id^="s"],
+.analysis-content [id^="check"] {
+  scroll-margin-top: 168px;
+}
+
+/* Override .main margin-left (no sidebar in site context) */
+.analysis-content .main {
+  margin-left: 0;
+  max-width: 960px;
+  padding: 48px 0 40px 0;
+}
+
+/* ── Dark theme overrides for hardcoded analysis colors ── */
+
+/* Badge text colors (light→dark) */
+.analysis-content .badge-primary { color: #D4956F; }
+.analysis-content .badge-secondary { color: #92A87E; }
+.analysis-content .badge-accent { color: #A3A4D4; }
+.analysis-content .badge-success { color: #82B86E; }
+.analysis-content .badge-warning { color: #D4AE6E; }
+.analysis-content .badge-error { color: #D47272; }
+.analysis-content .badge-neutral {
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  border-color: var(--border-strong);
+}
+
+/* Score colors */
+.analysis-content .score-plus { background: var(--success-subtle); color: #82B86E; }
+.analysis-content .score-minus { background: var(--error-subtle); color: #D47272; }
+.analysis-content .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+/* Kill criteria action badges */
+.analysis-content .kill-reduce { background: var(--warning-subtle); color: #D4AE6E; }
+.analysis-content .kill-exit { background: var(--error-subtle); color: #D47272; }
+.analysis-content .kill-reassess { background: var(--accent-subtle); color: #A3A4D4; }
+
+/* ═══════════════════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════════════════ */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  padding: 40px 24px;
+}
+
+.site-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.footer-copyright {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+.footer-disclaimer {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+  max-width: 800px;
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════
+   Analysis Content — Table Overflow Fix (all sizes)
+   ═══════════════════════════════════════════════════ */
+
+.analysis-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ═══════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .landing h1 {
+    font-size: 30px;
+  }
+  .landing {
+    padding: 40px 16px 60px;
+  }
+  .ticker-grid {
+    grid-template-columns: 1fr;
+  }
+  .analysis-content .main {
+    padding: 32px 0 40px 0;
+  }
+  .analysis-content {
+    padding: 0 16px 60px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header-inner {
+    padding: 0 16px;
+    height: 56px;
+  }
+  .section-nav {
+    top: 56px;
+  }
+  .site-nav {
+    gap: 12px;
+  }
+  .site-nav a {
+    font-size: 13px;
+  }
+
+  /* Section nav — compact on mobile */
+  .section-nav-phases {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .section-nav-phases::-webkit-scrollbar {
+    display: none;
+  }
+  .section-nav-phases,
+  .section-nav-sections {
+    padding: 2px 0;
+  }
+  .section-nav-phase-btn {
+    padding: 5px 10px;
+    margin: 3px 0;
+  }
+  .section-nav-btn {
+    padding: 5px 10px;
+    margin: 3px 0;
+  }
+
+  /* Ticker nav — tighter padding */
+  .ticker-nav-inner {
+    padding: 0 16px;
+  }
+  .ticker-nav-btn {
+    padding: 6px 10px;
+  }
+
+  /* Landing page — tighter mobile layout */
+  .ticker-card {
+    padding: 20px;
+  }
+  .ticker-symbol {
+    font-size: 18px;
+  }
+  .ticker-company {
+    font-size: 15px;
+  }
+
+  /* Footer — tighter */
+  .site-footer {
+    padding: 32px 16px;
+  }
+
+  /* Hero stats — single column on phones */
+  .analysis-content .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hero heading — smaller on mobile */
+  .analysis-content .hero h1 {
+    font-size: 24px;
+  }
+
+  /* Content padding — parent already has 16px */
+  .analysis-content .main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Scroll offset — recalculated for compact nav */
+  .analysis-content [id^="s"],
+  .analysis-content [id^="check"] {
+    scroll-margin-top: 148px;
+  }
+}
+
+/* ── Print ── */
+@media print {
+  .site-header, .ticker-nav, .site-footer, .section-nav {
+    display: none;
+  }
+  body {
+    background: white;
+    color: #2D2824;
+  }
+}

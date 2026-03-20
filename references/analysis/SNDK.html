@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandisk Corporation (SNDK) — Configuration Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C47B5A;
+    --primary-hover: #B06A4A;
+    --primary-subtle: rgba(196, 123, 90, 0.12);
+    --secondary: #7D8C6E;
+    --secondary-subtle: rgba(125, 140, 110, 0.12);
+    --accent: #8B8FC7;
+    --accent-subtle: rgba(139, 143, 199, 0.12);
+    --bg: #FAF7F4;
+    --bg-alt: #F5F0EB;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EAE2;
+    --text-primary: #2D2824;
+    --text-secondary: #6B5F54;
+    --text-tertiary: #9A8E82;
+    --border: #E8E0D5;
+    --border-strong: #D1C7B8;
+    --border-subtle: #F0EAE2;
+    --success: #6B8C5A;
+    --success-subtle: rgba(107, 140, 90, 0.12);
+    --warning: #C49A5A;
+    --warning-subtle: rgba(196, 154, 90, 0.12);
+    --error: #C45A5A;
+    --error-subtle: rgba(196, 90, 90, 0.12);
+    --amber: #B8927A;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(45,40,36,0.05);
+    --shadow-md: 0 2px 8px rgba(45,40,36,0.06), 0 1px 2px rgba(45,40,36,0.04);
+    --shadow-lg: 0 4px 16px rgba(45,40,36,0.08), 0 2px 4px rgba(45,40,36,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 30;
+    padding: 32px 0 48px 0;
+    transition: transform 0.3s ease;
+  }
+  .sidebar-logo {
+    padding: 0 24px 24px 24px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h2 {
+    font-family: var(--font-serif);
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: -0.02em;
+  }
+  .sidebar-logo .ticker {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 0.04em; margin-top: 4px;
+  }
+  .nav-group { padding: 8px 16px; }
+  .nav-group-label {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 8px 4px;
+  }
+  .nav-link {
+    display: block; padding: 6px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .nav-link:hover { background: var(--primary-subtle); color: var(--text-primary); }
+  .nav-link .snum {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px; max-width: 960px;
+    padding: 48px 56px 120px 56px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    color: var(--primary); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 400;
+    color: var(--text-primary); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 32px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono); font-size: 22px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .stat-delta {
+    font-family: var(--font-mono); font-size: 12px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--error); }
+  .delta-neutral { color: var(--text-tertiary); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; color: var(--primary);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-size: 24px;
+    font-weight: 500; color: var(--text-primary);
+    letter-spacing: -0.02em; line-height: 1.3;
+  }
+  .section-cadence {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: var(--text-tertiary);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 15px; color: var(--text-primary); line-height: 1.6;
+  }
+  .field-value.mono {
+    font-family: var(--font-mono); font-size: 14px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-serif); font-size: 18px;
+    font-weight: 500; color: var(--text-primary);
+    margin-bottom: 12px; line-height: 1.3;
+  }
+  .card-subtitle {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--text-secondary); margin-bottom: 16px;
+  }
+
+  /* Product architecture cards */
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .product-card.core { border-left-color: var(--primary); }
+  .product-card.supporting { border-left-color: var(--secondary); }
+  .product-card.legacy { border-left-color: var(--text-tertiary); }
+  .product-card.emerging { border-left-color: var(--accent); }
+
+  .product-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: var(--font-serif); font-size: 17px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .product-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .badge-primary { background: var(--primary-subtle); color: #9C5D3F; }
+  .badge-secondary { background: var(--secondary-subtle); color: #4A5A3E; }
+  .badge-accent { background: var(--accent-subtle); color: #6B6FA9; }
+  .badge-success { background: var(--success-subtle); color: #4A6B3A; }
+  .badge-warning { background: var(--warning-subtle); color: #8B6B3A; }
+  .badge-error { background: var(--error-subtle); color: #9C3A3A; }
+  .badge-neutral { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  /* Risk severity dots */
+  .severity-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .dot-red { background: var(--error); }
+  .dot-yellow { background: var(--warning); }
+  .dot-green { background: var(--success); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 20px; font-size: 14px;
+  }
+  .data-table thead th {
+    font-family: var(--font-sans); font-size: 11px;
+    font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding: 10px 12px; text-align: left;
+  }
+  .data-table thead th.num { text-align: right; }
+  .data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .data-table tbody td.num {
+    font-family: var(--font-mono); font-size: 13px;
+    text-align: right; white-space: nowrap;
+  }
+  .data-table tbody td.label-cell {
+    font-weight: 500; color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(196, 123, 90, 0.04);
+  }
+  .data-table tbody tr:last-child td { border-bottom: 1px solid var(--border-strong); }
+
+  /* ── RISK CARDS ── */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+  }
+  .risk-card.red { border-left: 4px solid var(--error); }
+  .risk-card.yellow { border-left: 4px solid var(--warning); }
+  .risk-card.green { border-left: 4px solid var(--success); }
+  .risk-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+  }
+  .risk-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .risk-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .risk-body {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .risk-watch {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ── CALLOUT / FLAG ── */
+  .callout {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0; padding: 14px 18px;
+    margin: 16px 0; font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: var(--warning-subtle);
+  }
+  .callout.danger {
+    border-left-color: var(--error);
+    background: var(--error-subtle);
+  }
+  .callout.success {
+    border-left-color: var(--success);
+    background: var(--success-subtle);
+  }
+  .callout strong { color: var(--text-primary); }
+
+  /* ── SCENARIO BARS ── */
+  .scenario-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    margin-bottom: 10px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .scenario-bar.bull { border-left: 4px solid var(--success); }
+  .scenario-bar.base { border-left: 4px solid var(--primary); }
+  .scenario-bar.bear { border-left: 4px solid var(--error); }
+  .scenario-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; min-width: 50px;
+  }
+  .scenario-value {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 500; min-width: 110px;
+  }
+  .scenario-prob {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .scenario-desc {
+    font-size: 13px; color: var(--text-secondary); flex: 1;
+  }
+
+  /* ── SCORECARD ── */
+  .score-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-metric {
+    flex: 1; font-size: 14px; color: var(--text-primary);
+  }
+  .score-weight {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); min-width: 40px; text-align: center;
+  }
+  .score-badge {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; min-width: 40px; text-align: center;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .score-plus { background: var(--success-subtle); color: #4A6B3A; }
+  .score-minus { background: var(--error-subtle); color: #9C3A3A; }
+  .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+  /* ── KILL CRITERION ── */
+  .kill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .kill-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .kill-num {
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; color: var(--primary);
+  }
+  .kill-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary); flex: 1;
+    margin-left: 10px;
+  }
+  .kill-action {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 4px;
+  }
+  .kill-reduce { background: var(--warning-subtle); color: #8B6B3A; }
+  .kill-exit { background: var(--error-subtle); color: #9C3A3A; }
+  .kill-reassess { background: var(--accent-subtle); color: #6B6FA9; }
+
+  .kill-trigger {
+    font-size: 14px; color: var(--text-primary); margin-bottom: 8px;
+    padding: 10px 14px; background: var(--bg-alt); border-radius: 6px;
+    line-height: 1.5;
+  }
+  .kill-gap {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); margin-top: 8px;
+  }
+
+  /* ── ANALYST CARDS ── */
+  .analyst-card {
+    display: flex; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+  .analyst-rating {
+    writing-mode: vertical-lr; text-orientation: mixed;
+    font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 0;
+    display: flex; align-items: center;
+  }
+  .analyst-body { flex: 1; }
+  .analyst-name {
+    font-family: var(--font-serif); font-size: 15px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .analyst-firm {
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+  }
+  .analyst-pt {
+    font-family: var(--font-mono); font-size: 16px;
+    font-weight: 600; color: var(--primary); margin-bottom: 6px;
+  }
+  .analyst-thesis {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: var(--primary);
+    transition: width 0.6s ease;
+  }
+
+  /* ── GRID HELPERS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .divider.accent { border-top: 2px solid var(--primary); }
+
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 20px 0;
+  }
+  .verdict-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .verdict-value {
+    font-family: var(--font-serif); font-size: 20px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .verdict-score {
+    font-family: var(--font-mono); font-size: 28px;
+    font-weight: 600; color: var(--primary);
+    margin-left: auto;
+  }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+  }
+  .check-icon { font-size: 16px; line-height: 1.4; }
+  .check-pass .check-icon { color: var(--success); }
+  .check-fail .check-icon { color: var(--error); }
+  .check-open .check-icon { color: var(--text-tertiary); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none; position: fixed; top: 16px; left: 16px;
+    z-index: 40; width: 44px; height: 44px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px;
+    color: var(--text-primary);
+  }
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 48px 24px 120px; }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .hero h1 { font-size: 30px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h2>Sandisk Corporation</h2>
+    <div class="ticker">NASDAQ: SNDK &nbsp;·&nbsp; Configuration Card</div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Foundation (Phase 1)</div>
+    <a class="nav-link" href="#s1"><span class="snum">S1</span> Identity & Classification</a>
+    <a class="nav-link" href="#s2"><span class="snum">S2</span> Thesis & Key Metric</a>
+    <a class="nav-link" href="#s3"><span class="snum">S3</span> Product Architecture</a>
+    <a class="nav-link" href="#s4"><span class="snum">S4</span> Revenue Stream Map</a>
+    <a class="nav-link" href="#s5"><span class="snum">S5</span> Competitive Context & Moat</a>
+    <a class="nav-link" href="#s6"><span class="snum">S6</span> Management Team</a>
+    <a class="nav-link" href="#s7"><span class="snum">S7</span> Acceleration Table</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Financials (Phase 2)</div>
+    <a class="nav-link" href="#s8"><span class="snum">S8</span> Income Statement</a>
+    <a class="nav-link" href="#s9"><span class="snum">S9</span> Balance Sheet</a>
+    <a class="nav-link" href="#s10"><span class="snum">S10</span> Cash Flow & Quality</a>
+    <a class="nav-link" href="#s11"><span class="snum">S11</span> Scorecard</a>
+    <a class="nav-link" href="#s12"><span class="snum">S12</span> Tier 2 Metrics</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Catalysts & Sell-Side (Phase 3)</div>
+    <a class="nav-link" href="#s13"><span class="snum">S13</span> Catalyst Pipeline</a>
+    <a class="nav-link" href="#s14"><span class="snum">S14</span> Sell-Side Landscape</a>
+    <a class="nav-link" href="#s15"><span class="snum">S15</span> Guidance & Credibility</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Risk & Valuation (Phase 4)</div>
+    <a class="nav-link" href="#s16"><span class="snum">S16</span> Kill Criteria</a>
+    <a class="nav-link" href="#s17"><span class="snum">S17</span> Valuation Framework</a>
+    <a class="nav-link" href="#s18"><span class="snum">S18</span> Pre-Earnings Baseline</a>
+    <a class="nav-link" href="#s19"><span class="snum">S19</span> Risk Inventory</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">Audit</div>
+    <a class="nav-link" href="#checkA">Checklist A — Documents</a>
+    <a class="nav-link" href="#checkB">Checklist B — Consistency</a>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Delta Framework · Configuration Card</div>
+    <h1>Sandisk Corporation</h1>
+    <div class="hero-meta">
+      NASDAQ: SNDK &nbsp;·&nbsp; Semiconductors / NAND Flash Storage<br>
+      Built: March 10, 2026 &nbsp;·&nbsp; Most recent quarter: Q2 FY2026 (ended Jan 2, 2026)<br>
+      19 sections + 2 procedural checklists &nbsp;·&nbsp; Spinoff from WDC: Feb 21, 2025
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-label">Q2 FY26 Revenue</div>
+        <div class="stat-value">$3.03B</div>
+        <div class="stat-delta delta-up">+61.3% YoY</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Datacenter Rev</div>
+        <div class="stat-value">$440M</div>
+        <div class="stat-delta delta-up">+76% YoY · +64% QoQ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Scorecard</div>
+        <div class="stat-value">100%</div>
+        <div class="stat-delta delta-up">Clearly improving</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Expected Value</div>
+        <div class="stat-value">$656</div>
+        <div class="stat-delta delta-up">+12.0% from $586</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">S1</span>
+      <h2 class="section-title">Identity & Model Classification</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="field-group"><div class="field-label">Ticker</div><div class="field-value mono">SNDK</div></div>
+        <div class="field-group"><div class="field-label">Company</div><div class="field-value">Sandisk Corporation</div></div>
+        <div class="field-group"><div class="field-label">Sector</div><div class="field-value">Semiconductors / NAND Flash Storage</div></div>
+      </div>
+      <div>
+        <div class="field-group"><div class="field-label">Position Established</div><div class="field-value mono">[To be confirmed]</div></div>
+        <div class="field-group"><div class="field-label">Model Type</div><div class="field-value">Capital-light vertically integrated NAND flash — fab partnership JV model (50/50 Kioxia manufacturing) with in-house controller design, firmware, and system integration</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Normal Operating Profile</h3>
+      <p>Sandisk is a pure-play NAND flash storage company that designs controllers and firmware in-house while sourcing substantially all flash memory wafers from Flash Ventures, a 50/50 joint venture with Kioxia Corporation operating eight manufacturing facilities in Japan (six Yokkaichi, two Kitakami).</p>
+      <p>The JV model results in capital intensity of ~5-9% capex-to-revenue vs. 30%+ for vertically integrated competitors (Micron, Samsung), producing structurally superior FCF conversion when margins normalize. Gross margins are highly cyclical, ranging from 7% (FY2023 trough) to 51% (Q2 FY2026 peak) with normalized non-GAAP range of 30-45% through a full cycle.</p>
+      <p>The NAND industry is characterized by 2-3 year boom-bust cycles driven by supply/demand imbalance, technology node transitions, and hyperscaler capital spending patterns. SNDK has no DRAM business — pure NAND exposure.</p>
+      <hr class="divider">
+      <div class="field-label" style="margin-bottom: 8px">Classification Determines</div>
+      <table class="data-table">
+        <thead><tr><th>Parameter</th><th>Setting</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">FCF conversion thresholds</td><td>60%+ of net income on annual basis (adjusted for Flash Ventures note receivable timing)</td></tr>
+          <tr><td class="label-cell">Tier 2 metrics</td><td>Enterprise SSD revenue as % of bits, inventory days, NAND bit shipment growth, ASP per GB trend, Kioxia JV utilization</td></tr>
+          <tr><td class="label-cell">DSO interpretation</td><td>Mix of OEM direct and channel/retail; DSO of 37-53 days observed across 5 quarters</td></tr>
+          <tr><td class="label-cell">Catalyst calendar</td><td>BiCS8/BiCS9 node transitions, enterprise SSD quals, HBF launch, NAND pricing cycle inflections</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top: 12px;">
+      <strong>Spinoff note:</strong> Sandisk separated from Western Digital Corporation (WDC) on February 21, 2025. Pre-spinoff (FY2025 Q2-Q3) financial statements are "combined" (carved out from WDC). Post-spinoff (FY2025 Q4 onward) are "consolidated" (standalone). YoY comparisons annotated where basis differs.
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">S2</span>
+      <h2 class="section-title">Thesis & Key Metric</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Falsifiable Thesis Statement <span style="font-size: 11px; color: var(--text-tertiary); font-weight: 400;">(card author analysis)</span></h3>
+      <p>Sandisk is transitioning from a cyclical commodity NAND supplier to a structural growth story driven by AI datacenter storage demand, with the capital-light Kioxia JV model generating superior FCF vs. vertically integrated competitors.</p>
+      <p>The thesis requires: <strong>(1)</strong> Enterprise SSD revenue growing to 25%+ of total revenue by FY2027 (from ~15% in Q2 FY2026), <strong>(2)</strong> non-GAAP gross margins sustaining above 40% through FY2027, and <strong>(3)</strong> NAND supply/demand remaining undersupplied through calendar year 2027.</p>
+      <div class="callout warn" style="margin-top: 16px;">
+        <strong>Falsification trigger:</strong> Datacenter revenue YoY growth <10% for 2 consecutive quarters, or non-GAAP GM <30% for 2 consecutive quarters would directly challenge the thesis.
+      </div>
+      <div class="hero-meta" style="margin-top: 12px;">Date written: March 10, 2026 &nbsp;·&nbsp; Last reviewed: March 10, 2026</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">3-Sentence Bear Case <span style="font-size: 11px; color: var(--text-tertiary); font-weight: 400;">(card author analysis, drawing on Citron short thesis and historical Samsung behavior)</span></h3>
+      <p style="color: var(--error);">Samsung's latent NAND capacity (bear estimates suggest multiples of prior peak) threatens demand sustainability — once HBM yields normalize, Samsung has historically responded by increasing NAND supply to pressure competitor margins, which could collapse SNDK's gross margins back to 15-25%. YMTC's expanding capacity provides additional low-cost supply in non-U.S. markets, eroding ASPs globally. The capital-light JV model becomes a constraint in downcycles because Sandisk cannot independently control capacity utilization — committed JV payments ($1.17B CY2026-2029 per 10-K) represent fixed costs that compress margins when pricing deteriorates.</p>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--primary);">
+      <h3 class="card-title">Key Metric: Datacenter Segment Revenue ($M)</h3>
+      <div class="grid-2" style="margin-bottom: 12px;">
+        <div>
+          <div class="field-label">Current Value</div>
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--success);">$440M</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary);">Q2 FY2026: 14.5% of revenue · +76% YoY · +64% QoQ</div>
+        </div>
+        <div>
+          <div class="field-label">5-Quarter Trajectory</div>
+          <div style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary); line-height: 1.8;">$250 → $197 → $213 → $269 → $440<br>CEO guidance: "substantial step up next quarter" for Q3 FY26</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">S3</span>
+      <h2 class="section-title">Business Model & Product Architecture</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+    <div class="product-card core">
+      <div class="product-header">
+        <span class="product-name">1. Enterprise SSDs (PCIe Gen 5 TLC, QLC Stargate, BiCS8)</span>
+        <div class="product-badges"><span class="badge badge-primary">Thesis-Critical</span><span class="badge badge-secondary">Emerging / Scale</span></div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">High-performance NAND storage for AI training clusters and inference deployments. 128TB and 256TB QLC SSDs reduce TCO for hyperscale data centers. PCIe Gen 5 TLC qualification completed at two hyperscalers (per Q2 FY2026 earnings call); additional hyperscaler quals on track. Stargate QLC advancing through qualification at two major hyperscalers.</p>
+      <div class="grid-2">
+        <div><span class="field-label">Q2 FY26 DC Revenue</span><br><span class="field-value mono">$440M (+76% YoY, +64% QoQ)</span></div>
+        <div><span class="field-label">DC bits % of total</span><br><span class="field-value mono">~18% (high teens range)</span></div>
+      </div>
+    </div>
+    <div class="product-card core">
+      <div class="product-header">
+        <span class="product-name">2. Client SSDs & Embedded (eMMC, UFS, Client SSDs)</span>
+        <div class="product-badges"><span class="badge badge-secondary">Core</span><span class="badge badge-neutral">~55-60% of Rev</span></div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Embedded and discrete NAND storage for PCs, smartphones, tablets, automotive (first UFS 4.1 for autonomous driving), gaming consoles. Largest revenue segment. Volume provides manufacturing absorption benefits through Flash Ventures.</p>
+    </div>
+    <div class="product-card supporting">
+      <div class="product-header">
+        <span class="product-name">3. Consumer Flash (SanDisk Brand)</span>
+        <div class="product-badges"><span class="badge badge-neutral">Cash Flow Stabilizer</span><span class="badge badge-neutral">~30% of Rev</span></div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Removable and portable storage — microSD, SD, USB flash drives, portable SSDs. Premium SanDisk brand commands retail shelf space and pricing power. ~$2.3B FY2025 revenue. Nintendo Switch 2 co-branded microSD Express product launched (per Q1 FY2026 earnings call).</p>
+    </div>
+    <div class="product-card legacy">
+      <div class="product-header">
+        <span class="product-name">4. Wafers & Components</span>
+        <div class="product-badges"><span class="badge badge-neutral">Optionality</span><span class="badge badge-neutral">Commodity</span></div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Bare NAND wafer and die sales to third-party customers. Lowest GM of all product lines. Used to manage Flash Ventures output allocation.</p>
+    </div>
+    <div class="product-card emerging">
+      <div class="product-header">
+        <span class="product-name">5. HBF (High Bandwidth Flash) — SK Hynix Partnership</span>
+        <div class="product-badges"><span class="badge badge-accent">Pre-revenue / Emerging</span></div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary);">New memory tier between HBM and SSD for AI inference KV cache. 8-16× capacity of HBM at comparable cost. HBF Consortium launched Feb 25, 2026. Memory die samples H2 2026; controller/product samples 2027.</p>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">S4</span>
+      <h2 class="section-title">Revenue Stream Map</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+    <div class="card">
+      <h3 class="card-title">FY2025 Full Year Revenue: $7,355M</h3>
+      <table class="data-table">
+        <thead><tr><th>Stream</th><th class="num">FY25 ($M)</th><th class="num">% Rev</th><th class="num">FY24 ($M)</th><th class="num">YoY</th><th>Thesis Role</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Edge (Client)</td><td class="num">4,127</td><td class="num">56.1%</td><td class="num">4,069</td><td class="num" style="color:var(--success)">+1.4%</td><td><span class="badge badge-neutral">Cash Flow Stabilizer</span></td></tr>
+          <tr><td class="label-cell">Consumer</td><td class="num">2,268</td><td class="num">30.8%</td><td class="num">2,269</td><td class="num">flat</td><td><span class="badge badge-neutral">Cash Flow Stabilizer</span></td></tr>
+          <tr><td class="label-cell">Datacenter (Cloud)</td><td class="num">960</td><td class="num">13.1%</td><td class="num">325</td><td class="num" style="color:var(--success)">+195%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+          <tr style="font-weight:600"><td>Total</td><td class="num">7,355</td><td class="num">100%</td><td class="num">6,663</td><td class="num" style="color:var(--success)">+10.4%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Quarterly Revenue Progression ($M)</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th class="num">Total</th><th class="num">DC/Cloud</th><th class="num">Edge/Client</th><th class="num">Consumer</th><th class="num">DC %</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q2 FY25</td><td class="num">1,876</td><td class="num">250</td><td class="num">1,028</td><td class="num">598</td><td class="num">13.3%</td></tr>
+          <tr><td class="label-cell">Q3 FY25</td><td class="num">1,695</td><td class="num">197</td><td class="num">927</td><td class="num">571</td><td class="num">11.6%</td></tr>
+          <tr><td class="label-cell">Q4 FY25</td><td class="num">1,901</td><td class="num">213</td><td class="num">1,103</td><td class="num">585</td><td class="num">11.2%</td></tr>
+          <tr><td class="label-cell">Q1 FY26</td><td class="num">2,308</td><td class="num">269</td><td class="num">1,387</td><td class="num">652</td><td class="num">11.7%</td></tr>
+          <tr><td class="label-cell">Q2 FY26</td><td class="num">3,025</td><td class="num">440</td><td class="num">1,678</td><td class="num">907</td><td class="num">14.5%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>Note:</strong> Q1 FY2026 is a 14-week quarter. Segment renamed from "Cloud" to "Datacenter" in Q1 FY2026. FY2025 segments use Cloud/Client/Consumer naming — figures are directly comparable.</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Revenue by Geography (FY2025)</h3>
+      <div class="grid-3">
+        <div><div class="field-label">Asia</div><div class="field-value mono">$4,457M (60.6%)</div></div>
+        <div><div class="field-label">Americas</div><div class="field-value mono">$1,618M (22.0%)</div></div>
+        <div><div class="field-label">EMEA</div><div class="field-value mono">$1,280M (17.4%)</div></div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 12px;">Customer concentration: Top 10 = 40-44% of revenue; no single customer >10% in most periods. Direction: Stable.</p>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">S5</span>
+      <h2 class="section-title">Competitive Context & Moat Evidence</h2>
+      <span class="section-cadence">landscape: material change / moat: quarterly</span>
+    </div>
+    <div class="risk-card red">
+      <div class="risk-header"><span class="risk-title">Samsung Electronics (~33% NAND share)</span><span class="badge badge-error">L3 Thesis Threatening</span></div>
+      <p class="risk-body">Samsung holds significant latent NAND capacity (analysis: believed to substantially exceed prior peak levels), currently constrained by HBM yield allocation. Samsung has historically responded to NAND supply shortages by ramping output aggressively, which could collapse industry pricing.</p>
+    </div>
+    <div class="risk-card yellow">
+      <div class="risk-header"><span class="risk-title">Micron Technology (~13% NAND share)</span><span class="badge badge-warning">L2 Investigate</span></div>
+      <p class="risk-body">Enterprise SSD direct competitor (6500 ION QLC). DRAM/HBM profits subsidize aggressive NAND pricing. Full vertical integration gives pricing flexibility SNDK lacks.</p>
+    </div>
+    <div class="risk-card green">
+      <div class="risk-header"><span class="risk-title">SK Hynix / Solidigm</span><span class="badge badge-success">L1 Monitor (partial ally via HBF)</span></div>
+      <p class="risk-body">Solidigm D7-PS1010 QLC competes with Stargate. SK Hynix HBM success could redirect investment away from NAND (net positive for SNDK pricing).</p>
+    </div>
+    <div class="risk-card green">
+      <div class="risk-header"><span class="risk-title">Kioxia Corporation (JV partner)</span><span class="badge badge-success">L1 Monitor (aligned via JV)</span></div>
+      <p class="risk-body">50/50 Flash Ventures JV — simultaneously ally and competitor. JV extended through 12/31/2034. Kioxia sells its 50% share independently and could undercut SNDK pricing.</p>
+    </div>
+    <div class="risk-card yellow">
+      <div class="risk-header"><span class="risk-title">YMTC (growing NAND share, entity-list constrained)</span><span class="badge badge-warning">L2 Investigate</span></div>
+      <p class="risk-body">China's national NAND champion. Low-cost supply in non-U.S. markets depresses global ASPs. Expanding on 232-layer node despite U.S. entity list restrictions.</p>
+    </div>
+    <hr class="divider accent">
+    <div class="card">
+      <h3 class="card-title">Moat Evidence Grid</h3>
+      <p style="font-size: 14px; margin-bottom: 12px;"><strong>Moat type:</strong> Cost advantage (Kioxia JV: 5.8% capex-to-revenue vs. Micron's 30%+) + Customer switching costs (enterprise SSD qualification cycles 6-12 months) + Brand (SanDisk #1 consumer flash)</p>
+      <div class="field-label" style="margin-bottom: 8px">Evidence Now</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+        BiCS8 technology lead: 218-layer CBA hybrid bonding, 2Tb die, ~30% lower power · Next-gen (10th gen) announced with Kioxia: 4.8 Gb/s I/O · BiCS8 at ~15% of bits as of Q1 FY26 (per press release), targeting majority of bit production exiting FY2026 (per Q1 FY2026 press release) · PCIe Gen 5 TLC qualification completed at 2 hyperscalers (per Q2 FY2026 earnings call); additional quals on track · 7,900 granted patents + 2,800 pending (per S-1/A) · JV extended through 2034
+      </div>
+      <div class="field-label" style="margin-bottom: 8px">Moat Limitations</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+        NAND flash is fundamentally a commodity — Citron Research (short report, undated): "Sandisk sells a commodity" · Kioxia JV is a partnership, not proprietary · BiCS8 lead is temporary (Samsung V-NAND 9th gen closing gap in 12-18 months) · No DRAM/HBM diversification · Consumer brand eroding as no-name brands gain shelf space
+      </div>
+      <div class="verdict-box">
+        <div><div class="verdict-label">Quarterly Moat Pulse</div><div class="verdict-value">Strengthening</div></div>
+        <div style="font-size: 13px; color: var(--text-secondary); flex: 1;">BiCS8 ramping, pricing inflecting up, datacenter revenue +64% QoQ in Q2 FY2026</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">March 10, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">S6</span>
+      <h2 class="section-title">Management Team Assessment</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="card-title">David Goeckeler — CEO & Chair</h3>
+        <div class="card-subtitle">Tenure: Jan 2025 (SNDK) · Former EVP Cisco · 30+ yrs tech leadership</div>
+        <p style="font-size: 14px; color: var(--text-secondary);">Drove WDC separation and SNDK spinoff. Combined CEO/Chair. Industry experience is networking (Cisco), not semiconductor manufacturing — deep Kioxia JV knowledge comes from CTO Ilkbahar. Holds 513,803 shares (per DEF 14A). Forward demand claims escalating: DC exabyte growth revised from mid-20% to mid-40% to high-60% across three quarters.</p>
+        <div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Moderate on forward demand claims (escalating estimates). Low on near-term execution. High on "structural shift" thesis (CEO has incentive to frame cyclical upturn as structural).</div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">Luis Visoso — CFO</h3>
+        <div class="card-subtitle">Tenure: Jul 2024 · Former AWS VP Finance, Palo Alto CFO, Unity CFO</div>
+        <p style="font-size: 14px; color: var(--text-secondary);">Measured, data-driven. Uses "we believe" qualifiers. Proactively applied negative discretion to incentive comp (reduced STI from 139.9% to 90%). New to NAND industry (joined Jul 2024) — still in learning curve on semiconductor cyclicality.</p>
+        <div class="callout" style="margin-top: 12px;"><strong>Discount factor:</strong> Low on financial guidance (conservative, precise). Moderate on "structural evolution" framing (limited NAND industry experience).</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 4px;">
+      <h3 class="card-title">Guidance Pattern: Consistent Sandbagger (escalating beat magnitude)</h3>
+      <table class="data-table">
+        <thead><tr><th>Quarter</th><th class="num">Rev Guided (mid)</th><th class="num">Rev Actual</th><th class="num">Rev Beat %</th><th class="num">GM Guided</th><th class="num">GM Actual</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q4 FY25</td><td class="num">$1,800M</td><td class="num">$1,901M</td><td class="num" style="color:var(--success)">+5.6%</td><td class="num">26.25%</td><td class="num" style="color:var(--success)">26.4%</td></tr>
+          <tr><td class="label-cell">Q1 FY26</td><td class="num">$2,150M</td><td class="num">$2,308M</td><td class="num" style="color:var(--success)">+7.3%</td><td class="num">29.0%</td><td class="num" style="color:var(--success)">29.9%</td></tr>
+          <tr><td class="label-cell">Q2 FY26</td><td class="num">$2,600M</td><td class="num">$3,025M</td><td class="num" style="color:var(--success)">+16.3%</td><td class="num">42.0%</td><td class="num" style="color:var(--success)">51.1%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">EPS beats: +$0.27, +$0.42, +$3.00 — escalating magnitude. Average revenue sandbagging factor: <strong>+9.7%</strong>. Only 3 data points — apply conservatively.</div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">S7</span>
+      <h2 class="section-title">Cross-Quarter Acceleration Table</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+    <div class="card">
+      <h3 class="card-title">5-Quarter Progression</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q2 FY25</th><th class="num">Q3 FY25</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th><th>Trend</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue ($M)</td><td class="num">1,876</td><td class="num">1,695</td><td class="num">1,901</td><td class="num">2,308</td><td class="num">3,025</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Revenue YoY</td><td class="num">+12.7%</td><td class="num">-0.6%</td><td class="num">+7.6%</td><td class="num">+22.6%</td><td class="num">+61.3%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Non-GAAP GM</td><td class="num">32.5%</td><td class="num">22.7%⚑</td><td class="num">26.4%</td><td class="num">29.9%</td><td class="num">51.1%⚑</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">GAAP OpM</td><td class="num">10.4%</td><td class="num">-110.9%⚑</td><td class="num">0.9%⚑</td><td class="num">7.6%</td><td class="num">35.2%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$1.23</td><td class="num">-$0.30⚑</td><td class="num">$0.29</td><td class="num">$1.22</td><td class="num">$6.20</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">FCF ($M)</td><td class="num">47</td><td class="num">-18⚑</td><td class="num">49</td><td class="num">438</td><td class="num">980</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">DSO (days)</td><td class="num">44</td><td class="num">53</td><td class="num">51</td><td class="num">47</td><td class="num">37</td><td><span class="badge badge-success">Improving</span></td></tr>
+          <tr><td class="label-cell">DC/Cloud rev ($M)</td><td class="num">250</td><td class="num">197</td><td class="num">213</td><td class="num">269</td><td class="num">440</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Total debt ($M)</td><td class="num">553</td><td class="num">2,000</td><td class="num">1,900</td><td class="num">1,400</td><td class="num">650</td><td><span class="badge badge-success">Improving</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>Notable (analysis):</strong> Every single metric is accelerating or improving. This pattern is consistent with cyclical recovery from NAND downturn trough (Q3 FY25) through pricing inflection to upcycle expansion. The critical question: does Q2 FY26's 51% GM represent a new structural floor or a cyclical peak?</div>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header"><span class="section-num">S8</span><h2 class="section-title">Quarterly Income Statement Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q2 FY25</th><th class="num">Q3 FY25</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Total Revenue ($M)</td><td class="num">1,876</td><td class="num">1,695</td><td class="num">1,901</td><td class="num">2,308</td><td class="num">3,025</td></tr>
+          <tr><td class="label-cell">&nbsp;&nbsp;YoY Growth</td><td class="num">+12.7%</td><td class="num">-0.6%</td><td class="num">+7.6%</td><td class="num">+22.6%</td><td class="num">+61.3%</td></tr>
+          <tr><td class="label-cell">&nbsp;&nbsp;QoQ Growth</td><td class="num">—</td><td class="num">-9.6%</td><td class="num">+12.2%</td><td class="num">+21.4%</td><td class="num">+31.1%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">GAAP Gross Margin</td><td class="num">32.3%</td><td class="num">22.5%</td><td class="num">26.2%</td><td class="num">29.8%</td><td class="num">50.9%</td></tr>
+          <tr><td class="label-cell">Non-GAAP Gross Margin</td><td class="num">32.5%</td><td class="num">22.7%</td><td class="num">26.4%</td><td class="num">29.9%</td><td class="num">51.1%</td></tr>
+          <tr><td class="label-cell">GAAP Operating Margin</td><td class="num">10.4%</td><td class="num">-110.9%</td><td class="num">0.9%</td><td class="num">7.6%</td><td class="num">35.2%</td></tr>
+          <tr><td class="label-cell">Non-GAAP Operating Margin</td><td class="num">—</td><td class="num">—</td><td class="num">5.2%</td><td class="num">10.6%</td><td class="num">37.5%</td></tr>
+          <tr><td class="label-cell">GAAP Net Margin</td><td class="num">5.5%</td><td class="num">-114.0%</td><td class="num">-1.2%</td><td class="num">4.9%</td><td class="num">26.5%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">GAAP EPS (diluted)</td><td class="num">$0.72</td><td class="num">-$13.33</td><td class="num">-$0.16</td><td class="num">$0.75</td><td class="num">$5.15</td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$1.23</td><td class="num">-$0.30</td><td class="num">$0.29</td><td class="num">$1.22</td><td class="num">$6.20</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;"><strong>Q3 FY25 GAAP distorted:</strong> -$1,830M goodwill impairment. Q1 FY26 is a 14-week quarter.</div>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header"><span class="section-num">S9</span><h2 class="section-title">Balance Sheet Progression</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q2 FY25</th><th class="num">Q3 FY25</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Cash & equiv. ($M)</td><td class="num">804</td><td class="num">1,507</td><td class="num">1,481</td><td class="num">1,442</td><td class="num">1,539</td></tr>
+          <tr><td class="label-cell">Accounts receivable</td><td class="num">904</td><td class="num">979</td><td class="num">1,068</td><td class="num">1,193</td><td class="num">1,239</td></tr>
+          <tr><td class="label-cell">Inventories</td><td class="num">2,172</td><td class="num">2,160</td><td class="num">2,079</td><td class="num">1,907</td><td class="num">1,970</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Total debt (principal)</td><td class="num">553</td><td class="num">2,000</td><td class="num">1,900</td><td class="num">1,400</td><td class="num">650</td></tr>
+          <tr><td class="label-cell">Net debt / (cash)</td><td class="num">(251)</td><td class="num">493</td><td class="num">419</td><td class="num">(42)</td><td class="num">(889)</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Shareholders' equity</td><td class="num">12,001</td><td class="num">9,161</td><td class="num">9,216</td><td class="num">9,381</td><td class="num">10,213</td></tr>
+          <tr><td class="label-cell">Diluted shares (M)</td><td class="num">145</td><td class="num">145</td><td class="num">145</td><td class="num">149</td><td class="num">156</td></tr>
+          <tr><td class="label-cell">Goodwill ($M)</td><td class="num">6,825</td><td class="num">4,997</td><td class="num">4,999</td><td class="num">4,998</td><td class="num">4,995</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top: 12px;"><strong>Rapid deleveraging:</strong> Debt reduced from $2,000M to $650M in 10 months post-spinoff. Net cash of $889M achieved ~6 months ahead of target. $1.5B undrawn revolver available.</div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header"><span class="section-num">S10</span><h2 class="section-title">Earnings Quality & Cash Flow Forensics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="card-title">Q2 FY2026 Cash Flow</h3>
+        <div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$1,019M</div></div>
+        <div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$980M</div></div>
+        <div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">32.4%</div></div>
+        <div class="field-group"><div class="field-label">FCF Conversion (vs NI)</div><div class="field-value mono" style="color: var(--success);">122%</div></div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">H1 FY2026 Cash Flow</h3>
+        <div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$1,507M</div></div>
+        <div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$1,418M</div></div>
+        <div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">26.6%</div></div>
+        <div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">1.7%</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">SBC & Dilution</h3>
+      <p style="font-size: 14px; color: var(--text-secondary);">SBC trending: 2.6% (Q2-Q4 FY25) → 2.3% (Q1 FY26) → 1.9% (Q2 FY26) — declining as % of revenue. FY2025 total: $182M (2.5% of revenue). Shares: 156M diluted weighted-average (for EPS), 148M issued / 146M outstanding (for equity value, per Q2 FY26 10-Q). YoY dilution: +7.6% (145M → 156M diluted, entirely from post-spinoff equity awards). No buyback program.</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">DSO & Per-Share Economics</h3>
+      <div class="grid-2">
+        <div>
+          <div class="field-label">DSO (Q2 FY26)</div>
+          <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600; color: var(--success);">37 days</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">Q2 FY25: 44 days (improved 7 days YoY)</div>
+        </div>
+        <div>
+          <div class="field-label">Rev/Share (Q2 FY26)</div>
+          <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600; color: var(--success);">$19.39</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">FCF/share: $6.28 (+1,863% YoY)</div>
+        </div>
+      </div>
+    </div>
+    <div class="verdict-box">
+      <div><div class="verdict-label">Earnings Quality Verdict</div><div class="verdict-value">Clean</div></div>
+      <div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Capital-light JV model: 1.3-2.6% CapEx-to-revenue. FCF conversion well above threshold. DSO at 37 days is best in series. Monitor: FCF conversion normalizing as working capital timing reverses.</div>
+    </div>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header"><span class="section-num">S11</span><h2 class="section-title">Thesis-Weighted Scorecard</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <div class="score-row" style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 4px;">
+        <span class="score-metric" style="font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Metric</span>
+        <span class="score-weight" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">WT</span>
+        <span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Score</span>
+        <span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Wtd</span>
+      </div>
+      <div class="score-row"><span class="score-metric"><strong>Datacenter revenue growth</strong> — $440M +76% YoY, +64% QoQ</span><span class="score-weight">2.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+2.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Non-GAAP GM trajectory</strong> — 51.1% vs 22.7% Q3 FY25 (+2,840 bps in 3Q)</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Revenue growth rate</strong> — +61.3% YoY, +31.1% QoQ</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>FCF conversion</strong> — 122% of NI, 32.4% FCF margin</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>DSO trend</strong> — 37 days vs 44 year-ago (-7 days)</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>SBC as % of revenue</strong> — 1.9%, down from 2.6%</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Balance sheet (net cash)</strong> — $889M net cash, debt $650M from $2,000M</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Scorecard Result</div><div class="verdict-value">Business clearly improving</div></div><div class="verdict-score">100%</div></div>
+    <p style="font-size: 13px; color: var(--text-tertiary); text-align: center;">&gt;60% = Clearly improving &nbsp;·&nbsp; 20-60% = Mixed/stable &nbsp;·&nbsp; &lt;20% = Deterioration</p>
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Historical Score Trajectory</h3>
+      <div style="display: flex; gap: 8px; align-items: flex-end; height: 100px; margin: 16px 0 8px;">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">22%</div><div style="width:100%;height:22px;background:var(--warning-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--warning);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--error);margin-bottom:4px;">-33%</div><div style="width:100%;height:5px;background:var(--error-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--error);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q3-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">56%</div><div style="width:100%;height:56px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">89%</div><div style="width:100%;height:89px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q1-26</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">100%</div><div style="width:100%;height:100px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-26</div></div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">V-shaped recovery from -33% trough (Q3 FY25, NAND downturn + goodwill impairment) to 100%. Every metric now scoring +1. Pattern consistent with cyclical recovery (analysis) — the question is sustainability, not direction.</p>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header"><span class="section-num">S12</span><h2 class="section-title">Tier 2 Sector-Specific Metrics</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q2 FY26</th><th class="num">Q1 FY26</th><th class="num">YoY Δ</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Enterprise SSD bits % of total</td><td class="num">~18%</td><td class="num">~15%</td><td class="num" style="color:var(--success)">+6-8 ppt</td><td><span class="badge badge-success">GREEN</span></td></tr>
+          <tr><td class="label-cell">ASP per GB trend (QoQ)</td><td class="num">+36%</td><td class="num">+mid-SDs</td><td class="num" style="color:var(--success)">Accel.</td><td><span class="badge badge-success">GREEN</span></td></tr>
+          <tr><td class="label-cell">Inventory days (DIO)</td><td class="num">~121</td><td class="num">~74</td><td class="num" style="color:var(--success)">~-35d vs Q2 FY25 (~156d)</td><td><span class="badge badge-success">GREEN</span></td></tr>
+          <tr><td class="label-cell">BiCS8 % of bit shipments</td><td class="num">est. 25-30%</td><td class="num">~15%</td><td class="num" style="color:var(--success)">Targeting majority by FY26 YE</td><td><span class="badge badge-success">GREEN</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header"><span class="section-num">S13</span><h2 class="section-title">Forward Catalyst Pipeline & Product Roadmap</h2><span class="section-cadence">material change</span></div>
+    <div class="card">
+      <h3 class="card-title">Catalyst Calendar (Next 12 Months)</h3>
+      <table class="data-table">
+        <thead><tr><th>Window</th><th>Event</th><th>Type</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q3 FY26 (Apr 26)</td><td>Earnings: guided $4.4-4.8B rev, $12-14 NG EPS</td><td>Earnings</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">Q3 FY26</td><td>Stargate QLC begin shipping for revenue</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">Q3-Q4 FY26</td><td>PCIe Gen 5 TLC qual at additional hyperscalers</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">Q4 FY26</td><td>BiCS8 majority of bit shipments</td><td>Technology</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">H2 CY2026</td><td>HBF memory die samples available</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">CY2027</td><td>HBF controller + product samples</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">CY2027</td><td>BiCS9 development milestones</td><td>Technology</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">FY2026</td><td>WDC disposition of remaining SNDK stake — 7,513,019 shares (5.1%) retained as of Oct 3, 2025 (per 10-Q); Feb 17, 2026 S-3ASR filed to register resale of these shares. Subsequent offerings may have reduced this figure.</td><td>Overhang</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header"><span class="section-num">S14</span><h2 class="section-title">Sell-Side Landscape</h2><span class="section-cadence">material change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Total Analysts</div><div class="stat-value">14-23</div></div>
+      <div class="stat-card"><div class="stat-label">Consensus PT</div><div class="stat-value">$515-$690</div><div class="stat-delta delta-neutral">varies by vendor</div></div>
+      <div class="stat-card"><div class="stat-label">Ratings</div><div class="stat-value" style="font-size: 16px;">Majority Buy · No Sell</div></div>
+    </div>
+    <div style="font-size: 11px; color: var(--text-tertiary); text-align: right; margin-top: -12px; margin-bottom: 12px;">Consensus varies materially by vendor: TipRanks (14 analysts, $666), StockAnalysis (16, $515), MarketBeat (23, $543). As of 2026-03-10. Original card source not identified; range shown for transparency.</div>
+    <div class="analyst-card">
+      <div class="analyst-rating" style="color: var(--success);">OP</div>
+      <div class="analyst-body">
+        <div class="analyst-name">Mark Newman — Bernstein</div><div class="analyst-pt">PT: $1,000 (post-Q2 FY26)</div>
+        <p class="analyst-thesis">Structural NAND shift thesis — AI datacenter makes NAND structurally undersupplied through CY2027+. HBF creates new category. BiCS8 cost curve drives margin expansion. Argues forward consensus EPS could be materially too low.</p>
+      </div>
+    </div>
+    <div class="analyst-card">
+      <div class="analyst-rating" style="color: var(--success);">Buy</div>
+      <div class="analyst-body">
+        <div class="analyst-name">Timothy Arcuri — UBS</div><div class="analyst-pt">PT: $1,000 (post-Q2 FY26)</div>
+        <p class="analyst-thesis">Supply-side analysis — tracks fab construction timelines, concludes no meaningful new NAND supply before CY2028. Among the highest-conviction SNDK bulls on the sell side.</p>
+      </div>
+    </div>
+    <div class="analyst-card">
+      <div class="analyst-rating" style="color: var(--text-secondary);">EW</div>
+      <div class="analyst-body">
+        <div class="analyst-name">Tom O'Malley — Barclays</div><div class="analyst-pt">PT: $750 (post-Q2 FY26)</div>
+        <p class="analyst-thesis">Valuation-constrained bull — sees strong fundamentals but trailing P/S premium vs peers is stretched. Raised PT from $385 to $750 post-Q2. If O'Malley upgrades, it signals the last valuation holdout capitulating.</p>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card" style="border-left: 3px solid var(--success);">
+        <h3 class="card-title">Notable Bull Case</h3>
+        <p style="font-size: 14px;">AI datacenter NAND demand is structural (bull thesis). Hyperscaler CapEx growth supports sustained enterprise SSD demand. Kioxia JV capital-light model supports higher FCF conversion vs vertically-integrated peers. BiCS8 cost curve drives gross margin expansion as mix shifts. Lynx Equity projects $90-100 CY2026 EPS (source: Lynx Equity research note, undated — treat as directional, not consensus).</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--error);">
+        <h3 class="card-title">Notable Bear Case (Citron Research, short report)</h3>
+        <p style="font-size: 14px;">Bear thesis: NAND is a commodity and current pricing power is cyclical, not structural. Samsung has historically responded to tight supply by flooding capacity (bear pattern, not verified for current cycle). No DRAM/HBM diversification limits margin floor. WDC sold ~$3.2B of SNDK shares post-spinoff; select institutional investors have reduced positions (per 13F filings).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- S15 -->
+  <div class="section" id="s15">
+    <div class="section-header"><span class="section-num">S15</span><h2 class="section-title">Management Guidance & Credibility</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <h3 class="card-title">Q3 FY2026 Forward Expectations — Raw vs. Credibility-Adjusted</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Raw Guidance</th><th class="num">Adjusted</th><th class="num">Street</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue</td><td class="num">$4,600M</td><td class="num" style="color:var(--primary);font-weight:600">$5,047M</td><td class="num">~$4,600M</td></tr>
+          <tr><td class="label-cell">Non-GAAP GM</td><td class="num">66.0%</td><td class="num" style="color:var(--primary);font-weight:600">69.4%</td><td class="num">—</td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$13.00</td><td class="num" style="color:var(--primary);font-weight:600">~$15-17</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">Sandbagging factors: Revenue ×1.097, GM +340 bps. <strong>Caution:</strong> Q2's +910 bps GM beat was likely a one-time pricing inflection, not a repeatable pattern. Only 3 data points.</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Commitment Tracker — Delivery Rate: 88%</h3>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Startup costs glided from $61M to ~$24M to ~$0 — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Net cash achieved ~6 months early — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Data center revenue "significant" step-up — DELIVERED (+64% QoQ)</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> Stargate QLC "shipping for revenue within next several quarters" — OPEN</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> BiCS8 at majority of bits by FY26 year-end (~15% in Q1, est. 25-30% in Q2, per Q1 FY2026 press release target) — OPEN</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> PCIe Gen 5 TLC qual at additional hyperscalers — OPEN</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> Datacenter "substantial step up" in Q3 FY26 — OPEN</div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Capital Allocation Score</h3>
+      <div class="progress-track"><div class="progress-fill" style="width: 75%;"></div></div>
+      <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--primary);">15 / 20</div>
+      <table class="data-table" style="margin-top: 12px;">
+        <thead><tr><th>Category</th><th class="num">Score</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Return on investing</td><td class="num">4/5</td><td>BiCS8 ramp + enterprise SSD quals on track. 1.7% CapEx</td></tr>
+          <tr><td class="label-cell">Equity management</td><td class="num">3/5</td><td>No buyback despite $889M net cash. 7.6% dilution structural</td></tr>
+          <tr><td class="label-cell">Balance sheet</td><td class="num">4/5</td><td>Repaid $1,350M of $2,000M TL in 10 months. Prudent</td></tr>
+          <tr><td class="label-cell">Return (redistributed)</td><td class="num">4/5</td><td>1 LTA signed; "several in queue." Kioxia JV extended to 2034</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Management Credibility</div><div class="verdict-value">High</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">3/3 beats with +9.7% avg revenue sandbagging factor. 88% commitment delivery rate. Watch: margin guidance accuracy as GM crosses 65%.</div></div>
+  </div>
+
+  <!-- S16 -->
+  <div class="section" id="s16">
+    <div class="section-header"><span class="section-num">S16</span><h2 class="section-title">Kill Criteria</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="callout danger" style="margin-bottom: 24px;"><strong>RULE:</strong> If ANY criterion fires, execute the pre-committed action. Do not rationalize. Do not wait for "one more quarter of data."</div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#1</span><span class="kill-title">Datacenter Revenue Stall</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Datacenter segment revenue YoY growth &lt;10% for 2 consecutive quarters, excluding product transition gaps.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Datacenter revenue declines YoY in ANY quarter while industry enterprise SSD demand is growing → REDUCE 50% immediately</div><div class="kill-gap">Gap: Current +76% YoY → trigger &lt;10% (6,600 bps margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#2</span><span class="kill-title">NAND Margin Collapse</span><span class="kill-action kill-reduce">REDUCE 75%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Non-GAAP gross margin &lt;30% for 2 consecutive quarters, excluding documented technology node transition costs (&gt;$50M).</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Non-GAAP GM &lt;20% in ANY single quarter → EXIT immediately</div><div class="kill-gap">Gap: Current 51.1% → trigger &lt;30% (2,110 bps margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#3</span><span class="kill-title">Kioxia JV Disruption</span><span class="kill-action kill-exit">REASSESS / EXIT</span></div><div class="kill-trigger"><strong>Trigger:</strong> Kioxia JV termination notice filed OR wafer allocation reduced &gt;20% OR underutilization charges &gt;$100M for 2 consecutive quarters at ≥90% JV utilization.</div><div class="kill-gap">Gap: JV extended through 12/31/2034, zero underutilization charges, full utilization</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#4</span><span class="kill-title">Management Credibility Failure</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Revenue below guided range low for 2 consecutive quarters.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Revenue miss &gt;15% below guided midpoint in ANY quarter → REDUCE 50% immediately</div><div class="kill-gap">Gap: Current 3/3 beats, +9.7% avg → trigger: 2 consecutive misses below guided low</div></div>
+  </div>
+
+  <!-- S17 -->
+  <div class="section" id="s17">
+    <div class="section-header"><span class="section-num">S17</span><h2 class="section-title">Valuation Framework</h2><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Market Cap</div><div class="stat-value">~$87B</div></div>
+      <div class="stat-card"><div class="stat-label">Enterprise Value</div><div class="stat-value">~$86B</div></div>
+      <div class="stat-card"><div class="stat-label">Fwd P/E (FY26)</div><div class="stat-value">~16×</div><div class="stat-delta delta-neutral">Micron ~10× fwd</div></div>
+    </div>
+    <div style="font-size: 11px; color: var(--text-tertiary); text-align: right; margin-top: -12px; margin-bottom: 12px;">Market cap based on ~148M shares outstanding × ~$586 share price; as of 2026-03-10. All valuation metrics are time-sensitive.</div>
+    <div class="card">
+      <h3 class="card-title">Scenario Analysis (3-Year Horizon → FY2028)</h3>
+      <div class="scenario-bar bull"><div class="scenario-label" style="color: var(--success);">Bull</div><div class="scenario-value" style="color: var(--success);">$900-$1,100</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$25B, 50%+ GM sustains. AI datacenter 40%+ CAGR, Samsung constrained, HBF adopted.</div></div>
+      <div class="scenario-bar base"><div class="scenario-label" style="color: var(--primary);">Base</div><div class="scenario-value" style="color: var(--primary);">$600-$750</div><div class="scenario-prob">50%</div><div class="scenario-desc">Revenue ~$20B, GM normalizes 45%. Datacenter 25-30% annual growth. Samsung moderate supply growth.</div></div>
+      <div class="scenario-bar bear"><div class="scenario-label" style="color: var(--error);">Bear</div><div class="scenario-value" style="color: var(--error);">$200-$350</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$14B, GM 25-30%. Samsung floods supply, NAND pricing collapses 40-60%, YMTC gains share.</div></div>
+      <div class="verdict-box" style="margin-top: 16px;"><div><div class="verdict-label">Expected Value</div><div class="verdict-value" style="font-family: var(--font-mono);">$656</div></div><div style="font-size: 14px; color: var(--success); font-weight: 500;">+12.0% upside from $586 &nbsp;·&nbsp; Annualized (3-yr): ~3.8%</div></div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Valuation Gap: <span style="color: var(--primary);">Fair</span></h3>
+      <p style="font-size: 14px; margin-bottom: 12px;">At $586, you are betting on:</p>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border);">
+        1. Datacenter NAND demand sustains 30%+ annual growth through FY2028<br>
+        2. Samsung does NOT flood NAND supply before CY2028<br>
+        3. Non-GAAP GM sustains >45% through FY2027 (BiCS8/9 + pricing power)<br>
+        4. Stargate QLC + hyperscaler quals convert to datacenter revenue >25% mix<br>
+        5. FY2027 EPS reaches consensus $73+ (not a cyclical peak reverting to $20-30)
+      </div>
+      <div class="callout" style="margin-top: 16px;"><strong>Position sizing:</strong> Memory stock at peak margins with embedded cyclicality risk. FCF yield 1.7% provides minimal downside cushion. Moderate position — not full conviction weight until cycle sustainability proven through Q4 FY26.</div>
+    </div>
+  </div>
+
+  <!-- S18 -->
+  <div class="section" id="s18">
+    <div class="section-header"><span class="section-num">S18</span><h2 class="section-title">Rolling Quarterly Baseline & Pre-Earnings Checklist</h2><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <h3 class="card-title">Q2 FY2026 Snapshot</h3>
+      <div class="grid-3">
+        <div><div class="field-label">Revenue</div><div class="field-value mono">$3,025M (+61.3% YoY)</div></div>
+        <div><div class="field-label">NG Gross Margin</div><div class="field-value mono">51.1%</div></div>
+        <div><div class="field-label">FCF</div><div class="field-value mono">$980M (32.4% margin)</div></div>
+        <div><div class="field-label">DSO</div><div class="field-value mono">37 days</div></div>
+        <div><div class="field-label">Diluted Shares (wtd avg)</div><div class="field-value mono">156M</div></div>
+        <div><div class="field-label">Net Cash</div><div class="field-value mono">$889M</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Pre-Earnings Checklist for Q3 FY2026</h3>
+      <div class="card-subtitle">Earnings date: ~Late April / Early May 2026</div>
+      <div class="field-label" style="margin-top: 16px;">What the Market Needs to Hear</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">
+        1. Datacenter revenue >$700M — validates "substantial step up" commitment<br>
+        2. Non-GAAP GM 65-67% — tests margin sustainability at peak levels<br>
+        3. Stargate QLC revenue shipments confirmed
+      </div>
+      <div class="field-label">Thresholds</div>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Expectation</th><th class="num">Concern</th><th class="num">Kill Threshold</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue</td><td class="num">$5,047M (adj)</td><td class="num" style="color:var(--warning)">&lt;$4,400M</td><td class="num" style="color:var(--error)">Below guided low 2Q</td></tr>
+          <tr><td class="label-cell">NG Gross Margin</td><td class="num">65-70%</td><td class="num" style="color:var(--warning)">&lt;60%</td><td class="num" style="color:var(--error)">&lt;30% for 2Q / &lt;20% any Q</td></tr>
+          <tr><td class="label-cell">Datacenter Rev</td><td class="num">&gt;$700M</td><td class="num" style="color:var(--warning)">Deceleration</td><td class="num" style="color:var(--error)">YoY &lt;10% for 2Q</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="verdict-box"><div><div class="verdict-label">Conviction Level</div><div class="verdict-value">Medium</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Memory stock at peak margins with embedded cyclicality risk. Not full conviction weight until cycle sustainability proven through Q4 FY26.</div></div>
+  </div>
+
+  <!-- S19 -->
+  <div class="section" id="s19">
+    <div class="section-header"><span class="section-num">S19</span><h2 class="section-title">Risk Inventory</h2><span class="section-cadence">quarterly</span></div>
+    <div class="grid-3" style="margin-bottom: 20px; text-align: center;">
+      <div class="stat-card" style="border-left: 3px solid var(--error);"><div class="stat-label">RED Risks</div><div class="stat-value" style="color: var(--error);">1</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--warning);"><div class="stat-label">YELLOW Risks</div><div class="stat-value" style="color: var(--warning);">6</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--success);"><div class="stat-label">GREEN Risks</div><div class="stat-value" style="color: var(--success);">3</div></div>
+    </div>
+
+    <div class="risk-card red"><div class="risk-header"><span class="risk-title">#1 — Samsung NAND Supply Flood</span><span class="badge badge-error">RED</span></div><div class="risk-meta">Competitive/Structural · Severity: High · Probability: Medium</div><p class="risk-body">Samsung holds significant latent NAND capacity (analysis: believed to substantially exceed prior peak levels), currently constrained by HBM yield allocation. Samsung has historically responded to tight supply by ramping aggressively (analysis based on prior NAND cycles). SNDK's 51% GM would compress to 15-25% in a Samsung-driven oversupply scenario.</p><div class="risk-watch"><strong>Watch:</strong> Samsung NAND bit growth >20% single Q, HBM yield improvement reports, TrendForce NAND pricing</div></div>
+
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#2 — YMTC Capacity Expansion</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competitive/Structural · Severity: Medium-High · Probability: Medium</div><p class="risk-body">YMTC expanding on 232-layer node despite entity list restrictions, gaining global NAND share (exact share estimate varies by source). Low-cost supply depresses global ASPs. If export controls relax, YMTC could accelerate capacity and enter enterprise SSD market.</p></div>
+
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#3 — Kioxia JV Fixed Cost Rigidity</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Financial/Structural · Severity: Medium-High · Probability: Low</div><p class="risk-body">$1,165M committed Yokohama payments CY2026-2029 plus $5.4B Flash Ventures commitments flow through COGS as fixed costs. In a downturn, SNDK cannot unilaterally curtail output or idle JV capacity — the capital-light model becomes a fixed-cost trap.</p></div>
+
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#4 — Cyclical Peak Misidentified as Structural Shift</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Thesis · Severity: High · Probability: Medium</div><p class="risk-body">Central debate: is AI datacenter NAND demand structural or cyclical? If cyclical, current 51% GM and 35% OM are near-peak. Last three NAND upcycles each ended with 12-18 months of margin compression. Yole Group flagged 2027 as potential downturn year.</p></div>
+
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#5 — Hyperscaler Qualification & Competition</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Customer/Competitive · Severity: Medium · Probability: Medium</div><p class="risk-body">PCIe Gen 5 TLC qualification completed at 2 hyperscalers as of Q2 FY2026 (per earnings call); additional quals on track. Loss of a qualification to Samsung PM9D3, Micron 6500 ION, or Solidigm D7-PS1010 weakens the datacenter growth thesis. Top 10 customers = 40-44% of revenue.</p></div>
+
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#6 — Valuation Compression at Cycle Inflection</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Market · Severity: Medium · Probability: Medium</div><p class="risk-body">Stock trading at significant premium to memory peers on trailing P/S basis (as of 2026-03-10). Substantial appreciation since Feb 2025 spinoff. GF Securities downgrade triggered sharp selloff — high beta stock. Analyst EPS estimates for FY2027 span a wide range, indicating consensus provides false precision (source: sell-side aggregation, as of 2026-03-10).</p></div>
+
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#7 — Pure-Play NAND Exposure</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Structural · Severity: Medium-High · Probability: High (embedded)</div><p class="risk-body">Unlike Samsung, SK Hynix, Micron — which derive revenue from DRAM/HBM — SNDK is 100% NAND with zero diversification. Diversified competitors can subsidize aggressive NAND pricing with DRAM/HBM profits, undercutting SNDK further than standalone scenario.</p></div>
+
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#8 — WDC Overhang & Institutional Flow</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Market/Sentiment · Severity: Low · Probability: High</div><p class="risk-body">WDC has disposed of the majority of its post-spinoff SNDK stake through multiple offerings (held 7.5M shares / 5.1% as of Oct 2025 per 10-Q; subsequent offerings have further reduced). Select institutional investors have reduced positions (per 13F filings). Major passive holders (Fidelity, Vanguard, BlackRock) are accumulating per 13F data. Residual overhang declining.</p></div>
+
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#9 — Management Track Record — Limited History</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Credibility · Severity: Medium · Probability: Low</div><p class="risk-body">Only 3 quarters of guidance history. CEO's semiconductor experience is networking (Cisco), not NAND manufacturing. Both CEO and CFO delivering strong execution but have not navigated a NAND downturn as SNDK leadership.</p></div>
+
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#10 — Consumer Brand Erosion</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Competitive · Severity: Low · Probability: Medium</div><p class="risk-body">SanDisk consumer brand premium eroding as no-name/Chinese brands gain shelf space. Consumer is 30% of revenue ($907M Q2 FY26) and acts as cash flow stabilizer.</p></div>
+
+    <hr class="divider accent">
+    <div class="card">
+      <h3 class="card-title">Insider Activity — Verdict: Routine</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Zero open-market purchases since Feb 2025 spinoff (per Form 4 filings through 2026-03-10). Two discretionary director sales totaling ~$2.4M (per Form 4). Departing directors sold ~$7.0M (routine — long-held compensation stock, per Form 4). CEO holds 513,803 shares (per DEF 14A / Form 4) — entirely from converted WDC equity and RSU grants, not conviction purchases. Dollar values based on transaction-date prices.</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Correlated Risk Cluster</h3>
+      <p style="font-size: 14px; color: var(--text-secondary);">Risks #1 (Samsung supply flood), #2 (YMTC), #3 (JV fixed costs), #4 (cyclical peak), and #7 (pure-play NAND) are highly correlated — a Samsung supply normalization event would trigger margin compression, amplified by JV fixed costs SNDK cannot cut and no DRAM cushion, validating the demand was cyclical not structural. This is the <strong>dominant correlated risk cluster</strong> — five of ten risks fire simultaneously in the Samsung-floods-supply scenario.</p>
+    </div>
+  </div>
+
+  <!-- CHECKLIST A -->
+  <div class="section" id="checkA">
+    <div class="section-header"><span class="section-num">A</span><h2 class="section-title">Procedural Checklist A — Document Inventory</h2></div>
+    <div class="card">
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-K annual filing (FY2025, year ended Jun 27, 2025)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-Q quarterly filings: Q2-FY25, Q3-FY25, Q1-FY26, Q2-FY26</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Press releases: Q3-FY25, Q4-FY25, Q1-FY26, Q2-FY26 (8-K Exhibit 99.1 on SEC EDGAR)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Earnings call transcripts: Q3-FY25, Q4-FY25, Q1-FY26, Q2-FY26</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Investor presentations: Q3-FY25 through Q2-FY26</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Proxy statement / DEF 14A (FY2025)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Sell-side analyst report</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Insider activity report</div>
+      <hr class="divider">
+      <div class="field-label">Does Not Exist</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Q2 FY2025 standalone earnings call transcript — does not exist (pre-spinoff quarter; WDC reported combined results)</div>
+      <div class="field-label" style="margin-top: 8px;">Exists But Not Used</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> FY2025 Investor Day presentation (Feb 2025) — available at investor.sandisk.com but not in source set for this build</div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST B -->
+  <div class="section" id="checkB">
+    <div class="section-header"><span class="section-num">B</span><h2 class="section-title">Procedural Checklist B — Consistency Audit</h2></div>
+    <div class="verdict-box" style="background: var(--warning-subtle); border-color: var(--warning);"><div><div class="verdict-label">Audit Result</div><div class="verdict-value" style="color: var(--warning);">NEAR-FINAL (pending human sign-off)</div></div><div class="verdict-score" style="color: var(--warning);">13/14</div></div>
+    <div class="card">
+      <div class="field-label">Numerical (3.5/4)</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Revenue segments consistent (N1) ✓ · Share counts: 156M diluted wtd-avg labeled for EPS; 148M issued / 146M outstanding labeled for equity value (N2 PASS with labeling) · FCF $980M matches (N3) ✓ · Guidance $4,400-4,800M midpoint $4,600M (N4) ✓. Corrections applied: Q3 FY25 EPS -$0.03→-$0.30; Q2 FY25 non-GAAP populated; S12 DIO corrected ~59→~121 days; S5 patents corrected 3,200→2,800 pending per S-1/A.</p>
+      <div class="field-label">Narrative (5.5/6)</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Key metric (datacenter rev) at 2× in scorecard (R1-R2) ✓ · S5 threats in S19 (R3) ✓ · Moat decay reflected (R4) ✓ · S6↔S15 consistent (R5) ✓ · Capital-light model drives S10/S12 (R6) ✓. Document inventory corrected. Unsupported claims softened or source-attributed across S5/S14/S19. Fact/opinion labeling applied. Investor Day dependency resolved (re-sourced to Q1 FY2026 press release). Sell-side consensus shown as vendor range. Hyperscaler qualification wording synchronized to Q1 FY2026. S14 verify-placeholders removed.</p>
+      <div class="field-label">Logical (4/4)</div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Kill criteria thresholds beyond current scorecard range (L1) ✓ · Implied ~20% CAGR achievable given 110% FY26 growth (L2) ✓ · Catalyst timing aligns (L3) ✓ · Bear case mapped to S16+S19 (L4) ✓</p>
+    </div>
+  </div>
+
+  <hr class="divider accent">
+  <p style="font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 24px;">
+    Delta Framework · Sandisk Corporation (SNDK) Configuration Card · Built March 10, 2026 · Corrected March 12, 2026 (4 correction rounds)<br>
+    Anthropic Warm Humanist Design System · 19 Sections + 2 Procedural Checklists
+  </p>
+
+</main>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.style.background = '');
+        const id = entry.target.id;
+        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (activeLink) activeLink.style.background = 'rgba(196, 123, 90, 0.12)';
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>

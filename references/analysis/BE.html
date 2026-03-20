@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Energy (BE) — Configuration Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C47B5A;
+    --primary-hover: #B06A4A;
+    --primary-subtle: rgba(196, 123, 90, 0.12);
+    --secondary: #7D8C6E;
+    --secondary-subtle: rgba(125, 140, 110, 0.12);
+    --accent: #8B8FC7;
+    --accent-subtle: rgba(139, 143, 199, 0.12);
+    --bg: #FAF7F4;
+    --bg-alt: #F5F0EB;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EAE2;
+    --text-primary: #2D2824;
+    --text-secondary: #6B5F54;
+    --text-tertiary: #9A8E82;
+    --border: #E8E0D5;
+    --border-strong: #D1C7B8;
+    --border-subtle: #F0EAE2;
+    --success: #6B8C5A;
+    --success-subtle: rgba(107, 140, 90, 0.12);
+    --warning: #C49A5A;
+    --warning-subtle: rgba(196, 154, 90, 0.12);
+    --error: #C45A5A;
+    --error-subtle: rgba(196, 90, 90, 0.12);
+    --amber: #B8927A;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(45,40,36,0.05);
+    --shadow-md: 0 2px 8px rgba(45,40,36,0.06), 0 1px 2px rgba(45,40,36,0.04);
+    --shadow-lg: 0 4px 16px rgba(45,40,36,0.08), 0 2px 4px rgba(45,40,36,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 30;
+    padding: 32px 0 48px 0;
+    transition: transform 0.3s ease;
+  }
+  .sidebar-logo {
+    padding: 0 24px 24px 24px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h2 {
+    font-family: var(--font-serif);
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: -0.02em;
+  }
+  .sidebar-logo .ticker {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 0.04em; margin-top: 4px;
+  }
+  .nav-group { padding: 8px 16px; }
+  .nav-group-label {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 8px 4px;
+  }
+  .nav-link {
+    display: block; padding: 6px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .nav-link:hover { background: var(--primary-subtle); color: var(--text-primary); }
+  .nav-link .snum {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px; max-width: 960px;
+    padding: 48px 56px 120px 56px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    color: var(--primary); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 400;
+    color: var(--text-primary); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 32px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono); font-size: 22px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .stat-delta {
+    font-family: var(--font-mono); font-size: 12px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--error); }
+  .delta-neutral { color: var(--text-tertiary); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; color: var(--primary);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-size: 24px;
+    font-weight: 500; color: var(--text-primary);
+    letter-spacing: -0.02em; line-height: 1.3;
+  }
+  .section-cadence {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: var(--text-tertiary);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 15px; color: var(--text-primary); line-height: 1.6;
+  }
+  .field-value.mono {
+    font-family: var(--font-mono); font-size: 14px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-serif); font-size: 18px;
+    font-weight: 500; color: var(--text-primary);
+    margin-bottom: 12px; line-height: 1.3;
+  }
+  .card-subtitle {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--text-secondary); margin-bottom: 16px;
+  }
+
+  /* Product architecture cards */
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .product-card.core { border-left-color: var(--primary); }
+  .product-card.supporting { border-left-color: var(--secondary); }
+  .product-card.legacy { border-left-color: var(--text-tertiary); }
+  .product-card.emerging { border-left-color: var(--accent); }
+
+  .product-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: var(--font-serif); font-size: 17px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .product-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .badge-primary { background: var(--primary-subtle); color: #9C5D3F; }
+  .badge-secondary { background: var(--secondary-subtle); color: #4A5A3E; }
+  .badge-accent { background: var(--accent-subtle); color: #6B6FA9; }
+  .badge-success { background: var(--success-subtle); color: #4A6B3A; }
+  .badge-warning { background: var(--warning-subtle); color: #8B6B3A; }
+  .badge-error { background: var(--error-subtle); color: #9C3A3A; }
+  .badge-neutral { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  /* Risk severity dots */
+  .severity-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .dot-red { background: var(--error); }
+  .dot-yellow { background: var(--warning); }
+  .dot-green { background: var(--success); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 20px; font-size: 14px;
+  }
+  .data-table thead th {
+    font-family: var(--font-sans); font-size: 11px;
+    font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding: 10px 12px; text-align: left;
+  }
+  .data-table thead th.num { text-align: right; }
+  .data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .data-table tbody td.num {
+    font-family: var(--font-mono); font-size: 13px;
+    text-align: right; white-space: nowrap;
+  }
+  .data-table tbody td.label-cell {
+    font-weight: 500; color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(196, 123, 90, 0.04);
+  }
+  .data-table tbody tr:last-child td { border-bottom: 1px solid var(--border-strong); }
+
+  /* ── RISK CARDS ── */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+  }
+  .risk-card.red { border-left: 4px solid var(--error); }
+  .risk-card.yellow { border-left: 4px solid var(--warning); }
+  .risk-card.green { border-left: 4px solid var(--success); }
+  .risk-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+  }
+  .risk-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .risk-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .risk-body {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .risk-watch {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ── CALLOUT / FLAG ── */
+  .callout {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0; padding: 14px 18px;
+    margin: 16px 0; font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: var(--warning-subtle);
+  }
+  .callout.danger {
+    border-left-color: var(--error);
+    background: var(--error-subtle);
+  }
+  .callout.success {
+    border-left-color: var(--success);
+    background: var(--success-subtle);
+  }
+  .callout strong { color: var(--text-primary); }
+
+  /* ── SCENARIO BARS ── */
+  .scenario-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    margin-bottom: 10px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .scenario-bar.bull { border-left: 4px solid var(--success); }
+  .scenario-bar.base { border-left: 4px solid var(--primary); }
+  .scenario-bar.bear { border-left: 4px solid var(--error); }
+  .scenario-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; min-width: 50px;
+  }
+  .scenario-value {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 500; min-width: 110px;
+  }
+  .scenario-prob {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .scenario-desc {
+    font-size: 13px; color: var(--text-secondary); flex: 1;
+  }
+
+  /* ── SCORECARD ── */
+  .score-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-metric {
+    flex: 1; font-size: 14px; color: var(--text-primary);
+  }
+  .score-weight {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); min-width: 40px; text-align: center;
+  }
+  .score-badge {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; min-width: 40px; text-align: center;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .score-plus { background: var(--success-subtle); color: #4A6B3A; }
+  .score-minus { background: var(--error-subtle); color: #9C3A3A; }
+  .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+  /* ── KILL CRITERION ── */
+  .kill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .kill-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .kill-num {
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; color: var(--primary);
+  }
+  .kill-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary); flex: 1;
+    margin-left: 10px;
+  }
+  .kill-action {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 4px;
+  }
+  .kill-reduce { background: var(--warning-subtle); color: #8B6B3A; }
+  .kill-exit { background: var(--error-subtle); color: #9C3A3A; }
+  .kill-reassess { background: var(--accent-subtle); color: #6B6FA9; }
+
+  .kill-trigger {
+    font-size: 14px; color: var(--text-primary); margin-bottom: 8px;
+    padding: 10px 14px; background: var(--bg-alt); border-radius: 6px;
+    line-height: 1.5;
+  }
+  .kill-gap {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); margin-top: 8px;
+  }
+
+  /* ── ANALYST CARDS ── */
+  .analyst-card {
+    display: flex; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+  .analyst-rating {
+    writing-mode: vertical-lr; text-orientation: mixed;
+    font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 0;
+    display: flex; align-items: center;
+  }
+  .analyst-body { flex: 1; }
+  .analyst-name {
+    font-family: var(--font-serif); font-size: 15px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .analyst-firm {
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+  }
+  .analyst-pt {
+    font-family: var(--font-mono); font-size: 16px;
+    font-weight: 600; color: var(--primary); margin-bottom: 6px;
+  }
+  .analyst-thesis {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: var(--primary);
+    transition: width 0.6s ease;
+  }
+
+  /* ── GRID HELPERS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .divider.accent { border-top: 2px solid var(--primary); }
+
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 20px 0;
+  }
+  .verdict-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .verdict-value {
+    font-family: var(--font-serif); font-size: 20px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .verdict-score {
+    font-family: var(--font-mono); font-size: 28px;
+    font-weight: 600; color: var(--primary);
+    margin-left: auto;
+  }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+  }
+  .check-icon { font-size: 16px; line-height: 1.4; }
+  .check-pass .check-icon { color: var(--success); }
+  .check-fail .check-icon { color: var(--error); }
+  .check-open .check-icon { color: var(--text-tertiary); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none; position: fixed; top: 16px; left: 16px;
+    z-index: 40; width: 44px; height: 44px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px;
+    color: var(--text-primary);
+  }
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 48px 24px 120px; }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .hero h1 { font-size: 30px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h2>Bloom Energy</h2>
+    <div class="ticker">NYSE: BE &nbsp;·&nbsp; Configuration Card</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Foundation (Phase 1)</div>
+    <a class="nav-link" href="#s1"><span class="snum">S1</span> Identity & Classification</a>
+    <a class="nav-link" href="#s2"><span class="snum">S2</span> Thesis & Key Metric</a>
+    <a class="nav-link" href="#s3"><span class="snum">S3</span> Product Architecture</a>
+    <a class="nav-link" href="#s4"><span class="snum">S4</span> Revenue Stream Map</a>
+    <a class="nav-link" href="#s5"><span class="snum">S5</span> Competitive Context & Moat</a>
+    <a class="nav-link" href="#s6"><span class="snum">S6</span> Management Team</a>
+    <a class="nav-link" href="#s7"><span class="snum">S7</span> Acceleration Table</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Financials (Phase 2)</div>
+    <a class="nav-link" href="#s8"><span class="snum">S8</span> Income Statement</a>
+    <a class="nav-link" href="#s9"><span class="snum">S9</span> Balance Sheet</a>
+    <a class="nav-link" href="#s10"><span class="snum">S10</span> Cash Flow & Quality</a>
+    <a class="nav-link" href="#s11"><span class="snum">S11</span> Scorecard</a>
+    <a class="nav-link" href="#s12"><span class="snum">S12</span> Tier 2 Metrics</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Catalysts & Sell-Side (Phase 3)</div>
+    <a class="nav-link" href="#s13"><span class="snum">S13</span> Catalyst Pipeline</a>
+    <a class="nav-link" href="#s14"><span class="snum">S14</span> Sell-Side Landscape</a>
+    <a class="nav-link" href="#s15"><span class="snum">S15</span> Guidance & Credibility</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Risk & Valuation (Phase 4)</div>
+    <a class="nav-link" href="#s16"><span class="snum">S16</span> Kill Criteria</a>
+    <a class="nav-link" href="#s17"><span class="snum">S17</span> Valuation Framework</a>
+    <a class="nav-link" href="#s18"><span class="snum">S18</span> Pre-Earnings Baseline</a>
+    <a class="nav-link" href="#s19"><span class="snum">S19</span> Risk Inventory</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Audit</div>
+    <a class="nav-link" href="#checkA">Checklist A — Documents</a>
+    <a class="nav-link" href="#checkB">Checklist B — Consistency</a>
+  </div>
+</nav>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main class="main">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-eyebrow">Delta Framework · Configuration Card</div>
+    <h1>Bloom Energy Corporation</h1>
+    <div class="hero-meta">
+      NYSE: BE &nbsp;·&nbsp; Clean Energy / Distributed Power Generation<br>
+      Built: March 6, 2026 &nbsp;·&nbsp; Most recent quarter: Q4 2025<br>
+      19 sections + 2 procedural checklists &nbsp;·&nbsp; Position established Feb 9, 2026
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-label">FY2025 Revenue</div>
+        <div class="stat-value">$2.02B</div>
+        <div class="stat-delta delta-up">+37.3% YoY</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Product Backlog</div>
+        <div class="stat-value">$6.0B</div>
+        <div class="stat-delta delta-up">+140% YoY</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Scorecard</div>
+        <div class="stat-value">77.8%</div>
+        <div class="stat-delta delta-up">Clearly improving</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Expected Value</div>
+        <div class="stat-value">$122.50</div>
+        <div class="stat-delta delta-down">-9.4% from $135.19</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 1 — IDENTITY -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">S1</span>
+      <h2 class="section-title">Identity & Model Classification</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <div class="field-group">
+          <div class="field-label">Ticker</div>
+          <div class="field-value mono">BE</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Company</div>
+          <div class="field-value">Bloom Energy Corporation</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Sector</div>
+          <div class="field-value">Clean Energy / Distributed Power Generation</div>
+        </div>
+      </div>
+      <div>
+        <div class="field-group">
+          <div class="field-label">Position Established</div>
+          <div class="field-value mono">February 9, 2026</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Model Type</div>
+          <div class="field-value">Asset-heavy hardware manufacturer with growing service annuity — solid oxide fuel cell (SOFC) platform for on-site power generation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Normal Operating Profile</h3>
+      <p>Bloom Energy designs, manufactures, and deploys solid oxide fuel cell systems (Energy Servers) that convert natural gas, biogas, or hydrogen into electricity without combustion. Revenue is project-based with extreme Q4 seasonality (~38-39% of annual revenue in Q4; H1 is structurally loss-making).</p>
+      <p>Manufacturing is concentrated in Fremont, CA (cell printing) and Newark, DE (assembly). Non-GAAP gross margins normalize at 29-32% annually but swing 28-39% quarterly due to project mix and seasonality.</p>
+      <p>GAAP profitability is distorted by non-cash items: SBC $145M FY2025, debt conversion inducement $66M, equity in loss of JVs $40M. Annual non-GAAP operating margins are 7-11% and expanding with scale. FCF conversion is low (25-31% of non-GAAP operating income) due to heavy working capital swings.</p>
+
+      <hr class="divider">
+
+      <div class="field-label" style="margin-bottom: 8px">Classification Determines</div>
+      <table class="data-table">
+        <thead><tr><th>Parameter</th><th>Setting</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">FCF conversion thresholds</td><td>Capital-heavy (50-80% target); currently at 25-31%</td></tr>
+          <tr><td class="label-cell">Tier 2 metrics</td><td>Product backlog growth, service margin expansion, customer concentration, capacity utilization, installation margin, DSO</td></tr>
+          <tr><td class="label-cell">DSO interpretation</td><td>Highly seasonal — Q4 DSO ~44d vs Q2 ~106d. Annual average is informative</td></tr>
+          <tr><td class="label-cell">Catalyst calendar</td><td>1GW→2GW capacity, 800V DC adoption, Brookfield JV, AEP milestones, CFO appointment, IRA/OBBBA policy</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 2 — THESIS -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">S2</span>
+      <h2 class="section-title">Thesis & Key Metric</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Falsifiable Thesis Statement</h3>
+      <p>Bloom Energy is the near-term winner in behind-the-meter distributed power for AI data centers, converting a structural grid interconnection bottleneck into a multi-year revenue ramp via its SOFC platform.</p>
+      <p>The thesis requires: <strong>(1)</strong> product backlog growing >50% YoY for at least 3 consecutive years, <strong>(2)</strong> non-GAAP gross margins sustaining >30% as mix shifts toward larger data center projects, and <strong>(3)</strong> manufacturing capacity scaling from 1GW to 2GW+ without execution failures at the single Fremont cell-printing facility.</p>
+      <div class="callout warn" style="margin-top: 16px;">
+        <strong>Falsification trigger:</strong> A single quarter of backlog deceleration below 50% YoY or gross margin compression below 28% on a trailing-4Q basis would challenge the thesis.
+      </div>
+      <div class="hero-meta" style="margin-top: 12px;">Date written: February 9, 2026 &nbsp;·&nbsp; Last reviewed: March 6, 2026</div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">3-Sentence Bear Case</h3>
+      <p style="color: var(--error);">Bloom is priced for 5+ years of flawless execution on a revenue ramp from $2B to $10B+, with a forward P/E of ~96× vs. energy sector average ~17×, leaving zero margin for a single stumble. The single Fremont cell-printing facility is a concentration risk that cannot be diversified quickly. GE Vernova is developing competing SOFC technology targeting market entry in 2-3 years, while small modular nuclear reactors could provide baseload alternatives by the 2030s; meanwhile, 44% of FY2025 revenue came from Brookfield-related JVs under terms that create equity-method losses and obscure true demand signals.</p>
+    </div>
+
+    <div class="card" style="border-left: 3px solid var(--primary);">
+      <h3 class="card-title">Key Metric: Product Backlog Growth (YoY %)</h3>
+      <div class="grid-2" style="margin-bottom: 12px;">
+        <div>
+          <div class="field-label">Current Value</div>
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--success);">+140% YoY</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary);">Q4 2025: ~$6B (from ~$2.5B Q4 2024)</div>
+        </div>
+        <div>
+          <div class="field-label">Why This Tests the Thesis</div>
+          <p style="font-size: 14px;">Product backlog is the leading indicator of future revenue conversion and directly measures whether data center and C&I customers are committing to Bloom's platform at an accelerating rate. A deceleration below 50% YoY would signal demand weakness.</p>
+        </div>
+      </div>
+      <div class="field-label">Where to Find It</div>
+      <p style="font-size: 13px; color: var(--text-secondary);">Earnings call prepared remarks (KR Sridhar opening comments) · Investor presentation supplemental slides · Press release (occasionally). Service backlog ($14B) is a lagging indicator — product backlog is the leading signal.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 3 — PRODUCT ARCHITECTURE -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">S3</span>
+      <h2 class="section-title">Business Model & Product Architecture</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+
+    <div class="product-card core">
+      <div class="product-header">
+        <span class="product-name">1. Energy Server (Product Revenue)</span>
+        <div class="product-badges">
+          <span class="badge badge-primary">Core</span>
+          <span class="badge badge-secondary">Scale</span>
+          <span class="badge badge-neutral">75.7% of Rev</span>
+        </div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Converts natural gas/biogas/hydrogen into electricity via solid-state electrochemical process (no combustion). Deployable in ~90 days vs. years for grid/turbine alternatives. All new shipments are 800V DC ready (per Q4-2025 call). Modular from hundreds of kW to hundreds of MW. Management claims 99.9% fleet availability (per Feb 2026 investor presentation).</p>
+      <div class="grid-2">
+        <div><span class="field-label">FY2025 Revenue</span><br><span class="field-value mono">$1,531M (+41.1% YoY)</span></div>
+        <div><span class="field-label">Product Gross Margin</span><br><span class="field-value mono">33-46% quarterly (non-GAAP)</span></div>
+      </div>
+    </div>
+
+    <div class="product-card supporting">
+      <div class="product-header">
+        <span class="product-name">2. Installation Services</span>
+        <div class="product-badges">
+          <span class="badge badge-secondary">Supporting</span>
+          <span class="badge badge-neutral">10.1% of Rev</span>
+        </div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Site preparation, installation, and commissioning. Bundled with product sales. Margins are thin to negative — Q4-2025 was -10.7%. Growing with product volume but margin-volatile.</p>
+      <div class="grid-2">
+        <div><span class="field-label">FY2025 Revenue</span><br><span class="field-value mono">$204M (+66.8% YoY)</span></div>
+        <div><span class="field-label">Thesis Role</span><br><span class="field-value">Supporting — necessary but not profit-driving</span></div>
+      </div>
+    </div>
+
+    <div class="product-card core">
+      <div class="product-header">
+        <span class="product-name">3. Operations & Maintenance (Service)</span>
+        <div class="product-badges">
+          <span class="badge badge-primary">Core / Growth</span>
+          <span class="badge badge-secondary">Scale</span>
+          <span class="badge badge-neutral">11.3% of Rev</span>
+        </div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">24/7 remote monitoring via dual RMCC centers (US/India), preventive maintenance, AI-driven digital twin analytics. Management reports 6B+ data points per day from installed fleet (per Feb 2026 presentation). Service contracts span 5-20 years with 100% attach rate on new bookings. $14B service backlog. Profitable for 8 consecutive quarters; Q4-2025 achieved 20% non-GAAP gross margin for first time.</p>
+      <div class="grid-2">
+        <div><span class="field-label">FY2025 Revenue</span><br><span class="field-value mono">$228M (+6.9% YoY)</span></div>
+        <div><span class="field-label">Margin Trajectory</span><br><span class="field-value mono">Breakeven (FY23) → ~10% (FY25) → 20% (Q4-25 NG)</span></div>
+      </div>
+    </div>
+
+    <div class="product-card legacy">
+      <div class="product-header">
+        <span class="product-name">4. Electricity / PPA Revenue</span>
+        <div class="product-badges">
+          <span class="badge badge-neutral">Legacy (wind-down)</span>
+          <span class="badge badge-neutral">3.0% of Rev</span>
+        </div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Electricity sold under legacy PPA arrangements. Declining as legacy PPAs roll off. FY2025: $60M (down from $82M in FY2023). Thesis role: immaterial.</p>
+    </div>
+
+    <div class="product-card emerging">
+      <div class="product-header">
+        <span class="product-name">5. Bloom Electrolyzer (SOEC)</span>
+        <div class="product-badges">
+          <span class="badge badge-accent">Emerging</span>
+          <span class="badge badge-neutral">&lt;1% of Rev</span>
+        </div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Produces hydrogen via high-temperature solid oxide electrolysis using same SOFC platform. Higher efficiency than PEM/alkaline. Minimal revenue to date — optionality bet on clean hydrogen market maturation. Shares manufacturing platform with Energy Server for cost leverage.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 4 — REVENUE STREAM MAP -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">S4</span>
+      <h2 class="section-title">Revenue Stream Map</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">FY2025 Full Year Revenue: $2,024.0M <span style="color: var(--success); font-family: var(--font-mono); font-size: 14px;">(+37.3% YoY)</span></h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>Stream</th><th class="num">FY25 ($M)</th><th class="num">% Rev</th><th class="num">FY24 ($M)</th><th class="num">YoY</th><th>Thesis Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="label-cell">Product (Energy Server)</td><td class="num">1,531.3</td><td class="num">75.7%</td><td class="num">1,085.2</td><td class="num" style="color:var(--success)">+41.1%</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+          <tr><td class="label-cell">Service (O&M)</td><td class="num">228.3</td><td class="num">11.3%</td><td class="num">213.5</td><td class="num" style="color:var(--success)">+6.9%</td><td><span class="badge badge-secondary">Cash Flow Stabilizer</span></td></tr>
+          <tr><td class="label-cell">Installation</td><td class="num">204.1</td><td class="num">10.1%</td><td class="num">122.3</td><td class="num" style="color:var(--success)">+66.8%</td><td><span class="badge badge-neutral">Supporting</span></td></tr>
+          <tr><td class="label-cell">Electricity (PPA)</td><td class="num">60.4</td><td class="num">3.0%</td><td class="num">52.8</td><td class="num" style="color:var(--success)">+14.3%</td><td><span class="badge badge-neutral">Immaterial</span></td></tr>
+          <tr style="font-weight:600; border-top:2px solid var(--border-strong)"><td>Total</td><td class="num">2,024.0</td><td class="num">100.0%</td><td class="num">1,473.9</td><td class="num" style="color:var(--success)">+37.3%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Quarterly Revenue Progression ($M)</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th class="num">Total</th><th class="num">Product</th><th class="num">Install</th><th class="num">Service</th><th class="num">Electr.</th><th class="num">Product %</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q4-24</td><td class="num">572.4</td><td class="num">471.7</td><td class="num">36.1</td><td class="num">53.8</td><td class="num">10.8</td><td class="num">82.4%</td></tr>
+          <tr><td class="label-cell">Q1-25</td><td class="num">326.0</td><td class="num">211.9</td><td class="num">33.7</td><td class="num">53.5</td><td class="num">27.0</td><td class="num">65.0%</td></tr>
+          <tr><td class="label-cell">Q2-25</td><td class="num">401.2</td><td class="num">296.6</td><td class="num">37.4</td><td class="num">54.4</td><td class="num">12.8</td><td class="num">73.9%</td></tr>
+          <tr><td class="label-cell">Q3-25</td><td class="num">519.0</td><td class="num">384.3</td><td class="num">65.8</td><td class="num">58.6</td><td class="num">10.4</td><td class="num">74.0%</td></tr>
+          <tr><td class="label-cell">Q4-25</td><td class="num">777.7</td><td class="num">638.5</td><td class="num">67.3</td><td class="num">61.7</td><td class="num">10.2</td><td class="num">82.1%</td></tr>
+          <tr style="font-weight:600"><td>FY25</td><td class="num">2,024.0</td><td class="num">1,531.3</td><td class="num">204.1</td><td class="num">228.3</td><td class="num">60.4</td><td class="num">75.7%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <strong>Seasonality note:</strong> Q4 product revenue is 3× Q1 levels. Service revenue is the most stable stream, growing sequentially every quarter from $53.5M (Q1) to $61.7M (Q4).
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Customer Concentration</h3>
+      <p>FY2025: Top 3 customers ≈ 68% of revenue (43% + 13% + 12%). Related party revenue surged from 0.9% (Q1) to 73.8% (Q4) as Brookfield Fund JVs were established. Direction: <span class="badge badge-error">Worsening</span></p>
+      <table class="data-table" style="margin-top: 12px;">
+        <thead><tr><th>Quarter</th><th class="num">Related Party $M</th><th class="num">% of Revenue</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Q1-25</td><td class="num">2.8</td><td class="num">0.9%</td></tr>
+          <tr><td class="label-cell">Q2-25</td><td class="num">27.1</td><td class="num">6.8%</td></tr>
+          <tr><td class="label-cell">Q3-25</td><td class="num">288.0</td><td class="num">55.5%</td></tr>
+          <tr><td class="label-cell">Q4-25</td><td class="num">~574</td><td class="num">73.8%</td></tr>
+          <tr style="font-weight:600"><td>FY2025</td><td class="num">892</td><td class="num">44.1%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 5 — COMPETITIVE CONTEXT & MOAT -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">S5</span>
+      <h2 class="section-title">Competitive Context & Moat Evidence</h2>
+      <span class="section-cadence">landscape: material change / moat: quarterly</span>
+    </div>
+
+    <div class="card-title" style="margin-bottom: 16px;">Competitive Landscape</div>
+
+    <div class="risk-card yellow">
+      <div class="risk-header">
+        <span class="risk-title">GE Vernova — SOFC Development</span>
+        <span class="badge badge-warning">L2 Investigate</span>
+      </div>
+      <p class="risk-body">Developing SOFC technology for stationary power; has global distribution, turbine install base to cross-sell, and $36B+ revenue to fund R&D. 2-3 years from commercial readiness per sell-side estimates. No deployed installations at scale. Analyst key debate: "5-7 years before GE Vernova fuel cells mature."</p>
+    </div>
+
+    <div class="risk-card green">
+      <div class="risk-header">
+        <span class="risk-title">Gas Turbine OEMs (GE Vernova, Siemens, Mitsubishi)</span>
+        <span class="badge badge-success">L1 Monitor</span>
+      </div>
+      <p class="risk-body">Currently supply-constrained with multi-year backlogs (GE Vernova 80 GW backlog through 2029 per Utility Dive). Significantly longer deployment timelines than Bloom's 90-day capability. Do not natively produce DC output. Require extensive permitting and infrastructure.</p>
+    </div>
+
+    <div class="risk-card green">
+      <div class="risk-header">
+        <span class="risk-title">Small Modular Nuclear Reactors</span>
+        <span class="badge badge-success">L1 Monitor</span>
+      </div>
+      <p class="risk-body">Deployment timelines protracted — most designs not deployable before 2030. No commercial-scale SMR operating in the US. Could compress Bloom's addressable market long-term but not a near-term threat.</p>
+    </div>
+
+    <div class="risk-card green">
+      <div class="risk-header">
+        <span class="risk-title">Solar + Storage / Wind + Storage</span>
+        <span class="badge badge-success">L1 Monitor</span>
+      </div>
+      <p class="risk-body">Intermittent — cannot provide 24/7 baseload for data centers without substantial over-provisioning and storage. Significantly larger land footprint than equivalent fuel cell installation (per Bloom management claims). Does not address grid interconnection bottleneck.</p>
+    </div>
+
+    <div class="risk-card green">
+      <div class="risk-header">
+        <span class="risk-title">FuelCell Energy — MCFC Technology</span>
+        <span class="badge badge-success">L1 Monitor</span>
+      </div>
+      <p class="risk-body">Molten carbonate FC technology — lower electrical efficiency and shorter stack life vs. SOFC. Fixed 300kW module architecture limits scalability for large data center deployments. Limited track record in islanded applications. Market cap &lt;$500M vs. Bloom ~$38B.</p>
+    </div>
+
+    <hr class="divider accent">
+
+    <div class="card">
+      <h3 class="card-title">Moat Evidence Grid</h3>
+      <p style="font-size: 14px; margin-bottom: 12px;"><strong>Moat type:</strong> Technology differentiation (380+ US patents per Apr 2025 presentation) + Switching costs (5-20yr service contracts, 100% attach rate per Q4-2025 call) + Time-to-power advantage (90-day deployment) + Installed base learning curve (22B+ kWh produced per Feb 2026 presentation)</p>
+
+      <div class="field-label" style="margin-bottom: 8px">Evidence Now</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+        Product backlog +140% YoY to $6B · 67% repeat customer rate (per Q4-2025 call) · Delivered Oracle data center in 55 days vs. 90-day commitment · Management claims 99.9% fleet availability · 8 consecutive quarters of profitable service · All product shipments now 800V DC ready (per Q4-2025 call) · Geographic expansion: 80% of US backlog from non-CA/NE states (per Q4-2025 call)
+      </div>
+
+      <div class="field-label" style="margin-bottom: 8px">Moat Limitations</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+        Single cell-printing facility in Fremont (no redundancy) · SOFC not proven at multi-GW scale · 44% of FY2025 revenue from Brookfield JVs · Natural gas dependency limits ESG appeal · No permanent CFO for 10 months
+      </div>
+
+      <div class="verdict-box">
+        <div>
+          <div class="verdict-label">Quarterly Moat Pulse</div>
+          <div class="verdict-value">Strengthening</div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Backlog +140%, revenue +37.3%, geographic expansion, 800V DC capability, service margins hit 20%. No evidence of competitive displacement.</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">March 6, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 6 — MANAGEMENT -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">S6</span>
+      <h2 class="section-title">Management Team Assessment</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="card-title">KR Sridhar — CEO & Founder</h3>
+        <div class="card-subtitle">24-year tenure · Age 64 · Total comp: $45.0M (FY2024)</div>
+        <p style="font-size: 14px; color: var(--text-secondary);">Former professor of Aerospace/Mechanical Engineering; NASA advisor; built Bloom from founding to $2B revenue, 2,200+ employees, 1.4 GW deployed. Holds irrevocable voting proxy over SK ecoplant's shares. New 3-year equity retention package approved Dec 2024.</p>
+        <div class="callout" style="margin-top: 12px;">
+          <strong>Credible on:</strong> technology capabilities, time-to-power claims, cost reduction trajectory, customer relationships (67% repeat rate).<br>
+          <strong>Apply discount on:</strong> market size claims ("trillion-dollar market"), long-term competitive moat assertions, M&A discipline claims.
+        </div>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--warning);">
+        <h3 class="card-title">CFO — VACANT</h3>
+        <div class="card-subtitle">Vacant since May 1, 2025 (10 months)</div>
+        <p style="font-size: 14px; color: var(--text-secondary);">Dan Berenbaum departed May 1, 2025. Maciej Kurzymski (CAO) serving as Acting/Interim PFO. No permanent search update as of Feb 2026. KR stated "sense of urgency but no sense of rush" on Q4 call.</p>
+        <div class="callout warn" style="margin-top: 12px;">
+          <strong>Governance risk:</strong> Vacant during most critical scaling year ($2B → $3.2B revenue). Financial controls and capital allocation rely on interim leadership.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 4px;">
+      <h3 class="card-title">Guidance Pattern: Significant Sandbagger</h3>
+      <div class="card-subtitle">1 year available — apply conservatively</div>
+      <table class="data-table">
+        <thead><tr><th>FY2025 Metric</th><th class="num">Guided (Feb 2025)</th><th class="num">Actual</th><th class="num">Beat %</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue</td><td class="num">$1.65B-$1.85B</td><td class="num">$2.024B</td><td class="num" style="color:var(--success)">+15.7%</td></tr>
+          <tr><td class="label-cell">Non-GAAP GM</td><td class="num">~29%</td><td class="num">30.3%</td><td class="num" style="color:var(--success)">+130 bps</td></tr>
+          <tr><td class="label-cell">Non-GAAP OpInc</td><td class="num">~$150M</td><td class="num">$221M</td><td class="num" style="color:var(--success)">+47.3%</td></tr>
+          <tr><td class="label-cell">CFO</td><td class="num">~$92M</td><td class="num">$114M</td><td class="num" style="color:var(--success)">+23.9%</td></tr>
+          <tr><td class="label-cell">CapEx</td><td class="num">~$59M</td><td class="num">$57M</td><td class="num">In-line</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 7 — ACCELERATION TABLE -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">S7</span>
+      <h2 class="section-title">Cross-Quarter Acceleration Table</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">5-Quarter Progression</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4-24</th><th class="num">Q1-25</th><th class="num">Q2-25</th><th class="num">Q3-25</th><th class="num">Q4-25</th><th>Trend</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue growth YoY</td><td class="num">60.4%</td><td class="num">38.6%</td><td class="num">19.5%</td><td class="num">57.1%</td><td class="num">35.9%</td><td>Volatile</td></tr>
+          <tr><td class="label-cell">Non-GAAP GM</td><td class="num">39.3%</td><td class="num">28.7%</td><td class="num">28.2%</td><td class="num">30.4%</td><td class="num">31.9%</td><td><span class="badge badge-secondary">Stable</span></td></tr>
+          <tr><td class="label-cell">Non-GAAP OpM</td><td class="num">23.3%</td><td class="num">4.0%</td><td class="num">7.1%</td><td class="num">8.9%</td><td class="num">17.1%</td><td><span class="badge badge-secondary">Stable</span></td></tr>
+          <tr><td class="label-cell">GAAP OpM</td><td class="num">18.3%</td><td class="num">-5.8%</td><td class="num">-0.9%</td><td class="num">1.5%</td><td class="num">11.3%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$0.43</td><td class="num">$0.03</td><td class="num">$0.10</td><td class="num">$0.15</td><td class="num">$0.45</td><td><span class="badge badge-success">Accel.</span></td></tr>
+          <tr><td class="label-cell">FCF ($M)</td><td class="num">473.1</td><td class="num">-124.9</td><td class="num">-220.4</td><td class="num">7.4</td><td class="num">395.1</td><td>Volatile</td></tr>
+          <tr><td class="label-cell">Product backlog YoY</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">140%</td><td>—</td></tr>
+          <tr><td class="label-cell">Service margin (NG)</td><td class="num">0.5%</td><td class="num">~3%</td><td class="num">~11%</td><td class="num">14.4%</td><td class="num">~20%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Annual Summary</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">FY2023</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">FY26 Guide</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue ($M)</td><td class="num">1,333</td><td class="num">1,474</td><td class="num">2,024</td><td class="num">3,100-3,300</td></tr>
+          <tr><td class="label-cell">Revenue growth</td><td class="num">—</td><td class="num">10.5%</td><td class="num">37.3%</td><td class="num">53-63%</td></tr>
+          <tr><td class="label-cell">Non-GAAP GM</td><td class="num">—</td><td class="num">28.7%</td><td class="num">30.3%</td><td class="num">~32%</td></tr>
+          <tr><td class="label-cell">Non-GAAP OpInc ($M)</td><td class="num">—</td><td class="num">107.6</td><td class="num">221.0</td><td class="num">425-475</td></tr>
+          <tr><td class="label-cell">FCF ($M)</td><td class="num">-456</td><td class="num">33</td><td class="num">57</td><td class="num">~25-50 est.</td></tr>
+          <tr><td class="label-cell">Shares outstd. (M)</td><td class="num">225</td><td class="num">229</td><td class="num">280</td><td class="num">~305 est.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 8 — INCOME STATEMENT -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">S8</span>
+      <h2 class="section-title">Quarterly Income Statement Progression</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4-24</th><th class="num">Q1-25</th><th class="num">Q2-25</th><th class="num">Q3-25</th><th class="num">Q4-25</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Total Revenue ($M)</td><td class="num">572.4</td><td class="num">326.0</td><td class="num">401.2</td><td class="num">519.0</td><td class="num">777.7</td></tr>
+          <tr><td class="label-cell">&nbsp;&nbsp;YoY Growth</td><td class="num">60.4%</td><td class="num">38.6%</td><td class="num">19.5%</td><td class="num">57.1%</td><td class="num">35.9%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Gross Margin (GAAP)</td><td class="num">38.3%</td><td class="num">27.2%</td><td class="num">26.7%</td><td class="num">29.2%</td><td class="num">30.8%</td></tr>
+          <tr><td class="label-cell">Operating Margin (GAAP)</td><td class="num">18.3%</td><td class="num">-5.8%</td><td class="num">-0.9%</td><td class="num">1.5%</td><td class="num">11.3%</td></tr>
+          <tr><td class="label-cell">Operating Margin (Adj)</td><td class="num">23.3%</td><td class="num">4.0%</td><td class="num">7.1%</td><td class="num">8.9%</td><td class="num">17.1%</td></tr>
+          <tr><td class="label-cell">Net Margin (GAAP)</td><td class="num">18.3%</td><td class="num">-7.3%</td><td class="num">-10.6%</td><td class="num">-4.4%</td><td class="num">0.1%</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">GAAP diluted EPS</td><td class="num">$0.38</td><td class="num">-$0.10</td><td class="num">-$0.18</td><td class="num">-$0.10</td><td class="num">$0.00</td></tr>
+          <tr><td class="label-cell">Non-GAAP diluted EPS</td><td class="num">$0.43</td><td class="num">$0.03</td><td class="num">$0.10</td><td class="num">$0.15</td><td class="num">$0.45</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">
+        <strong>Rule of 40 (FY2025 Annual):</strong> 37.3% + 2.8% = <strong>40.1</strong> — barely passes. FY2024: 10.5% + 2.2% = 12.7.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 9 — BALANCE SHEET -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <span class="section-num">S9</span>
+      <h2 class="section-title">Balance Sheet Progression</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Q4-24</th><th class="num">Q1-25</th><th class="num">Q2-25</th><th class="num">Q3-25</th><th class="num">Q4-25</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Cash & equiv. ($M)</td><td class="num">802.9</td><td class="num">794.8</td><td class="num">574.8</td><td class="num">595.1</td><td class="num">2,454.1</td></tr>
+          <tr><td class="label-cell">Accounts receivable</td><td class="num">335.8</td><td class="num">334.0</td><td class="num">467.0</td><td class="num">411.7</td><td class="num">371.8</td></tr>
+          <tr><td class="label-cell">Inventories</td><td class="num">544.7</td><td class="num">612.5</td><td class="num">690.0</td><td class="num">705.0</td><td class="num">643.3</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Total debt</td><td class="num">1,128.8</td><td class="num">1,130.8</td><td class="num">1,132.9</td><td class="num">1,132.3</td><td class="num">2,617.9</td></tr>
+          <tr><td class="label-cell">Net debt</td><td class="num">325.9</td><td class="num">336.1</td><td class="num">558.1</td><td class="num">537.3</td><td class="num">163.8</td></tr>
+          <tr><td class="label-cell">Net debt / EBITDA</td><td class="num">2.0×</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">0.6×</td></tr>
+          <tr style="height:8px"><td colspan="6"></td></tr>
+          <tr><td class="label-cell">Shareholders' equity</td><td class="num">585.2</td><td class="num">601.5</td><td class="num">619.4</td><td class="num">677.5</td><td class="num">793.0</td></tr>
+          <tr><td class="label-cell">Shares outstd. (M)</td><td class="num">229.1</td><td class="num">232.0</td><td class="num">233.7</td><td class="num">236.4</td><td class="num">280.0</td></tr>
+          <tr><td class="label-cell">Diluted shares (M)</td><td class="num">275.8</td><td class="num">230.2</td><td class="num">232.5</td><td class="num">234.9</td><td class="num">315.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Debt Structure (December 31, 2025)</h3>
+      <table class="data-table">
+        <thead><tr><th>Instrument</th><th class="num">Principal ($M)</th><th class="num">Rate</th><th>Maturity</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">0% Convertible Senior Notes</td><td class="num">2,500</td><td class="num">0%</td><td>Nov 2030</td></tr>
+          <tr><td class="label-cell">3.0% Green Convert Notes</td><td class="num">75</td><td class="num">3.0%</td><td>Jun 2029</td></tr>
+          <tr><td class="label-cell">3.0% Green Convert Notes</td><td class="num">100</td><td class="num">3.0%</td><td>Jun 2028</td></tr>
+          <tr><td class="label-cell">Korean JV term loans</td><td class="num">4</td><td class="num">—</td><td>—</td></tr>
+          <tr style="font-weight:600"><td>Total principal</td><td class="num">2,679</td><td class="num">~0.3%</td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top: 12px;">
+        <strong>Q4-25 cash surge ($1.86B):</strong> Driven by $2.5B 0% convertible note issuance, not operating cash generation. Dilution: 229M → 280M shares (+22.2% YoY). 0% notes conversion price: $194.97 — could add ~12.8M shares if stock sustains above $195.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 10 — EARNINGS QUALITY & CASH FLOW -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s10">
+    <div class="section-header">
+      <span class="section-num">S10</span>
+      <h2 class="section-title">Earnings Quality & Cash Flow Forensics</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3 class="card-title">FY2025 Cash Flow</h3>
+        <div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$113.9M</div></div>
+        <div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$57.2M</div></div>
+        <div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">2.8%</div></div>
+        <div class="field-group"><div class="field-label">FCF Conversion (vs NG OpInc)</div><div class="field-value mono" style="color: var(--error);">25.9%</div></div>
+        <div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">2.8%</div></div>
+      </div>
+      <div class="card">
+        <h3 class="card-title">FY2024 Cash Flow</h3>
+        <div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$92.0M</div></div>
+        <div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$33.1M</div></div>
+        <div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">2.2%</div></div>
+        <div class="field-group"><div class="field-label">FCF Conversion (vs NG OpInc)</div><div class="field-value mono">30.8%</div></div>
+        <div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">4.0%</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">SBC & Dilution</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">FY2024</th><th class="num">FY2025</th><th class="num">YoY Δ</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">SBC ($M)</td><td class="num">$83.0</td><td class="num">$145.0</td><td class="num" style="color:var(--error)">+74.7%</td></tr>
+          <tr><td class="label-cell">SBC as % of revenue</td><td class="num">5.6%</td><td class="num">7.2%</td><td class="num" style="color:var(--error)">+1.6pp</td></tr>
+          <tr><td class="label-cell">Shares outstanding (M)</td><td class="num">229</td><td class="num">280</td><td class="num" style="color:var(--error)">+22.2%</td></tr>
+          <tr><td class="label-cell">Revenue/share</td><td class="num">$6.43</td><td class="num">$7.23</td><td class="num">+12.4%</td></tr>
+          <tr><td class="label-cell">FCF/share</td><td class="num">$0.14</td><td class="num">$0.20</td><td class="num" style="color:var(--success)">+41.2%</td></tr>
+        </tbody>
+      </table>
+      <div class="callout danger" style="margin-top: 12px;">
+        <strong>Dilution cost: 2,490 bps.</strong> Revenue grew 37.3% but revenue/share grew only 12.4%. Dilution consumed ~25pp of per-share growth. SBC growing 2× revenue rate.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">ROIC & DSO</h3>
+      <div class="grid-2">
+        <div>
+          <div class="field-label">ROIC (FY2025) — Pre-tax, Non-GAAP</div>
+          <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600; color: var(--success);">23.7%</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">FY2024: 13.3% (+78% improvement)</div>
+        </div>
+        <div>
+          <div class="field-label">DSO (Q4-25)</div>
+          <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 600; color: var(--success);">44.0 days</div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">Q4-24: 54.0 days (improved 10 days YoY)</div>
+        </div>
+      </div>
+      <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--border);">
+        <strong>Methodology:</strong> ROIC = Non-GAAP Operating Income / Average Invested Capital (equity + debt − cash). Pre-tax basis used due to ITC/IRA credit distortions. FCF Conversion = FCF / Non-GAAP Operating Income. DSO = (AR / Quarterly Revenue) × 91.
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <div>
+        <div class="verdict-label">Earnings Quality Verdict</div>
+        <div class="verdict-value">Investigate</div>
+      </div>
+      <div style="font-size: 13px; color: var(--text-secondary); flex: 1;">FCF conversion 25.9% below 40% threshold AND deteriorated YoY. SBC growing 2× revenue rate. Mitigants: absolute FCF improved, ROIC improved 78%, DSO improved 10 days. Growth-phase driven, not structural.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 11 — SCORECARD -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s11">
+    <div class="section-header">
+      <span class="section-num">S11</span>
+      <h2 class="section-title">Thesis-Weighted Scorecard</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="card">
+      <div class="score-row" style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 4px;">
+        <span class="score-metric" style="font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Metric</span>
+        <span class="score-weight" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">WT</span>
+        <span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Score</span>
+        <span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Wtd</span>
+      </div>
+      <div class="score-row">
+        <span class="score-metric"><strong>Product backlog growth</strong> — +140% YoY vs >50% threshold</span>
+        <span class="score-weight">2.0×</span>
+        <span class="score-badge score-plus">+1</span>
+        <span class="score-badge score-plus">+2.0</span>
+      </div>
+      <div class="score-row">
+        <span class="score-metric"><strong>Revenue growth rate</strong> — FY25 +37.3% vs FY24 +10.5%, accelerating</span>
+        <span class="score-weight">1.5×</span>
+        <span class="score-badge score-plus">+1</span>
+        <span class="score-badge score-plus">+1.5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-metric"><strong>Margin trajectory (NG GM)</strong> — FY25 30.3% vs FY24 28.7%, above 30%</span>
+        <span class="score-weight">1.5×</span>
+        <span class="score-badge score-plus">+1</span>
+        <span class="score-badge score-plus">+1.5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-metric"><strong>FCF conversion</strong> — FY25 25.9% vs FY24 30.8%, deteriorated</span>
+        <span class="score-weight">1.0×</span>
+        <span class="score-badge score-minus">-1</span>
+        <span class="score-badge score-minus">-1.0</span>
+      </div>
+      <div class="score-row">
+        <span class="score-metric"><strong>DSO trend</strong> — Q4-25 44d vs Q4-24 54d, improved 10 days</span>
+        <span class="score-weight">1.0×</span>
+        <span class="score-badge score-plus">+1</span>
+        <span class="score-badge score-plus">+1.0</span>
+      </div>
+      <div class="score-row">
+        <span class="score-metric"><strong>ROIC</strong> — FY25 23.7% vs FY24 13.3%, +78%</span>
+        <span class="score-weight">1.0×</span>
+        <span class="score-badge score-plus">+1</span>
+        <span class="score-badge score-plus">+1.0</span>
+      </div>
+      <div class="score-row">
+        <span class="score-metric"><strong>Service margin expansion</strong> — Q4-25 ~20% NG vs Q4-24 ~-2%</span>
+        <span class="score-weight">1.0×</span>
+        <span class="score-badge score-plus">+1</span>
+        <span class="score-badge score-plus">+1.0</span>
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <div>
+        <div class="verdict-label">Scorecard Result</div>
+        <div class="verdict-value">Business clearly improving</div>
+      </div>
+      <div class="verdict-score">77.8%</div>
+    </div>
+    <p style="font-size: 13px; color: var(--text-tertiary); text-align: center;">&gt;60% = Clearly improving &nbsp;·&nbsp; 20-60% = Mixed/stable &nbsp;·&nbsp; &lt;20% = Deterioration</p>
+
+    <div class="card" style="margin-top: 16px;">
+      <h3 class="card-title">Historical Score Trajectory</h3>
+      <div style="display: flex; gap: 8px; align-items: flex-end; height: 100px; margin: 16px 0 8px;">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">55.6%</div>
+          <div style="width:100%;height:55.6px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div>
+          <div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-24</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">50.0%</div>
+          <div style="width:100%;height:50px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div>
+          <div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q1-25</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--error);margin-bottom:4px;">16.7%</div>
+          <div style="width:100%;height:16.7px;background:var(--error-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--error);"></div>
+          <div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-25</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">66.7%</div>
+          <div style="width:100%;height:66.7px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div>
+          <div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q3-25</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">77.8%</div>
+          <div style="width:100%;height:77.8px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div>
+          <div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-25</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text-secondary);">V-shaped recovery from Q2-25 seasonal trough (16.7%, driven by revenue growth deceleration to 19.5% YoY). Overall trend: 50-56% range → 78%.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 12 — TIER 2 METRICS -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s12">
+    <div class="section-header">
+      <span class="section-num">S12</span>
+      <h2 class="section-title">Tier 2 Sector-Specific Metrics</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="card">
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Value (Q4-25)</th><th class="num">Prior Q</th><th class="num">YoY Δ</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Related party rev %</td><td class="num">73.8%</td><td class="num">55.5%</td><td class="num" style="color:var(--error)">+21.1pp</td><td><span class="badge badge-error">RED</span></td></tr>
+          <tr><td class="label-cell">Installation margin (GAAP)</td><td class="num">-10.7%</td><td class="num">8.9%</td><td class="num">—</td><td><span class="badge badge-warning">YELLOW</span></td></tr>
+          <tr><td class="label-cell">Inventory turns (FY25)</td><td class="num">2.4×</td><td class="num">2.0× (FY24)</td><td class="num" style="color:var(--success)">+0.4×</td><td><span class="badge badge-success">GREEN</span></td></tr>
+          <tr><td class="label-cell">Service NG GM %</td><td class="num">~20%</td><td class="num">~12%</td><td class="num" style="color:var(--success)">+22pp</td><td><span class="badge badge-success">GREEN</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 13 — CATALYST PIPELINE -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s13">
+    <div class="section-header">
+      <span class="section-num">S13</span>
+      <h2 class="section-title">Forward Catalyst Pipeline & Product Roadmap</h2>
+      <span class="section-cadence">material change</span>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Catalyst Calendar (Next 12 Months from March 2026)</h3>
+      <table class="data-table">
+        <thead><tr><th>Window</th><th>Event</th><th>Type</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">May 2026</td><td>Q1 2026 earnings — first quarter on $3.1-3.3B guide</td><td>Earnings</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">H2 2026</td><td>AEP Wyoming Phase 1 delivery — 104 MW initial</td><td>Commercial</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">End 2026</td><td>2 GW capacity target — double from 1 GW</td><td>Operations</td><td><span class="badge badge-error">HIGH</span></td></tr>
+          <tr><td class="label-cell">2026</td><td>CFO permanent appointment</td><td>Governance</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">2026</td><td>800V DC customer deployments</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">2026</td><td>OBBBA/Section 48E tax credit clarity</td><td>Policy</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">2026</td><td>Oracle strategic partnership finalization</td><td>Commercial</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+          <tr><td class="label-cell">2026-27</td><td>Brookfield European AI data center deployment</td><td>Commercial</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Supply Commitments</h3>
+      <div class="grid-2">
+        <div>
+          <div class="field-label">AEP</div>
+          <p style="font-size: 14px;">1 GW framework → option exercised unconditionally Jan 2026. Phase plan: 104 MW → 300 MW → 800 MW → 1.5 GW. Deal value ~$2.65B. ASP: ~$2,950/kW.</p>
+        </div>
+        <div>
+          <div class="field-label">Brookfield</div>
+          <p style="font-size: 14px;">$5B partnership for global AI infrastructure. First investment through dedicated AI strategy. 6 hyperscaler customers in backlog (vs 1 a year ago).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 14 — SELL-SIDE LANDSCAPE -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s14">
+    <div class="section-header">
+      <span class="section-num">S14</span>
+      <h2 class="section-title">Sell-Side Landscape</h2>
+      <span class="section-cadence">material change</span>
+    </div>
+
+    <div class="callout" style="margin-bottom: 16px; font-size: 13px; color: var(--text-tertiary);">
+      <strong>Source:</strong> Internal Delta Framework compilation of active sell-side coverage. Analyst list, PTs, and ratings hand-collected from multiple aggregators (Benzinga, GuruFocus, Quiver Quantitative) and cross-referenced against earnings call participation as of late February 2026. Counts and medians may differ from any single provider's headline consensus due to inclusion/exclusion criteria (active coverage within 6 months, post-Q4 FY2025 update required). Full analyst-by-analyst detail in BE_Sellside_Analyst_Report.md.
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card">
+        <div class="stat-label">Identified Analysts</div>
+        <div class="stat-value">24</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Median PT (compiled)</div>
+        <div class="stat-value">~$130</div>
+        <div class="stat-delta delta-down">~3.8% below $135.19</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ratings (compiled)</div>
+        <div class="stat-value" style="font-size: 16px;">12 Buy · 9 Hold · 3 Sell</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Unusual dynamic:</strong> Compiled median target implies ~3.8% downside from March 6 close. 14 of 24 identified analysts have targets at or above $135.19. Post-Q4 2025, all identified analysts raised PTs based on available rating histories.
+    </div>
+
+    <div class="card-title" style="margin: 24px 0 12px;">Key Analysts</div>
+
+    <div class="analyst-card">
+      <div class="analyst-rating" style="color: var(--success);">OW</div>
+      <div class="analyst-body">
+        <div class="analyst-name">David Arcaro — Morgan Stanley</div>
+        <div class="analyst-pt">PT: $184 <span style="font-size: 12px; color: var(--text-tertiary);">(from $155)</span></div>
+        <p class="analyst-thesis">Proprietary 47 GW US data center power shortfall model (2025-2028). Bloom could deliver 5-8 GW alongside 15-20 GW gas turbines and 5-15 GW nuclear. Longest track record on name (PT: $29→$44→$85→$155→$184). Best structural demand/supply modeling.</p>
+      </div>
+    </div>
+
+    <div class="analyst-card">
+      <div class="analyst-rating" style="color: var(--error);">UP</div>
+      <div class="analyst-body">
+        <div class="analyst-name">Dimple Gosai — BofA Securities</div>
+        <div class="analyst-pt">PT: $71 <span style="font-size: 12px; color: var(--text-tertiary);">(from $39, +82%)</span></div>
+        <p class="analyst-thesis">Most rigorous bear. Independent supply chain intelligence showed revenue growth "well below" Street estimates for 2026-2028. Tracks factory utilization (<50% late 2025). Called Q4 a "clean beat" but maintained UP: "pricing in five-year perfection."</p>
+      </div>
+    </div>
+
+    <div class="analyst-card">
+      <div class="analyst-rating" style="color: var(--text-secondary);">EW</div>
+      <div class="analyst-body">
+        <div class="analyst-name">Michael Blum — Wells Fargo</div>
+        <div class="analyst-pt">PT: $130 <span style="font-size: 12px; color: var(--text-tertiary);">(from $95)</span></div>
+        <p class="analyst-thesis">Most differentiated data source: supply chain intelligence via MTAR Technologies (key Bloom supplier). Cumulative 15 GW by 2030 supports $172/share upside case but base case can't justify current price. Equal Weight since Feb 2023.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card" style="border-left: 3px solid var(--success);">
+        <h3 class="card-title">Notable Bull Case</h3>
+        <p style="font-size: 14px;">Structural 47 GW US power shortfall creates multi-year demand runway. Bloom is "most underappreciated beneficiary." Inference AI loads favor distributed 150-400MW sites — Bloom's sweet spot. $6B product backlog validates demand. PT range: $165-$207.</p>
+      </div>
+      <div class="card" style="border-left: 3px solid var(--error);">
+        <h3 class="card-title">Notable Bear Case</h3>
+        <p style="font-size: 14px;">Market paying today for 5+ years of flawless execution. Supply chain checks show revenue growth "well below" Street estimates. Factory utilization <50% late 2025. Forward P/E ~96× vs energy sector ~17×. Any single execution miss would be punitive. PT: $71-$102.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 15 — GUIDANCE & CREDIBILITY -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s15">
+    <div class="section-header">
+      <span class="section-num">S15</span>
+      <h2 class="section-title">Management Guidance & Credibility</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">FY2026 Forward Expectations — Company Guidance vs. House Estimate</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Company Guidance (midpoint)</th><th class="num">House Estimate ¹</th><th class="num">Street Consensus</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue</td><td class="num">$3.20B</td><td class="num" style="color:var(--primary);font-weight:600">$3.45B</td><td class="num">~$3.2B</td></tr>
+          <tr><td class="label-cell">Non-GAAP OpInc</td><td class="num">$450M</td><td class="num" style="color:var(--primary);font-weight:600">$556M</td><td class="num">—</td></tr>
+          <tr><td class="label-cell">Non-GAAP GM</td><td class="num">~32%</td><td class="num" style="color:var(--primary);font-weight:600">~32.7%</td><td class="num">—</td></tr>
+          <tr><td class="label-cell">CFO</td><td class="num">~$200M</td><td class="num" style="color:var(--primary);font-weight:600">~$224M</td><td class="num">—</td></tr>
+          <tr><td class="label-cell">CapEx</td><td class="num">$175M</td><td class="num">$175M</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top: 12px;">
+        <strong>¹ House estimate methodology:</strong> Company guidance midpoints adjusted upward using a sandbagging factor derived from FY2025 guidance vs. actual beats. Factor applied at <strong>50% weight</strong> per S6 caution (single-year history insufficient for full adjustment). FY2026 is first year of accelerated growth guidance — management may calibrate more accurately at scale.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Commitment Tracker — Delivery Rate: 83%</h3>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Service profitable every quarter — DELIVERED (8 consecutive Qs)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Double-digit annual product cost reductions — DELIVERED</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> CFO positive ~FY2024 level — DELIVERED ($114M vs $92M)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Absorb 100bps tariff impact within 29% GM — DELIVERED (30.3%)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Oracle power delivery in 90 days — EXCEEDED (55 days)</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Brookfield European data center by end 2025 — NOT CONFIRMED</div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Capital Allocation Score</h3>
+      <div class="progress-track"><div class="progress-fill" style="width: 55%;"></div></div>
+      <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--primary);">11 / 20</div>
+      <table class="data-table" style="margin-top: 12px;">
+        <thead><tr><th>Category</th><th class="num">Score</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">High-return investing</td><td class="num">4/5</td><td>2GW expansion, disciplined 2.8% CapEx</td></tr>
+          <tr><td class="label-cell">Acquisitions</td><td class="num">3/5</td><td>No M&A — appropriately focused on organic</td></tr>
+          <tr><td class="label-cell">Equity management</td><td class="num" style="color:var(--error)">1/5</td><td>22% dilution, no buyback, Oracle warrants</td></tr>
+          <tr><td class="label-cell">Balance sheet</td><td class="num">3/5</td><td>$2.5B cash vs $2.6B debt; 0% notes favorable</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="verdict-box">
+      <div>
+        <div class="verdict-label">Management Credibility</div>
+        <div class="verdict-value">Moderate</div>
+      </div>
+      <div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Beat on all 5 guided metrics (FY2025). 83% delivery rate. Offset by CFO vacancy, growing non-GAAP addbacks, and Brookfield European commitment not confirmed.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 16 — KILL CRITERIA -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s16">
+    <div class="section-header">
+      <span class="section-num">S16</span>
+      <h2 class="section-title">Kill Criteria</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+
+    <div class="callout danger" style="margin-bottom: 24px;">
+      <strong>RULE:</strong> If ANY criterion fires, execute the pre-committed action. Do not rationalize. Do not wait for "one more quarter of data."
+    </div>
+
+    <div class="kill-card">
+      <div class="kill-card-header">
+        <span class="kill-num">#1</span>
+        <span class="kill-title">Product Backlog Deceleration</span>
+        <span class="kill-action kill-reduce">REDUCE 50%</span>
+      </div>
+      <div class="kill-trigger"><strong>Trigger:</strong> Product backlog YoY growth &lt;50% for 2 consecutive quarters, excluding quarters where deceleration is attributed to accelerated conversion.</div>
+      <div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Product backlog YoY growth &lt;25% in ANY single quarter → EXIT</div>
+      <div class="kill-gap">Gap: Current 140% → trigger 50% (margin: 90pp)</div>
+    </div>
+
+    <div class="kill-card">
+      <div class="kill-card-header">
+        <span class="kill-num">#2</span>
+        <span class="kill-title">Gross Margin Compression</span>
+        <span class="kill-action kill-reduce">REDUCE 50%</span>
+      </div>
+      <div class="kill-trigger"><strong>Trigger:</strong> Non-GAAP gross margin &lt;28% on trailing 4-quarter basis for 2 consecutive quarters, excluding documented one-time costs.</div>
+      <div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Non-GAAP gross margin &lt;24% in ANY single quarter → REDUCE 50%</div>
+      <div class="kill-gap">Gap: Current 30.3% (T4Q) → trigger 28% (margin: 2.3pp)</div>
+    </div>
+
+    <div class="kill-card">
+      <div class="kill-card-header">
+        <span class="kill-num">#3</span>
+        <span class="kill-title">Customer Concentration Crisis</span>
+        <span class="kill-action kill-reduce">REDUCE 50%</span>
+      </div>
+      <div class="kill-trigger"><strong>Trigger:</strong> Related party revenue &gt;60% of trailing 4-quarter revenue AND product backlog from non-related-party customers declines YoY. Both conditions required.</div>
+      <div class="kill-gap">Gap: Current FY25 44% → trigger 60% T4Q + non-RP backlog decline</div>
+    </div>
+
+    <div class="kill-card">
+      <div class="kill-card-header">
+        <span class="kill-num">#4</span>
+        <span class="kill-title">Management Credibility Collapse</span>
+        <span class="kill-action kill-reassess">REASSESS</span>
+      </div>
+      <div class="kill-trigger"><strong>Trigger:</strong> Revenue misses guidance midpoint by &gt;10% for 2 consecutive periods OR permanent CFO not appointed by Dec 31, 2026.</div>
+      <div class="kill-gap">Gap: Current beat +15.7% → trigger -10% (margin: 25.7pp). CFO vacancy 10 months → deadline 21 months.</div>
+    </div>
+
+    <div class="kill-card">
+      <div class="kill-card-header">
+        <span class="kill-num">#5</span>
+        <span class="kill-title">Competitive Displacement</span>
+        <span class="kill-action kill-reassess">REASSESS</span>
+      </div>
+      <div class="kill-trigger"><strong>Trigger:</strong> A direct competitor announces commercial SOFC deployment for data center at &gt;10MW scale AND Bloom loses a documented head-to-head for a &gt;50MW project. Both conditions required.</div>
+      <div class="kill-gap">Gap: No competing commercial SOFC deployment exists today.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 17 — VALUATION FRAMEWORK -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s17">
+    <div class="section-header">
+      <span class="section-num">S17</span>
+      <h2 class="section-title">Valuation Framework</h2>
+      <span class="section-cadence">annual / thesis change</span>
+    </div>
+
+    <div class="callout" style="margin-bottom: 16px;">
+      <strong>Valuation as of:</strong> March 6, 2026 &nbsp;·&nbsp; Price: $135.19 &nbsp;·&nbsp; Shares: 280.0M &nbsp;·&nbsp; Net debt: $163.8M
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card">
+        <div class="stat-label">Market Cap</div>
+        <div class="stat-value">~$37.9B</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Enterprise Value</div>
+        <div class="stat-value">~$38.0B</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Fwd P/E (FY26)</div>
+        <div class="stat-value">~96×</div>
+        <div class="stat-delta delta-down">Energy avg ~17×</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Scenario Analysis (5-Year Horizon → FY2030)</h3>
+
+      <div class="scenario-bar bull">
+        <div class="scenario-label" style="color: var(--success);">Bull</div>
+        <div class="scenario-value" style="color: var(--success);">$150-$210</div>
+        <div class="scenario-prob">25%</div>
+        <div class="scenario-desc">Revenue ~$12B by FY30. Requires 2GW on time, 5GW by 2028, sustained 40%+ bookings growth, 800V DC standard, international >30%.</div>
+      </div>
+      <div class="scenario-bar base">
+        <div class="scenario-label" style="color: var(--primary);">Base</div>
+        <div class="scenario-value" style="color: var(--primary);">$100-$150</div>
+        <div class="scenario-prob">50%</div>
+        <div class="scenario-desc">Revenue ~$8B by FY30. Requires 2GW on time, 3-4GW by 2028, backlog conversion >50% YoY, margins >30%, competitive window holds.</div>
+      </div>
+      <div class="scenario-bar bear">
+        <div class="scenario-label" style="color: var(--error);">Bear</div>
+        <div class="scenario-value" style="color: var(--error);">$40-$80</div>
+        <div class="scenario-prob">25%</div>
+        <div class="scenario-desc">Revenue ~$4-5B by FY30. Capacity delays, competitive displacement, Brookfield slows, concentration persists.</div>
+      </div>
+
+      <div class="verdict-box" style="margin-top: 16px;">
+        <div>
+          <div class="verdict-label">Expected Value</div>
+          <div class="verdict-value" style="font-family: var(--font-mono);">$122.50</div>
+        </div>
+        <div style="font-size: 14px; color: var(--error); font-weight: 500;">~9.4% downside from $135.19 &nbsp;·&nbsp; Annualized: -2.0%</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Valuation Gap: <span style="color: var(--error);">Stretched</span></h3>
+      <p style="font-size: 14px; margin-bottom: 12px;">At $135.19 (March 6, 2026), the market implies ~30-35% revenue CAGR for 5 years. What you are betting on:</p>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border);">
+        1. AI data center power demand sustains >30% CAGR through 2030<br>
+        2. Manufacturing scales from 1GW to 3-5GW without Fremont failure<br>
+        3. Non-GAAP gross margins sustain >30% at scale<br>
+        4. Backlog conversion sustains >$3B annually<br>
+        5. No meaningful competitive displacement within 5-year window
+      </div>
+      <div class="callout warn" style="margin-top: 16px;">
+        <strong>Position sizing:</strong> Expected value $122.50 implies ~9.4% downside at $135.19. Valuation still stretched (~96× fwd P/E vs energy ~17×) but less extreme after -15.5% selloff. Size for >50% drawdown risk in bear scenario.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 18 — PRE-EARNINGS BASELINE -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s18">
+    <div class="section-header">
+      <span class="section-num">S18</span>
+      <h2 class="section-title">Rolling Quarterly Baseline & Pre-Earnings Checklist</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Q4 2025 Snapshot</h3>
+      <div class="grid-3">
+        <div><div class="field-label">Revenue</div><div class="field-value mono">$777.7M / $2,024.0M (FY)</div></div>
+        <div><div class="field-label">NG Gross Margin</div><div class="field-value mono">31.9% (Q4) / 30.3% (FY)</div></div>
+        <div><div class="field-label">FCF</div><div class="field-value mono">$395.1M (Q4) / $57.2M (FY)</div></div>
+        <div><div class="field-label">DSO</div><div class="field-value mono">44.0 days</div></div>
+        <div><div class="field-label">Diluted Shares</div><div class="field-value mono">315.1M</div></div>
+        <div><div class="field-label">ROIC</div><div class="field-value mono">23.7% (FY)</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Pre-Earnings Checklist for Q1 2026</h3>
+      <div class="card-subtitle">Earnings date: ~May 2026 (estimate)</div>
+
+      <div class="field-label" style="margin-top: 16px;">What the Market Needs to Hear</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">
+        1. Revenue pacing toward $3.1-3.3B guide (Q1 needs ~$470-520M given ~16% seasonal weight)<br>
+        2. Product backlog sustained >$6B<br>
+        3. 2GW capacity expansion on track
+      </div>
+
+      <div class="field-label">What to Check First (15-Minute Quick Assessment)</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">
+        1. Product backlog — sustain >$6B or grow?<br>
+        2. DSO vs Q1-2025 (92.2 days)<br>
+        3. FCF — will be heavily negative; compare to Q1-25 -$124.9M<br>
+        4. Guidance — maintained, raised, or lowered?<br>
+        5. Transcript search: "800V DC", "2 gigawatt", "Brookfield", "AEP", "backlog"<br>
+        6. Kill criteria check — any triggers approached?
+      </div>
+
+      <div class="field-label">Thresholds</div>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th class="num">Expectation</th><th class="num">Concern</th><th class="num">Kill Threshold</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">Revenue (Q1)</td><td class="num">~$520M (adj)</td><td class="num" style="color:var(--warning)">&lt;$470M</td><td class="num" style="color:var(--error)">&gt;10% miss of guide</td></tr>
+          <tr><td class="label-cell">NG Gross Margin</td><td class="num">28-32%</td><td class="num" style="color:var(--warning)">&lt;28%</td><td class="num" style="color:var(--error)">&lt;24% single Q</td></tr>
+          <tr><td class="label-cell">Backlog</td><td class="num">&gt;$6B</td><td class="num" style="color:var(--warning)">YoY &lt;50%</td><td class="num" style="color:var(--error)">YoY &lt;25% any Q</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="verdict-box">
+      <div>
+        <div class="verdict-label">Last Quarter Verdict</div>
+        <div class="verdict-value">Hold</div>
+      </div>
+      <div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Fundamentals improving but valuation stretched at ~96× fwd P/E. Conviction: Medium — thesis supported, expected value modestly below price (-9.4%).</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 19 — RISK INVENTORY -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s19">
+    <div class="section-header">
+      <span class="section-num">S19</span>
+      <h2 class="section-title">Risk Inventory</h2>
+      <span class="section-cadence">quarterly</span>
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 20px; text-align: center;">
+      <div class="stat-card" style="border-left: 3px solid var(--error);"><div class="stat-label">RED Risks</div><div class="stat-value" style="color: var(--error);">2</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--warning);"><div class="stat-label">YELLOW Risks</div><div class="stat-value" style="color: var(--warning);">5</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--success);"><div class="stat-label">GREEN Risks</div><div class="stat-value" style="color: var(--success);">3</div></div>
+    </div>
+
+    <div class="risk-card red">
+      <div class="risk-header">
+        <span class="risk-title">#1 — Valuation Compression</span>
+        <span class="badge badge-error">RED</span>
+      </div>
+      <div class="risk-meta">Financial · Severity: High · Probability: Medium</div>
+      <p class="risk-body">Stock at $135.19 (March 6) trades at ~96× FY26 forward P/E vs energy sector ~17×. Expected value $122.50 implies ~9.4% downside. 14 of 24 analysts have PTs at or above current price. Valuation risk partially de-risked by -15.5% selloff but any execution miss remains punitive at these multiples.</p>
+      <div class="risk-watch"><strong>Watch:</strong> Forward P/E vs earnings delivery pace, consensus PT revisions</div>
+    </div>
+
+    <div class="risk-card red">
+      <div class="risk-header">
+        <span class="risk-title">#3 — Customer / Related Party Concentration</span>
+        <span class="badge badge-error">RED</span>
+      </div>
+      <div class="risk-meta">Commercial · Severity: High · Probability: Medium</div>
+      <p class="risk-body">FY2025 related party revenue $892M (44.1%); Q4-25 alone ~$574M (73.8%). Top 3 customers = ~68% of revenue. Brookfield JV structure creates equity method losses ($40.4M FY25) while inflating top line. If either AEP or Brookfield relationship slows, revenue math fails.</p>
+      <div class="risk-watch"><strong>Watch:</strong> Related party % T4Q, non-Brookfield customer diversification, JV equity losses</div>
+    </div>
+
+    <div class="risk-card yellow">
+      <div class="risk-header">
+        <span class="risk-title">#2 — Manufacturing Concentration</span>
+        <span class="badge badge-warning">YELLOW</span>
+      </div>
+      <div class="risk-meta">Operational · Severity: High · Probability: Low</div>
+      <p class="risk-body">All SOFC cell printing at single Fremont, CA facility (164K sqft, earthquake zone). No manufacturing redundancy — a fire, earthquake, or supply chain disruption could halt production for months.</p>
+      <div class="risk-watch"><strong>Watch:</strong> Site diversification commentary, insurance adequacy, seismic events</div>
+    </div>
+
+    <div class="risk-card yellow">
+      <div class="risk-header">
+        <span class="risk-title">#4 — GE Vernova Competitive Threat</span>
+        <span class="badge badge-warning">YELLOW</span>
+      </div>
+      <div class="risk-meta">Competitive · Severity: Medium-High · Probability: Low</div>
+      <p class="risk-body">Developing SOFC technology; 2-3 years from commercial readiness. $36B+ revenue, global distribution, and utility install base. No deployed installations at scale yet. Analyst consensus: "5-7 years before mature."</p>
+    </div>
+
+    <div class="risk-card yellow">
+      <div class="risk-header">
+        <span class="risk-title">#5 — FCF Conversion / Cash Burn</span>
+        <span class="badge badge-warning">YELLOW</span>
+      </div>
+      <div class="risk-meta">Financial · Severity: Medium · Probability: Medium</div>
+      <p class="risk-body">FY25 FCF conversion 25.9% (below 40% threshold), deteriorated from 30.8% FY24. FY2026 guided CFO ~$200M minus CapEx $150-200M implies FCF $0-50M on $3.2B revenue.</p>
+    </div>
+
+    <div class="risk-card yellow">
+      <div class="risk-header">
+        <span class="risk-title">#6 — Dilution Trajectory</span>
+        <span class="badge badge-warning">YELLOW</span>
+      </div>
+      <div class="risk-meta">Financial · Severity: Medium · Probability: High</div>
+      <p class="risk-body">22% dilution FY2025. SBC $145M growing 2× revenue rate. 0% convertible notes ($2.5B, conv. price $194.97) could add ~12.8M shares. No buyback program. Dilution cost: 2,490 bps.</p>
+    </div>
+
+    <div class="risk-card yellow">
+      <div class="risk-header">
+        <span class="risk-title">#7 — CFO Vacancy</span>
+        <span class="badge badge-warning">YELLOW</span>
+      </div>
+      <div class="risk-meta">Governance · Severity: Medium · Probability: Medium</div>
+      <p class="risk-body">Vacant since May 1, 2025 (10 months). Interim PFO during most critical scaling year ($2B → $3.2B revenue). CEO: "sense of urgency but no sense of rush."</p>
+    </div>
+
+    <div class="risk-card green">
+      <div class="risk-header">
+        <span class="risk-title">#8 — Natural Gas ESG Tension</span>
+        <span class="badge badge-success">GREEN</span>
+      </div>
+      <div class="risk-meta">Regulatory · Severity: Medium · Probability: Low</div>
+      <p class="risk-body">Hyperscalers have aggressive carbon neutrality pledges while deploying nat gas fuel cells. Hydrogen-readiness provides optionality hedge but is theoretical at commercial scale.</p>
+    </div>
+
+    <div class="risk-card green">
+      <div class="risk-header">
+        <span class="risk-title">#9 — Tariff / Supply Chain Policy</span>
+        <span class="badge badge-success">GREEN</span>
+      </div>
+      <div class="risk-meta">Operational · Severity: Medium · Probability: Low</div>
+      <p class="risk-body">CEO states "not dependent on China" for scandium. Absorbed 100bps tariff impact within FY25 margins without pass-through.</p>
+    </div>
+
+    <div class="risk-card green">
+      <div class="risk-header">
+        <span class="risk-title">#10 — SMR / Alternative Baseload</span>
+        <span class="badge badge-success">GREEN</span>
+      </div>
+      <div class="risk-meta">Competitive · Severity: Low-Medium · Probability: Low</div>
+      <p class="risk-body">No commercial SMR in US. Most designs not deployable before 2030+. Regulatory hurdles significant. Not a near-term threat.</p>
+    </div>
+
+    <hr class="divider accent">
+
+    <div class="card">
+      <h3 class="card-title">Insider Activity — Verdict: Noteworthy</h3>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">NET SELLER pattern dominated by SK ecoplant block sale and CEO recurring sales.</p>
+      <table class="data-table">
+        <thead><tr><th>Insider</th><th>Action</th><th class="num">Amount</th><th>Context</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cell">SK ecoplant</td><td>Sold 10M shares</td><td class="num">$276M</td><td>Jul 2025; ownership 10.2% → ~4.8%</td></tr>
+          <tr><td class="label-cell">CEO Sridhar</td><td>~577K shares sold</td><td class="num">$50M total</td><td>3 clusters: Nov '24 ($3M, 10b5-1), Aug '25 ($13M, option exercise), Feb '26 ($34M, GRAT)</td></tr>
+          <tr><td class="label-cell">Others (Joshi, Snabe, Bush, Kurzymski)</td><td>Various sales</td><td class="num">~$27M</td><td>Mostly tax withholdings on stock awards</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top: 12px;">
+        <strong>Highest-signal:</strong> Feb 2026 CEO GRAT annuity payment ($34M at ~$170) — large dollar amount at peak price without explicit 10b5-1 plan disclosure. No open-market purchases identified among top insiders.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Correlated Risk Cluster</h3>
+      <p style="font-size: 14px; color: var(--text-secondary);">Risks #1 (valuation), #3 (concentration), and #5 (FCF) are correlated — if Brookfield JV deployment pace slows, revenue would miss consensus (triggering valuation compression at extreme multiples), concentration becomes more visible, and FCF deteriorates from higher working capital per dollar of revenue. This cluster represents the <strong>single largest threat</strong> to the thesis.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- CHECKLIST A — DOCUMENT INVENTORY -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="checkA">
+    <div class="section-header">
+      <span class="section-num">A</span>
+      <h2 class="section-title">Procedural Checklist A — Document Inventory</h2>
+    </div>
+
+    <div class="card">
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-K annual filing: FY2025, FY2024</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-Q quarterly filings: Q3-2024, Q1-2025, Q2-2025, Q3-2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Press releases: Q4-2024 through Q4-2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Earnings call transcripts: Q4-2024 through Q4-2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Investor presentations: April 2025, February 2026</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Proxy statement / DEF 14A: 2025</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Sell-side analyst report: Delta Framework compilation (24 analysts, sourced from Benzinga/GuruFocus/Quiver, pulled Feb 28, 2026)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Insider activity report: CEO, SK ecoplant, directors</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Extracted financial JSON: validated 15/15 PASS, 0 WARN, 0 FAIL</div>
+
+      <hr class="divider">
+      <div class="field-label">Documents Not Available (gaps)</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Q4 2023 earnings call transcript (limits guidance history to 1 year)</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Q1-Q3 2024 press releases</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Individual sell-side analyst reports</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Proxy statement for FY2025 compensation (not yet filed)</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- CHECKLIST B — CONSISTENCY AUDIT -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="checkB">
+    <div class="section-header">
+      <span class="section-num">B</span>
+      <h2 class="section-title">Procedural Checklist B — Consistency Audit</h2>
+    </div>
+
+    <div class="verdict-box" style="background: var(--success-subtle); border-color: var(--success);">
+      <div>
+        <div class="verdict-label">Audit Result (v2 — post-correction)</div>
+        <div class="verdict-value" style="color: var(--success);">PASS</div>
+      </div>
+      <div class="verdict-score" style="color: var(--success);">14/14</div>
+    </div>
+
+    <div class="callout warn" style="margin-bottom: 16px;">
+      <strong>Audit history:</strong> v1 (March 6, 2026) failed on: stale $155 price anchor (11 affected outputs), inventory turns calculation error (3.1× → 2.4×), unsourced sell-side data, unsourced moat/competitive claims. v2 corrected all numerical and sourcing issues. v2.1 resolved remaining internal consistency (>100× → ~96× in S2/S14 bear case text) and downgraded S14 sell-side block from consensus-provider framing to explicitly labeled internal compilation with methodology note. Re-audited March 12, 2026.
+    </div>
+
+    <div class="card">
+      <div class="field-label">Numerical (4/4)</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Segment sums match S4↔S8; share counts 315.1M consistent S9↔S10; FCF conversion 25.9% (FCF/NG OpInc) consistent S10↔S11; guidance $3.1-3.3B internally consistent S15. Inventory turns corrected to 2.4× using COGS/Avg Inventory formula.</p>
+
+      <div class="field-label">Narrative (6/6)</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Thesis supported by 77.8% scorecard; key metric at 2× weight; S5 L2 threat (GE Vernova) in S19 Risk #4; moat decay signals mapped; S6 sandbagger ↔ S15 moderate consistent; asset-heavy model classification drives FCF thresholds & Tier 2. Competitive claims sourced or softened to thesis-level language.</p>
+
+      <div class="field-label">Logical (4/4)</div>
+      <p style="font-size: 14px; color: var(--text-secondary);">Kill criteria thresholds well below current metrics (90pp backlog margin, 2.3pp GM margin); valuation at $135.19 implies 30-35% CAGR, achievable given S8 37.3% FY25 growth; catalyst timing aligns with revenue recognition; bear case reflected in S16 criteria #1-5 and S19 risks #1-5. S15 house estimates clearly labeled and separated from company guidance.</p>
+    </div>
+  </div>
+
+  <hr class="divider accent">
+  <p style="font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 24px;">
+    Delta Framework · Bloom Energy (BE) Configuration Card · Built March 6, 2026<br>
+    Anthropic Warm Humanist Design System · 19 Sections + 2 Procedural Checklists
+  </p>
+
+</main>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.style.background = '');
+        const id = entry.target.id;
+        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (activeLink) activeLink.style.background = 'rgba(196, 123, 90, 0.12)';
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Close mobile sidebar on link click
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
