@@ -86,9 +86,7 @@ export default function RootLayout({
               <span className="site-logo-brand">Alpha Sniper</span>
             </a>
             <nav className="site-nav">
-              <a href={SITE_URL}>Alpha</a>
-              <a href="https://theta.thevixguy.com">Theta</a>
-              <a href="https://thevixguy.com">Home</a>
+              <a href="/framework/" className="nav-btn-framework">Framework Explain</a>
             </nav>
           </div>
         </header>

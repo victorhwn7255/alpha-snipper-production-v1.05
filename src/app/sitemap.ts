@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 1.0,
     },
+    {
+      url: `${SITE_URL}/framework/`,
+      lastModified: new Date("2026-03-21"),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
     ...stockPages,
   ];
 }

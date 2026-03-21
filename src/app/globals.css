@@ -132,6 +132,28 @@ a:hover {
   color: var(--text-primary);
 }
 
+.nav-btn-framework {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 18px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--primary) !important;
+  background: var(--primary-subtle);
+  border: 1px solid rgba(212, 149, 111, 0.25);
+  border-radius: 8px;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.nav-btn-framework:hover {
+  color: var(--primary-hover) !important;
+  background: rgba(212, 149, 111, 0.18);
+  border-color: rgba(212, 149, 111, 0.4);
+  box-shadow: 0 0 12px rgba(212, 149, 111, 0.15);
+  transform: translateY(-1px);
+}
+
 /* ═══════════════════════════════════════════════════
    Landing Page
    ═══════════════════════════════════════════════════ */
@@ -197,6 +219,9 @@ a:hover {
 }
 
 .ticker-quarter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
@@ -205,6 +230,49 @@ a:hover {
   padding: 3px 10px;
   border-radius: 999px;
   letter-spacing: 0.02em;
+}
+
+.signal-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.signal-bullish {
+  background: var(--success);
+  box-shadow: 0 0 4px rgba(130, 184, 110, 0.5);
+}
+
+.signal-cautious {
+  background: var(--warning);
+  box-shadow: 0 0 4px rgba(212, 174, 110, 0.5);
+}
+
+.ticker-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticker-verdict {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.ticker-verdict-hold {
+  color: var(--text-secondary);
+  background: var(--surface-alt);
+}
+
+.ticker-verdict-buy {
+  color: var(--success);
+  background: var(--success-subtle);
 }
 
 .ticker-company {
@@ -218,13 +286,216 @@ a:hover {
 .ticker-sector {
   font-size: 13px;
   color: var(--text-tertiary);
+  margin-bottom: 14px;
+}
+
+.ticker-data {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
   margin-bottom: 12px;
 }
 
-.ticker-description {
+.ticker-key-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.ticker-key-metric-label {
+  font-family: var(--font-sans);
+  color: var(--text-tertiary);
+}
+
+.ticker-key-metric-value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.ticker-scorecard {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.ticker-scorecard.score-green {
+  color: var(--success);
+}
+
+.ticker-scorecard.score-amber {
+  color: var(--warning);
+}
+
+.ticker-scorecard.score-red {
+  color: var(--error);
+}
+
+.ticker-thesis {
+  font-family: var(--font-serif);
   font-size: 14px;
+  font-style: italic;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════
+   Framework Page
+   ═══════════════════════════════════════════════════ */
+
+/* Hero overrides — centered for framework page */
+.landing.framework-landing h1 {
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landing.framework-landing .landing-subtitle {
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 56px;
+}
+
+.framework-section {
+  max-width: 960px;
+  margin: 0 auto 56px;
+}
+
+.framework-section h2 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.framework-section h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.framework-section p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.framework-overview-table,
+.framework-section-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+  display: table;
+}
+
+.framework-overview-table th,
+.framework-section-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-strong);
+  background: var(--surface);
+}
+
+.framework-overview-table td,
+.framework-section-table td {
+  padding: 10px 16px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.framework-overview-table tbody tr:hover,
+.framework-section-table tbody tr:hover {
+  background: var(--surface);
+}
+
+/* Three governing questions — horizontal card grid */
+.framework-questions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.framework-phase {
+  border-top: 3px solid var(--border-strong);
+  padding: 20px;
+  background: var(--surface);
+  border-radius: 0 0 10px 10px;
+}
+
+.framework-phase h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.framework-phase p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.framework-cta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.framework-cta-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.framework-cta-link:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.framework-cta-ticker {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.framework-cta-company {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.framework-cta-sector {
+  font-size: 13px;
+  color: var(--text-tertiary);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -315,7 +586,7 @@ a:hover {
 .section-nav-phases {
   display: flex;
   gap: 4px;
-  padding: 3px 0;
+  padding: 6px 0 3px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -506,6 +777,21 @@ a:hover {
   .ticker-grid {
     grid-template-columns: 1fr;
   }
+  .framework-overview-table,
+  .framework-section-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .framework-questions-grid {
+    grid-template-columns: 1fr;
+  }
+  .framework-cta {
+    grid-template-columns: 1fr;
+  }
+  .framework-section h2 {
+    font-size: 22px;
+  }
   .analysis-content .main {
     padding: 32px 0 40px 0;
   }
@@ -556,6 +842,18 @@ a:hover {
   }
   .ticker-nav-btn {
     padding: 6px 10px;
+  }
+
+  /* Framework page — compact tables on phones */
+  .framework-phase {
+    padding: 12px 16px;
+  }
+  .framework-overview-table th,
+  .framework-section-table th,
+  .framework-overview-table td,
+  .framework-section-table td {
+    padding: 8px 12px;
+    font-size: 13px;
   }
 
   /* Landing page — tighter mobile layout */

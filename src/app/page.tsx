@@ -44,17 +44,11 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
       <main className="landing">
-        <h1>Stock Analysis &amp; Investment Research</h1>
-        <p className="landing-subtitle">
-          In-depth fundamental analysis for high-conviction stocks. Each report
-          covers investment thesis, financial metrics, competitive moat,
-          management assessment, risk framework, and valuation — built on a
-          structured 19-section framework designed for rigorous, repeatable
-          research.
-        </p>
         <div className="ticker-grid">
           {TICKERS.map((ticker) => {
             const stock = STOCKS[ticker];
+            const scorePct = parseInt(stock.scorecard);
+            const scoreColor = scorePct >= 60 ? "score-green" : scorePct >= 20 ? "score-amber" : "score-red";
             return (
               <a
                 key={ticker}
@@ -68,13 +62,30 @@ export default function HomePage() {
                   >
                     {ticker}
                   </span>
-                  <span className="ticker-quarter">
-                    {stock.earningsQuarter}
-                  </span>
+                  <div className="ticker-card-badges">
+                    <span className={`ticker-verdict ticker-verdict-${stock.verdict.toLowerCase()}`}>
+                      {stock.verdict}
+                    </span>
+                    <span className="ticker-quarter">
+                      <span className={`signal-dot signal-${stock.signal}`} />
+                      {stock.earningsQuarter}
+                    </span>
+                  </div>
                 </div>
                 <div className="ticker-company">{stock.company}</div>
                 <div className="ticker-sector">{stock.sector}</div>
-                <div className="ticker-description">{stock.description}</div>
+                <div className="ticker-data">
+                  <div className="ticker-key-metric">
+                    <span className="ticker-key-metric-label">{stock.keyMetric}</span>
+                    <span className="ticker-key-metric-value">{stock.keyMetricValue}</span>
+                  </div>
+                  <div className={`ticker-scorecard ${scoreColor}`}>
+                    Scorecard: {stock.scorecard}
+                  </div>
+                </div>
+                <div className="ticker-thesis">
+                  &ldquo;{stock.thesis}&rdquo;
+                </div>
               </a>
             );
           })}

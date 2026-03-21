@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumentum (LITE) — Configuration Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C47B5A;
+    --primary-hover: #B06A4A;
+    --primary-subtle: rgba(196, 123, 90, 0.12);
+    --secondary: #7D8C6E;
+    --secondary-subtle: rgba(125, 140, 110, 0.12);
+    --accent: #8B8FC7;
+    --accent-subtle: rgba(139, 143, 199, 0.12);
+    --bg: #FAF7F4;
+    --bg-alt: #F5F0EB;
+    --surface: #FFFFFF;
+    --surface-alt: #F0EAE2;
+    --text-primary: #2D2824;
+    --text-secondary: #6B5F54;
+    --text-tertiary: #9A8E82;
+    --border: #E8E0D5;
+    --border-strong: #D1C7B8;
+    --border-subtle: #F0EAE2;
+    --success: #6B8C5A;
+    --success-subtle: rgba(107, 140, 90, 0.12);
+    --warning: #C49A5A;
+    --warning-subtle: rgba(196, 154, 90, 0.12);
+    --error: #C45A5A;
+    --error-subtle: rgba(196, 90, 90, 0.12);
+    --amber: #B8927A;
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --shadow-sm: 0 1px 2px rgba(45,40,36,0.05);
+    --shadow-md: 0 2px 8px rgba(45,40,36,0.06), 0 1px 2px rgba(45,40,36,0.04);
+    --shadow-lg: 0 4px 16px rgba(45,40,36,0.08), 0 2px 4px rgba(45,40,36,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto; z-index: 30;
+    padding: 32px 0 48px 0;
+    transition: transform 0.3s ease;
+  }
+  .sidebar-logo {
+    padding: 0 24px 24px 24px;
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h2 {
+    font-family: var(--font-serif);
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: -0.02em;
+  }
+  .sidebar-logo .ticker {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 0.04em; margin-top: 4px;
+  }
+  .nav-group { padding: 8px 16px; }
+  .nav-group-label {
+    font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 8px 4px;
+  }
+  .nav-link {
+    display: block; padding: 6px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .nav-link:hover { background: var(--primary-subtle); color: var(--text-primary); }
+  .nav-link .snum {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-right: 4px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 280px; max-width: 960px;
+    padding: 48px 56px 120px 56px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 48px 0 40px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    color: var(--primary); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif); font-size: 42px; font-weight: 400;
+    color: var(--text-primary); line-height: 1.15;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 32px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text-tertiary); letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-mono); font-size: 22px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .stat-delta {
+    font-family: var(--font-mono); font-size: 12px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--success); }
+  .delta-down { color: var(--error); }
+  .delta-neutral { color: var(--text-tertiary); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 12px; margin-bottom: 24px;
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; color: var(--primary);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--font-serif); font-size: 24px;
+    font-weight: 500; color: var(--text-primary);
+    letter-spacing: -0.02em; line-height: 1.3;
+  }
+  .section-cadence {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-tertiary); margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .field-group {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: var(--text-tertiary);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-value {
+    font-size: 15px; color: var(--text-primary); line-height: 1.6;
+  }
+  .field-value.mono {
+    font-family: var(--font-mono); font-size: 14px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: var(--font-serif); font-size: 18px;
+    font-weight: 500; color: var(--text-primary);
+    margin-bottom: 12px; line-height: 1.3;
+  }
+  .card-subtitle {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--text-secondary); margin-bottom: 16px;
+  }
+
+  /* Product architecture cards */
+  .product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .product-card.core { border-left-color: var(--primary); }
+  .product-card.supporting { border-left-color: var(--secondary); }
+  .product-card.legacy { border-left-color: var(--text-tertiary); }
+  .product-card.emerging { border-left-color: var(--accent); }
+
+  .product-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .product-name {
+    font-family: var(--font-serif); font-size: 17px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .product-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .badge-primary { background: var(--primary-subtle); color: #9C5D3F; }
+  .badge-secondary { background: var(--secondary-subtle); color: #4A5A3E; }
+  .badge-accent { background: var(--accent-subtle); color: #6B6FA9; }
+  .badge-success { background: var(--success-subtle); color: #4A6B3A; }
+  .badge-warning { background: var(--warning-subtle); color: #8B6B3A; }
+  .badge-error { background: var(--error-subtle); color: #9C3A3A; }
+  .badge-neutral { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  /* Risk severity dots */
+  .severity-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px; vertical-align: middle;
+  }
+  .dot-red { background: var(--error); }
+  .dot-yellow { background: var(--warning); }
+  .dot-green { background: var(--success); }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%; border-collapse: collapse;
+    margin-bottom: 20px; font-size: 14px;
+  }
+  .data-table thead th {
+    font-family: var(--font-sans); font-size: 11px;
+    font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-bottom: 2px solid var(--primary);
+    padding: 10px 12px; text-align: left;
+  }
+  .data-table thead th.num { text-align: right; }
+  .data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+  .data-table tbody td.num {
+    font-family: var(--font-mono); font-size: 13px;
+    text-align: right; white-space: nowrap;
+  }
+  .data-table tbody td.label-cell {
+    font-weight: 500; color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .data-table tbody tr:hover {
+    background: rgba(196, 123, 90, 0.04);
+  }
+  .data-table tbody tr:last-child td { border-bottom: 1px solid var(--border-strong); }
+
+  /* ── RISK CARDS ── */
+  .risk-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 12px; box-shadow: var(--shadow-sm);
+  }
+  .risk-card.red { border-left: 4px solid var(--error); }
+  .risk-card.yellow { border-left: 4px solid var(--warning); }
+  .risk-card.green { border-left: 4px solid var(--success); }
+  .risk-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 8px;
+  }
+  .risk-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .risk-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .risk-body {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  }
+  .risk-watch {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13px; color: var(--text-tertiary);
+  }
+
+  /* ── CALLOUT / FLAG ── */
+  .callout {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0; padding: 14px 18px;
+    margin: 16px 0; font-size: 14px; color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .callout.warn {
+    border-left-color: var(--warning);
+    background: var(--warning-subtle);
+  }
+  .callout.danger {
+    border-left-color: var(--error);
+    background: var(--error-subtle);
+  }
+  .callout.success {
+    border-left-color: var(--success);
+    background: var(--success-subtle);
+  }
+  .callout strong { color: var(--text-primary); }
+
+  /* ── SCENARIO BARS ── */
+  .scenario-bar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    margin-bottom: 10px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .scenario-bar.bull { border-left: 4px solid var(--success); }
+  .scenario-bar.base { border-left: 4px solid var(--primary); }
+  .scenario-bar.bear { border-left: 4px solid var(--error); }
+  .scenario-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; min-width: 50px;
+  }
+  .scenario-value {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 500; min-width: 110px;
+  }
+  .scenario-prob {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .scenario-desc {
+    font-size: 13px; color: var(--text-secondary); flex: 1;
+  }
+
+  /* ── SCORECARD ── */
+  .score-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border-subtle);
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-metric {
+    flex: 1; font-size: 14px; color: var(--text-primary);
+  }
+  .score-weight {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); min-width: 40px; text-align: center;
+  }
+  .score-badge {
+    font-family: var(--font-mono); font-size: 13px;
+    font-weight: 600; min-width: 40px; text-align: center;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .score-plus { background: var(--success-subtle); color: #4A6B3A; }
+  .score-minus { background: var(--error-subtle); color: #9C3A3A; }
+  .score-zero { background: var(--surface-alt); color: var(--text-tertiary); }
+
+  /* ── KILL CRITERION ── */
+  .kill-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .kill-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .kill-num {
+    font-family: var(--font-mono); font-size: 12px;
+    font-weight: 600; color: var(--primary);
+  }
+  .kill-title {
+    font-family: var(--font-serif); font-size: 16px;
+    font-weight: 500; color: var(--text-primary); flex: 1;
+    margin-left: 10px;
+  }
+  .kill-action {
+    font-family: var(--font-mono); font-size: 11px;
+    font-weight: 600; padding: 3px 10px; border-radius: 4px;
+  }
+  .kill-reduce { background: var(--warning-subtle); color: #8B6B3A; }
+  .kill-exit { background: var(--error-subtle); color: #9C3A3A; }
+  .kill-reassess { background: var(--accent-subtle); color: #6B6FA9; }
+
+  .kill-trigger {
+    font-size: 14px; color: var(--text-primary); margin-bottom: 8px;
+    padding: 10px 14px; background: var(--bg-alt); border-radius: 6px;
+    line-height: 1.5;
+  }
+  .kill-gap {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-tertiary); margin-top: 8px;
+  }
+
+  /* ── ANALYST CARDS ── */
+  .analyst-card {
+    display: flex; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-bottom: 10px;
+  }
+  .analyst-rating {
+    writing-mode: vertical-lr; text-orientation: mixed;
+    font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 0;
+    display: flex; align-items: center;
+  }
+  .analyst-body { flex: 1; }
+  .analyst-name {
+    font-family: var(--font-serif); font-size: 15px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .analyst-firm {
+    font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+  }
+  .analyst-pt {
+    font-family: var(--font-mono); font-size: 16px;
+    font-weight: 600; color: var(--primary); margin-bottom: 6px;
+  }
+  .analyst-thesis {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    height: 6px; background: var(--border);
+    border-radius: 999px; overflow: hidden; margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 999px;
+    background: var(--primary);
+    transition: width 0.6s ease;
+  }
+
+  /* ── GRID HELPERS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  .divider.accent { border-top: 2px solid var(--primary); }
+
+  /* ── VERDICT BOX ── */
+  .verdict-box {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 20px 0;
+  }
+  .verdict-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .verdict-value {
+    font-family: var(--font-serif); font-size: 20px;
+    font-weight: 500; color: var(--text-primary);
+  }
+  .verdict-score {
+    font-family: var(--font-mono); font-size: 28px;
+    font-weight: 600; color: var(--primary);
+    margin-left: auto;
+  }
+
+  /* ── CHECKLIST ── */
+  .check-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 6px 0; font-size: 14px; color: var(--text-secondary);
+  }
+  .check-icon { font-size: 16px; line-height: 1.4; }
+  .check-pass .check-icon { color: var(--success); }
+  .check-fail .check-icon { color: var(--error); }
+  .check-open .check-icon { color: var(--text-tertiary); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none; position: fixed; top: 16px; left: 16px;
+    z-index: 40; width: 44px; height: 44px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px;
+    color: var(--text-primary);
+  }
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 48px 24px 120px; }
+    .menu-toggle { display: flex; align-items: center; justify-content: center; }
+    .hero h1 { font-size: 30px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; max-width: 100%; }
+  }
+</style>
+</head><body>
+
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<nav class="sidebar">
+  <div class="sidebar-logo"><h2>Lumentum Holdings</h2><div class="ticker">NASDAQ: LITE &nbsp;·&nbsp; Configuration Card</div></div>
+  <div class="nav-group"><div class="nav-group-label">Foundation (Phase 1)</div>
+    <a class="nav-link" href="#s1"><span class="snum">S1</span> Identity & Classification</a><a class="nav-link" href="#s2"><span class="snum">S2</span> Thesis & Key Metric</a><a class="nav-link" href="#s3"><span class="snum">S3</span> Product Architecture</a><a class="nav-link" href="#s4"><span class="snum">S4</span> Revenue Stream Map</a><a class="nav-link" href="#s5"><span class="snum">S5</span> Competitive Context & Moat</a><a class="nav-link" href="#s6"><span class="snum">S6</span> Management Team</a><a class="nav-link" href="#s7"><span class="snum">S7</span> Acceleration Table</a></div>
+  <div class="nav-group"><div class="nav-group-label">Financials (Phase 2)</div>
+    <a class="nav-link" href="#s8"><span class="snum">S8</span> Income Statement</a><a class="nav-link" href="#s9"><span class="snum">S9</span> Balance Sheet</a><a class="nav-link" href="#s10"><span class="snum">S10</span> Cash Flow & Quality</a><a class="nav-link" href="#s11"><span class="snum">S11</span> Scorecard</a><a class="nav-link" href="#s12"><span class="snum">S12</span> Tier 2 Metrics</a></div>
+  <div class="nav-group"><div class="nav-group-label">Catalysts & Sell-Side (Phase 3)</div>
+    <a class="nav-link" href="#s13"><span class="snum">S13</span> Catalyst Pipeline</a><a class="nav-link" href="#s14"><span class="snum">S14</span> Sell-Side Landscape</a><a class="nav-link" href="#s15"><span class="snum">S15</span> Guidance & Credibility</a></div>
+  <div class="nav-group"><div class="nav-group-label">Risk & Valuation (Phase 4)</div>
+    <a class="nav-link" href="#s16"><span class="snum">S16</span> Kill Criteria</a><a class="nav-link" href="#s17"><span class="snum">S17</span> Valuation Framework</a><a class="nav-link" href="#s18"><span class="snum">S18</span> Pre-Earnings Baseline</a><a class="nav-link" href="#s19"><span class="snum">S19</span> Risk Inventory</a></div>
+  <div class="nav-group"><div class="nav-group-label">Audit</div>
+    <a class="nav-link" href="#checkA">Checklist A — Documents</a><a class="nav-link" href="#checkB">Checklist B — Consistency</a></div>
+</nav>
+<main class="main">
+  <div class="hero"><div class="hero-eyebrow">Delta Framework · Configuration Card</div>
+    <h1>Lumentum Holdings Inc.</h1>
+    <div class="hero-meta">NASDAQ: LITE &nbsp;·&nbsp; Optical & Photonic Components / AI Infrastructure<br>Built: March 20, 2026 &nbsp;·&nbsp; Most recent quarter: Q2 FY2026 (ended Dec 27, 2025)<br>Dynamic market sections refreshed: Mar 20, 2026 14:13 UTC (price anchor: $715.22)</div>
+    <div class="hero-stats">
+      <div class="stat-card"><div class="stat-label">Q2 FY26 Revenue</div><div class="stat-value">$665.5M</div><div class="stat-delta delta-up">+65.5% YoY</div></div>
+      <div class="stat-card"><div class="stat-label">Non-GAAP OM</div><div class="stat-value">25.2%</div><div class="stat-delta delta-up">Path to 40% target</div></div>
+      <div class="stat-card"><div class="stat-label">Scorecard</div><div class="stat-value">55.6%</div><div class="stat-delta delta-neutral">Mixed / stable</div></div>
+      <div class="stat-card"><div class="stat-label">Scenario Value</div><div class="stat-value">$550</div><div class="stat-delta delta-down">-23% from $715.22</div></div>
+    </div></div>
+
+  <!-- S1 --><div class="section" id="s1"><div class="section-header"><span class="section-num">S1</span><span class="section-title">Identity & Model Classification</span><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2"><div><div class="field-group"><div class="field-label">Ticker</div><div class="field-value mono">LITE</div></div><div class="field-group"><div class="field-label">Company</div><div class="field-value">Lumentum Holdings Inc.</div></div><div class="field-group"><div class="field-label">Sector</div><div class="field-value">Optical & Photonic Components / AI Infrastructure</div></div></div><div><div class="field-group"><div class="field-label">Position Established</div><div class="field-value mono">N/A / not specified</div></div><div class="field-group"><div class="field-label">Model Type</div><div class="field-value">Vertically integrated photonic semiconductor manufacturer — InP wafer fab + backend assembly/test + systems integration</div></div></div></div>
+    <div class="card" style="margin-top: 16px;"><div class="card-title">Normal Operating Profile</div>
+      <p>Operates four InP wafer fabs (Japan ×2, UK, US ×1) plus Greensboro (acquired Mar 18, 2026 from Qorvo; converting to InP, first production CY2028) + backend assembly/test (Thailand, China, US). Revenue: Components (~67%) and Systems (~33%). Non-GAAP GM transitioning from 25-28% trough toward 42-48% at scale. Operating margins on path from negative to 40% long-term target. FCF currently negative (FY2025: -$104.7M) due to heavy capacity CapEx ($231M FY2025); should normalize to 50-80% post-buildout.</p>
+      <hr class="divider">
+      <table class="data-table"><thead><tr><th>Parameter</th><th>Setting</th></tr></thead><tbody>
+        <tr><td class="label-cell">FCF conversion</td><td>Capital-intensive: 50-80% at normalized scale. This card uses FCF / GAAP net income unless stated otherwise; annual is the preferred horizon during buildout.</td></tr>
+        <tr><td class="label-cell">Tier 2 metrics</td><td>Capacity utilization (InP output growth), inventory days, customer concentration, Components/Systems mix</td></tr>
+        <tr><td class="label-cell">DSO interpretation</td><td>B2B hyperscaler/NEM. Normal range 45-55 days. Q2 FY26: 51.5 days.</td></tr>
+        <tr><td class="label-cell">Catalyst calendar</td><td>Capacity milestones, 100G→200G EML transition, 800G→1.6T transceivers, OCS/CPO orders, Greensboro fab (CY2028)</td></tr>
+      </tbody></table></div></div>
+
+  <!-- S2 --><div class="section" id="s2"><div class="section-header"><span class="section-num">S2</span><span class="section-title">Thesis & Key Metric</span><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card"><div class="card-title">Falsifiable Thesis Statement</div>
+      <p>Lumentum's leadership position in InP EML laser chips — the photonic bottleneck inside high-speed optical modules — combined with vertical integration spanning components to systems (transceivers, OCS, CPO lasers), supports the case for <strong>50%+ YoY revenue growth through FY2027</strong> as AI demand drives quarterly revenue from $665M toward management's <strong>$2B/quarter target</strong> within roughly 18-24 months, with non-GAAP operating margins expanding from 25% toward 40%.</p>
+      <div class="callout warn" style="margin-top: 16px;"><strong>Falsification triggers:</strong> Revenue YoY &lt;40% for 2Q | Non-GAAP OM declining QoQ for 2Q AND &lt;25% | EML share &lt;40% | Liquidity &lt;$500M AND Debt/EBITDA &gt;8×</div></div>
+    <div class="card"><div class="card-title">3-Sentence Bear Case</div>
+      <p style="color: var(--error);">Competition from silicon photonics and Coherent's 6-inch InP line could erode EML demand and compress margins, while any hyperscaler capex slowdown would reduce backlog visibility and leave customer concentration elevated (Q2 FY26 top-2 customers represented 24% and 17% of revenue). NVIDIA's March 2026 nonexclusive strategic agreement and $2B investment strengthen demand visibility but still leave architecture and customer concentration risk if any major customer shifts design choices or internalizes lasers. $3.2B in convertible debt and 27.4% YoY diluted-share growth amplify financial risk while BIS/DOJ subpoenas add operational uncertainty.</p></div>
+    <div class="card" style="border-left: 3px solid var(--primary);"><div class="card-title">Key Metric: Revenue YoY Growth Rate (%)</div>
+      <div class="grid-2" style="margin-bottom: 12px;"><div>
+          <div class="field-label">Current Value (Q2 FY26)</div>
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 600; color: var(--success);">+65.5% YoY</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-tertiary);">$665.5M vs $402.2M · Accelerating from +58.4%</div></div>
+        <div><div class="field-label">3-Quarter Trajectory ($M)</div>
+          <div style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary); line-height: 1.8;">$480.7 (+55.9%) → $533.8 (+58.4%) → $665.5 (+65.5%)<br>Q3 FY26 guide: $780-830M (~85%+ YoY per CEO)<br>Management commentary indicates strong demand visibility into CY2027</div></div></div></div></div>
+
+  <!-- S3 --><div class="section" id="s3"><div class="section-header"><span class="section-num">S3</span><span class="section-title">Business Model & Product Architecture</span><span class="section-cadence">annual / thesis change</span></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">1. EML Laser Chips (100G/200G InP)</span><div class="product-badges"><span class="badge badge-primary">Core</span><span class="badge badge-secondary">Leadership position</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Photonic engine in high-speed optical modules. 8 EMLs per 800G module; 512 per 51.2 Tbps switch. 200G EMLs carry roughly 2× the ASP of 100G parts. Management commentary continues to point to tight supply and strong visibility through CY2027. Vertical integration runs from InP epitaxy to die packaging.</p></div>
+    <div class="product-card core"><div class="product-header"><span class="product-name">2. Cloud Transceivers (800G/1.6T — CloudLight)</span><div class="product-badges"><span class="badge badge-primary">Growth</span><span class="badge badge-secondary">Scale</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Complete 800G/1.6T OSFP/QSFP-DD modules. CloudLight acquisition ($750M, Nov 2023) expanded SAM 5×. 1.6T margins "significantly better than 800G." Revenue growing beyond initial $1B annual cap. CW laser vertical integration planned late Q2/early Q3 FY26.</p></div>
+    <div class="product-card emerging"><div class="product-header"><span class="product-name">3. Optical Circuit Switches (R300 MEMS)</span><div class="product-badges"><span class="badge badge-accent">Growth / Emerging</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Replaces electrical spine switches. 3D MEMS beam-steering enables any-to-any optical paths in milliseconds with materially lower power than comparable electrical fabrics. At OFC 2026, management said OCS backlog exceeded $400M, the first $10M quarter arrived about three months early, and a new multi-billion-dollar third OCS order had been secured.</p></div>
+    <div class="product-card emerging"><div class="product-header"><span class="product-name">4. Co-Packaged Optics / UHP Lasers</span><div class="product-badges"><span class="badge badge-accent">Emerging</span><span class="badge badge-primary">NVIDIA strategic partner</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Ultra-high-power InP lasers for CPO. NVIDIA's March 2026 agreement with Lumentum is explicitly nonexclusive, but it includes a multibillion purchase commitment, future capacity access rights, and a $2B strategic investment. At OFC 2026, management highlighted 800+ mW performance exceeding 1.0 W at 25°C and framed CPO as a 2027+ commercialization vector.</p></div>
+    <div class="product-card supporting"><div class="product-header"><span class="product-name">5. Telecom & DCI Components</span><div class="product-badges"><span class="badge badge-neutral">Core (Legacy)</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Tunable lasers, coherent components, pump lasers, ROADMs. Narrow-linewidth assemblies grew 8 consecutive quarters. Pump lasers +90% YoY in Q2. Stable cash flow but lower growth than cloud/AI.</p></div>
+    <div class="product-card legacy"><div class="product-header"><span class="product-name">6. Industrial Tech</span><div class="product-badges"><span class="badge badge-neutral">Legacy / Optionality</span></div></div><p style="font-size: 14px; color: var(--text-secondary);">Fiber lasers, 3D sensing VCSELs, ultrafast lasers. 3D sensing grew modestly on new smartphone launch. PicoBlade Compact design win funnel expanding. Not thesis-critical but provides diversification.</p></div></div>
+
+  <!-- S4 --><div class="section" id="s4"><div class="section-header"><span class="section-num">S4</span><span class="section-title">Revenue Stream Map</span><span class="section-cadence">annual / thesis change</span></div>
+    <div class="card"><div class="card-title">FY2025 Revenue: $1,645.0M <span style="color: var(--success); font-family: var(--font-mono); font-size: 14px;">(+20.9% YoY)</span></div>
+      <table class="data-table"><thead><tr><th>Stream</th><th class="num">FY25 Est</th><th class="num">% Rev</th><th class="num">FY24 Est</th><th>Thesis Role</th></tr></thead><tbody>
+        <tr><td class="label-cell">Components (EML, CW, pump, tunable)</td><td class="num">~$1.1B</td><td class="num">~66%</td><td class="num">~$0.9B</td><td><span class="badge badge-primary">Thesis-Critical</span></td></tr>
+        <tr><td class="label-cell">Systems (transceivers, OCS, industrial)</td><td class="num">~$0.6B</td><td class="num">~34%</td><td class="num">~$0.5B</td><td><span class="badge badge-secondary">Growth Engine</span></td></tr>
+        <tr style="font-weight:600"><td>Total</td><td class="num">$1,645.0M</td><td class="num">100%</td><td class="num">$1,360.6M</td><td></td></tr>
+      </tbody></table>
+      <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 8px;">Single reportable segment since Q1 FY2026. Revenue disaggregated by Components vs Systems. Q3/Q4 FY25 splits not available (legacy C&N/IT segments pre-restatement).</p></div>
+    <div class="card"><div class="card-title">Quarterly Revenue Progression ($M)</div>
+      <table class="data-table"><thead><tr><th></th><th class="num">Total</th><th class="num">Components</th><th class="num">Systems</th><th class="num">Comp%</th><th class="num">QoQ</th></tr></thead><tbody>
+        <tr><td class="label-cell">Q2 FY25</td><td class="num">402.2</td><td class="num">263.7</td><td class="num">138.5</td><td class="num">65.6%</td><td class="num">—</td></tr>
+        <tr><td class="label-cell">Q3 FY25</td><td class="num">425.2</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">+5.7%</td></tr>
+        <tr><td class="label-cell">Q4 FY25</td><td class="num">480.7</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">N/A</td><td class="num">+13.1%</td></tr>
+        <tr><td class="label-cell">Q1 FY26</td><td class="num">533.8</td><td class="num">379.2</td><td class="num">154.6</td><td class="num">71.0%</td><td class="num">+11.0%</td></tr>
+        <tr><td class="label-cell">Q2 FY26</td><td class="num">665.5</td><td class="num">443.7</td><td class="num">221.8</td><td class="num">66.7%</td><td class="num">+24.7%</td></tr>
+      </tbody></table>
+      <div class="callout" style="margin-top: 12px;"><strong>Customer concentration:</strong> Q2 FY26 10-Q: top-2 customers represented 24% and 17% of revenue (41% combined), versus 22% and 21% in Q1 FY26 and 16%, 14%, and 11% in Q2 FY25. Elevated, but modestly improved sequentially.</div></div></div>
+
+  <!-- S5 --><div class="section" id="s5"><div class="section-header"><span class="section-num">S5</span><span class="section-title">Competitive Context & Moat Evidence</span><span class="section-cadence">landscape: material change / moat: quarterly</span></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Coherent Corp. (COHR)</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">6-inch InP wafer line (cost advantage vs LITE 3-4 inch). Received identical $2B Nvidia investment. DLC OCS competing vs LITE's MEMS. 3.5× larger revenue. Currently both capacity-constrained; Coherent buys LITE's EMLs.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">InnoLight Technology</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">World's largest transceiver supplier (~$5.27B CY2025). SiPh mix surged 35%→60% in one year. Chinese pricing 20-25% below Western. Simultaneously a competitor (transceivers) and customer (buys LITE's EMLs).</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">Broadcom Inc.</span><span class="badge badge-warning">L2 Investigate</span></div><p class="risk-body">Third-gen CPO platform could bypass external laser sources. Dominant ASIC position gives leverage over CPO architecture. Most formidable long-term threat to CPO/ELS opportunity. CPO not expected to cannibalize pluggable for 3+ years.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">AAOI (Applied Optoelectronics)</span><span class="badge badge-success">L1 Monitor</span></div><p class="risk-body">Secured $4B Amazon deal, expanding domestic InP capacity. Positioned as second-source EML alternative. ~1/4 LITE's revenue scale. InP expansion takes 18-24 months to qualify.</p></div>
+    <hr class="divider accent">
+    <div class="card"><div class="card-title">Moat Evidence Grid</div>
+      <p style="font-size: 14px; margin-bottom: 12px;"><strong>Moat type:</strong> Supply-side scale (4 operating InP fabs + Greensboro CY2028) + vertical integration across optics + proprietary 3D MEMS OCS</p>
+      <div class="field-label" style="margin-bottom: 8px">Evidence Now</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">Four operating InP fabs (+ Greensboro converting, CY2028) and component-to-system integration · Q2 FY26 revenue +65.5% YoY and non-GAAP gross margin +1,020 bps YoY · NVIDIA's March 2026 nonexclusive strategic agreement includes a $2B investment and multibillion purchase commitment · OFC 2026 commentary pointed to OCS backlog above $400M and a new third OCS order · Customer concentration remains elevated, which is both evidence of strategic relevance and a real risk</div>
+      <div class="field-label" style="margin-bottom: 8px">Moat Limitations</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">Coherent on 6-inch wafers (cost advantage), AAOI expanding InP · SiPh projected >50% transceiver share CY2026 · MEMS replicable; Coherent DLC alternative · No protection against AI capex cyclicality · 10-K: products "increasingly subject to commoditization"</div>
+      <div class="verdict-box"><div><div class="verdict-label">Quarterly Moat Pulse</div><div class="verdict-value">Strengthening</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Vertical integration, faster mix/margin improvement, the NVIDIA partnership, and OFC 2026 OCS backlog commentary all support a strengthening moat, though architecture exclusivity is not disclosed and customer concentration remains elevated.</div><div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary);">March 20, 2026</div></div></div></div>
+
+  <!-- S6 --><div class="section" id="s6"><div class="section-header"><span class="section-num">S6</span><span class="section-title">Management Team Assessment</span><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-2">
+      <div class="card"><div class="card-title">Michael E. Hurlston — CEO</div><div class="card-subtitle">~1 year tenure · Ex-Synaptics/Finisar/Broadcom · 30-year track record</div><p style="font-size: 14px; color: var(--text-secondary);">First external CEO. 93% comp is variable/performance-based. Zero shares sold ($100M unrealized) — strongest positive signal. Energetic, direct. Product commitments reliable: OCS $10M quarter 3 months early, 200G EML 1 quarter early.</p><div class="callout" style="margin-top: 12px;"><strong>Discount:</strong> Low on near-term (1-2Q). Moderate on 18-24 month targets. High on TAM sizing ($90B).</div></div>
+      <div class="card"><div class="card-title">Wajid Ali — CFO</div><div class="card-subtitle">7 year tenure · Ex-Synaptics/Teledyne · CPA, CMA, MBA</div><p style="font-size: 14px; color: var(--text-secondary);">Precise, data-oriented. Clean non-GAAP reconciliation. Guidance deliberately conservative — OM beats escalated from +80 to +420 bps. $4.0M sold (7.4% position, 10b5-1) — routine.</p><div class="callout" style="margin-top: 12px;"><strong>Discount:</strong> Low. Most reliable source for credibility-adjusted expectations.</div></div></div>
+    <div class="card" style="margin-top: 4px;"><div class="card-title">Guidance Pattern: Consistent Sandbagger</div>
+      <table class="data-table"><thead><tr><th>Qtr</th><th class="num">Rev Guided</th><th class="num">Actual</th><th class="num">Rev Beat</th><th class="num">OM Guided</th><th class="num">OM Actual</th></tr></thead><tbody>
+        <tr><td class="label-cell">Q3 FY25</td><td class="num">$410-425M</td><td class="num">$425.2M</td><td class="num" style="color:var(--success)">Met high</td><td class="num">9.5-10.5%</td><td class="num" style="color:var(--success)">10.8%</td></tr>
+        <tr><td class="label-cell">Q4 FY25</td><td class="num">$440-470M</td><td class="num">$480.7M</td><td class="num" style="color:var(--success)">Beat +2.3%</td><td class="num">13-14%</td><td class="num" style="color:var(--success)">15.0%</td></tr>
+        <tr><td class="label-cell">Q1 FY26</td><td class="num">$510-540M</td><td class="num">$533.8M</td><td class="num" style="color:var(--success)">In-range</td><td class="num">16-17.5%</td><td class="num" style="color:var(--success)">18.7%</td></tr>
+        <tr><td class="label-cell">Q2 FY26</td><td class="num">$630-670M</td><td class="num">$665.5M</td><td class="num" style="color:var(--success)">Near high</td><td class="num">20-22%</td><td class="num" style="color:var(--success)">25.2%</td></tr>
+      </tbody></table>
+      <div class="callout" style="margin-top: 12px;">Revenue: 4/4 in-range or above (+2.9% avg). EPS: 4/4 beat (+14.5% avg). Non-GAAP OM: 4/4 above high end, beat magnitude accelerating (+80→+420 bps).</div></div></div>
+
+  <!-- S7 --><div class="section" id="s7"><div class="section-header"><span class="section-num">S7</span><span class="section-title">Cross-Quarter Acceleration Table</span><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric</th><th class="num">Q2 FY25</th><th class="num">Q3 FY25</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th><th>Trend</th></tr></thead><tbody>
+      <tr><td class="label-cell">Revenue ($M)</td><td class="num">402.2</td><td class="num">425.2</td><td class="num">480.7</td><td class="num">533.8</td><td class="num">665.5</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Rev YoY</td><td class="num">—</td><td class="num">—</td><td class="num">+55.9%</td><td class="num">+58.4%</td><td class="num">+65.5%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Non-GAAP GM</td><td class="num">32.3%⚑</td><td class="num">—</td><td class="num">—</td><td class="num">39.4%</td><td class="num">42.5%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Non-GAAP OM</td><td class="num">7.9%⚑</td><td class="num">10.8%⚑</td><td class="num">15.0%</td><td class="num">18.7%</td><td class="num">25.2%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">GAAP OM</td><td class="num">-12.8%⚑</td><td class="num">-8.9%⚑</td><td class="num">-1.7%⚑</td><td class="num">+1.3%</td><td class="num">+9.7%</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$0.42</td><td class="num">$0.57</td><td class="num">$0.88</td><td class="num">$1.10</td><td class="num">$1.67</td><td><span class="badge badge-success">Accel.</span></td></tr>
+      <tr><td class="label-cell">FCF ($M)</td><td class="num">-15.9</td><td class="num">-64.4⚑</td><td class="num">10.1</td><td class="num">-18.3</td><td class="num">43.1</td><td>Volatile</td></tr>
+      <tr><td class="label-cell">SBC % Rev</td><td class="num">9.6%</td><td class="num">14.8%⚑</td><td class="num">8.3%</td><td class="num">8.7%</td><td class="num">7.2%</td><td><span class="badge badge-success">Improving</span></td></tr>
+      <tr><td class="label-cell">DSO (days)</td><td class="num">51.3</td><td class="num">54.7</td><td class="num">47.3</td><td class="num">52.4</td><td class="num">51.5</td><td><span class="badge badge-secondary">Stable</span></td></tr>
+    </tbody></table>
+    <div class="callout" style="margin-top: 12px;">⚑ FCF negative in 4/5 quarters — expected during capacity buildout ($276.5M TTM CapEx). ⚑ Q3 FY25 SBC includes $28.2M one-time CEO transition. Non-GAAP EPS nearly quadrupled in 5Q ($0.42→$1.67). Q3 FY26 guide implies ~85%+ YoY growth.</div></div></div>
+
+  <!-- S8 --><div class="section" id="s8"><div class="section-header"><span class="section-num">S8</span><span class="section-title">Quarterly Income Statement Progression</span><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric</th><th class="num">Q2 FY25</th><th class="num">Q3 FY25</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th></tr></thead><tbody>
+      <tr><td class="label-cell">Revenue ($M)</td><td class="num">402.2</td><td class="num">425.2</td><td class="num">480.7</td><td class="num">533.8</td><td class="num">665.5</td></tr>
+      <tr><td class="label-cell">&nbsp;&nbsp;YoY / QoQ</td><td class="num">— / —</td><td class="num">— / +5.7%</td><td class="num">+55.9% / +13.1%</td><td class="num">+58.4% / +11.0%</td><td class="num">+65.5% / +24.7%</td></tr>
+      <tr style="height:8px"><td colspan="6"></td></tr>
+      <tr><td class="label-cell">GAAP Gross Margin</td><td class="num">24.8%</td><td class="num">28.8%</td><td class="num">33.3%</td><td class="num">34.0%</td><td class="num">36.1%</td></tr>
+      <tr><td class="label-cell">Non-GAAP Op Margin</td><td class="num">7.9%</td><td class="num">10.8%</td><td class="num">15.0%</td><td class="num">18.7%</td><td class="num">25.2%</td></tr>
+      <tr><td class="label-cell">GAAP Op Margin</td><td class="num">-12.8%</td><td class="num">-8.9%</td><td class="num">-1.7%</td><td class="num">+1.3%</td><td class="num">+9.7%</td></tr>
+      <tr style="height:8px"><td colspan="6"></td></tr>
+      <tr><td class="label-cell">Non-GAAP EPS</td><td class="num">$0.42</td><td class="num">$0.57</td><td class="num">$0.88</td><td class="num">$1.10</td><td class="num">$1.67</td></tr>
+      <tr><td class="label-cell">GAAP EPS</td><td class="num">-$0.88</td><td class="num">-$0.64</td><td class="num">$2.96⚑</td><td class="num">$0.05</td><td class="num">$0.89</td></tr>
+    </tbody></table>
+    <div class="callout" style="margin-top: 12px;"><strong>FY2025:</strong> Revenue $1,645.0M (+20.9%). Non-GAAP EPS $2.06. ⚑ Q4 FY25 GAAP NI of $213.3M includes $224.7M DTA valuation allowance release — not operating performance. Rule of 40: 58 → 55 → 72 (Q4-Q2 FY26, accelerating).</div></div></div>
+
+  <!-- S9 --><div class="section" id="s9"><div class="section-header"><span class="section-num">S9</span><span class="section-title">Balance Sheet Progression</span><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric ($M)</th><th class="num">Q2 FY25</th><th class="num">Q3 FY25</th><th class="num">Q4 FY25</th><th class="num">Q1 FY26</th><th class="num">Q2 FY26</th></tr></thead><tbody>
+      <tr><td class="label-cell">Total Liquidity</td><td class="num">896.7</td><td class="num">866.7</td><td class="num">877.1</td><td class="num">1,121.8</td><td class="num">1,155.3</td></tr>
+      <tr><td class="label-cell">Accounts Receivable</td><td class="num">226.9</td><td class="num">255.7</td><td class="num">250.0</td><td class="num">307.0</td><td class="num">376.8</td></tr>
+      <tr><td class="label-cell">Inventory</td><td class="num">402.3</td><td class="num">422.9</td><td class="num">470.1</td><td class="num">531.6</td><td class="num">570.4</td></tr>
+      <tr><td class="label-cell">Total Debt</td><td class="num">—</td><td class="num">—</td><td class="num">2,573.2</td><td class="num">3,243.5</td><td class="num">3,287.3</td></tr>
+      <tr><td class="label-cell">Stockholders' Equity</td><td class="num">—</td><td class="num">—</td><td class="num">1,134.7</td><td class="num">780.8</td><td class="num">846.6</td></tr>
+      <tr><td class="label-cell">Diluted Shares (M)</td><td class="num">68.9</td><td class="num">69.3</td><td class="num">72.0</td><td class="num">78.3</td><td class="num">87.8</td></tr>
+    </tbody></table>
+    <div class="callout warn" style="margin-top: 12px;"><strong>Debt surge:</strong> $3,287M across 4 convertible note series. Fair value $10,670M (3.3× carrying). 2026 Notes ($468M) mature within 12 months. Debt/equity 3.88×. Equity dropped $354M in Q1 from note repurchase costs. Nvidia preferred adds ~3.9% dilution at $695.31 conversion. Diluted shares +27.4% YoY.</div></div></div>
+
+  <!-- S10 --><div class="section" id="s10"><div class="section-header"><span class="section-num">S10</span><span class="section-title">Earnings Quality & Cash Flow Forensics</span><span class="section-cadence">quarterly</span></div>
+    <div class="grid-2">
+      <div class="card"><div class="card-title">Q2 FY26 Cash Flow</div><div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$126.7M</div></div><div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">$43.1M</div></div><div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">6.5%</div></div><div class="field-group"><div class="field-label">CapEx</div><div class="field-value mono">$83.6M</div></div></div>
+      <div class="card"><div class="card-title">FY2025 Cash Flow</div><div class="field-group"><div class="field-label">Operating CF</div><div class="field-value mono">$126.3M</div></div><div class="field-group"><div class="field-label">Free Cash Flow</div><div class="field-value mono">-$104.7M</div></div><div class="field-group"><div class="field-label">FCF Margin</div><div class="field-value mono">-6.4%</div></div><div class="field-group"><div class="field-label">CapEx Intensity</div><div class="field-value mono">14.0% ($231M)</div></div></div></div>
+    <div class="card"><div class="card-title">SBC & Dilution</div><p style="font-size: 14px; color: var(--text-secondary);">FY25 SBC: $177.2M (10.8% of revenue). H1 FY26: $94.4M (7.9%). Diluted shares: 87.8M (+27.4% YoY from convertible conversion). No buyback program. Revenue/share TTM: $23.98 (+1.4% YoY despite 65%+ revenue growth) — dilution eroding per-share economics.</p>
+      <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 8px;">DSO: 51.5 days (+0.2 YoY, stable). ROIC: ~16.1% annualized (vs ~4.4% year-ago). Reinvestment rate: ~49.7%.</p></div>
+    <div class="verdict-box"><div><div class="verdict-label">Earnings Quality Verdict</div><div class="verdict-value">Minor concerns</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">FCF structurally negative during buildout — must normalize FY2027. Diluted share +27.4% YoY from convertibles is the primary quality concern. Revenue/share growth minimal despite 65%+ top-line.</div></div></div>
+
+  <!-- S11 --><div class="section" id="s11"><div class="section-header"><span class="section-num">S11</span><span class="section-title">Thesis-Weighted Scorecard</span><span class="section-cadence">quarterly</span></div>
+    <div class="card">
+      <div class="score-row" style="border-bottom: 2px solid var(--primary); padding-bottom: 12px; margin-bottom: 4px;"><span class="score-metric" style="font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);">Metric</span><span class="score-weight" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">WT</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Score</span><span class="score-badge" style="font-weight: 600; font-size: 11px; color: var(--text-secondary);">Wtd</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Revenue YoY Growth</strong> — +65.5%, accelerating from +58.4%. Above 50% thesis threshold.</span><span class="score-weight">2.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+2.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Non-GAAP OM Trajectory</strong> — 25.2% vs 18.7% QoQ (+420 bps beat). Path to 40%.</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>EML Supply-Demand Position</strong> — management commentary still points to tight supply and strong demand visibility despite a 20% capacity add.</span><span class="score-weight">1.5×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.5</span></div>
+      <div class="score-row"><span class="score-metric"><strong>FCF Conversion</strong> — TTM remains negative during buildout, but Q2 FCF / GAAP net income improved to +55.1% ($43.1M / $78.2M).</span><span class="score-weight">1.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>DSO Trend</strong> — 51.5 days, +0.2 YoY. Stable within 47-55 day range.</span><span class="score-weight">1.0×</span><span class="score-badge score-zero">0</span><span class="score-badge score-zero">0.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>ROIC</strong> — ~16.1% annualized vs ~4.4% year-ago. Rapid improvement.</span><span class="score-weight">1.0×</span><span class="score-badge score-plus">+1</span><span class="score-badge score-plus">+1.0</span></div>
+      <div class="score-row"><span class="score-metric"><strong>Dilution Management</strong> — +27.4% YoY diluted shares. Convertibles eroding per-share economics.</span><span class="score-weight">1.0×</span><span class="score-badge score-minus">-1</span><span class="score-badge score-minus">-1.0</span></div></div>
+    <div class="verdict-box"><div><div class="verdict-label">Scorecard Result</div><div class="verdict-value">Mixed / Stable</div></div><div class="verdict-score">55.6%</div></div>
+    <p style="font-size: 13px; color: var(--text-tertiary); text-align: center;">&gt;60% = Clearly improving &nbsp;·&nbsp; 20-60% = Mixed/stable &nbsp;·&nbsp; &lt;20% = Deterioration</p>
+    <div class="card" style="margin-top: 16px;"><div class="card-title">Historical Score Trajectory</div>
+      <div style="display: flex; gap: 8px; align-items: flex-end; height: 100px; margin: 16px 0 8px;">
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--error);margin-bottom:4px;">0%</div><div style="width:100%;height:2px;background:var(--error-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--error);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">33%</div><div style="width:100%;height:33px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q3-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--success);margin-bottom:4px;">89%</div><div style="width:100%;height:89px;background:var(--success-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--success);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q4-25</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">33%</div><div style="width:100%;height:33px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q1-26</div></div>
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-secondary);margin-bottom:4px;">56%</div><div style="width:100%;height:56px;background:var(--primary-subtle);border-radius:4px 4px 0 0;border-top:2px solid var(--primary);"></div><div style="font-size:10px;color:var(--text-tertiary);margin-top:4px;">Q2-26</div></div></div>
+      <p style="font-size: 13px; color: var(--text-secondary);">V-shaped: Q2 FY25 neutral (baseline). Q4 FY25 peak (89%) as FCF turned positive. Q1 FY26 pullback on FCF reversal. Q2 FY26 recovery on accelerating revenue/margins, offset by dilution.</p></div></div>
+
+  <!-- S12 --><div class="section" id="s12"><div class="section-header"><span class="section-num">S12</span><span class="section-title">Tier 2 Sector-Specific Metrics</span><span class="section-cadence">quarterly</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Metric</th><th class="num">Q2 FY26</th><th class="num">Prior Q</th><th class="num">YoY Δ</th><th>Signal</th></tr></thead><tbody>
+      <tr><td class="label-cell">Inventory Days</td><td class="num">127.9</td><td class="num">129.3</td><td class="num" style="color:var(--warning)">+6.9 days YoY</td><td><span class="badge badge-warning">YELLOW</span></td></tr>
+      <tr><td class="label-cell">Components Mix (% rev)</td><td class="num">66.7%</td><td class="num">71.0%</td><td class="num">+1.1pp YoY</td><td><span class="badge badge-secondary">Monitoring</span></td></tr>
+      <tr><td class="label-cell">Customer Conc. (top 2)</td><td class="num">41%</td><td class="num">43%</td><td class="num" style="color:var(--warning)">+11pp YoY</td><td><span class="badge badge-warning">YELLOW</span></td></tr>
+      <tr><td class="label-cell">Adj EBITDA Margin</td><td class="num">29.8%</td><td class="num">23.9%</td><td class="num" style="color:var(--success)">+15.5pp YoY</td><td><span class="badge badge-success">GREEN</span></td></tr>
+    </tbody></table><div class="callout" style="margin-top: 12px;"><strong>Method note:</strong> Inventory Days = ending inventory / quarterly GAAP cost of sales × 91. Customer concentration uses the most recent 10-Q customer disclosures, not analyst attribution estimates.</div></div></div>
+
+  <!-- S13 --><div class="section" id="s13"><div class="section-header"><span class="section-num">S13</span><span class="section-title">Forward Catalyst Pipeline & Product Roadmap</span><span class="section-cadence">material change</span></div>
+    <div class="card"><table class="data-table"><thead><tr><th>Window</th><th>Event</th><th>Type</th><th>Impact</th></tr></thead><tbody>
+      <tr><td class="label-cell">Mar 23, 2026</td><td>S&P 500 inclusion effective</td><td>Index</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">May 5-12E</td><td>Q3 FY2026 earnings vs $780-830M guide</td><td>Earnings</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">H2 CY2026</td><td>OCS ramp to $100M+ quarterly</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">H2 CY2026</td><td>1.6T transceiver volume production</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">H1 CY2027</td><td>CPO/UHP laser shipments begin (Nvidia)</td><td>Product</td><td><span class="badge badge-error">HIGH</span></td></tr>
+      <tr><td class="label-cell">Late CY2026</td><td>200G EML mix reaching 25% of shipments</td><td>Product</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+      <tr><td class="label-cell">CY2028</td><td>Greensboro fab first production</td><td>Capacity</td><td><span class="badge badge-warning">MEDIUM</span></td></tr>
+    </tbody></table></div></div>
+
+  <!-- S14 --><div class="section" id="s14"><div class="section-header"><span class="section-num">S14</span><span class="section-title">Sell-Side Landscape</span><span class="section-cadence">material change</span></div>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="stat-card"><div class="stat-label">Total Analysts</div><div class="stat-value">23</div><div class="stat-delta delta-neutral">Investing.com consensus page · Mar 20, 2026</div></div>
+      <div class="stat-card"><div class="stat-label">Consensus PT</div><div class="stat-value">$671.83</div><div class="stat-delta delta-down">Current $715.22 is 6.5% above consensus</div></div>
+      <div class="stat-card"><div class="stat-label">Ratings</div><div class="stat-value" style="font-size: 16px;">18 Buy · 5 Hold · 0 Sell</div></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">Buy</div><div class="analyst-body"><div class="analyst-name">Mike Genovese — Rosenblatt</div><div class="analyst-pt">PT: $900 <span style="font-size: 12px; color: var(--text-tertiary);">(Street-high)</span></div><p class="analyst-thesis">Rosenblatt remains the street-high bull at $900, reflecting confidence that Lumentum can monetize several optical growth vectors at once, including EMLs, OCS, and later-stage CPO/UHP lasers. Useful as a bull-case framing source, but still thesis-driven rather than a filed fact.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--text-secondary);">Hold</div><div class="analyst-body"><div class="analyst-name">David Vogt — UBS</div><div class="analyst-pt">PT: $455 <span style="font-size: 12px; color: var(--text-tertiary);">(Street-low active)</span></div><p class="analyst-thesis">UBS remains a key bear/hold reference point at $455. The core pushback is valuation and execution risk: investors may be pricing FY27/FY28 upside aggressively before OCS and CPO ramps are fully proven and before capital-structure overhang is fully digested.</p></div></div>
+    <div class="analyst-card"><div class="analyst-rating" style="color: var(--success);">OW</div><div class="analyst-body"><div class="analyst-name">Samik Chatterjee — JPMorgan</div><div class="analyst-pt">PT: $565</div><p class="analyst-thesis">JPMorgan sits between the street-high bull and stricter valuation bears. The framework acknowledges Lumentum's optical leadership but also keeps an eye on scale competition, execution risk, and how much of the upside is already capitalized in the stock.</p></div></div>
+    <div class="grid-2" style="margin-top: 16px;">
+      <div class="card" style="border-left: 3px solid var(--success);"><div class="card-title">Notable Bull</div><p style="font-size: 14px;">Street bulls are underwriting a rare optical upcycle with several growth vectors landing at once: EMLs, 1.6T modules, OCS, and later-stage CPO. Rosenblatt remains the street-high at $900, while other firms have also moved targets sharply higher after the Q2 beat and OFC 2026 updates.</p></div>
+      <div class="card" style="border-left: 3px solid var(--error);"><div class="card-title">Notable Bear</div><p style="font-size: 14px;">The core bear case is still valuation plus execution: Morgan Stanley sits at $595 and UBS at $455, both well below the bull cases. The risk is that investors are capitalizing FY27/FY28 upside too aggressively before OCS and CPO revenue ramps are fully proven and before the convertibles are fully worked through.</p></div></div></div>
+
+  <!-- S15 --><div class="section" id="s15"><div class="section-header"><span class="section-num">S15</span><span class="section-title">Management Guidance & Credibility</span><span class="section-cadence">quarterly</span></div>
+    <div class="card"><div class="card-title">Q3 FY2026 Forward Expectations</div>
+      <table class="data-table"><thead><tr><th>Metric</th><th class="num">Raw Guidance</th><th class="num">Adjusted</th><th class="num">Street</th></tr></thead><tbody>
+        <tr><td class="label-cell">Q3 Revenue</td><td class="num">$780-830M (mid $805M)</td><td class="num" style="color:var(--primary);font-weight:600">$828M (×1.029)</td><td class="num">~$805M</td></tr>
+        <tr><td class="label-cell">Q3 EPS</td><td class="num">$2.15-2.35 (mid $2.25)</td><td class="num" style="color:var(--primary);font-weight:600">$2.58 (×1.145)</td><td class="num">~$2.25</td></tr>
+        <tr><td class="label-cell">Q3 Non-GAAP OM</td><td class="num">30-31% (mid 30.5%)</td><td class="num" style="color:var(--primary);font-weight:600">32.6% (+210 bps)</td><td class="num">—</td></tr>
+      </tbody></table>
+      <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 8px;">FY26 consensus: Rev $2.91B, EPS $7.60. FY27: Rev $4.71B, EPS $14.55.</p></div>
+    <div class="card"><div class="card-title">Commitment Tracker — Delivery Rate: 50% (3/6)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> OCS $10M quarterly — achieved 3 months early</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 200G EML production ramp — reached ~5% on/ahead of target</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> InP capacity +40% in FY — front-loaded, +20% in Q2 alone</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> OCS to $100M+ quarterly by late CY2026 — currently ~$10M (10× needed)</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> 200G EML reaching 25% mix by end CY2026 — currently ~5%</div>
+      <div class="check-item check-open"><span class="check-icon">○</span> CW laser integration — delayed 2-3 months</div></div>
+    <div class="card"><div class="card-title">Capital Allocation Score</div><div class="progress-track"><div class="progress-fill" style="width: 65%;"></div></div><div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--primary);">13 / 20</div>
+      <table class="data-table" style="margin-top: 12px;"><thead><tr><th>Category</th><th class="num">Score</th><th>Notes</th></tr></thead><tbody>
+        <tr><td class="label-cell">High-return investing</td><td class="num">4/5</td><td>50% InP capacity expansion + Greensboro — aggressive, not yet proven at ROI</td></tr>
+        <tr><td class="label-cell">Acquisitions</td><td class="num">4/5</td><td>CloudLight ($750M) validated (5× SAM). Greensboro strategic for 6-inch InP.</td></tr>
+        <tr><td class="label-cell">Equity management</td><td class="num" style="color:var(--error)">2/5</td><td>$3.2B convertibles creating 27.4% YoY dilution. No buyback. Dilution = cost of growth.</td></tr>
+        <tr><td class="label-cell">Balance sheet</td><td class="num">3/5</td><td>Debt/equity 3.88×. Liquidity $1.16B covers $468M 2026 Notes. Revenue growth de-leverages rapidly.</td></tr>
+      </tbody></table></div>
+    <div class="verdict-box"><div><div class="verdict-label">Management Credibility</div><div class="verdict-value">High</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Sandbagging: +2.9% rev, +14.5% EPS, +210 bps OM. Delivery 50% (3/6 — open items are ambitious scale targets). CEO zero shares sold. Watch: OCS scale-up and CW laser integration (delayed 2-3 months).</div></div></div>
+
+  <!-- S16 --><div class="section" id="s16"><div class="section-header"><span class="section-num">S16</span><span class="section-title">Kill Criteria</span><span class="section-cadence">annual / thesis change</span></div>
+    <div class="callout danger" style="margin-bottom: 24px;"><strong>RULE:</strong> If ANY criterion fires, execute the pre-committed action. Do not rationalize.</div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#1</span><span class="kill-title">Revenue Growth Deceleration</span><span class="kill-action kill-reduce">REDUCE 50%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Revenue YoY &lt;40% for 2 consecutive quarters, excluding planned product exits or fab transitions.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Revenue YoY &lt;25% in ANY quarter → REDUCE 50% immediately</div><div class="kill-gap">Gap: Current +65.5% → trigger &lt;40% (25.5pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#2</span><span class="kill-title">Margin Compression</span><span class="kill-action kill-reassess">REASSESS</span></div><div class="kill-trigger"><strong>Trigger:</strong> Non-GAAP OM declines QoQ for 2 consecutive quarters AND is below 25%.</div><div class="kill-gap">Gap: Current 25.2% and rising QoQ → both declining AND &lt;25% required</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#3</span><span class="kill-title">Customer Concentration Breach</span><span class="kill-action kill-reduce">REDUCE 25%</span></div><div class="kill-trigger"><strong>Trigger:</strong> Any single customer &gt;35% of quarterly revenue OR top-2 &gt;55%.</div><div class="kill-gap">Gap: Current top-2 41% → trigger &gt;55% (14pp margin)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#4</span><span class="kill-title">EML Market Share Loss</span><span class="kill-action kill-reassess">REASSESS — moat erosion</span></div><div class="kill-trigger"><strong>Trigger:</strong> EML share &lt;40% OR Coherent/AAOI qualified as primary 1.6T EML supplier by any top-3 hyperscaler.</div><div class="kill-gap">Gap: Current public evidence still points to a leadership position; internal monitoring threshold remains &lt;40%.</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#5</span><span class="kill-title">Balance Sheet Stress</span><span class="kill-action kill-reduce">EXIT</span></div><div class="kill-trigger"><strong>Trigger:</strong> Liquidity &lt;$500M AND Debt/adj EBITDA &gt;8×.</div><div class="kill-trigger" style="border-left: 3px solid var(--error); margin-top: 4px;"><strong>Emergency:</strong> Liquidity &lt;$300M in ANY quarter → EXIT immediately</div><div class="kill-gap">Gap: Liquidity $1,155M → $500M (655M). Debt/EBITDA 6.6× → 8× (1.4×)</div></div>
+    <div class="kill-card"><div class="kill-card-header"><span class="kill-num">#6</span><span class="kill-title">Management Credibility Collapse</span><span class="kill-action kill-reassess">REASSESS</span></div><div class="kill-trigger"><strong>Trigger:</strong> Miss BOTH revenue AND EPS guidance low end for 2 consecutive quarters, OR delivery rate &lt;25%.</div><div class="kill-gap">Gap: Current 4/4 beats, delivery 50% → 2 consecutive misses OR &lt;25% rate</div></div></div>
+
+  <!-- S17 --><div class="section" id="s17"><div class="section-header"><span class="section-num">S17</span><span class="section-title">Valuation Framework</span><span class="section-cadence">annual / thesis change</span></div>
+    <div class="grid-3" style="margin-bottom: 8px;">
+      <div class="stat-card"><div class="stat-label">Diluted Market Cap (if-converted)</div><div class="stat-value">~$64.9B</div><div class="stat-delta delta-neutral">90.7M fully diluted × $715.22</div></div>
+      <div class="stat-card"><div class="stat-label">Enterprise Value (if-converted)</div><div class="stat-value">~$62.2B</div><div class="stat-delta delta-neutral">Convert debt → equity; post-Nvidia cash ~$2.66B</div></div>
+      <div class="stat-card"><div class="stat-label">Fwd P/E (FY27)</div><div class="stat-value">~49×</div><div class="stat-delta delta-down">~97% above 5-yr avg ~25×</div></div></div>
+    <div class="callout" style="margin-bottom: 20px;"><strong>EV method note:</strong> All four convertible note series ($3.3B face) are deeply in-the-money at $715. If-converted treatment: diluted shares (87.8M Q2 + 2.9M Nvidia preferred = 90.7M) include conversion effect; convert debt removed from debt stack. Post-Nvidia balance-sheet cash ~$2.66B ($657M Q2 + $2B proceeds). GAAP net debt ($2.63B) and D/E (3.88×) remain in S9/S18 as reported balance-sheet figures. Price anchor: $715.22 · Mar 20, 2026 14:13 UTC.</div>
+    <div class="card"><div class="card-title">Scenario Analysis (2-Year Horizon → FY2028)</div>
+      <div class="scenario-bar bull"><div class="scenario-label" style="color: var(--success);">Bull</div><div class="scenario-value" style="color: var(--success);">$800-$950</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$6.5B. $2B/qtr run-rate, CPO >$500M, OCS >$400M, 200G at 50%+ mix, 40% OM. EPS ~$22 at ~41×.</div></div>
+      <div class="scenario-bar base"><div class="scenario-label" style="color: var(--primary);">Base</div><div class="scenario-value" style="color: var(--primary);">$450-$600</div><div class="scenario-prob">50%</div><div class="scenario-desc">Revenue ~$4.7B (FY27) → $5.3B (FY28). Consensus met, capacity on schedule, margins 35%+. EPS $14.55 at ~39×.</div></div>
+      <div class="scenario-bar bear"><div class="scenario-label" style="color: var(--error);">Bear</div><div class="scenario-value" style="color: var(--error);">$200-$350</div><div class="scenario-prob">25%</div><div class="scenario-desc">Revenue ~$3.5B. AI capex cycle turns, SiPh displaces EML, fab execution failure. Historical ~31× on compressed EPS.</div></div>
+      <div class="verdict-box" style="margin-top: 16px;"><div><div class="verdict-label">Scenario Value</div><div class="verdict-value" style="font-family: var(--font-mono);">$550</div></div><div style="font-size: 14px; color: var(--error); font-weight: 500;">-23% from $715.22 &nbsp;·&nbsp; Annualized (2-yr): -12%</div></div></div>
+    <div class="card"><div class="card-title">Valuation Gap: <span style="color: var(--error);">Stretched</span></div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">Scenario value remains below the current price. At roughly 49× FY27 EPS, the stock is trading at about a 97% premium to the 5-year average multiple of roughly 25×, so the equity still prices in a large share of the bull path.</p>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; padding-left: 16px; border-left: 2px solid var(--border);">1. Revenue reaches $4.7B+ FY2027 (requires continued 60%+ growth)<br>2. Non-GAAP OM reaches 35%+ by Q4 FY2027<br>3. EML supply-demand imbalance persists through CY2027<br>4. CPO/OCS become $500M+ combined by FY2028<br>5. No violent AI capex cycle correction before FY2028</div>
+      <div class="callout" style="margin-top: 16px;"><strong>Position sizing:</strong> Stretched valuation still argues for smaller sizing unless an investor has unusually high confidence in the FY27/FY28 optical ramp.</div></div></div>
+
+  <!-- S18 --><div class="section" id="s18"><div class="section-header"><span class="section-num">S18</span><span class="section-title">Rolling Quarterly Baseline & Pre-Earnings Checklist</span><span class="section-cadence">quarterly</span></div>
+    <div class="card"><div class="card-title">Q2 FY2026 Snapshot</div><div class="grid-3">
+      <div><div class="field-label">Revenue</div><div class="field-value mono">$665.5M (+65.5% YoY)</div></div>
+      <div><div class="field-label">Non-GAAP OM</div><div class="field-value mono">25.2%</div></div>
+      <div><div class="field-label">FCF</div><div class="field-value mono">$43.1M (6.5%)</div></div>
+      <div><div class="field-label">DSO</div><div class="field-value mono">51.5 days</div></div>
+      <div><div class="field-label">ROIC (ann.)</div><div class="field-value mono">~16.1%</div></div>
+      <div><div class="field-label">Net Debt</div><div class="field-value mono">$2,630M (D/E 3.88×)</div></div>
+    </div></div>
+    <div class="card"><div class="card-title">Pre-Earnings Checklist for Q3 FY2026</div><div class="card-subtitle">Earnings date: ~May 5-12, 2026</div>
+      <div class="field-label" style="margin-top: 16px;">What the Market Needs to Hear</div>
+      <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;">1. Revenue ≥$830M (beat guide high end; adj: $828M)<br>2. Non-GAAP OM ≥31% (entry into 30-40% normal range; adj: 32.6%)<br>3. OCS quarterly revenue trajectory toward $100M target</div>
+      <div class="field-label">Thresholds</div>
+      <table class="data-table"><thead><tr><th>Metric</th><th class="num">Expectation</th><th class="num">Concern</th><th class="num">Kill Threshold</th></tr></thead><tbody>
+        <tr><td class="label-cell">Revenue</td><td class="num">$828M (adj)</td><td class="num" style="color:var(--warning)">&lt;$780M (guide low)</td><td class="num" style="color:var(--error)">&lt;40% YoY for 2Q</td></tr>
+        <tr><td class="label-cell">Non-GAAP OM</td><td class="num">32.6% (adj)</td><td class="num" style="color:var(--warning)">&lt;28%</td><td class="num" style="color:var(--error)">Declining QoQ for 2Q AND &lt;25%</td></tr>
+        <tr><td class="label-cell">Rev YoY</td><td class="num">~85%+</td><td class="num" style="color:var(--warning)">&lt;60%</td><td class="num" style="color:var(--error)">&lt;25% any Q = emergency</td></tr>
+      </tbody></table></div>
+    <div class="verdict-box"><div><div class="verdict-label">Conviction / Valuation</div><div class="verdict-value">Medium · Stretched</div></div><div style="font-size: 13px; color: var(--text-secondary); flex: 1;">Strong fundamentals are still offset by stretched valuation. Internal scenario value $550 vs price $715.22. Mixed scorecard (55.6%) + stretched gap keep sizing discipline important.</div></div></div>
+
+  <!-- S19 --><div class="section" id="s19"><div class="section-header"><span class="section-num">S19</span><span class="section-title">Risk Inventory</span><span class="section-cadence">quarterly</span></div>
+    <div class="grid-3" style="margin-bottom: 20px; text-align: center;">
+      <div class="stat-card" style="border-left: 3px solid var(--error);"><div class="stat-label">RED Risks</div><div class="stat-value" style="color: var(--error);">0</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--warning);"><div class="stat-label">YELLOW Risks</div><div class="stat-value" style="color: var(--warning);">5</div></div>
+      <div class="stat-card" style="border-left: 3px solid var(--success);"><div class="stat-label">GREEN Risks</div><div class="stat-value" style="color: var(--success);">4</div></div></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#1 — AI Capex Cyclicality</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Macro · Severity: High · Probability: Medium</div><p class="risk-body">Hyperscaler capex could contract 20-30% (2019/2022 precedent). Management commentary still points to strong visibility into CY2027, but that does not eliminate the risk of slower order growth, timing pushes, or LTA renegotiation in a downcycle.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#2 — Customer Concentration</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Operational · Severity: High · Probability: Medium-High</div><p class="risk-body">Customer concentration is elevated. In Q2 FY26, the top-2 customers represented 24% and 17% of revenue (41% combined), versus 22% and 21% in Q1 FY26. Loss of any single large customer would create a meaningful near-term revenue gap given the current mix and LTA structure.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#3 — Competitive Displacement: Coherent</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Competitive · Severity: High · Probability: Low-Medium</div><p class="risk-body">6-inch InP wafer line (cost advantage). Identical $2B Nvidia investment. DLC OCS competing. Currently both capacity-constrained; competition intensifies as supply catches demand.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#4 — Silicon Photonics Disruption</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Technology · Severity: Medium-High · Probability: Medium</div><p class="risk-body">InnoLight SiPh mix surged 35%→60%. SiPh projected >50% transceiver market CY2026. SiPh reduces EML content per module. EML advantage could erode if SiPh achieves 200G+ performance parity.</p></div>
+    <div class="risk-card yellow"><div class="risk-header"><span class="risk-title">#5 — Convertible Debt & Dilution Overhang</span><span class="badge badge-warning">YELLOW</span></div><div class="risk-meta">Financial · Severity: Medium-High · Probability: High</div><p class="risk-body">$3,287M total debt, 4 convertible series. Fair value $10,670M (3.3× carrying). All conversion-triggered. 2026 Notes ($468M) mature within 12 months. Diluted shares +27.4% YoY. Nvidia preferred adds ~3.9%.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#6 — Fab Execution Risk</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Operational · Severity: Medium · Probability: Medium</div><p class="risk-body">50% output growth target while integrating Greensboro fab (production 2028). CW laser integration already delayed 2-3 months. Any yield issues create delivery shortfalls in supply-constrained environment.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#7 — Broadcom CPO Internalization</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Competitive · Severity: Medium · Probability: Low</div><p class="risk-body">Broadcom's third-gen CPO could bypass external lasers. Would reduce LITE's CPO opportunity. CPO not expected to materially cannibalize pluggable for 3+ years.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#8 — Regulatory & Geopolitical</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Regulatory · Severity: Medium · Probability: Low-Medium</div><p class="risk-body">BIS/DOJ subpoenas on historical Huawei shipments. China export controls on indium/rare earth. Tariff risks on Thailand/China facilities. Stopped all Huawei shipments early CY2024.</p></div>
+    <div class="risk-card green"><div class="risk-header"><span class="risk-title">#9 — Telecom Cycle Dependency</span><span class="badge badge-success">GREEN</span></div><div class="risk-meta">Market · Severity: Low · Probability: Medium</div><p class="risk-body">Telecom contracted >23% FY2024. AI growth overwhelms telecom weakness. Telecom customers resist LTAs (CEO noted friction). Extended downturn could force capacity allocation tradeoffs.</p></div>
+    <hr class="divider accent">
+    <div class="card"><div class="card-title">Insider Activity — Verdict: <span style="color: var(--warning);">Noteworthy</span></div><p style="font-size: 14px; color: var(--text-secondary);">$52.9M in open-market sales over 12 months, zero purchases. 69% under 10b5-1. CEO Hurlston: zero shares sold ($100M unrealized) — strongest positive signal. CFO Wajid: $4.0M (7.4% reduction, 10b5-1). Largest sale: V. Retort $26.6M single-day (30.5% reduction). Board Chair Herscher: 81% direct holdings liquidated, no confirmed 10b5-1.</p></div>
+    <div class="card"><div class="card-title">Correlated Risk Cluster</div><p style="font-size: 14px; color: var(--text-secondary);">Risks #1 (AI capex), #2 (concentration), and #4 (SiPh) are correlated — AI capex downturn simultaneously reduces demand (#1), concentrates remaining revenue (#2), and accelerates SiPh substitution as pricing power erodes (#4). A coordinated downturn fires S16 KC #1 and potentially #3.</p></div></div>
+
+  <!-- CHECKLIST A --><div class="section" id="checkA"><div class="section-header"><span class="section-num">A</span><span class="section-title">Procedural Checklist A — Document Inventory</span></div>
+    <div class="card">
+      <div class="check-item check-pass"><span class="check-icon">✓</span> 10-K (FY2025), 10-Qs (Q2 FY25, Q3 FY25, Q1 FY26, Q2 FY26)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Press releases (5 quarters: Q2 FY25 through Q2 FY26)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Earnings call transcripts (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Investor presentations (5 quarters)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Proxy statement / DEF 14A (FY2025)</div>
+      <div class="check-item check-pass"><span class="check-icon">✓</span> Sell-side analyst report + Insider activity report + AI infra report</div>
+      <hr class="divider"><div class="field-label">Gaps</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Individual FY2024 quarterly press releases and 10-Qs (limits YoY calcs)</div>
+      <div class="check-item check-fail"><span class="check-icon">✗</span> Non-GAAP GM detail for Q3/Q4 FY2025</div></div></div>
+
+  <!-- CHECKLIST B --><div class="section" id="checkB"><div class="section-header"><span class="section-num">B</span><span class="section-title">Procedural Checklist B — Consistency Audit</span></div>
+    <div class="verdict-box" style="background: var(--success-subtle); border-color: var(--success);"><div><div class="verdict-label">Audit Result</div><div class="verdict-value" style="color: var(--success);">PASS</div></div><div class="verdict-score" style="color: var(--success);">14/14</div></div>
+    <div class="card">
+      <div class="field-label">Numerical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Revenue segments sum ✓ · basic vs diluted share counts reconciled ✓ · FCF formula explicitly GAAP-based ✓ · valuation / sell-side sections refreshed to Mar 20, 2026 ✓</p>
+      <div class="field-label">Narrative (6/6)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Thesis → scorecard ✓ · Key metric repeated ✓ · Threats → risk inventory ✓ · moat language softened where facts are not directly disclosed ✓ · management / credibility aligned ✓ · model → FCF/Tier2 ✓</p>
+      <div class="field-label">Logical (4/4)</div><p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Kill criteria gaps refreshed ✓ · valuation vs growth aligned to current price anchor ✓ · catalyst timing consistent ✓ · bear case mapped into risk inventory ✓</p><p style="font-size: 13px; color: var(--text-tertiary);">Scope note: this 14/14 result refers to the current build's internal consistency after the March 20, 2026 refresh. Separate source-completeness gaps remain disclosed in Checklist A.</p></div></div>
+
+  <hr class="divider accent">
+  <p style="font-size: 12px; color: var(--text-tertiary); text-align: center; margin-top: 24px;">Delta Framework · Lumentum (LITE) Configuration Card · Built March 20, 2026<br>Dynamic price / valuation / analyst sections refreshed Mar 20, 2026 14:13 UTC using SEC filings, Lumentum IR releases, and current consensus-market data.</p>
+</main>
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { navLinks.forEach(link => link.style.background = ''); const id = entry.target.id; const al = document.querySelector(`.nav-link[href="#${id}"]`); if (al) al.style.background = 'rgba(196, 123, 90, 0.12)'; } });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => { link.addEventListener('click', () => { document.querySelector('.sidebar').classList.remove('open'); }); });
+</script>
+</body>
+</html>
